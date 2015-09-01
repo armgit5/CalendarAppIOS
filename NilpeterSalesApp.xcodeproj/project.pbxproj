@@ -13,6 +13,9 @@
 		12009D1D1B830CD300C012B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12009D1C1B830CD300C012B6 /* Images.xcassets */; };
 		12009D201B830CD300C012B6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12009D1E1B830CD300C012B6 /* LaunchScreen.xib */; };
 		12009D2C1B830CD400C012B6 /* NilpeterSalesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D2B1B830CD400C012B6 /* NilpeterSalesAppTests.swift */; };
+		12009D361B956F6000C012B6 /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D351B956F6000C012B6 /* ScheduleService.swift */; };
+		12009D381B956F7100C012B6 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D371B956F7100C012B6 /* NetworkOperation.swift */; };
+		12009D3A1B95726500C012B6 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D391B95726500C012B6 /* ScheduleData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		12009D251B830CD400C012B6 /* NilpeterSalesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NilpeterSalesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12009D2A1B830CD400C012B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12009D2B1B830CD400C012B6 /* NilpeterSalesAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilpeterSalesAppTests.swift; sourceTree = "<group>"; };
+		12009D351B956F6000C012B6 /* ScheduleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
+		12009D371B956F7100C012B6 /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
+		12009D391B95726500C012B6 /* ScheduleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,9 @@
 		12009D121B830CD300C012B6 /* NilpeterSalesApp */ = {
 			isa = PBXGroup;
 			children = (
+				12009D391B95726500C012B6 /* ScheduleData.swift */,
+				12009D371B956F7100C012B6 /* NetworkOperation.swift */,
+				12009D351B956F6000C012B6 /* ScheduleService.swift */,
 				12009D151B830CD300C012B6 /* AppDelegate.swift */,
 				12009D171B830CD300C012B6 /* ViewController.swift */,
 				12009D191B830CD300C012B6 /* Main.storyboard */,
@@ -212,6 +221,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12009D381B956F7100C012B6 /* NetworkOperation.swift in Sources */,
+				12009D361B956F6000C012B6 /* ScheduleService.swift in Sources */,
+				12009D3A1B95726500C012B6 /* ScheduleData.swift in Sources */,
 				12009D181B830CD300C012B6 /* ViewController.swift in Sources */,
 				12009D161B830CD300C012B6 /* AppDelegate.swift in Sources */,
 			);
@@ -409,6 +421,7 @@
 				12009D311B830CD400C012B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		12009D321B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterSalesAppTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +430,7 @@
 				12009D341B830CD400C012B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
