@@ -9,17 +9,25 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UITableViewController, UITextFieldDelegate {
+    
+    
     
     @IBOutlet weak var myDatePicker: UIDatePicker?
     @IBOutlet weak var allDaySwitch: UISwitch!
+    @IBOutlet weak var dateTextField: UITextField!
     var selectedDate = ""
     var allDayStatus = 0
+    var popDatePicker : PopDatePicker?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        getCompanies()
+        
+        popDatePicker = PopDatePicker(forTextField: dateTextField)
+        dateTextField.delegate = self
+        
+        getComapnies()
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,33 +50,41 @@ class ViewController: UIViewController {
         }
     }
     
-    func getCompanies() {
-        
-        let session = NSURLSession.sharedSession()
-        let urlString = "http://localhost:3000/api/companies"
-        let url = NSURL(string: urlString)!
-        let request = NSMutableURLRequest(URL: url)
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        /* 4 - Initialize task for getting data */
-        let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!)  in
-            
-            if error != nil {
-                // Handle error...
-                println(error)
-            } else {
-                /* 5. Parse the data */
-                var parsingError: NSError? = nil
-                let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as? [[String: AnyObject]]
-                
-                /* 6. Use the data! */
-                println(parsedResult)
-            }
+    func getComapnies() {
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("companies") {
+            companies in
+                println(companies)
         }
+    }
+    
+    func resign() {
+        dateTextField.resignFirstResponder()
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        /* 9 - Resume (execute) the task */
-        task.resume()
-
+        if (textField === dateTextField) {
+            resign()
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "dd-MM-yyyy HH:mm"
+//            formatter.dateStyle = .MediumStyle
+//            formatter.timeStyle = .NoStyle
+            let initDate : NSDate? = formatter.dateFromString(dateTextField.text)
+            
+            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
+                
+                // here we don't use self (no retain cycle)
+                forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
+                
+            }
+            
+            popDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
+            return false
+        }
+        else {
+            return true
+        }
     }
     
     

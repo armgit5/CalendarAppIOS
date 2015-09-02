@@ -15,5 +15,5 @@ struct ScheduleData {
     let products: [[String: AnyObject]]?
     let locations: [[String: AnyObject]]?
     
-        
+    
 }

@@ -14,7 +14,7 @@ class NetworkOperation {
     lazy var session: NSURLSession = NSURLSession(configuration: self.config)
     let queryURL: NSURL
     
-    typealias JSONDictionaryCompletion = ([String: AnyObject]?) -> Void
+    typealias JSONDictionaryCompletion = ([[String: AnyObject]]?) -> Void
     
     init(url: NSURL) {
         self.queryURL = url
@@ -32,7 +32,7 @@ class NetworkOperation {
                 switch(httpResponse.statusCode) {
                 case 200:
                     // create json object
-                    let jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [String: AnyObject]
+                    let jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [[String: AnyObject]]
                     completion(jsonDictionary)
                 default:
                     println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")

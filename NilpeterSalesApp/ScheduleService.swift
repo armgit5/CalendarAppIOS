@@ -12,34 +12,23 @@ struct ScheduleService {
     let scheduleBaseURL: NSURL?
     
     init() {
-        self.scheduleBaseURL = NSURL(string: "http://localhost:3000/api/schedules")
+        let headingBastURL =  "http://localhost:3000/api/"
+        self.scheduleBaseURL = NSURL(string: headingBastURL)
     }
     
-//    func getSchedule(scheduleQuery: String, completion: (CurrentWeather? -> Void)) {
-//        if let forecaseURL = NSURL(string: scheduleInfo, relativeToURL: forecaseBaseURL) {
-//            
-//            let networkOperation = NetworkOperation(url: forecaseURL)
-//            
-//            networkOperation.downloadJSONFromURL {
-//                JSONDictionary in
-//                let currentWeather = self.currentWeatherFromJSON(JSONDictionary)
-//                completion(currentWeather)
-//            }
-//            
-//        } else {
-//            println("counldn't construct valid url")
-//        }
-//    }
-//    
-//    func currentWeatherFromJSON(jsonDictionary: [String: AnyObject]?) -> CurrentWeather? {
-//        if let currentWeatherDictionary = jsonDictionary?["currently"] as? [String: AnyObject] {
-//            return CurrentWeather(weatherDictionary: currentWeatherDictionary)
-//        } else {
-//            println("JSON dictionary returned nil for currently key")
-//            return nil
-//        }
-//    }
-
-    
+    func getSchedule(scheduleQuery: String, completion: ([[String: AnyObject]]? -> Void)) {
+        if let scheduleURL = NSURL(string: scheduleQuery, relativeToURL: scheduleBaseURL) {
+            
+            let networkOperation = NetworkOperation(url: scheduleURL)
+            
+            networkOperation.downloadJSONFromURL {
+                JSONDictionary in
+                completion(JSONDictionary)
+            }
+            
+        } else {
+            println("counldn't construct valid url")
+        }
+    }
     
 }
