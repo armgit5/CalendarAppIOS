@@ -75,6 +75,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UITableViewDat
         }
     }
     
+    // MARK - allday onoff
+    
     @IBAction func allDayOnOff(sender: AnyObject) {
         if allDaySwitch.on {
             allDayStatus = 1
