@@ -9,20 +9,29 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UITextFieldDelegate {
+class ViewController: UITableViewController, UITextFieldDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchDisplayDelegate {
     
-    
-    
-    @IBOutlet weak var myDatePicker: UIDatePicker?
     @IBOutlet weak var allDaySwitch: UISwitch!
     @IBOutlet weak var dateTextField: UITextField!
     var selectedDate = ""
     var allDayStatus = 0
     var popDatePicker : PopDatePicker?
     
+    var friendArray = [FriendItem]()
+    var filteredFriends = [FriendItem]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.friendArray += [FriendItem(name: "test")]
+        self.friendArray += [FriendItem(name: "apple")]
+        self.friendArray += [FriendItem(name: "itune")]
+        self.friendArray += [FriendItem(name: "arm")]
+        self.friendArray += [FriendItem(name: "mac")]
+        self.friendArray += [FriendItem(name: "ipad")]
+        self.friendArray += [FriendItem(name: "tree")]
+        
         
         popDatePicker = PopDatePicker(forTextField: dateTextField)
         dateTextField.delegate = self
@@ -35,28 +44,7 @@ class ViewController: UITableViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func datePickerAction(sender: AnyObject) {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
-        let strDate = dateFormatter.stringFromDate(myDatePicker!.date)
-        self.selectedDate = strDate
-    }
-    
-    @IBAction func allDayOnOff(sender: AnyObject) {
-        if allDaySwitch.on {
-            allDayStatus = 1
-        } else {
-            allDayStatus = 0
-        }
-    }
-    
-    func getComapnies() {
-        let scheduleService = ScheduleService()
-        scheduleService.getSchedule("companies") {
-            companies in
-                println(companies)
-        }
-    }
+    // MARK - DatePicker popup
     
     func resign() {
         dateTextField.resignFirstResponder()
@@ -68,8 +56,8 @@ class ViewController: UITableViewController, UITextFieldDelegate {
             resign()
             let formatter = NSDateFormatter()
             formatter.dateFormat = "dd-MM-yyyy HH:mm"
-//            formatter.dateStyle = .MediumStyle
-//            formatter.timeStyle = .NoStyle
+            // formatter.dateStyle = .MediumStyle
+            // formatter.timeStyle = .NoStyle
             let initDate : NSDate? = formatter.dateFromString(dateTextField.text)
             
             let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
@@ -87,53 +75,36 @@ class ViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
+    @IBAction func allDayOnOff(sender: AnyObject) {
+        if allDaySwitch.on {
+            allDayStatus = 1
+        } else {
+            allDayStatus = 0
+        }
+    }
+    
+    // MARK - get method
+    
+    func getComapnies() {
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("companies") {
+            companies in
+            println(companies)
+        }
+    }
+    
+    // MARK - post method
     
     @IBAction func postToArm(sender: AnyObject) {
-        
-        let session = NSURLSession.sharedSession()
-        let urlString = "http://localhost:3000/api/schedules"
-        let url = NSURL(string: urlString)!
-        let body = "{\"date\": \"\(selectedDate)\", \"all_day\": \"\(allDayStatus)\"}"
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding);
-        
-        /* 4 - Initialize task for getting data */
-        let task = session.dataTaskWithRequest(request) { (data: NSData!, response: NSURLResponse!, error: NSError!) in
-            
-            if error != nil {
-                // Handle error...
-                println(error)
-            } else {
-                println("successfully submitted \(self.selectedDate)")
-                /* 5. Parse the data */
-                var parsingError: NSError? = nil
-                let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as? NSDictionary
-                
-                /* 6. Use the data! */
-                if let status = parsedResult?["message"] as? String {
-                    println(status)
-                }
+        let scheduleService = ScheduleService()
+        let body = "{\"date\": \"\(dateTextField)\", \"all_day\": \"\(allDayStatus)\"}"
+        scheduleService.postSchedule(body) {
+            status in
+            if let returnMessage = status as String? {
+                println(returnMessage)
             }
         }
         
-        /* 9 - Resume (execute) the task */
-        task.resume()
-    }
-    
-    func escapedParameters(parameters: [String : AnyObject]) -> String {
-        var urlVars = [String]()
-        for (key, value) in parameters {
-            /* Make sure that it is a string value */
-            let stringValue = "\(value)"
-            /* Escape it */
-            let escapedValue = stringValue.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-            /* Append it */
-            urlVars += [key + "=" + "\(escapedValue!)"]
-        }
-        return (!urlVars.isEmpty ? "?" : "") + join("&", urlVars)
     }
     
     

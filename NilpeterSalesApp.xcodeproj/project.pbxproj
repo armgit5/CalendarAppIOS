@@ -20,6 +20,7 @@
 		12009D3E1B96B57D00C012B6 /* PopDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D3D1B96B57D00C012B6 /* PopDateViewController.swift */; };
 		12009D401B96B58300C012B6 /* PopDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12009D3F1B96B58300C012B6 /* PopDateViewController.xib */; };
 		12009D431B96B5BD00C012B6 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D421B96B5BD00C012B6 /* DateUtils.swift */; };
+		122A64471B96EAE800E1A57D /* FriendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A64461B96EAE800E1A57D /* FriendItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		12009D3D1B96B57D00C012B6 /* PopDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopDateViewController.swift; path = "../../PopDatePickerApp-master/PopDatePickerApp/PopDateViewController.swift"; sourceTree = "<group>"; };
 		12009D3F1B96B58300C012B6 /* PopDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopDateViewController.xib; path = "../../PopDatePickerApp-master/PopDatePickerApp/PopDateViewController.xib"; sourceTree = "<group>"; };
 		12009D421B96B5BD00C012B6 /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateUtils.swift; path = "../../PopDatePickerApp-master/PopDatePickerApp/DateUtils.swift"; sourceTree = "<group>"; };
+		122A64461B96EAE800E1A57D /* FriendItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				12009D411B96B58900C012B6 /* PopDatePicker */,
-				12009D421B96B5BD00C012B6 /* DateUtils.swift */,
+				122A64461B96EAE800E1A57D /* FriendItem.swift */,
 				12009D391B95726500C012B6 /* ScheduleData.swift */,
 				12009D371B956F7100C012B6 /* NetworkOperation.swift */,
 				12009D351B956F6000C012B6 /* ScheduleService.swift */,
@@ -134,6 +136,7 @@
 		12009D411B96B58900C012B6 /* PopDatePicker */ = {
 			isa = PBXGroup;
 			children = (
+				12009D421B96B5BD00C012B6 /* DateUtils.swift */,
 				12009D3F1B96B58300C012B6 /* PopDateViewController.xib */,
 				12009D3D1B96B57D00C012B6 /* PopDateViewController.swift */,
 				12009D3B1B96B56D00C012B6 /* PopDatePicker.swift */,
@@ -247,6 +250,7 @@
 				12009D361B956F6000C012B6 /* ScheduleService.swift in Sources */,
 				12009D3A1B95726500C012B6 /* ScheduleData.swift in Sources */,
 				12009D3C1B96B56D00C012B6 /* PopDatePicker.swift in Sources */,
+				122A64471B96EAE800E1A57D /* FriendItem.swift in Sources */,
 				12009D181B830CD300C012B6 /* ViewController.swift in Sources */,
 				12009D161B830CD300C012B6 /* AppDelegate.swift in Sources */,
 				12009D3E1B96B57D00C012B6 /* PopDateViewController.swift in Sources */,

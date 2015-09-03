@@ -14,6 +14,7 @@ struct ScheduleData {
     let companies: [[String: AnyObject]]?
     let products: [[String: AnyObject]]?
     let locations: [[String: AnyObject]]?
+    let name: String
     
     
 }

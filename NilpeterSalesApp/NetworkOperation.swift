@@ -46,4 +46,43 @@ class NetworkOperation {
         dataTask.resume()
     }
     
+    func postBodyToURL(postBody: String, completion: String? -> Void) {
+        
+        let request = NSMutableURLRequest(URL: queryURL)
+        let body = postBody
+        request.HTTPMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding);
+        let dataTask = session.dataTaskWithRequest(request) {
+            data, response, error in
+            
+            // Check http response for successful GET request
+            if let httpResponse = response as? NSHTTPURLResponse {
+                
+                switch(httpResponse.statusCode) {
+                case 200:
+                    // create json object
+                    var parsingError: NSError? = nil
+                    let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as? NSDictionary
+                    
+                    /* 6. Use the data! */
+                    if let status = parsedResult?["message"] as? String {
+                        completion(status)
+                    }
+                default:
+                    println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                }
+                
+            } else {
+                println("error no valid http response")
+            }
+        }
+        
+        dataTask.resume()
+    }
+
+    
+    
+    
 }
