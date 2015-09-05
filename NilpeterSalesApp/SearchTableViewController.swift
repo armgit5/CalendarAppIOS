@@ -11,9 +11,10 @@ import UIKit
 
 class SearchTableViewController: UITableViewController, UISearchResultsUpdating {
     
-    let appleProducts = ["Mac","Apple 5","iPhone","Apple Watch","iPad","Apple2","Apple3"]
+    var appleProducts: [String] = []
     var filteredAppleProducts = [String]()
     var resultSearchController = UISearchController()
+    var com = [[String: AnyObject]]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,29 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         self.tableView.tableHeaderView = self.resultSearchController.searchBar
         self.tableView.reloadData()
         
+        
+        getComapnies()
+        
     }
+    
+    func getComapnies() {
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("companies") {
+            companies in
+            
+            if let comArray = companies {
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.com = comArray
+                    let comArrayObj = Company(dictArray: self.com)
+                    self.appleProducts = comArrayObj.companyArray
+                    self.tableView.reloadData()
+                }
+            }
+            
+        }
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
