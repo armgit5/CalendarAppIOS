@@ -18,6 +18,8 @@ class ViewController: UITableViewController, UITextFieldDelegate {
     var selectedDate = ""
     var allDayStatus = 0
     var popDatePicker : PopDatePicker?
+    var companyData: [String]?
+
     
     // search bar
     @IBOutlet weak var companyTextField: UITextField!
@@ -29,9 +31,25 @@ class ViewController: UITableViewController, UITextFieldDelegate {
         dateTextField.delegate = self
         companyTextField.delegate = self
         
-        // getComapnies()
-        
+        getComapnies()
     }
+    
+    func getComapnies() {
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("companies") {
+            companies in
+            
+                if let comArray = companies {
+                dispatch_async(dispatch_get_main_queue()) {
+                    let comArrayObj = Company(dictArray: comArray)
+                    self.companyData = comArrayObj.companyArray
+//                    println(self.companyData)
+                }
+            }
+            
+        }
+    }
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -45,7 +63,17 @@ class ViewController: UITableViewController, UITextFieldDelegate {
         dateTextField.resignFirstResponder()
     }
     
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "toATable" {
+//            let secondCtrl = segue.destinationViewController as? SearchTableViewController
+////            secondCtrl?.parentVC = self
+//        }
+//    }
+    
+    
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        
+        
         
         if (textField === dateTextField) {
             resign()
@@ -81,15 +109,6 @@ class ViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    // MARK: - get method
-    
-    func getComapnies() {
-        let scheduleService = ScheduleService()
-        scheduleService.getSchedule("companies") {
-            companies in
-            println(companies)
-        }
-    }
     
     // MARK: - post method
     

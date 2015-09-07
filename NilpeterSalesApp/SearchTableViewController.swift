@@ -16,6 +16,9 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     var resultSearchController = UISearchController()
     var com = [[String: AnyObject]]()
     
+    var parentVC: ViewController?
+    var parentApple: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -28,7 +31,6 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         self.tableView.tableHeaderView = self.resultSearchController.searchBar
         self.tableView.reloadData()
         
-        
         getComapnies()
         
     }
@@ -40,8 +42,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
             
             if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.com = comArray
-                    let comArrayObj = Company(dictArray: self.com)
+                    let comArrayObj = Company(dictArray: comArray)
                     self.appleProducts = comArrayObj.companyArray
                     self.tableView.reloadData()
                 }
@@ -49,8 +50,6 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
             
         }
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -69,6 +68,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         else
         {
             return self.appleProducts.count
+
         }
     }
     
@@ -84,11 +84,20 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         }
         else
         {
+            
             cell!.textLabel?.text = self.appleProducts[indexPath.row]
             
             return cell!
         }
     }
+//    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier == "toATable" {
+//            let firstCtrl = segue.destinationViewController as? ViewController
+//            firstCtrl?.companyTextField.text = parentApple
+//        }
+//    }
+    
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -98,13 +107,18 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         
         if (self.resultSearchController.active) {
             apple = self.filteredAppleProducts[indexPath.row]
-            println("call")
+            // println("call")
         } else {
-            println("nocall")
+            // println("nocall")
             apple = self.appleProducts[indexPath.row]
         }
         
-        println("result \(self.resultSearchController.active) , index row = \(indexPath.row), apple = \(apple), filter = \(filteredAppleProducts), appleprods = \(appleProducts)")
+//        if  !apple.isEmpty {
+//            parentApple = apple
+//            self.dismissViewControllerAnimated(true, completion: nil)
+//        }
+        
+        // println("result \(self.resultSearchController.active) , index row = \(indexPath.row), apple = \(apple), filter = \(filteredAppleProducts), appleprods = \(appleProducts)")
         
         
     }
@@ -121,5 +135,12 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         //println(self.filteredAppleProducts)
         self.tableView.reloadData()
     }
+    
+    @IBAction func refreshCompanies() {
+        getComapnies()
+        refreshControl?.endRefreshing()
+    }
+    
+    
     
 }
