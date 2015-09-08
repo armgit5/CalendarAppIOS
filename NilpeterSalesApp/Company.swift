@@ -13,16 +13,22 @@ struct Company {
     
     var companyDictArray: [[String: AnyObject]]
     var companyArray: [String] = []
+    var companyIdDict: [String: Int]
     
     init(dictArray: [[String: AnyObject]]) {
         self.companyDictArray = dictArray
+        self.companyIdDict = [String: Int]()
         makeCompanyArray()
     }
     
     mutating func makeCompanyArray() {
         for company in companyDictArray {
-            let comName = company["name"] as! String
-            companyArray.append(comName)
+            if let comName = company["name"] as? String {
+                companyArray.append(comName)
+                let comId = company["id"] as! Int
+                companyIdDict[comName] = comId
+            }
+            
         }
     }
   
