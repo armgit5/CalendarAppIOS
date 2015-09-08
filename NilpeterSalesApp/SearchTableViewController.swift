@@ -9,7 +9,13 @@
 import Foundation
 import UIKit
 
+protocol SearchTableViewControllerDelegate {
+    func addCompany(company: String)
+}
+
 class SearchTableViewController: UITableViewController, UISearchResultsUpdating {
+    
+    var delegate: SearchTableViewControllerDelegate?
     
     var appleProducts: [String] = []
     var filteredAppleProducts = [String]()
@@ -113,10 +119,10 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
             apple = self.appleProducts[indexPath.row]
         }
         
-//        if  !apple.isEmpty {
-//            parentApple = apple
-//            self.dismissViewControllerAnimated(true, completion: nil)
-//        }
+        if  !apple.isEmpty {
+            parentApple = apple
+            self.performSegueWithIdentifier("companySelected", sender: self)
+        }
         
         // println("result \(self.resultSearchController.active) , index row = \(indexPath.row), apple = \(apple), filter = \(filteredAppleProducts), appleprods = \(appleProducts)")
         
@@ -140,6 +146,8 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         getComapnies()
         refreshControl?.endRefreshing()
     }
+    
+    
     
     
     

@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UITextFieldDelegate {
+class ViewController: UITableViewController, UITextFieldDelegate, SearchTableViewControllerDelegate {
     
     @IBOutlet weak var allDaySwitch: UISwitch!
     
@@ -18,10 +18,9 @@ class ViewController: UITableViewController, UITextFieldDelegate {
     var selectedDate = ""
     var allDayStatus = 0
     var popDatePicker : PopDatePicker?
-    var companyData: [String]?
-
     
     // search bar
+    var companyData: [String]?
     @IBOutlet weak var companyTextField: UITextField!
     
     override func viewDidLoad() {
@@ -30,9 +29,11 @@ class ViewController: UITableViewController, UITextFieldDelegate {
         popDatePicker = PopDatePicker(forTextField: dateTextField)
         dateTextField.delegate = self
         companyTextField.delegate = self
-        
+        companyTextField.text = "test"
         getComapnies()
     }
+    
+    // MARK: - Get companies
     
     func getComapnies() {
         let scheduleService = ScheduleService()
@@ -43,33 +44,22 @@ class ViewController: UITableViewController, UITextFieldDelegate {
                 dispatch_async(dispatch_get_main_queue()) {
                     let comArrayObj = Company(dictArray: comArray)
                     self.companyData = comArrayObj.companyArray
-//                    println(self.companyData)
                 }
             }
             
         }
     }
-
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func addCompany(company: String) {
+        companyTextField.text = company
+        tableView.reloadData()
     }
-
     
     // MARK: - DatePicker popup
     
     func resign() {
         dateTextField.resignFirstResponder()
     }
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "toATable" {
-//            let secondCtrl = segue.destinationViewController as? SearchTableViewController
-////            secondCtrl?.parentVC = self
-//        }
-//    }
-    
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
@@ -121,7 +111,17 @@ class ViewController: UITableViewController, UITextFieldDelegate {
                 println(returnMessage)
             }
         }
-        
+    }
+    
+    // MARK: - unwind company from company table view
+    
+    @IBAction func unwindFromModalViewController(segue: UIStoryboardSegue) {
+        if segue.sourceViewController.isKindOfClass(SearchTableViewController) {
+            let searchController = segue.sourceViewController as! SearchTableViewController
+            if searchController.parentApple != nil {
+                companyTextField.text = searchController.parentApple
+            }
+        }
     }
     
 }
