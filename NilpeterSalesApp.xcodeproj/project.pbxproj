@@ -187,9 +187,9 @@
 			isa = PBXGroup;
 			children = (
 				12CBF1341B9993420087E061 /* Company.swift */,
+				12EAC8D51BA013CB00B5E08A /* Location.swift */,
 				12009D371B956F7100C012B6 /* NetworkOperation.swift */,
 				12009D351B956F6000C012B6 /* ScheduleService.swift */,
-				12EAC8D51BA013CB00B5E08A /* Location.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";

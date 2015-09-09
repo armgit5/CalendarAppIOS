@@ -21,6 +21,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     // search bar
     var companyData: [String]?
+    var companyId: Int?
     @IBOutlet weak var companyTextField: UITextField!
     
     // picker view
@@ -38,7 +39,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         // picker view
         myPicker.dataSource = self
         myPicker.delegate = self
-        getLocations()
+        
     }
     
     // MARK: - uipicker view
@@ -53,23 +54,17 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         return pickerData[row]
     }
-    
-  
-    
-    
+
     // MARK: - Get locations
     
-    func getLocations() {
+    func getLocations(companyId: Int) {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("locations") {
             companies in
-            
             if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
-                    let comArrayObj = Location(dictArray: comArray)
+                    let comArrayObj = Location(dictArray: comArray, companyId: companyId)
                     println(comArrayObj.locationArray)
-                    self.pickerData = comArrayObj.locationArray
-                    println(comArrayObj.locationIdDict)
                     self.myPicker.reloadAllComponents()
                 }
             }
@@ -147,6 +142,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             let searchController = segue.sourceViewController as! SearchTableViewController
             if searchController.parentApple != nil {
                 companyTextField.text = searchController.parentApple
+                companyId = searchController.parentAppleId
+                println(companyId)
+                getLocations(companyId!)
             }
         }
     }

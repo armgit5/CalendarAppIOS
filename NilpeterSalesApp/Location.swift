@@ -16,18 +16,23 @@ struct Location {
     var locationArray: [String] = []
     var locationIdDict: [String: Int]
     
-    init(dictArray: [[String: AnyObject]]) {
+    init(dictArray: [[String: AnyObject]], companyId: Int) {
         self.locationDictArray = dictArray
         self.locationIdDict = [String: Int]()
-        makeLocationArray()
+        makeLocationArray(companyId)
     }
     
-    mutating func makeLocationArray() {
+    mutating func makeLocationArray(companyId: Int) {
         for location in locationDictArray {
-            if let locName = location["name"] as? String {
-                locationArray.append(locName)
-                let locId = location["id"] as! Int
-                locationIdDict[locName] = locId
+            if let companyIdKey = location["company_id"] as? Int {
+                println("\(companyIdKey), \(companyId)")
+                if companyIdKey == companyId {
+                    if let locName = location["name"] as? String {
+                        locationArray.append(locName)
+                        locationIdDict[locName] = companyIdKey
+        
+                    }
+                }
             }
             
         }

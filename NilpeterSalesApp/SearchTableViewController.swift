@@ -56,6 +56,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
                     let comArrayObj = Company(dictArray: comArray)
                     self.appleProducts = comArrayObj.companyArray
                     self.parentAppleIdDict = comArrayObj.companyIdDict
+                    
                     self.tableView.reloadData()
                 }
             }
@@ -114,8 +115,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         
         if  !apple.isEmpty {
             parentApple = apple
-            parentAppleId = parentAppleIdDict![parentApple!]!
-            println(parentAppleId)
+            parentAppleId = parentAppleIdDict![apple]
             self.performSegueWithIdentifier("companySelected", sender: self)
         }
     }
