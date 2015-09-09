@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UITextFieldDelegate, SearchTableViewControllerDelegate {
+class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var allDaySwitch: UISwitch!
     
@@ -23,6 +23,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, SearchTableVie
     var companyData: [String]?
     @IBOutlet weak var companyTextField: UITextField!
     
+    // picker view
+    var pickerData = ["Mozzarella","Gorgonzola","Provolone","Brie","Maytag Blue","Sharp Cheddar","Monterrey Jack","Stilton","Gouda","Goat Cheese", "Asiago"]
+    @IBOutlet weak var myPicker: UIPickerView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -30,20 +34,43 @@ class ViewController: UITableViewController, UITextFieldDelegate, SearchTableVie
         dateTextField.delegate = self
         companyTextField.delegate = self
         companyTextField.text = "test"
-        getComapnies()
+        
+        // picker view
+        myPicker.dataSource = self
+        myPicker.delegate = self
+        getLocations()
     }
     
-    // MARK: - Get companies
+    // MARK: - uipicker view
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
+        return 1
+    }
     
-    func getComapnies() {
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        return pickerData.count
+    }
+
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return pickerData[row]
+    }
+    
+  
+    
+    
+    // MARK: - Get locations
+    
+    func getLocations() {
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("companies") {
+        scheduleService.getSchedule("locations") {
             companies in
             
-                if let comArray = companies {
+            if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
-                    let comArrayObj = Company(dictArray: comArray)
-                    self.companyData = comArrayObj.companyArray
+                    let comArrayObj = Location(dictArray: comArray)
+                    println(comArrayObj.locationArray)
+                    self.pickerData = comArrayObj.locationArray
+                    println(comArrayObj.locationIdDict)
+                    self.myPicker.reloadAllComponents()
                 }
             }
             

@@ -83,7 +83,7 @@
                                             </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="XhE-LG-dkc">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="XhE-LG-dkc">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XhE-LG-dkc" id="8JJ-19-j8R">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -101,27 +101,45 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="T3C-L3-3Rm" secondAttribute="trailing" constant="26" id="8Gf-jT-5Qg"/>
                                                 <constraint firstItem="T3C-L3-3Rm" firstAttribute="leading" secondItem="eW2-Qy-t0z" secondAttribute="trailing" constant="20" id="Hwc-wA-rse"/>
                                                 <constraint firstItem="eW2-Qy-t0z" firstAttribute="leading" secondItem="8JJ-19-j8R" secondAttribute="leadingMargin" id="Mh0-HR-fSh"/>
                                                 <constraint firstAttribute="centerY" secondItem="eW2-Qy-t0z" secondAttribute="centerY" id="fmN-ub-D1d"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="T3C-L3-3Rm" secondAttribute="trailing" constant="26" id="ftz-Ua-ZWn"/>
                                                 <constraint firstAttribute="centerY" secondItem="T3C-L3-3Rm" secondAttribute="centerY" constant="1.5" id="j4Q-dh-FOv"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="yTV-VI-fL2">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="65" id="yTV-VI-fL2">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yTV-VI-fL2" id="Wsu-bR-lEa">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LOCATION" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwC-Qi-boS">
+                                                    <rect key="frame" x="8" y="22" width="84" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dhl-rY-uKi">
+                                                    <rect key="frame" x="140" y="-49" width="422" height="162"/>
+                                                </pickerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerY" secondItem="Dhl-rY-uKi" secondAttribute="centerY" id="Gdx-Cy-V1l"/>
+                                                <constraint firstItem="Dhl-rY-uKi" firstAttribute="leading" secondItem="QwC-Qi-boS" secondAttribute="trailing" constant="48" id="I2u-b9-3jp"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Dhl-rY-uKi" secondAttribute="trailing" constant="30" id="L5c-5u-UV5"/>
+                                                <constraint firstAttribute="centerY" secondItem="QwC-Qi-boS" secondAttribute="centerY" id="dkj-hI-lI8"/>
+                                                <constraint firstItem="QwC-Qi-boS" firstAttribute="leading" secondItem="Wsu-bR-lEa" secondAttribute="leadingMargin" id="tXm-Dn-XgY"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="fDp-CF-9Xl">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="230" id="fDp-CF-9Xl">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fDp-CF-9Xl" id="82X-nV-JGq">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAx-fZ-Ntf">
-                                                    <rect key="frame" x="229" y="10" width="143" height="30"/>
+                                                    <rect key="frame" x="229" y="100" width="143" height="30"/>
                                                     <state key="normal" title="CREATE SCHEDULE">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -148,6 +166,7 @@
                         <outlet property="allDaySwitch" destination="wOh-bm-bc7" id="O6n-yG-IC2"/>
                         <outlet property="companyTextField" destination="T3C-L3-3Rm" id="Drk-Zi-qoa"/>
                         <outlet property="dateTextField" destination="PdG-SM-Hol" id="Oo2-1R-RKc"/>
+                        <outlet property="myPicker" destination="Dhl-rY-uKi" id="Mfs-tA-Cw9"/>
                         <outlet property="searchDisplayController" destination="9Io-qc-hp6" id="C6G-XQ-gmw"/>
                         <segue destination="fnf-38-leF" kind="presentation" identifier="toATable" id="Eg4-XK-k9t"/>
                     </connections>
