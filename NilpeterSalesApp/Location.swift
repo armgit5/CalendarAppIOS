@@ -25,12 +25,12 @@ struct Location {
     mutating func makeLocationArray(companyId: Int) {
         for location in locationDictArray {
             if let companyIdKey = location["company_id"] as? Int {
-                println("\(companyIdKey), \(companyId)")
                 if companyIdKey == companyId {
                     if let locName = location["name"] as? String {
                         locationArray.append(locName)
-                        locationIdDict[locName] = companyIdKey
-        
+                        if let locationId = location["id"] as? Int {
+                            locationIdDict[locName] = locationId
+                        }
                     }
                 }
             }

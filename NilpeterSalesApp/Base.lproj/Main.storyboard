@@ -120,7 +120,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <pickerView contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dhl-rY-uKi">
+                                                <pickerView contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" id="Dhl-rY-uKi">
                                                     <rect key="frame" x="140" y="-49" width="422" height="162"/>
                                                 </pickerView>
                                             </subviews>

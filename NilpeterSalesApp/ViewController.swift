@@ -25,7 +25,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     @IBOutlet weak var companyTextField: UITextField!
     
     // picker view
-    var pickerData = ["Mozzarella","Gorgonzola","Provolone","Brie","Maytag Blue","Sharp Cheddar","Monterrey Jack","Stilton","Gouda","Goat Cheese", "Asiago"]
+    var pickerData = [""]
+    var pickerLocation: String?
+    var pickerLocationId: Int?
+    var pickerLocationIdDict: [String: Int]?
     @IBOutlet weak var myPicker: UIPickerView!
 
     override func viewDidLoad() {
@@ -54,6 +57,13 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         return pickerData[row]
     }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickerLocation = pickerData[row]
+        pickerLocationId = self.pickerLocationIdDict![self.pickerLocation!]
+        println(pickerLocation)
+        println(pickerLocationId)
+    }
 
     // MARK: - Get locations
     
@@ -64,7 +74,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
                     let comArrayObj = Location(dictArray: comArray, companyId: companyId)
-                    println(comArrayObj.locationArray)
+                    
+                    self.pickerData = comArrayObj.locationArray
+                    self.pickerLocation = self.pickerData.first
+                    
+                    self.pickerLocationIdDict = comArrayObj.locationIdDict
+                    self.pickerLocationId = self.pickerLocationIdDict![self.pickerLocation!]
                     self.myPicker.reloadAllComponents()
                 }
             }
@@ -85,17 +100,13 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        
-        
         if (textField === dateTextField) {
             resign()
             let formatter = NSDateFormatter()
             formatter.dateFormat = "dd-MM-yyyy HH:mm"
-            
             let initDate : NSDate? = formatter.dateFromString(dateTextField.text)
-            
             let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
-                
+    
                 // here we don't use self (no retain cycle)
                 forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
                 
@@ -143,7 +154,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             if searchController.parentApple != nil {
                 companyTextField.text = searchController.parentApple
                 companyId = searchController.parentAppleId
-                println(companyId)
                 getLocations(companyId!)
             }
         }
