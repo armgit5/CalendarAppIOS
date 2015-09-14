@@ -11,22 +11,22 @@ import UIKit
 
 struct Company {
     
-    var companyDictArray: [[String: AnyObject]]
+    var rawCompanyData: [[String: AnyObject]]
     var companyArray: [String] = []
-    var companyIdDict: [String: Int]
+    var companyDict: [String: Int]
     
     init(dictArray: [[String: AnyObject]]) {
-        self.companyDictArray = dictArray
-        self.companyIdDict = [String: Int]()
+        self.rawCompanyData = dictArray
+        self.companyDict = [String: Int]()
         makeCompanyArray()
     }
     
     mutating func makeCompanyArray() {
-        for company in companyDictArray {
+        for company in rawCompanyData {
             if let comName = company["name"] as? String {
                 companyArray.append(comName)
                 let comId = company["id"] as! Int
-                companyIdDict[comName] = comId
+                companyDict[comName] = comId
             }
             
         }

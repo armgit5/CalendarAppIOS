@@ -21,12 +21,10 @@ struct ScheduleService {
         if let scheduleURL = NSURL(string: scheduleQuery, relativeToURL: scheduleBaseURL) {
             
             let networkOperation = NetworkOperation(url: scheduleURL)
-            
             networkOperation.downloadJSONFromURL {
                 JSONDictionary in
                 completion(JSONDictionary)
             }
-            
         } else {
             println("counldn't construct valid url")
         }
@@ -45,5 +43,7 @@ struct ScheduleService {
             println("counldn't construct valid url")
         }
     }
+    
+    
     
 }

@@ -24,7 +24,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     var companyId: Int?
     @IBOutlet weak var companyTextField: UITextField!
     
-    // picker view
+    // location picker view
     var pickerData = [""]
     var pickerLocation: String?
     var pickerLocationId: Int?
@@ -78,7 +78,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                     self.pickerData = comArrayObj.locationArray
                     self.pickerLocation = self.pickerData.first
                     
-                    self.pickerLocationIdDict = comArrayObj.locationIdDict
+                    self.pickerLocationIdDict = comArrayObj.locationDict
                     self.pickerLocationId = self.pickerLocationIdDict![self.pickerLocation!]
                     self.myPicker.reloadAllComponents()
                 }
@@ -151,9 +151,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     @IBAction func unwindFromModalViewController(segue: UIStoryboardSegue) {
         if segue.sourceViewController.isKindOfClass(SearchTableViewController) {
             let searchController = segue.sourceViewController as! SearchTableViewController
-            if searchController.parentApple != nil {
-                companyTextField.text = searchController.parentApple
-                companyId = searchController.parentAppleId
+            if searchController.parentCompany != nil {
+                companyTextField.text = searchController.parentCompany
+                companyId = searchController.parentCompanyId
                 getLocations(companyId!)
             }
         }
