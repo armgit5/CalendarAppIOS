@@ -54,15 +54,15 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         return pickerData.count
     }
 
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerLocation = pickerData[row]
         pickerLocationId = self.pickerLocationIdDict![self.pickerLocation!]
-        println(pickerLocation)
-        println(pickerLocationId)
+        print(pickerLocation, terminator: "")
+        print(pickerLocationId, terminator: "")
     }
 
     // MARK: - Get locations
@@ -104,7 +104,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             resign()
             let formatter = NSDateFormatter()
             formatter.dateFormat = "dd-MM-yyyy HH:mm"
-            let initDate : NSDate? = formatter.dateFromString(dateTextField.text)
+            let initDate : NSDate? = formatter.dateFromString(dateTextField.text!)
             let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
     
                 // here we don't use self (no retain cycle)
@@ -141,7 +141,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         scheduleService.postSchedule(body) {
             status in
             if let returnMessage = status as String? {
-                println(returnMessage)
+                print(returnMessage, terminator: "")
             }
         }
     }

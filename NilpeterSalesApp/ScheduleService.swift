@@ -26,7 +26,7 @@ struct ScheduleService {
                 completion(JSONDictionary)
             }
         } else {
-            println("counldn't construct valid url")
+            print("counldn't construct valid url")
         }
     }
     
@@ -40,7 +40,7 @@ struct ScheduleService {
             }
             
         } else {
-            println("counldn't construct valid url")
+            print("counldn't construct valid url")
         }
     }
     

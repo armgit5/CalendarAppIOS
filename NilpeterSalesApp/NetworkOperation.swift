@@ -32,14 +32,14 @@ class NetworkOperation {
                 switch(httpResponse.statusCode) {
                 case 200:
                     // create json object
-                    let jsonDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? [[String: AnyObject]]
+                    let jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data, options: [])) as? [[String: AnyObject]]
                     completion(jsonDictionary)
                 default:
-                    println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                    print("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
                 }
                 
             } else {
-                println("error no valid http response")
+                print("error no valid http response")
             }
         }
         
@@ -64,18 +64,23 @@ class NetworkOperation {
                 case 200:
                     // create json object
                     var parsingError: NSError? = nil
-                    let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: &parsingError) as? NSDictionary
+                    
+                    do {
+                    let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                     
                     /* 6. Use the data! */
                     if let status = parsedResult?["message"] as? String {
                         completion(status)
                     }
+                    } catch {
+                        print(error)
+                    }
                 default:
-                    println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                    print("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
                 }
                 
             } else {
-                println("error no valid http response")
+                print("error no valid http response")
             }
         }
         

@@ -238,6 +238,8 @@
 		12009D081B830CD300C012B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Arm Suwansiri";
 				TargetAttributes = {
