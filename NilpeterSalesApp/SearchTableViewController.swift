@@ -45,7 +45,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
             if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
                     let comArrayObj = Company(dictArray: comArray)
-                    self.companies = comArrayObj.companyArray
+                    self.companies = comArrayObj.companyArray!
                     self.parentCompanyDict = comArrayObj.companyDict
                     self.tableView.reloadData()
                 }
@@ -71,15 +71,14 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as? UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
         if (self.resultSearchController.active) {
-            cell!.textLabel?.text = self.filteredCompanies[indexPath.row]
-            return cell!
-        }
+            cell.textLabel?.text = self.filteredCompanies[indexPath.row]
+            return cell        }
         else {
-            cell!.textLabel?.text = self.companies[indexPath.row]
-            return cell!
+            cell.textLabel?.text = self.companies[indexPath.row]
+            return cell
         }
     }
     

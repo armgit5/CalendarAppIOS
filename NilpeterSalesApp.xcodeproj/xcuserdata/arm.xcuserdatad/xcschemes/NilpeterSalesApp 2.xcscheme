@@ -20,20 +20,6 @@
                ReferencedContainer = "container:NilpeterSalesApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "12009D241B830CD400C012B6"
-               BuildableName = "NilpeterSalesAppTests.xctest"
-               BlueprintName = "NilpeterSalesAppTests"
-               ReferencedContainer = "container:NilpeterSalesApp.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "12009D241B830CD400C012B6"
-               BuildableName = "NilpeterSalesAppTests.xctest"
-               BlueprintName = "NilpeterSalesAppTests"
-               ReferencedContainer = "container:NilpeterSalesApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

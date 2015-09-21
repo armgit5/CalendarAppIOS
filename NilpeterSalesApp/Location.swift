@@ -12,24 +12,31 @@ import UIKit
 
 struct Location {
     
-    var rawLocationData: [[String: AnyObject]]
-    var locationArray: [String] = []
-    var locationDict: [String: Int]
+    
+    
+    var rawLocationData: [[String: AnyObject]]?
+    var locationArray: [String]?
+    var locationDict: [String: Int]?
+    
+    init() {
+        
+    }
     
     init(dictArray: [[String: AnyObject]], companyId: Int) {
         self.rawLocationData = dictArray
         self.locationDict = [String: Int]()
+        self.locationArray = [String]()
         makeLocationArray(companyId)
     }
     
     mutating func makeLocationArray(companyId: Int) {
-        for location in rawLocationData {
+        for location in rawLocationData! {
             if let companyIdKey = location["company_id"] as? Int {
                 if companyIdKey == companyId {
                     if let locName = location["name"] as? String {
-                        locationArray.append(locName)
+                        self.locationArray!.append(locName)
                         if let locationId = location["id"] as? Int {
-                            locationDict[locName] = locationId
+                            self.locationDict![locName] = locationId
                         }
                     }
                 }

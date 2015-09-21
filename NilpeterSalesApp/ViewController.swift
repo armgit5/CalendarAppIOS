@@ -15,24 +15,25 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     // date and time data
     @IBOutlet weak var dateTextField: UITextField!
-    var selectedDate = ""
     var allDayStatus = 0
     var popDatePicker : PopDatePicker?
     
     // search bar
-    var companyData: [String]?
-    var companyId: Int?
+    var company: Company?
     @IBOutlet weak var companyTextField: UITextField!
     
     // location picker view
     var pickerData = [""]
-    var pickerLocation: String?
-    var pickerLocationId: Int?
-    var pickerLocationIdDict: [String: Int]?
-    @IBOutlet weak var myPicker: UIPickerView!
+    var pickerLocation: String = ""
+    var pickerLocationId: Int = 0
+    var pickerLocationIdDict = [String: Int]()
+    @IBOutlet weak var myPicker: UIPickerView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        company = Company()
+        
         // Do any additional setup after loading the view, typically from a nib.
         popDatePicker = PopDatePicker(forTextField: dateTextField)
         dateTextField.delegate = self
@@ -40,8 +41,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         companyTextField.text = "test"
         
         // picker view
-        myPicker.dataSource = self
-        myPicker.delegate = self
+        // myPicker!.dataSource = self
+        // myPicker!.delegate = self
         
     }
     
@@ -59,10 +60,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pickerLocation = pickerData[row]
-        pickerLocationId = self.pickerLocationIdDict![self.pickerLocation!]
-        print(pickerLocation, terminator: "")
-        print(pickerLocationId, terminator: "")
+//        pickerLocation = pickerData[row]
+//        pickerLocationId = self.pickerLocationIdDict![self.pickerLocation!]
+//        print(pickerLocation, terminator: "")
+//        print(pickerLocationId, terminator: "")
     }
 
     // MARK: - Get locations
@@ -75,12 +76,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                 dispatch_async(dispatch_get_main_queue()) {
                     let comArrayObj = Location(dictArray: comArray, companyId: companyId)
                     
-                    self.pickerData = comArrayObj.locationArray
-                    self.pickerLocation = self.pickerData.first
-                    
-                    self.pickerLocationIdDict = comArrayObj.locationDict
-                    self.pickerLocationId = self.pickerLocationIdDict![self.pickerLocation!]
-                    self.myPicker.reloadAllComponents()
+                    self.pickerData = comArrayObj.locationArray!
+//                    self.pickerLocation = self.pickerData.first
+//                    
+//                    self.pickerLocationIdDict = comArrayObj.locationDict
+//                    self.pickerLocationId = self.pickerLocationIdDict![self.pickerLocation!]
+//                    self.myPicker.reloadAllComponents()
                 }
             }
             
@@ -153,8 +154,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             let searchController = segue.sourceViewController as! SearchTableViewController
             if searchController.parentCompany != nil {
                 companyTextField.text = searchController.parentCompany
-                companyId = searchController.parentCompanyId
-                getLocations(companyId!)
+                company?.companyId = searchController.parentCompanyId
+                getLocations((company?.companyId)!)
             }
         }
     }
