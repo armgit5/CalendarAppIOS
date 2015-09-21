@@ -11,16 +11,14 @@ import UIKit
 
 class SearchTableViewController: UITableViewController, UISearchResultsUpdating {
     
-    var companies: [String] = []
-    var filteredCompanies = [String]()
+    var company: Company?
     var resultSearchController = UISearchController()
-    
-    var parentCompany: String?
-    var parentCompanyDict: [String: Int]?
-    var parentCompanyId: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        company = Company()
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         self.resultSearchController = UISearchController(searchResultsController: nil)
@@ -45,8 +43,8 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
             if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
                     let comArrayObj = Company(dictArray: comArray)
-                    self.companies = comArrayObj.companyArray!
-                    self.parentCompanyDict = comArrayObj.companyDict
+                    self.company?.companies = comArrayObj.companyArray!
+                    self.company?.parentCompanyDict = comArrayObj.companyDict
                     self.tableView.reloadData()
                 }
             }
@@ -62,10 +60,10 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (self.resultSearchController.active) {
-            return self.filteredCompanies.count
+            return (self.company?.filteredCompanies.count)!
         }
         else {
-            return self.companies.count
+            return (self.company?.companies.count)!
         }
     }
     
@@ -74,10 +72,10 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
         
         if (self.resultSearchController.active) {
-            cell.textLabel?.text = self.filteredCompanies[indexPath.row]
+            cell.textLabel?.text = self.company?.filteredCompanies[indexPath.row]
             return cell        }
         else {
-            cell.textLabel?.text = self.companies[indexPath.row]
+            cell.textLabel?.text = self.company?.companies[indexPath.row]
             return cell
         }
     }
@@ -89,25 +87,25 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         var apple = ""
         
         if (self.resultSearchController.active) {
-            apple = self.filteredCompanies[indexPath.row]
+            apple = (self.company?.filteredCompanies[indexPath.row])!
         } else {
-            apple = self.companies[indexPath.row]
+            apple = (self.company?.companies[indexPath.row])!
         }
         
         if  !apple.isEmpty {
-            parentCompany = apple
-            parentCompanyId = parentCompanyDict![apple]
+            company?.parentCompany = apple
+            company?.parentCompanyId = company?.parentCompanyDict![apple]
             self.performSegueWithIdentifier("companySelected", sender: self)
         }
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController)
     {
-        self.filteredCompanies.removeAll(keepCapacity: false)
+        self.company?.filteredCompanies.removeAll(keepCapacity: false)
         
         let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
-        let array = (self.companies as NSArray).filteredArrayUsingPredicate(searchPredicate)
-        self.filteredCompanies = array as! [String]
+        let array = ((self.company?.companies)! as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        self.company?.filteredCompanies = array as! [String]
         self.tableView.reloadData()
     }
     

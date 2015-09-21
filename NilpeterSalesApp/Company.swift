@@ -11,9 +11,18 @@ import UIKit
 
 struct Company {
     
+    // View Controller
     var companyData: [String]?
     var companyId: Int?
     
+    // Search Table
+    var companies: [String] = []
+    var filteredCompanies = [String]()
+    var parentCompany: String?
+    var parentCompanyDict: [String: Int]?
+    var parentCompanyId: Int?
+    
+    // Parsing
     var rawCompanyData: [[String: AnyObject]]?
     var companyArray: [String]?
     var companyDict: [String: Int]?

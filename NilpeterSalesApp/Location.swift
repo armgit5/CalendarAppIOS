@@ -12,14 +12,22 @@ import UIKit
 
 struct Location {
     
+    // Location Picker
     
+    var pickerLocationName: String?
+    var pickerLocationId: Int?
+    var pickerLocationIdDict: [String: Int]?
     
+    // Parsing
+
     var rawLocationData: [[String: AnyObject]]?
     var locationArray: [String]?
     var locationDict: [String: Int]?
     
     init() {
-        
+        pickerLocationName = ""
+        pickerLocationId = 0
+        pickerLocationIdDict = [String: Int]()
     }
     
     init(dictArray: [[String: AnyObject]], companyId: Int) {

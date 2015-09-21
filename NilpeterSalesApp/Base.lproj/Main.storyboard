@@ -51,7 +51,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wOh-bm-bc7">
-                                                    <rect key="frame" x="117" y="9" width="51" height="31"/>
+                                                    <rect key="frame" x="133" y="9" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="allDayOnOff:" destination="wXc-VK-6OQ" eventType="valueChanged" id="GGe-EX-ivV"/>
                                                     </connections>
@@ -59,11 +59,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="IMS-nB-lSr" secondAttribute="centerY" constant="2" id="1ON-50-sGM"/>
+                                                <constraint firstItem="wOh-bm-bc7" firstAttribute="leading" secondItem="IMS-nB-lSr" secondAttribute="trailing" constant="50" id="6Uh-zD-GLT"/>
                                                 <constraint firstItem="IMS-nB-lSr" firstAttribute="leading" secondItem="ano-Zw-nsy" secondAttribute="leadingMargin" constant="9" id="MGI-OX-rg0"/>
                                                 <constraint firstAttribute="centerY" secondItem="wOh-bm-bc7" secondAttribute="centerY" id="N3q-Ac-c82"/>
                                                 <constraint firstItem="IMS-nB-lSr" firstAttribute="top" secondItem="ano-Zw-nsy" secondAttribute="topMargin" constant="3" id="P62-ml-E8e"/>
                                                 <constraint firstItem="wOh-bm-bc7" firstAttribute="leading" secondItem="IMS-nB-lSr" secondAttribute="trailing" constant="51" id="XDm-eJ-S7B"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="wOh-bm-bc7" secondAttribute="trailing" constant="426" id="zIN-Cj-5w2"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -148,6 +148,7 @@
                         <outlet property="allDaySwitch" destination="wOh-bm-bc7" id="O6n-yG-IC2"/>
                         <outlet property="companyTextField" destination="T3C-L3-3Rm" id="Drk-Zi-qoa"/>
                         <outlet property="dateTextField" destination="PdG-SM-Hol" id="Oo2-1R-RKc"/>
+                        <outlet property="locationTextField" destination="boK-zM-9af" id="2Qx-Xg-PPn"/>
                         <outlet property="searchDisplayController" destination="9Io-qc-hp6" id="C6G-XQ-gmw"/>
                         <segue destination="fnf-38-leF" kind="presentation" identifier="toATable" id="Eg4-XK-k9t"/>
                     </connections>

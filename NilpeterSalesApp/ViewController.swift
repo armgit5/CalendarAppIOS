@@ -23,11 +23,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     @IBOutlet weak var companyTextField: UITextField!
     
     // location picker view
-    var pickerData = [""]
-    var pickerLocation: String = ""
-    var pickerLocationId: Int = 0
-    var pickerLocationIdDict = [String: Int]()
-    @IBOutlet weak var myPicker: UIPickerView?
+    var pickerData = ["one", "two", "three", "seven", "fifteen"]
+    var location: Location?
+    @IBOutlet var locationTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +36,20 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         popDatePicker = PopDatePicker(forTextField: dateTextField)
         dateTextField.delegate = self
         companyTextField.delegate = self
-        companyTextField.text = "test"
         
         // picker view
+        
         // myPicker!.dataSource = self
         // myPicker!.delegate = self
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let locationPickerView = UIPickerView()
+        locationPickerView.delegate = self
+        locationTextField.inputView = locationPickerView
     }
     
     // MARK: - uipicker view
@@ -60,11 +66,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        pickerLocation = pickerData[row]
-//        pickerLocationId = self.pickerLocationIdDict![self.pickerLocation!]
-//        print(pickerLocation, terminator: "")
-//        print(pickerLocationId, terminator: "")
+        location?.pickerLocationName = pickerData[row]
+        self.locationTextField.text = pickerData[row]
+        locationTextField.resignFirstResponder()
+       
     }
+    
 
     // MARK: - Get locations
     
@@ -152,9 +159,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     @IBAction func unwindFromModalViewController(segue: UIStoryboardSegue) {
         if segue.sourceViewController.isKindOfClass(SearchTableViewController) {
             let searchController = segue.sourceViewController as! SearchTableViewController
-            if searchController.parentCompany != nil {
-                companyTextField.text = searchController.parentCompany
-                company?.companyId = searchController.parentCompanyId
+            if searchController.company?.parentCompany != nil {
+                companyTextField.text = searchController.company?.parentCompany
+                company?.companyId = searchController.company?.parentCompanyId
                 getLocations((company?.companyId)!)
             }
         }
