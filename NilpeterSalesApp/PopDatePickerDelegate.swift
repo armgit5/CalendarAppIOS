@@ -34,7 +34,7 @@ class PopDatePickerDelegate: NSObject, UITextFieldDelegate {
             let formatter = NSDateFormatter()
             formatter.dateFormat = "dd-MM-yyyy HH:mm"
             
-            let initDate : NSDate? = formatter.dateFromString(dateTextField!.text)
+            let initDate : NSDate? = formatter.dateFromString(dateTextField!.text!)
             
             let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
                 

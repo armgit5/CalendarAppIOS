@@ -32,7 +32,7 @@ class NetworkOperation {
                 switch(httpResponse.statusCode) {
                 case 200:
                     // create json object
-                    let jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data, options: [])) as? [[String: AnyObject]]
+                    let jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as? [[String: AnyObject]]
                     completion(jsonDictionary)
                 default:
                     print("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
@@ -63,15 +63,13 @@ class NetworkOperation {
                 switch(httpResponse.statusCode) {
                 case 200:
                     // create json object
-                    var parsingError: NSError? = nil
-                    
                     do {
-                    let parsedResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                        let parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                     
-                    /* 6. Use the data! */
-                    if let status = parsedResult?["message"] as? String {
-                        completion(status)
-                    }
+                        /* 6. Use the data! */
+                        if let status = parsedResult?["message"] as? String {
+                            completion(status)
+                        }
                     } catch {
                         print(error)
                     }
