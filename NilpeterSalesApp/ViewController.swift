@@ -23,7 +23,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     @IBOutlet weak var companyTextField: UITextField!
     
     // location picker view
-    var pickerData = ["one", "two", "three", "seven", "fifteen"]
     var location: Location?
     @IBOutlet var locationTextField: UITextField!
 
@@ -33,18 +32,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         // disable table view selection
         self.tableView.allowsSelection = false
         
+        // initialize company and location models
         company = Company()
         location = Location()
         
-        // Do any additional setup after loading the view, typically from a nib.
+        // location pickerview
         popDatePicker = PopDatePicker(forTextField: dateTextField)
         dateTextField.delegate = self
         companyTextField.delegate = self
-        
-        // picker view
-        
-        // myPicker!.dataSource = self
-        // myPicker!.delegate = self
         
     }
     
