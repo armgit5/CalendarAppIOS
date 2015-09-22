@@ -30,7 +30,11 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // disable table view selection
+        self.tableView.allowsSelection = false
+        
         company = Company()
+        location = Location()
         
         // Do any additional setup after loading the view, typically from a nib.
         popDatePicker = PopDatePicker(forTextField: dateTextField)
@@ -58,18 +62,20 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return pickerData.count
+        return (location?.locationArray?.count)!
     }
 
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return pickerData[row]
+        return (location?.locationArray)![row]
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        location?.pickerLocationName = pickerData[row]
-        self.locationTextField.text = pickerData[row]
+        // set location name
+        self.locationTextField.text = (location?.locationArray)![row]
+        // set loation id
+        self.location?.pickerLocationId = self.location?.locationDict![self.locationTextField.text!]
+        
         locationTextField.resignFirstResponder()
-       
     }
     
 
@@ -82,13 +88,13 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
                     let comArrayObj = Location(dictArray: comArray, companyId: companyId)
-                    
-                    self.pickerData = comArrayObj.locationArray!
-//                    self.pickerLocation = self.pickerData.first
-//                    
-//                    self.pickerLocationIdDict = comArrayObj.locationDict
-//                    self.pickerLocationId = self.pickerLocationIdDict![self.pickerLocation!]
-//                    self.myPicker.reloadAllComponents()
+                    self.location?.locationArray = comArrayObj.locationArray
+                    self.location?.locationDict = comArrayObj.locationDict
+                    // check if location array exist, then set first location name and id
+                    if let locationArray = self.location?.locationArray {
+                        self.locationTextField.text = locationArray.first
+                        self.location?.pickerLocationId = self.location?.locationDict![locationArray.first!]
+                    }
                 }
             }
             

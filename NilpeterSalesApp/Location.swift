@@ -14,9 +14,7 @@ struct Location {
     
     // Location Picker
     
-    var pickerLocationName: String?
     var pickerLocationId: Int?
-    var pickerLocationIdDict: [String: Int]?
     
     // Parsing
 
@@ -25,9 +23,9 @@ struct Location {
     var locationDict: [String: Int]?
     
     init() {
-        pickerLocationName = ""
+        //pickerLocationName = ""
         pickerLocationId = 0
-        pickerLocationIdDict = [String: Int]()
+        // pickerLocationIdDict = [String: Int]()
     }
     
     init(dictArray: [[String: AnyObject]], companyId: Int) {
