@@ -8,8 +8,6 @@
 
 import Foundation
 
-import UIKit
-
 struct Location {
     
     // Location Picker

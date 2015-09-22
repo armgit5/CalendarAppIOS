@@ -25,6 +25,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     // location picker view
     var location: Location?
     @IBOutlet var locationTextField: UITextField!
+    
+    // products
+    var product: Product?
+    @IBOutlet var nilpeterProductTextField: UITextField!
+    @IBOutlet var otherProductTextField: UITextField!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +41,15 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         // initialize company and location models
         company = Company()
         location = Location()
+        product = Product()
         
         // location pickerview
         popDatePicker = PopDatePicker(forTextField: dateTextField)
         dateTextField.delegate = self
         companyTextField.delegate = self
+        
+        // product loading
+        getProducts()
         
     }
     
@@ -79,12 +89,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     func getLocations(companyId: Int) {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("locations") {
-            companies in
-            if let comArray = companies {
+            locations in
+            if let locationArray = locations {
                 dispatch_async(dispatch_get_main_queue()) {
-                    let comArrayObj = Location(dictArray: comArray, companyId: companyId)
-                    self.location?.locationArray = comArrayObj.locationArray
-                    self.location?.locationDict = comArrayObj.locationDict
+                    let locationArrayObj = Location(dictArray: locationArray, companyId: companyId)
+                    self.location?.locationArray = locationArrayObj.locationArray
+                    self.location?.locationDict = locationArrayObj.locationDict
                     // check if location array exist, then set first location name and id
                     if let locationArray = self.location?.locationArray {
                         self.locationTextField.text = locationArray.first
@@ -95,6 +105,27 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             
         }
     }
+    
+    func getProducts() {
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("products") {
+            products in
+            if let productArray = products {
+                dispatch_async(dispatch_get_main_queue()) {
+                    let productArrayObj = Product(dictArray: productArray)
+                    self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
+                    self.product?.otherProductArray = productArrayObj.otherProductArray
+                    self.product?.productDict = productArrayObj.productDict
+                    print(self.product?.nilpeterProductArray)
+                    print(self.product?.otherProductArray)
+                    print(self.product?.productDict)
+
+                }
+            }
+            
+        }
+    }
+
     
     func addCompany(company: String) {
         companyTextField.text = company
