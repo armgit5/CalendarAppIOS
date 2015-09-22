@@ -23,14 +23,17 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     @IBOutlet weak var companyTextField: UITextField!
     
     // location picker view
+    let locationPickerView = UIPickerView()
     var location: Location?
     @IBOutlet var locationTextField: UITextField!
     
     // products
     var product: Product?
+    var testarray = ["one", "two", "three"]
+    let nilpeterProductView = UIPickerView()
+    let otherProductView = UIPickerView()
     @IBOutlet var nilpeterProductTextField: UITextField!
     @IBOutlet var otherProductTextField: UITextField!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,15 +53,21 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
         // product loading
         getProducts()
+        nilpeterProductView.delegate = self
+        nilpeterProductTextField.inputView = nilpeterProductView
+        otherProductView.delegate = self
+        otherProductTextField.inputView = otherProductView
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let locationPickerView = UIPickerView()
+    
         locationPickerView.delegate = self
         locationTextField.inputView = locationPickerView
+    
+        
+
     }
     
     // MARK: - uipicker view
@@ -67,20 +76,36 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        
+        if pickerView == nilpeterProductView {
+            return (product?.nilpeterProductArray?.count)!
+        } else if pickerView == otherProductView {
+            return (product?.otherProductArray?.count)!
+        }
         return (location?.locationArray?.count)!
     }
 
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        if pickerView == nilpeterProductView {
+            return product?.nilpeterProductArray![row]
+        } else if pickerView == otherProductView {
+            return product?.otherProductArray![row]
+        }
         return (location?.locationArray)![row]
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // set location name
-        self.locationTextField.text = (location?.locationArray)![row]
-        // set loation id
-        self.location?.pickerLocationId = self.location?.locationDict![self.locationTextField.text!]
+        pickerView.resignFirstResponder()
         
-        locationTextField.resignFirstResponder()
+        if pickerView == locationPickerView {
+            // set location name
+            self.locationTextField.text = (location?.locationArray)![row]
+            // set loation id
+            self.location?.pickerLocationId = self.location?.locationDict![self.locationTextField.text!]
+            
+            locationTextField.resignFirstResponder()
+        }
     }
     
 
@@ -116,9 +141,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                     self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
                     self.product?.otherProductArray = productArrayObj.otherProductArray
                     self.product?.productDict = productArrayObj.productDict
-                    print(self.product?.nilpeterProductArray)
-                    print(self.product?.otherProductArray)
-                    print(self.product?.productDict)
 
                 }
             }

@@ -21,7 +21,7 @@
 		12CBF1281B987C250087E061 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF1271B987C250087E061 /* SearchViewController.swift */; };
 		12CBF12E1B9897E40087E061 /* PopDatePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */; };
 		12CBF1301B989AF80087E061 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */; };
-		12CBF1331B998B2D0087E061 /* SearchbarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF1321B998B2D0087E061 /* SearchbarDelegate.swift */; };
+		12CBF1331B998B2D0087E061 /* NilpeterProductDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF1321B998B2D0087E061 /* NilpeterProductDelegate.swift */; };
 		12CBF1351B9993420087E061 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF1341B9993420087E061 /* Company.swift */; };
 		12EAC8D11B9E9A3500B5E08A /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EAC8CD1B9E9A3500B5E08A /* DateUtils.swift */; };
 		12EAC8D21B9E9A3500B5E08A /* PopDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EAC8CE1B9E9A3500B5E08A /* PopDatePicker.swift */; };
@@ -59,7 +59,7 @@
 		12CBF1271B987C250087E061 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDatePickerDelegate.swift; sourceTree = "<group>"; };
 		12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
-		12CBF1321B998B2D0087E061 /* SearchbarDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchbarDelegate.swift; sourceTree = "<group>"; };
+		12CBF1321B998B2D0087E061 /* NilpeterProductDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NilpeterProductDelegate.swift; sourceTree = "<group>"; };
 		12CBF1341B9993420087E061 /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		12EAC8CD1B9E9A3500B5E08A /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateUtils.swift; path = "../../SupportiveCodes/PopDatePickerApp-master/PopDatePickerApp/DateUtils.swift"; sourceTree = "<group>"; };
 		12EAC8CE1B9E9A3500B5E08A /* PopDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopDatePicker.swift; path = "../../SupportiveCodes/PopDatePickerApp-master/PopDatePickerApp/PopDatePicker.swift"; sourceTree = "<group>"; };
@@ -110,6 +110,7 @@
 				12147BBB1B9C53BF0033DF31 /* Views */,
 				12CBF1361B9993460087E061 /* Models */,
 				12147BBA1B9C53900033DF31 /* Controllers */,
+				120C5A2F1BB1824300D0F0D5 /* Delegates */,
 				12009D411B96B58900C012B6 /* PopDatePicker */,
 				12CBF1311B997CE30087E061 /* Test */,
 				12009D1C1B830CD300C012B6 /* Images.xcassets */,
@@ -156,6 +157,14 @@
 			name = PopDatePicker;
 			sourceTree = "<group>";
 		};
+		120C5A2F1BB1824300D0F0D5 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				12CBF1321B998B2D0087E061 /* NilpeterProductDelegate.swift */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
 		12147BBA1B9C53900033DF31 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +189,6 @@
 				122A64461B96EAE800E1A57D /* FriendItem.swift */,
 				12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */,
 				12CBF1271B987C250087E061 /* SearchViewController.swift */,
-				12CBF1321B998B2D0087E061 /* SearchbarDelegate.swift */,
 			);
 			name = Test;
 			sourceTree = "<group>";
@@ -314,7 +322,7 @@
 				122A64471B96EAE800E1A57D /* FriendItem.swift in Sources */,
 				12CBF1351B9993420087E061 /* Company.swift in Sources */,
 				12009D181B830CD300C012B6 /* ViewController.swift in Sources */,
-				12CBF1331B998B2D0087E061 /* SearchbarDelegate.swift in Sources */,
+				12CBF1331B998B2D0087E061 /* NilpeterProductDelegate.swift in Sources */,
 				12009D161B830CD300C012B6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
