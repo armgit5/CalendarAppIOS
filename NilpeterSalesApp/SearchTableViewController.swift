@@ -27,7 +27,6 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         self.resultSearchController.searchBar.sizeToFit()
         
         self.tableView.tableHeaderView = self.resultSearchController.searchBar
-        self.tableView.reloadData()
         
         getComapnies()
         

@@ -11,7 +11,7 @@ import Foundation
 struct Product {
     
     // product pickers
-    var productPickerArray: [Int]?
+    var productPickerIdArray: [Int]?
     
     // Parsing
     var rawProductData: [[String: AnyObject]]?
@@ -20,7 +20,7 @@ struct Product {
     var productDict: [String: Int]?
     
     init() {
-        productPickerArray = [Int]()
+        productPickerIdArray = [Int]()
     }
     
     init(dictArray: [[String: AnyObject]]) {

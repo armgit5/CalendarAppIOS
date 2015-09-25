@@ -29,11 +29,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     // products
     var product: Product?
-    var testarray = ["one", "two", "three"]
-    let nilpeterProductView = UIPickerView()
-    let otherProductView = UIPickerView()
     @IBOutlet var nilpeterProductTextField: UITextField!
     @IBOutlet var otherProductTextField: UITextField!
+    var selectedProductName = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,24 +48,15 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         popDatePicker = PopDatePicker(forTextField: dateTextField)
         dateTextField.delegate = self
         companyTextField.delegate = self
+        nilpeterProductTextField.delegate = self
         
-        // product loading
         getProducts()
-        nilpeterProductView.delegate = self
-        nilpeterProductTextField.inputView = nilpeterProductView
-        otherProductView.delegate = self
-        otherProductTextField.inputView = otherProductView
-        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-    
         locationPickerView.delegate = self
         locationTextField.inputView = locationPickerView
-    
-        
-
     }
     
     // MARK: - uipicker view
@@ -76,23 +65,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        
-        if pickerView == nilpeterProductView {
-            return (product?.nilpeterProductArray?.count)!
-        } else if pickerView == otherProductView {
-            return (product?.otherProductArray?.count)!
-        }
-        return (location?.locationArray?.count)!
-    }
-
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        if pickerView == nilpeterProductView {
-            return product?.nilpeterProductArray![row]
-        } else if pickerView == otherProductView {
-            return product?.otherProductArray![row]
-        }
-        return (location?.locationArray)![row]
+        return (product?.nilpeterProductArray?.count)!
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -103,9 +76,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             self.locationTextField.text = (location?.locationArray)![row]
             // set loation id
             self.location?.pickerLocationId = self.location?.locationDict![self.locationTextField.text!]
-            
             locationTextField.resignFirstResponder()
         }
+        
     }
     
 
@@ -141,14 +114,13 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                     self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
                     self.product?.otherProductArray = productArrayObj.otherProductArray
                     self.product?.productDict = productArrayObj.productDict
-
+                    self.tableView.reloadData()
                 }
             }
-            
         }
     }
 
-    
+        
     func addCompany(company: String) {
         companyTextField.text = company
         tableView.reloadData()
@@ -159,6 +131,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     func resign() {
         dateTextField.resignFirstResponder()
     }
+    
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
@@ -179,9 +152,11 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         } else if textField == companyTextField {
             performSegueWithIdentifier("toATable", sender: self)
             return true
-        } else {
+        } else if textField == nilpeterProductTextField {
+            performSegueWithIdentifier("nilpeterProduct", sender: self)
             return true
         }
+        return true
     }
        
     // MARK: - allday onoff
@@ -220,6 +195,37 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             }
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "nilpeterProduct" {
+            print("out selected prod name \(selectedProductName)")
+            let nav = segue.destinationViewController as! UINavigationController
+            let destination = nav.topViewController as! NilpeterProductTableViewController
+            destination.selectedProducts = selectedProductName as? [String]
+        }
+        
+        
+        
+    }
+    
+    @IBAction func unwindFromNilpeterProducts(segue: UIStoryboardSegue) {
+        if segue.sourceViewController.isKindOfClass(NilpeterProductTableViewController) {
+            let nilpeterProductsController = segue.sourceViewController as! NilpeterProductTableViewController
+            if let selectedProductArray = nilpeterProductsController.selectedProducts {
+                selectedProductName = selectedProductArray
+                nilpeterProductTextField.text = selectedProductName.description
+                print("in selected prod name \(selectedProductName)")
+                self.product?.productPickerIdArray?.removeAll()
+                for product in selectedProductArray {
+                    let id = self.product?.productDict![product]
+                    self.product?.productPickerIdArray?.append(id!)
+                }
+                print(self.product?.productPickerIdArray)
+            }
+        }
+    }
+    
+    
     
 }
 
