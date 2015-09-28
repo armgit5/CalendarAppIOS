@@ -12,6 +12,7 @@ struct Product {
     
     // product pickers
     var productPickerIdArray: [Int]?
+    var otherProductPickerIdArray: [Int]?
     
     // Parsing
     var rawProductData: [[String: AnyObject]]?

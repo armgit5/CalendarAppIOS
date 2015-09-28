@@ -1,23 +1,26 @@
 //
-//  ProductsTableViewController.swift
+//  ThirdPartyProductTableViewController.swift
 //  NilpeterSalesApp
 //
-//  Created by Yuttanant Suwansiri on 9/25/2558 BE.
+//  Created by Yuttanant Suwansiri on 9/28/2558 BE.
 //  Copyright © 2558 Arm Suwansiri. All rights reserved.
 //
 
 import UIKit
 
-class NilpeterProductTableViewController: UITableViewController {
+class ThirdPartyProductTableViewController: UITableViewController {
     
+    
+
     var product: Product?
     var selectedProducts: [String]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.selectedProducts =  [String]()
+        
         product = Product()
-        getProducts()
+        self.selectedProducts = [String]()
+        self.getProducts()
         
     }
     
@@ -28,39 +31,40 @@ class NilpeterProductTableViewController: UITableViewController {
             if let productArray = products {
                 dispatch_async(dispatch_get_main_queue()) {
                     let productArrayObj = Product(dictArray: productArray)
-                    self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
-                   
+                    self.product?.otherProductArray = productArrayObj.otherProductArray
                     self.product?.productDict = productArrayObj.productDict
+                    
+                    print(self.product?.otherProductArray)
                     self.tableView.reloadData()
                 }
             }
         }
     }
-
-
+    
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let nilpeterProducts = self.product?.nilpeterProductArray {
-            return nilpeterProducts.count
+        if let otherProducts = self.product?.otherProductArray {
+            return otherProducts.count
         }
         return 1
     }
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("nilpeterCell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("otherCell")
         
-        if let nilpeterProducts = self.product?.nilpeterProductArray {
+        if let nilpeterProducts = self.product?.otherProductArray {
             cell?.textLabel!.text = nilpeterProducts[indexPath.row]
         }
         
-        if self.product?.nilpeterProductArray != nil {
-            let product = self.product?.nilpeterProductArray![indexPath.row]
+        if self.product?.otherProductArray != nil {
+            let product = self.product?.otherProductArray![indexPath.row]
             if isSelected(product!) {
                 cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
                 
@@ -74,9 +78,9 @@ class NilpeterProductTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-    
+        
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        let product = self.product?.nilpeterProductArray![indexPath.row]
+        let product = self.product?.otherProductArray![indexPath.row]
         
         if isSelected(product!) {
             cell!.accessoryType = UITableViewCellAccessoryType.None
@@ -89,23 +93,25 @@ class NilpeterProductTableViewController: UITableViewController {
                     
                 }
             }
-        
+            
         } else {
             cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
             selectedProducts?.append(product!)
         }
-    
+        
     }
+    
     
     @IBAction func dismissController(sender: AnyObject) {
-        self.performSegueWithIdentifier("nilpeterProductsSelected", sender: self)
+        print(selectedProducts)
+        self.performSegueWithIdentifier("otherProductSelected", sender: self)
     }
-
-   
+    
+    
     func isSelected(product: String) -> Bool {
         
         for selectedProduct in (self.selectedProducts)! {
-    
+            
             if product == selectedProduct {
                 return true
             }
@@ -113,9 +119,5 @@ class NilpeterProductTableViewController: UITableViewController {
         
         return false
     }
-    
-    
-
-    
 
 }

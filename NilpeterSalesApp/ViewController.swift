@@ -49,14 +49,18 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         dateTextField.delegate = self
         companyTextField.delegate = self
         nilpeterProductTextField.delegate = self
+        otherProductTextField.delegate = self
         
-        getProducts()
+        self.getProducts()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        locationPickerView.delegate = self
-        locationTextField.inputView = locationPickerView
+        if location?.locationArray != nil {
+            locationPickerView.delegate = self
+            locationTextField.inputView = locationPickerView
+        }
+        
     }
     
     // MARK: - uipicker view
@@ -65,19 +69,23 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return (product?.nilpeterProductArray?.count)!
+        return (location?.locationArray!.count)!
+    }
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return location?.locationArray![row]
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerView.resignFirstResponder()
         
-        if pickerView == locationPickerView {
-            // set location name
-            self.locationTextField.text = (location?.locationArray)![row]
-            // set loation id
-            self.location?.pickerLocationId = self.location?.locationDict![self.locationTextField.text!]
-            locationTextField.resignFirstResponder()
-        }
+        
+        // set location name
+        self.locationTextField.text = (location?.locationArray)![row]
+        // set loation id
+        self.location?.pickerLocationId = self.location?.locationDict![self.locationTextField.text!]
+        locationTextField.resignFirstResponder()
+        
         
     }
     
@@ -155,6 +163,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         } else if textField == nilpeterProductTextField {
             performSegueWithIdentifier("nilpeterProduct", sender: self)
             return true
+        } else if textField == otherProductTextField {
+            performSegueWithIdentifier("otherProduct", sender: self)
         }
         return true
     }
@@ -204,8 +214,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             destination.selectedProducts = selectedProductName as? [String]
         }
         
-        
-        
     }
     
     @IBAction func unwindFromNilpeterProducts(segue: UIStoryboardSegue) {
@@ -217,14 +225,31 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                 print("in selected prod name \(selectedProductName)")
                 self.product?.productPickerIdArray?.removeAll()
                 for product in selectedProductArray {
-                    let id = self.product?.productDict![product]
-                    self.product?.productPickerIdArray?.append(id!)
+                    if let id = self.product?.productDict![product] {
+                        self.product?.productPickerIdArray?.append(id)
+                    }
                 }
                 print(self.product?.productPickerIdArray)
             }
         }
     }
     
+    @IBAction func unwindFromOtherProducts(segue: UIStoryboardSegue) {
+        if segue.sourceViewController.isKindOfClass(ThirdPartyProductTableViewController) {
+            let otherProductsController = segue.sourceViewController as! ThirdPartyProductTableViewController
+            if let selectedProductArray = otherProductsController.selectedProducts {
+                selectedProductName = selectedProductArray
+                otherProductTextField.text = selectedProductName.description
+                print("in selected prod name \(selectedProductName)")
+                self.product?.otherProductPickerIdArray?.removeAll()
+                for product in selectedProductArray {
+                    let id = self.product?.productDict![product]
+                    self.product?.otherProductPickerIdArray?.append(id!)
+                }
+                print(self.product?.otherProductPickerIdArray)
+            }
+        }
+    }
     
     
 }

@@ -19,6 +19,7 @@
 		120C5A2E1BB12E8E00D0F0D5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A2D1BB12E8E00D0F0D5 /* Product.swift */; settings = {ASSET_TAGS = (); }; };
 		120C5A331BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		122A64471B96EAE800E1A57D /* FriendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A64461B96EAE800E1A57D /* FriendItem.swift */; };
+		128885261BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		12CBF1281B987C250087E061 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF1271B987C250087E061 /* SearchViewController.swift */; };
 		12CBF12E1B9897E40087E061 /* PopDatePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */; };
 		12CBF1301B989AF80087E061 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */; };
@@ -58,6 +59,7 @@
 		120C5A2D1BB12E8E00D0F0D5 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NilpeterProductTableViewController.swift; sourceTree = "<group>"; };
 		122A64461B96EAE800E1A57D /* FriendItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendItem.swift; sourceTree = "<group>"; };
+		128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyProductTableViewController.swift; sourceTree = "<group>"; };
 		12CBF1271B987C250087E061 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDatePickerDelegate.swift; sourceTree = "<group>"; };
 		12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			children = (
 				12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */,
 				120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */,
+				128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */,
 				12009D171B830CD300C012B6 /* ViewController.swift */,
 			);
 			name = Controllers;
@@ -311,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				128885261BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift in Sources */,
 				12CBF1281B987C250087E061 /* SearchViewController.swift in Sources */,
 				12EAC8D11B9E9A3500B5E08A /* DateUtils.swift in Sources */,
 				12009D381B956F7100C012B6 /* NetworkOperation.swift in Sources */,
