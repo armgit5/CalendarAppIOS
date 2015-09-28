@@ -15,7 +15,6 @@ class NilpeterProductTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.selectedProducts =  [String]()
         product = Product()
         getProducts()
         

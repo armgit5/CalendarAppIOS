@@ -162,17 +162,24 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EAg-aP-wRU" id="ECN-Dt-qbZ">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="DESCRIPTIONS" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eGl-al-C5U">
+                                                    <rect key="frame" x="8" y="8" width="580" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                </textField>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="50" id="UdZ-ap-Rbc">
-                                        <rect key="frame" x="0.0" y="400" width="600" height="50"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="149" id="UdZ-ap-Rbc">
+                                        <rect key="frame" x="0.0" y="400" width="600" height="149"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UdZ-ap-Rbc" id="JBK-7Q-Ptl">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="148"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYn-ic-vFu">
-                                                    <rect key="frame" x="277" y="10" width="46" height="30"/>
+                                                    <rect key="frame" x="277" y="59" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                 </button>
                                             </subviews>
@@ -195,6 +202,7 @@
                         <outlet property="allDaySwitch" destination="wOh-bm-bc7" id="O6n-yG-IC2"/>
                         <outlet property="companyTextField" destination="T3C-L3-3Rm" id="Drk-Zi-qoa"/>
                         <outlet property="dateTextField" destination="PdG-SM-Hol" id="Oo2-1R-RKc"/>
+                        <outlet property="descriptionTextField" destination="eGl-al-C5U" id="OBq-Rp-ISq"/>
                         <outlet property="locationTextField" destination="boK-zM-9af" id="2Qx-Xg-PPn"/>
                         <outlet property="nilpeterProductTextField" destination="jjA-6J-cx0" id="6Rk-5u-ZYb"/>
                         <outlet property="otherProductTextField" destination="gq2-Mu-3lS" id="H8J-uC-wgo"/>

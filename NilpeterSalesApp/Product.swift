@@ -22,6 +22,7 @@ struct Product {
     
     init() {
         productPickerIdArray = [Int]()
+        otherProductPickerIdArray = [Int]()
     }
     
     init(dictArray: [[String: AnyObject]]) {
@@ -29,6 +30,7 @@ struct Product {
         self.otherProductArray = []
         self.rawProductData = dictArray
         self.productDict = [String: Int]()
+    
         makeProductArray()
     }
     

@@ -19,7 +19,6 @@ class ThirdPartyProductTableViewController: UITableViewController {
         super.viewDidLoad()
         
         product = Product()
-        self.selectedProducts = [String]()
         self.getProducts()
         
     }
@@ -34,7 +33,6 @@ class ThirdPartyProductTableViewController: UITableViewController {
                     self.product?.otherProductArray = productArrayObj.otherProductArray
                     self.product?.productDict = productArrayObj.productDict
                     
-                    print(self.product?.otherProductArray)
                     self.tableView.reloadData()
                 }
             }
@@ -98,12 +96,9 @@ class ThirdPartyProductTableViewController: UITableViewController {
             cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
             selectedProducts?.append(product!)
         }
-        
     }
     
-    
     @IBAction func dismissController(sender: AnyObject) {
-        print(selectedProducts)
         self.performSegueWithIdentifier("otherProductSelected", sender: self)
     }
     
