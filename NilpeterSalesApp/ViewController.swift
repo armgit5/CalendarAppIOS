@@ -106,8 +106,16 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                     // check if location array exist, then set first location name and id
                     if let locationArray = self.location?.locationArray {
                         self.locationTextField.text = locationArray.first
-                        self.location?.pickerLocationId = self.location?.locationDict![locationArray.first!]
+                        if let firstLoc = locationArray.first {
+                            self.location?.pickerLocationId = self.location?.locationDict![firstLoc]
+                        } else {
+                            self.location?.locationArray = nil
+                            self.locationPickerView.delegate = nil
+                            self.locationTextField.inputView = nil
+                        }
                     }
+                    
+                    print(self.location?.pickerLocationId)
                 }
             }
             
