@@ -110,6 +110,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                             self.location?.pickerLocationId = self.location?.locationDict![firstLoc]
                         } else {
                             self.location?.locationArray = nil
+                            self.location?.pickerLocationId = nil
                             self.locationPickerView.delegate = nil
                             self.locationTextField.inputView = nil
                         }
@@ -192,6 +193,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     // MARK: - post method
     
+    func convertArrayIntToArratString(arrayInt: [Int]) -> [String] {
+        var outArray = [String]()
+        for i in arrayInt {
+            outArray.append("\(i)")
+        }
+        return outArray
+    }
+    
     @IBAction func postToArm(sender: AnyObject) {
         
         print(dateTextField.text)
@@ -201,8 +210,49 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         print(product?.productPickerIdArray)
         print(product?.otherProductPickerIdArray)
         print(descriptionTextField.text)
+        
+        
+        var dateString = ""
+        let allDayString = ", \"all_day\": \"\(allDayStatus)\" "
+        var companyString = ""
+        var locationIdString = ""
+        var combinedIdArray = ""
+        var descriptionString = ""
+        let userIdString = ", \"user_id\": \"\(1)\" "
+        
+        if let dateTime = dateTextField.text {
+            dateString = "\"date\": \"\(dateTime)\" "
+        }
+        
+        if let companyId = company?.companyId {
+            companyString = ", \"company_id\": \"\(companyId)\" "
+        }
+        
+        if let locationId = location?.pickerLocationId {
+            locationIdString = ", \"location_id\": \"\(locationId)\" "
+        }
+    
+        
+        if let nilpeterProductId = product?.productPickerIdArray {
+            if let thirdPartyProductId = product?.otherProductPickerIdArray {
+                combinedIdArray = ", \"products\": \(convertArrayIntToArratString(nilpeterProductId + thirdPartyProductId)) "
+            } else {
+                combinedIdArray = ", \"products\": \(convertArrayIntToArratString(nilpeterProductId)) "
+            }
+        } else if let thirdPartyProductId = product?.otherProductPickerIdArray {
+            combinedIdArray = ", \"products\": \(convertArrayIntToArratString(thirdPartyProductId)) "
+        }
+        
+        if let description = descriptionTextField.text {
+            descriptionString = ", \"project\": \"\(description)\" "
+        }
+        
+        let body = "{" + dateString + allDayString + companyString + locationIdString + combinedIdArray + descriptionString + userIdString + "}"
+        
+        print(body)
+        
 //        let scheduleService = ScheduleService()
-//        let body = "{\"date\": \"\(dateTextField)\", \"all_day\": \"\(allDayStatus)\"}"
+//        
 //        scheduleService.postSchedule(body) {
 //            status in
 //            if let returnMessage = status as String? {

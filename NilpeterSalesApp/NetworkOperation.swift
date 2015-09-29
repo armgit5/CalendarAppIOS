@@ -74,7 +74,7 @@ class NetworkOperation {
                         print(error)
                     }
                 default:
-                    print("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                    print("POST request not successful. HTTP status code: \(httpResponse.statusCode)")
                 }
                 
             } else {

@@ -88,7 +88,6 @@ class ThirdPartyProductTableViewController: UITableViewController {
                     if let index = selectedProducts?.indexOf(selectedProduct) {
                         selectedProducts?.removeAtIndex(index)
                     }
-                    
                 }
             }
             
