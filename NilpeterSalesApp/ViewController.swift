@@ -108,6 +108,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                         self.locationTextField.text = locationArray.first
                         if let firstLoc = locationArray.first {
                             self.location?.pickerLocationId = self.location?.locationDict![firstLoc]
+                            self.locationPickerView.delegate = self
+                            self.locationTextField.inputView = self.locationPickerView
                         } else {
                             self.location?.locationArray = nil
                             self.location?.pickerLocationId = nil
@@ -202,16 +204,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     @IBAction func postToArm(sender: AnyObject) {
-        
-        print(dateTextField.text)
-        print(allDayStatus)
-        print(company?.companyId)
-        print(location?.pickerLocationId)
-        print(product?.productPickerIdArray)
-        print(product?.otherProductPickerIdArray)
-        print(descriptionTextField.text)
-        
-        
+
         var dateString = ""
         let allDayString = ", \"all_day\": \"\(allDayStatus)\" "
         var companyString = ""
@@ -232,15 +225,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             locationIdString = ", \"location_id\": \"\(locationId)\" "
         }
     
-        
         if let nilpeterProductId = product?.productPickerIdArray {
             if let thirdPartyProductId = product?.otherProductPickerIdArray {
-                combinedIdArray = ", \"products\": \(convertArrayIntToArratString(nilpeterProductId + thirdPartyProductId)) "
+                combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId + thirdPartyProductId)) "
             } else {
-                combinedIdArray = ", \"products\": \(convertArrayIntToArratString(nilpeterProductId)) "
+                combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId)) "
             }
         } else if let thirdPartyProductId = product?.otherProductPickerIdArray {
-            combinedIdArray = ", \"products\": \(convertArrayIntToArratString(thirdPartyProductId)) "
+            combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(thirdPartyProductId)) "
         }
         
         if let description = descriptionTextField.text {
@@ -248,17 +240,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
         
         let body = "{" + dateString + allDayString + companyString + locationIdString + combinedIdArray + descriptionString + userIdString + "}"
-        
-        print(body)
-        
-//        let scheduleService = ScheduleService()
-//        
-//        scheduleService.postSchedule(body) {
-//            status in
-//            if let returnMessage = status as String? {
-//                print(returnMessage, terminator: "")
-//            }
-//        }
+
+        let scheduleService = ScheduleService()
+        scheduleService.postSchedule(body) {
+            status in
+            if let returnMessage = status as String? {
+                print(returnMessage, terminator: "")
+            }
+        }
     }
     
     // MARK: - unwind company from company table view
