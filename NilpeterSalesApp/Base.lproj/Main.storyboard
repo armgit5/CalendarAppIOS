@@ -51,7 +51,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wOh-bm-bc7">
-                                                    <rect key="frame" x="133" y="9" width="51" height="31"/>
+                                                    <rect key="frame" x="533" y="9" width="51" height="31"/>
                                                     <connections>
                                                         <action selector="allDayOnOff:" destination="wXc-VK-6OQ" eventType="valueChanged" id="GGe-EX-ivV"/>
                                                     </connections>
@@ -59,11 +59,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="IMS-nB-lSr" secondAttribute="centerY" constant="2" id="1ON-50-sGM"/>
-                                                <constraint firstItem="wOh-bm-bc7" firstAttribute="leading" secondItem="IMS-nB-lSr" secondAttribute="trailing" constant="50" id="6Uh-zD-GLT"/>
                                                 <constraint firstItem="IMS-nB-lSr" firstAttribute="leading" secondItem="ano-Zw-nsy" secondAttribute="leadingMargin" constant="9" id="MGI-OX-rg0"/>
                                                 <constraint firstAttribute="centerY" secondItem="wOh-bm-bc7" secondAttribute="centerY" id="N3q-Ac-c82"/>
                                                 <constraint firstItem="IMS-nB-lSr" firstAttribute="top" secondItem="ano-Zw-nsy" secondAttribute="topMargin" constant="3" id="P62-ml-E8e"/>
                                                 <constraint firstItem="wOh-bm-bc7" firstAttribute="leading" secondItem="IMS-nB-lSr" secondAttribute="trailing" constant="51" id="XDm-eJ-S7B"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="wOh-bm-bc7" secondAttribute="trailing" constant="10" id="rrR-aM-8MP"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -181,6 +181,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bYn-ic-vFu">
                                                     <rect key="frame" x="277" y="59" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="postToArm:" destination="wXc-VK-6OQ" eventType="touchUpInside" id="LNi-Rw-4vF"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -322,7 +325,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="hgy-M6-vqJ" kind="unwind" identifier="nilpeterProductsSelected" unwindAction="unwindFromNilpeterProducts:" id="9Ci-lY-Y8J"/>
+                        <segue destination="hgy-M6-vqJ" kind="unwind" identifier="nilpeterProductsSelected" unwindAction="unwindFromModalViewController:" id="9Ci-lY-Y8J"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23O-h4-v2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -363,7 +366,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="uyk-4a-2hV" kind="unwind" identifier="otherProductSelected" unwindAction="unwindFromOtherProducts:" id="Fey-Yo-xxH"/>
+                        <segue destination="uyk-4a-2hV" kind="unwind" identifier="otherProductSelected" unwindAction="unwindFromModalViewController:" id="Fey-Yo-xxH"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zHk-5z-3Il" userLabel="First Responder" sceneMemberID="firstResponder"/>

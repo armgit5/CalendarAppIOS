@@ -185,14 +185,22 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     // MARK: - post method
     
     @IBAction func postToArm(sender: AnyObject) {
-        let scheduleService = ScheduleService()
-        let body = "{\"date\": \"\(dateTextField)\", \"all_day\": \"\(allDayStatus)\"}"
-        scheduleService.postSchedule(body) {
-            status in
-            if let returnMessage = status as String? {
-                print(returnMessage, terminator: "")
-            }
-        }
+        
+        print(dateTextField.text)
+        print(allDayStatus)
+        print(company?.companyId)
+        print(location?.pickerLocationId)
+        print(product?.productPickerIdArray)
+        print(product?.otherProductPickerIdArray)
+        print(descriptionTextField.text)
+//        let scheduleService = ScheduleService()
+//        let body = "{\"date\": \"\(dateTextField)\", \"all_day\": \"\(allDayStatus)\"}"
+//        scheduleService.postSchedule(body) {
+//            status in
+//            if let returnMessage = status as String? {
+//                print(returnMessage, terminator: "")
+//            }
+//        }
     }
     
     // MARK: - unwind company from company table view
@@ -204,6 +212,36 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                 companyTextField.text = searchController.company?.parentCompany
                 company?.companyId = searchController.company?.parentCompanyId
                 getLocations((company?.companyId)!)
+            }
+            
+        } else if segue.sourceViewController.isKindOfClass(NilpeterProductTableViewController) {
+            let nilpeterProductsController = segue.sourceViewController as! NilpeterProductTableViewController
+            if let selectedProductArray = nilpeterProductsController.selectedProducts {
+                selectedProductName = selectedProductArray // assign to segue pass back variable
+                nilpeterProductTextField.text = selectedProductName.description
+                
+                self.product?.productPickerIdArray?.removeAll()
+                for product in selectedProductArray {
+                    if let id = self.product?.productDict![product] {
+                        self.product?.productPickerIdArray?.append(id)
+                    }
+                }
+                
+            }
+            
+        } else if segue.sourceViewController.isKindOfClass(ThirdPartyProductTableViewController) {
+            let otherProductsController = segue.sourceViewController as! ThirdPartyProductTableViewController
+            if let selectedProductArray = otherProductsController.selectedProducts {
+                selectedOtherProductName = selectedProductArray // assign to segue pass back variable
+                otherProductTextField.text = selectedOtherProductName.description
+                
+                self.product?.otherProductPickerIdArray?.removeAll()
+                for product in selectedProductArray {
+                    if let id = self.product?.productDict![product] {
+                        self.product?.otherProductPickerIdArray?.append(id)
+                    }
+                }
+                
             }
         }
     }
@@ -220,44 +258,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
         
     }
-    
-    
-    @IBAction func unwindFromNilpeterProducts(segue: UIStoryboardSegue) {
-        if segue.sourceViewController.isKindOfClass(NilpeterProductTableViewController) {
-            let nilpeterProductsController = segue.sourceViewController as! NilpeterProductTableViewController
-            if let selectedProductArray = nilpeterProductsController.selectedProducts {
-                selectedProductName = selectedProductArray // assign to segue pass back variable
-                nilpeterProductTextField.text = selectedProductName.description
-                
-                self.product?.productPickerIdArray?.removeAll()
-                for product in selectedProductArray {
-                    if let id = self.product?.productDict![product] {
-                        self.product?.productPickerIdArray?.append(id)
-                    }
-                }
-                // print(self.product?.productPickerIdArray)
-            }
-        }
-    }
-    
-    @IBAction func unwindFromOtherProducts(segue: UIStoryboardSegue) {
-        if segue.sourceViewController.isKindOfClass(ThirdPartyProductTableViewController) {
-            let otherProductsController = segue.sourceViewController as! ThirdPartyProductTableViewController
-            if let selectedProductArray = otherProductsController.selectedProducts {
-                selectedOtherProductName = selectedProductArray // assign to segue pass back variable
-                otherProductTextField.text = selectedOtherProductName.description
-                
-                self.product?.otherProductPickerIdArray?.removeAll()
-                for product in selectedProductArray {
-                    if let id = self.product?.productDict![product] {
-                        self.product?.otherProductPickerIdArray?.append(id)
-                    }
-                }
-                // print(self.product?.otherProductPickerIdArray)
-            }
-        }
-    }
-    
     
 }
 
