@@ -216,15 +216,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         if let dateTime = dateTextField.text {
             dateString = "\"date\": \"\(dateTime)\" "
         }
-        
         if let companyId = company?.companyId {
             companyString = ", \"company_id\": \"\(companyId)\" "
         }
-        
         if let locationId = location?.pickerLocationId {
             locationIdString = ", \"location_id\": \"\(locationId)\" "
         }
-    
         if let nilpeterProductId = product?.productPickerIdArray {
             if let thirdPartyProductId = product?.otherProductPickerIdArray {
                 combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId + thirdPartyProductId)) "
