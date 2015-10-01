@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--SCHEDULE-->
         <scene sceneID="fGY-ZH-mc9">
             <objects>
                 <tableViewController id="wXc-VK-6OQ" customClass="ViewController" customModule="NilpeterSalesApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -181,7 +181,7 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="bxP-Qq-jtu"/>
+                    <navigationItem key="navigationItem" title="SCHEDULE" id="bxP-Qq-jtu"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="allDaySwitch" destination="wOh-bm-bc7" id="O6n-yG-IC2"/>
@@ -209,7 +209,7 @@
             </objects>
             <point key="canvasLocation" x="3242" y="-450"/>
         </scene>
-        <!--Web View Controller-->
+        <!--CALENDAR-->
         <scene sceneID="ySW-k7-48S">
             <objects>
                 <viewController id="8sL-Y7-Tma" customClass="WebViewController" customModule="NilpeterSalesApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -247,7 +247,7 @@
                             <constraint firstItem="cjz-i1-E88" firstAttribute="centerX" secondItem="oVu-Tx-kDs" secondAttribute="centerX" id="wOA-bs-KYA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Phj-zC-Tgt"/>
+                    <navigationItem key="navigationItem" title="CALENDAR" id="Phj-zC-Tgt"/>
                     <connections>
                         <outlet property="loadingIndicator" destination="cjz-i1-E88" id="gSk-gP-3dM"/>
                         <outlet property="loadingLabel" destination="wf4-JX-Peh" id="Cz2-uL-PRa"/>

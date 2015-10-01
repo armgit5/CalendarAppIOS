@@ -12,13 +12,39 @@ class NilpeterProductTableViewController: UITableViewController {
     
     var product: Product?
     var selectedProducts: [String]?
+    var spinner: UIActivityIndicatorView!
+    var loadingLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         product = Product()
-        getProducts()
         
+        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        
+        loadingLabel = UILabel.init(frame: CGRectMake(view.center.x - 40, view.center.y - 40, 80, 80))
+        loadingLabel.text = "Loading..."
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 80, 80)
+        view.addSubview(spinner)
+        view.addSubview(loadingLabel)
+        
+        getProducts()
+        showLoading()
     }
+    
+    // MARK: - Helper function
+    
+    func hideLoading() {
+        spinner.stopAnimating()
+        loadingLabel.hidden = true
+    }
+    
+    func showLoading() {
+        spinner.startAnimating()
+        loadingLabel.hidden = false
+    }
+    
+    // MARK: - Get products
     
     func getProducts() {
         let scheduleService = ScheduleService()
@@ -31,6 +57,7 @@ class NilpeterProductTableViewController: UITableViewController {
                    
                     self.product?.productDict = productArrayObj.productDict
                     self.tableView.reloadData()
+                    self.hideLoading()
                 }
             }
         }

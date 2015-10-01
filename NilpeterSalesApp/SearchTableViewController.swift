@@ -13,7 +13,8 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     
     var company: Company?
     var resultSearchController = UISearchController()
-    
+    var spinner: UIActivityIndicatorView!
+    var loadingLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,11 +29,31 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         
         self.tableView.tableHeaderView = self.resultSearchController.searchBar
         
-        getComapnies()
-        
         // UI stuff
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         
+        loadingLabel = UILabel.init(frame: CGRectMake(view.center.x - 40, view.center.y - 40, 80, 80))
+        loadingLabel.text = "Loading..."
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 80, 80)
+        view.addSubview(spinner)
+        view.addSubview(loadingLabel)
+        
+        // Operation
+        getComapnies()
+        self.showLoading()
+    }
+    
+    // MARK: - Helper function
+    
+    func hideLoading() {
+        spinner.stopAnimating()
+        loadingLabel.hidden = true
+    }
+    
+    func showLoading() {
+        spinner.startAnimating()
+        loadingLabel.hidden = false
     }
     
     // MARK: - Get companies
@@ -44,10 +65,13 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
             
             if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
+                    
                     let comArrayObj = Company(dictArray: comArray)
                     self.company?.companies = comArrayObj.companyArray!
                     self.company?.parentCompanyDict = comArrayObj.companyDict
                     self.tableView.reloadData()
+                    
+                    self.hideLoading()
                 }
             }
             
