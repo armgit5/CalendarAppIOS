@@ -30,6 +30,9 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         
         getComapnies()
         
+        // UI stuff
+        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        
     }
     
     // MARK: - Get companies

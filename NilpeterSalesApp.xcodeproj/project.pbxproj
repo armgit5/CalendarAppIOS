@@ -17,6 +17,12 @@
 		12009D381B956F7100C012B6 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D371B956F7100C012B6 /* NetworkOperation.swift */; };
 		12009D3A1B95726500C012B6 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D391B95726500C012B6 /* ScheduleData.swift */; };
 		1206DF9B1BBB9C8D0056536D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206DF9A1BBB9C8D0056536D /* WebViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		1206DFA21BBBAB020056536D /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9C1BBBAB020056536D /* camera.png */; settings = {ASSET_TAGS = (); }; };
+		1206DFA31BBBAB020056536D /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9D1BBBAB020056536D /* camera@2x.png */; settings = {ASSET_TAGS = (); }; };
+		1206DFA41BBBAB020056536D /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9E1BBBAB020056536D /* friends.png */; settings = {ASSET_TAGS = (); }; };
+		1206DFA51BBBAB020056536D /* friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9F1BBBAB020056536D /* friends@2x.png */; settings = {ASSET_TAGS = (); }; };
+		1206DFA61BBBAB020056536D /* inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DFA01BBBAB020056536D /* inbox.png */; settings = {ASSET_TAGS = (); }; };
+		1206DFA71BBBAB020056536D /* inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DFA11BBBAB020056536D /* inbox@2x.png */; settings = {ASSET_TAGS = (); }; };
 		120C5A2E1BB12E8E00D0F0D5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A2D1BB12E8E00D0F0D5 /* Product.swift */; settings = {ASSET_TAGS = (); }; };
 		120C5A331BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		122A64471B96EAE800E1A57D /* FriendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A64461B96EAE800E1A57D /* FriendItem.swift */; };
@@ -58,6 +64,12 @@
 		12009D371B956F7100C012B6 /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
 		12009D391B95726500C012B6 /* ScheduleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
 		1206DF9A1BBB9C8D0056536D /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		1206DF9C1BBBAB020056536D /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		1206DF9D1BBBAB020056536D /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		1206DF9E1BBBAB020056536D /* friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends.png; sourceTree = "<group>"; };
+		1206DF9F1BBBAB020056536D /* friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friends@2x.png"; sourceTree = "<group>"; };
+		1206DFA01BBBAB020056536D /* inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inbox.png; sourceTree = "<group>"; };
+		1206DFA11BBBAB020056536D /* inbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inbox@2x.png"; sourceTree = "<group>"; };
 		120C5A2D1BB12E8E00D0F0D5 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NilpeterProductTableViewController.swift; sourceTree = "<group>"; };
 		122A64461B96EAE800E1A57D /* FriendItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendItem.swift; sourceTree = "<group>"; };
@@ -120,6 +132,7 @@
 				12009D411B96B58900C012B6 /* PopDatePicker */,
 				12CBF1311B997CE30087E061 /* Test */,
 				12009D1C1B830CD300C012B6 /* Images.xcassets */,
+				1206DFA81BBBAB150056536D /* images */,
 				12009D1E1B830CD300C012B6 /* LaunchScreen.xib */,
 				12009D131B830CD300C012B6 /* Supporting Files */,
 			);
@@ -161,6 +174,19 @@
 				12EAC8D01B9E9A3500B5E08A /* PopDateViewController.xib */,
 			);
 			name = PopDatePicker;
+			sourceTree = "<group>";
+		};
+		1206DFA81BBBAB150056536D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				1206DF9D1BBBAB020056536D /* camera@2x.png */,
+				1206DF9E1BBBAB020056536D /* friends.png */,
+				1206DF9F1BBBAB020056536D /* friends@2x.png */,
+				1206DFA01BBBAB020056536D /* inbox.png */,
+				1206DFA11BBBAB020056536D /* inbox@2x.png */,
+				1206DF9C1BBBAB020056536D /* camera.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 		120C5A2F1BB1824300D0F0D5 /* Delegates */ = {
@@ -297,10 +323,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1206DFA41BBBAB020056536D /* friends.png in Resources */,
 				12009D1B1B830CD300C012B6 /* Main.storyboard in Resources */,
 				12009D201B830CD300C012B6 /* LaunchScreen.xib in Resources */,
 				12EAC8D41B9E9A3500B5E08A /* PopDateViewController.xib in Resources */,
 				12009D1D1B830CD300C012B6 /* Images.xcassets in Resources */,
+				1206DFA71BBBAB020056536D /* inbox@2x.png in Resources */,
+				1206DFA21BBBAB020056536D /* camera.png in Resources */,
+				1206DFA51BBBAB020056536D /* friends@2x.png in Resources */,
+				1206DFA31BBBAB020056536D /* camera@2x.png in Resources */,
+				1206DFA61BBBAB020056536D /* inbox.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,7 +447,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -453,7 +485,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

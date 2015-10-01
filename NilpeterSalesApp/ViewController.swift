@@ -53,6 +53,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         nilpeterProductTextField.delegate = self
         otherProductTextField.delegate = self
         
+        // UI Design
+        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.tabBarController?.tabBar.barTintColor = UIColor.redColor()
+        self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+    
+        
         self.getProducts()
     }
     
@@ -64,6 +70,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
         
     }
+    
     
     // MARK: - uipicker view
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
@@ -299,7 +306,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! ThirdPartyProductTableViewController
             destination.selectedProducts = selectedOtherProductName
-        }
+        } 
         
     }
     
