@@ -60,6 +60,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
         
         self.getProducts()
+        self.getComapnies()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -147,6 +148,27 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             }
         }
     }
+    
+    func getComapnies() {
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("companies") {
+            companies in
+            
+            if let comArray = companies {
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    let comArrayObj = Company(dictArray: comArray)
+                    self.company?.companies = comArrayObj.companyArray!
+                    self.company?.parentCompanyDict = comArrayObj.companyDict
+                    //self.tableView.reloadData()
+                    
+                    // self.hideLoading()
+                }
+            }
+            
+        }
+    }
+
 
         
     func addCompany(company: String) {
@@ -306,9 +328,18 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! ThirdPartyProductTableViewController
             destination.selectedProducts = selectedOtherProductName
-        } 
+        } else if segue.identifier == "toATable" {
+            let nav = segue.destinationViewController as! UINavigationController
+            let destination = nav.topViewController as! SearchTableViewController
+            destination.company = self.company
+        }
+    }
+    
+    @IBAction func cancelSchedule(sender: AnyObject) {
+        
         
     }
+    
     
 }
 

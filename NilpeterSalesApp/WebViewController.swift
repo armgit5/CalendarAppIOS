@@ -19,20 +19,26 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         
-        let url = NSURL(string: "http://localhost:3000/ioscalendar")
-        let request = NSURLRequest(URL: url!)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
+        let url = NSURL(string: "http://arm-calendar-apitest.herokuapp.com/ioscalendar")
+        let request = NSURLRequest(URL: url!)
         webView.delegate = self
         webView.loadRequest(request)
     }
     
     func hideLoading() {
         loadingIndicator.stopAnimating()
+        loadingIndicator.hidden = true
         loadingLabel.hidden = true
     }
     
     func showLoading() {
         loadingIndicator.startAnimating()
+        loadingIndicator.hidden = false
         loadingLabel.hidden = false
     }
     

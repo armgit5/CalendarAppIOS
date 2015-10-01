@@ -18,7 +18,10 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        company = Company()
+        if company == nil {
+            company = Company()
+        }
+        
         
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -40,6 +43,8 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         view.addSubview(loadingLabel)
         
         // Operation
+        print(company.debugDescription)
+        print("call")
         getComapnies()
         self.showLoading()
     }
@@ -121,6 +126,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         if  !apple.isEmpty {
             company?.parentCompany = apple
             company?.parentCompanyId = company?.parentCompanyDict![apple]
+            self.dismissViewControllerAnimated(false, completion: nil)
             self.performSegueWithIdentifier("companySelected", sender: self)
         }
     }
