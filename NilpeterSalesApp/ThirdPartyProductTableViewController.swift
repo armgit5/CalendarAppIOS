@@ -17,7 +17,12 @@ class ThirdPartyProductTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        product = Product()
+        if product == nil {
+            product = Product()
+            self.getProducts()
+            showLoading()
+        }
+        
         
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         
@@ -28,8 +33,7 @@ class ThirdPartyProductTableViewController: UITableViewController {
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         
-        self.getProducts()
-        showLoading()
+        
         
     }
     

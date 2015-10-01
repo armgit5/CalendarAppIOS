@@ -17,7 +17,10 @@ class NilpeterProductTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        product = Product()
+        if product == nil {
+            product = Product()
+            
+        }
         
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         
@@ -28,8 +31,9 @@ class NilpeterProductTableViewController: UITableViewController {
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         
-        getProducts()
-        showLoading()
+        self.getProducts()
+        self.showLoading()
+        
     }
     
     // MARK: - Helper function

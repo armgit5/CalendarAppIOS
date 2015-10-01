@@ -61,6 +61,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
         self.getProducts()
         self.getComapnies()
+        print("call view did load")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -126,7 +127,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                         }
                     }
                     
-                    print(self.location?.pickerLocationId)
+                    // print(self.location?.pickerLocationId)
                 }
             }
             
@@ -324,10 +325,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! NilpeterProductTableViewController
             destination.selectedProducts = selectedProductName
+            destination.product = self.product
         } else if segue.identifier == "otherProduct" {
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! ThirdPartyProductTableViewController
             destination.selectedProducts = selectedOtherProductName
+            destination.product = self.product
         } else if segue.identifier == "toATable" {
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! SearchTableViewController
