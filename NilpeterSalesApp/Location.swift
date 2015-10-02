@@ -19,9 +19,16 @@ struct Location {
     var rawLocationData: [[String: AnyObject]]?
     var locationArray: [String]?
     var locationDict: [String: Int]?
+    var allLocationDict: [String: Int]?
     
     init() {
         pickerLocationId = 0
+    }
+    
+    init(dictArray: [[String: AnyObject]]) {
+        self.rawLocationData = dictArray
+        self.allLocationDict = [String: Int]()
+        makeLocationArray()
     }
     
     init(dictArray: [[String: AnyObject]], companyId: Int) {
@@ -46,5 +53,17 @@ struct Location {
             
         }
     }
+    
+    mutating func makeLocationArray() {
+        for location in rawLocationData! {
+            if let locName = location["name"] as? String {
+                if let locationId = location["id"] as? Int {
+                    self.allLocationDict![locName] = locationId
+                }
+            }
+        }
+        
+    }
+    
     
 }

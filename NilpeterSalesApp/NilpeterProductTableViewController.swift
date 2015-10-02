@@ -19,6 +19,8 @@ class NilpeterProductTableViewController: UITableViewController {
         super.viewDidLoad()
         if product == nil {
             product = Product()
+            self.showLoading()
+            self.getProducts()
             
         }
         
@@ -26,26 +28,27 @@ class NilpeterProductTableViewController: UITableViewController {
         
         loadingLabel = UILabel.init(frame: CGRectMake(view.center.x - 40, view.center.y - 40, 80, 80))
         loadingLabel.text = "Loading..."
+        self.loadingLabel.hidden = true
         spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 80, 80)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         
-        self.getProducts()
-        self.showLoading()
+        //self.getProducts()
+        //self.showLoading()
         
     }
     
     // MARK: - Helper function
     
     func hideLoading() {
-        spinner.stopAnimating()
-        loadingLabel.hidden = true
+        self.spinner.stopAnimating()
+        self.loadingLabel.hidden = true
     }
     
     func showLoading() {
-        spinner.startAnimating()
-        loadingLabel.hidden = false
+        self.spinner.startAnimating()
+        self.loadingLabel.hidden = false
     }
     
     // MARK: - Get products

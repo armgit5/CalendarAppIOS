@@ -19,8 +19,8 @@ class ThirdPartyProductTableViewController: UITableViewController {
         super.viewDidLoad()
         if product == nil {
             product = Product()
+            self.showLoading()
             self.getProducts()
-            showLoading()
         }
         
         
@@ -28,12 +28,11 @@ class ThirdPartyProductTableViewController: UITableViewController {
         
         loadingLabel = UILabel.init(frame: CGRectMake(view.center.x - 40, view.center.y - 40, 80, 80))
         loadingLabel.text = "Loading..."
+        self.loadingLabel.hidden = true
         spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 80, 80)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
-        
-        
         
     }
     

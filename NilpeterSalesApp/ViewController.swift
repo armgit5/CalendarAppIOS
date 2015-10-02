@@ -25,6 +25,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     // location picker view
     let locationPickerView = UIPickerView()
     var location: Location?
+    var filteredLocationArray: [String]?
     @IBOutlet var locationTextField: UITextField!
     
     // products
@@ -45,6 +46,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         company = Company()
         location = Location()
         product = Product()
+        filteredLocationArray = [String]()
         
         // location pickerview
         popDatePicker = PopDatePicker(forTextField: dateTextField)
@@ -57,10 +59,11 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         self.tabBarController?.tabBar.barTintColor = UIColor.redColor()
         self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-    
         
         self.getProducts()
         self.getComapnies()
+        self.getLocation()
+        
         print("call view did load")
     }
     
@@ -80,59 +83,116 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        return (location?.locationArray!.count)!
+        if (filteredLocationArray != nil) {
+            return (filteredLocationArray?.count)!
+        } else {
+            return (location?.locationArray!.count)!
+        }
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return location?.locationArray![row]
+        if (filteredLocationArray != nil) {
+            return filteredLocationArray![row]
+        } else {
+            return location?.locationArray![row]
+        }
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickerView.resignFirstResponder()
         
-        
-        // set location name
-        self.locationTextField.text = (location?.locationArray)![row]
-        // set loation id
-        self.location?.pickerLocationId = self.location?.locationDict![self.locationTextField.text!]
-        locationTextField.resignFirstResponder()
-        
+        if (filteredLocationArray != nil) {
+            self.locationTextField.text = (filteredLocationArray)![row]
+            self.location?.pickerLocationId = self.location?.allLocationDict![self.locationTextField.text!]
+            locationTextField.resignFirstResponder()
+        } else {
+            // set location name
+            self.locationTextField.text = (location?.locationArray)![row]
+            // set loation id
+            self.location?.pickerLocationId = self.location?.locationDict![self.locationTextField.text!]
+            locationTextField.resignFirstResponder()
+        }
         
     }
     
 
     // MARK: - Get locations
     
-    func getLocations(companyId: Int) {
+    func getLocation() {
+        
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("locations") {
             locations in
             if let locationArray = locations {
+                
                 dispatch_async(dispatch_get_main_queue()) {
-                    let locationArrayObj = Location(dictArray: locationArray, companyId: companyId)
-                    self.location?.locationArray = locationArrayObj.locationArray
-                    self.location?.locationDict = locationArrayObj.locationDict
-                    // check if location array exist, then set first location name and id
-                    if let locationArray = self.location?.locationArray {
-                        self.locationTextField.text = locationArray.first
-                        if let firstLoc = locationArray.first {
-                            self.location?.pickerLocationId = self.location?.locationDict![firstLoc]
-                            self.locationPickerView.delegate = self
-                            self.locationTextField.inputView = self.locationPickerView
-                        } else {
-                            self.location?.locationArray = nil
-                            self.location?.pickerLocationId = nil
-                            self.locationPickerView.delegate = nil
-                            self.locationTextField.inputView = nil
-                        }
-                    }
-                    
-                    // print(self.location?.pickerLocationId)
+                    self.location = Location(dictArray: locationArray)
                 }
             }
             
         }
+        
     }
+    
+    func getLocations(companyId: Int) {
+        // Load location from cache
+        if let rawLocation = self.location?.rawLocationData {
+            self.filteredLocationArray?.removeAll()
+            for location in rawLocation {
+                let locationName = location["name"] as! String
+                if companyId == location["company_id"] as! Int {
+                    print(companyId)
+                    self.filteredLocationArray?.append(locationName)
+                }
+            }
+            if (filteredLocationArray != nil) {
+                self.locationTextField.text = filteredLocationArray!.first
+                if let firstLoc = filteredLocationArray!.first {
+                    self.location?.pickerLocationId = self.location?.allLocationDict![firstLoc]
+                    self.locationPickerView.delegate = self
+                    self.locationTextField.inputView = self.locationPickerView
+                } else {
+                    self.filteredLocationArray?.removeAll()
+                    self.location?.pickerLocationId = nil
+                    self.locationPickerView.delegate = nil
+                    self.locationTextField.inputView = nil
+                }
+            }
+        } else {
+            // Load locations
+            let scheduleService = ScheduleService()
+            scheduleService.getSchedule("locations") {
+                locations in
+                if let locationArray = locations {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        let locationArrayObj = Location(dictArray: locationArray, companyId: companyId)
+                        self.location?.locationArray = locationArrayObj.locationArray
+                        self.location?.locationDict = locationArrayObj.locationDict
+                        // check if location array exist, then set first location name and id
+                        if let locationArray = self.location?.locationArray {
+                            self.locationTextField.text = locationArray.first
+                            if let firstLoc = locationArray.first {
+                                self.location?.pickerLocationId = self.location?.locationDict![firstLoc]
+                                self.locationPickerView.delegate = self
+                                self.locationTextField.inputView = self.locationPickerView
+                            } else {
+                                self.location?.locationArray = nil
+                                self.location?.pickerLocationId = nil
+                                self.locationPickerView.delegate = nil
+                                self.locationTextField.inputView = nil
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+
+    }
+
+    
+    
     
     func getProducts() {
         let scheduleService = ScheduleService()
@@ -287,6 +347,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                 company?.companyId = searchController.company?.parentCompanyId
                 getLocations((company?.companyId)!)
             }
+            
             
         } else if segue.sourceViewController.isKindOfClass(NilpeterProductTableViewController) {
             let nilpeterProductsController = segue.sourceViewController as! NilpeterProductTableViewController
