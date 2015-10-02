@@ -58,6 +58,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         companyTextField.delegate = self
         nilpeterProductTextField.delegate = self
         otherProductTextField.delegate = self
+        descriptionTextField.delegate = self
         
         // UI Design
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
@@ -251,6 +252,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         dateTextField.resignFirstResponder()
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == descriptionTextField {
+            textField.resignFirstResponder()
+            return true
+        }
+        return true
+        
+    }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
@@ -276,6 +285,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             return true
         } else if textField == otherProductTextField {
             performSegueWithIdentifier("otherProduct", sender: self)
+            return true
         }
         return true
     }
