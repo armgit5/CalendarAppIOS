@@ -45,6 +45,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         self.resultSearchController.dimsBackgroundDuringPresentation = false
         self.resultSearchController.searchBar.sizeToFit()
         
+        
         self.tableView.tableHeaderView = self.resultSearchController.searchBar
         
         // UI stuff

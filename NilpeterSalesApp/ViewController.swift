@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIWebViewDelegate {
     
     @IBOutlet weak var allDaySwitch: UISwitch!
     
@@ -38,6 +38,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     // Description
     @IBOutlet var descriptionTextField: UITextField!
     
+    var webView: UIWebView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,6 +67,13 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         self.getProducts()
         self.getComapnies()
         self.getLocation()
+        
+//        let url = NSURL(string: "http://arm-calendar-apitest.herokuapp.com/ioscalendar")
+//        let request = NSURLRequest(URL: url!)
+//        self.webView?.delegate = self
+//        self.webView?.loadRequest(request)
+        
+    
         
         print("call view did load")
     }
@@ -293,6 +302,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     @IBAction func postToArm(sender: AnyObject) {
+        
+        
 
         var dateString = ""
         let allDayString = ", \"all_day\": \"\(allDayStatus)\" "
@@ -327,13 +338,16 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
         let body = "{" + dateString + allDayString + companyString + locationIdString + combinedIdArray + descriptionString + userIdString + "}"
 
-        let scheduleService = ScheduleService()
-        scheduleService.postSchedule(body) {
-            status in
-            if let returnMessage = status as String? {
-                print(returnMessage, terminator: "")
-            }
-        }
+        print(body)
+//        let scheduleService = ScheduleService()
+//        scheduleService.postSchedule(body) {
+//            status in
+//            if let returnMessage = status as String? {
+//                print(returnMessage, terminator: "")
+//            }
+//        }
+        
+        self.tabBarController?.selectedIndex = 1
     }
     
     // MARK: - unwind company from company table view
@@ -395,7 +409,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! SearchTableViewController
             destination.company = self.company
-        }
+        } 
     }
     
     // MARK: - Helper functions

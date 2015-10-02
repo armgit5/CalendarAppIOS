@@ -34,12 +34,15 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         loadingIndicator.stopAnimating()
         loadingIndicator.hidden = true
         loadingLabel.hidden = true
+        webView.alpha = 0.85
+        
     }
     
     func showLoading() {
         loadingIndicator.startAnimating()
         loadingIndicator.hidden = false
         loadingLabel.hidden = false
+        webView.alpha = 0.3
     }
     
     func webViewDidStartLoad(webView: UIWebView)
