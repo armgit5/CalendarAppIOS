@@ -18,19 +18,24 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if company == nil {
-            company = Company()
-            loadingLabel = UILabel.init(frame: CGRectMake(view.center.x - 40, view.center.y - 40, 80, 80))
-            loadingLabel.text = "Loading..."
-            spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-            spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 50, 25)
-        } else {
-            loadingLabel = UILabel.init(frame: CGRectMake(55, 0, 80, 40))
-            loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
-            loadingLabel.text = "Updating..."
-            spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-            spinner.frame = CGRectMake(5, 0, 80, 40)
-        }
+        loadingLabel = UILabel.init(frame: CGRectMake(55, 0, 80, 40))
+        loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
+        loadingLabel.text = "Updating..."
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        spinner.frame = CGRectMake(5, 0, 80, 40)
+        
+//        if company?.companies.count == 0 {
+//            loadingLabel = UILabel.init(frame: CGRectMake(view.center.x - 40, view.center.y - 40, 80, 80))
+//            loadingLabel.text = "Loading..."
+//            spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+//            spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 50, 25)
+//        } else {
+//            loadingLabel = UILabel.init(frame: CGRectMake(55, 0, 80, 40))
+//            loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
+//            loadingLabel.text = "Updating..."
+//            spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+//            spinner.frame = CGRectMake(5, 0, 80, 40)
+//        }
         
         
         // Do any additional setup after loading the view, typically from a nib.

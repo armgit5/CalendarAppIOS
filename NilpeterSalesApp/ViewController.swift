@@ -34,6 +34,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     @IBOutlet var otherProductTextField: UITextField!
     var selectedProductName = [String]() // send back segue data
     var selectedOtherProductName = [String]() // send back segue data
+    
+    // Description
     @IBOutlet var descriptionTextField: UITextField!
     
     override func viewDidLoad() {
@@ -119,7 +121,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     // MARK: - Get locations
     
     func getLocation() {
-        
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("locations") {
             locations in
@@ -135,27 +136,31 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     func getLocations(companyId: Int) {
-        // Load location from cache
+        // Load locations from cache
         if let rawLocation = self.location?.rawLocationData {
             self.filteredLocationArray?.removeAll()
             for location in rawLocation {
                 let locationName = location["name"] as! String
                 if companyId == location["company_id"] as! Int {
-                    print(companyId)
                     self.filteredLocationArray?.append(locationName)
                 }
             }
             if (filteredLocationArray != nil) {
-                self.locationTextField.text = filteredLocationArray!.first
-                if let firstLoc = filteredLocationArray!.first {
-                    self.location?.pickerLocationId = self.location?.allLocationDict![firstLoc]
-                    self.locationPickerView.delegate = self
-                    self.locationTextField.inputView = self.locationPickerView
+                // Check if the company has locations
+                print(filteredLocationArray)
+                print(filteredLocationArray?.count)
+                if filteredLocationArray?.count == 0 {
+                    self.locationTextField.text = "No Location"
+                    resetLocations()
                 } else {
-                    self.filteredLocationArray?.removeAll()
-                    self.location?.pickerLocationId = nil
-                    self.locationPickerView.delegate = nil
-                    self.locationTextField.inputView = nil
+                    self.locationTextField.text = filteredLocationArray!.first
+                    if let firstLoc = filteredLocationArray!.first {
+                        self.location?.pickerLocationId = self.location?.allLocationDict![firstLoc]
+                        self.locationPickerView.delegate = self
+                        self.locationTextField.inputView = self.locationPickerView
+                    } else {
+                        resetLocations()
+                    }
                 }
             }
         } else {
@@ -176,19 +181,13 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                                 self.locationPickerView.delegate = self
                                 self.locationTextField.inputView = self.locationPickerView
                             } else {
-                                self.location?.locationArray = nil
-                                self.location?.pickerLocationId = nil
-                                self.locationPickerView.delegate = nil
-                                self.locationTextField.inputView = nil
+                                self.resetLocations()
                             }
                         }
                     }
                 }
-                
             }
-            
         }
-
     }
 
     
@@ -345,7 +344,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             if searchController.company?.parentCompany != nil {
                 companyTextField.text = searchController.company?.parentCompany
                 company?.companyId = searchController.company?.parentCompanyId
-                getLocations((company?.companyId)!)
+                getLocations((searchController.company?.parentCompanyId)!)
             }
             
             
@@ -399,9 +398,51 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
     }
     
+    // MARK: - Helper functions
+    
+    func resetAllDayStatus() {
+        self.allDayStatus = 0
+        self.allDaySwitch.setOn(false, animated: false)
+    }
+    
+    func resetCompany() {
+        self.company = Company()
+        self.companyTextField.text?.removeAll()
+        self.getComapnies()
+    }
+    
+    func resetLocations() {
+        self.filteredLocationArray?.removeAll()
+        self.location?.locationArray = nil
+        self.location?.pickerLocationId = nil
+        self.locationPickerView.delegate = nil
+        self.locationTextField.inputView = nil
+    }
+    
+    func cancelResetLocations() {
+        resetLocations()
+        self.locationTextField.text?.removeAll()
+    }
+    
+    
+    func resetProducts() {
+        self.nilpeterProductTextField.text?.removeAll()
+        self.otherProductTextField.text?.removeAll()
+        self.product?.productPickerIdArray?.removeAll()
+        self.product?.otherProductPickerIdArray?.removeAll()
+        self.selectedProductName = [String]() // send back segue data
+        self.selectedOtherProductName = [String]() // send back segue data
+        
+    }
+    
     @IBAction func cancelSchedule(sender: AnyObject) {
-        
-        
+        self.dateTextField.text?.removeAll()
+        resetAllDayStatus()
+        resetCompany()
+        cancelResetLocations()
+        resetProducts()
+        self.descriptionTextField.text?.removeAll()
+
     }
     
     
