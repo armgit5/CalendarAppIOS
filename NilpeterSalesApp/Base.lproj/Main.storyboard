@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--SCHEDULE-->
+        <!--View Controller-->
         <scene sceneID="fGY-ZH-mc9">
             <objects>
                 <tableViewController id="wXc-VK-6OQ" customClass="ViewController" customModule="NilpeterSalesApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -187,7 +187,7 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="SCHEDULE" id="bxP-Qq-jtu">
+                    <navigationItem key="navigationItem" id="bxP-Qq-jtu">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="pdo-9b-QOn">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -214,6 +214,7 @@
                         <segue destination="fnf-38-leF" kind="presentation" identifier="toATable" id="Eg4-XK-k9t"/>
                         <segue destination="Dkp-ua-R12" kind="presentation" identifier="nilpeterProduct" id="70N-hW-mb1"/>
                         <segue destination="Wtj-UP-WkT" kind="presentation" identifier="otherProduct" id="maZ-mB-0ou"/>
+                        <segue destination="ExF-yh-G1t" kind="show" identifier="showLogin" animates="NO" id="S25-wX-dUk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kTJ-Pv-peW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -342,7 +343,58 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n0H-r5-klc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="SF1-aU-CXn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4125" y="-1114"/>
+            <point key="canvasLocation" x="4805" y="-1120"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="qZR-cV-ZdV">
+            <objects>
+                <viewController id="ExF-yh-G1t" customClass="LoginViewController" customModule="NilpeterSalesApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gQi-ds-1Lx"/>
+                        <viewControllerLayoutGuide type="bottom" id="XYo-Gv-2CJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="67c-Q2-Ltf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="USERNAME" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jgW-uC-cLL">
+                                <rect key="frame" x="20" y="109" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNz-gK-JJ8">
+                                <rect key="frame" x="278" y="285" width="45" height="30"/>
+                                <state key="normal" title="LOGIN"/>
+                                <connections>
+                                    <action selector="login:" destination="ExF-yh-G1t" eventType="touchUpInside" id="VvW-r8-eXO"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PASSWORD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CHn-Nt-vkL">
+                                <rect key="frame" x="20" y="184" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jgW-uC-cLL" firstAttribute="top" secondItem="gQi-ds-1Lx" secondAttribute="bottom" constant="45" id="0M2-c0-odq"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CHn-Nt-vkL" secondAttribute="trailing" id="2LD-X6-rPD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jgW-uC-cLL" secondAttribute="trailing" id="7Nc-37-aHv"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="jgW-uC-cLL" secondAttribute="leading" id="Eyn-ft-hL2"/>
+                            <constraint firstItem="kNz-gK-JJ8" firstAttribute="centerY" secondItem="67c-Q2-Ltf" secondAttribute="centerY" id="JTc-PW-qr2"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="CHn-Nt-vkL" secondAttribute="leading" id="MGk-zH-8EW"/>
+                            <constraint firstItem="CHn-Nt-vkL" firstAttribute="top" secondItem="jgW-uC-cLL" secondAttribute="bottom" constant="45" id="OxE-uz-sZ2"/>
+                            <constraint firstItem="kNz-gK-JJ8" firstAttribute="centerX" secondItem="67c-Q2-Ltf" secondAttribute="centerX" id="gKb-85-RtS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="email" destination="jgW-uC-cLL" id="FZs-qK-Q0h"/>
+                        <outlet property="password" destination="CHn-Nt-vkL" id="RRd-nV-Ydb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Czh-60-Xnv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3255" y="-1135"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="P1i-tg-Qil">
@@ -360,7 +412,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fKz-BU-2Ri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3307" y="-1114"/>
+            <point key="canvasLocation" x="4125" y="-1120"/>
         </scene>
         <!--Nilpeter Products-->
         <scene sceneID="BKZ-iP-2y3">

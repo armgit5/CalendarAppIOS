@@ -27,6 +27,8 @@
 		120C5A331BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		122A64471B96EAE800E1A57D /* FriendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A64461B96EAE800E1A57D /* FriendItem.swift */; };
 		128885261BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		12C46CF61BC223E000A0787B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C46CF51BC223E000A0787B /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		12C46CF81BC25DA100A0787B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C46CF71BC25DA100A0787B /* User.swift */; settings = {ASSET_TAGS = (); }; };
 		12CBF1281B987C250087E061 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF1271B987C250087E061 /* SearchViewController.swift */; };
 		12CBF12E1B9897E40087E061 /* PopDatePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */; };
 		12CBF1301B989AF80087E061 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */; };
@@ -74,6 +76,8 @@
 		120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NilpeterProductTableViewController.swift; sourceTree = "<group>"; };
 		122A64461B96EAE800E1A57D /* FriendItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendItem.swift; sourceTree = "<group>"; };
 		128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyProductTableViewController.swift; sourceTree = "<group>"; };
+		12C46CF51BC223E000A0787B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		12C46CF71BC25DA100A0787B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		12CBF1271B987C250087E061 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDatePickerDelegate.swift; sourceTree = "<group>"; };
 		12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 				128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */,
 				12009D171B830CD300C012B6 /* ViewController.swift */,
 				1206DF9A1BBB9C8D0056536D /* WebViewController.swift */,
+				12C46CF51BC223E000A0787B /* LoginViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				120C5A2D1BB12E8E00D0F0D5 /* Product.swift */,
 				12009D371B956F7100C012B6 /* NetworkOperation.swift */,
 				12009D351B956F6000C012B6 /* ScheduleService.swift */,
+				12C46CF71BC25DA100A0787B /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -358,6 +364,7 @@
 				12009D361B956F6000C012B6 /* ScheduleService.swift in Sources */,
 				12009D3A1B95726500C012B6 /* ScheduleData.swift in Sources */,
 				12EAC8D21B9E9A3500B5E08A /* PopDatePicker.swift in Sources */,
+				12C46CF61BC223E000A0787B /* LoginViewController.swift in Sources */,
 				12EAC8D31B9E9A3500B5E08A /* PopDateViewController.swift in Sources */,
 				12EAC8D61BA013CB00B5E08A /* Location.swift in Sources */,
 				12CBF12E1B9897E40087E061 /* PopDatePickerDelegate.swift in Sources */,
@@ -369,6 +376,7 @@
 				12009D181B830CD300C012B6 /* ViewController.swift in Sources */,
 				12CBF1331B998B2D0087E061 /* NilpeterProductDelegate.swift in Sources */,
 				12009D161B830CD300C012B6 /* AppDelegate.swift in Sources */,
+				12C46CF81BC25DA100A0787B /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

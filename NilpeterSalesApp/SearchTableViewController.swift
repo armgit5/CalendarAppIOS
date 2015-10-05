@@ -17,7 +17,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     var loadingLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("user statid id \(User.userId)")
         loadingLabel = UILabel.init(frame: CGRectMake(55, 0, 80, 40))
         loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
         loadingLabel.text = "Updating..."

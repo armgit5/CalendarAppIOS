@@ -43,6 +43,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.performSegueWithIdentifier("showLogin", sender: self)
+        
         // disable table view selection
         self.tableView.allowsSelection = false
         

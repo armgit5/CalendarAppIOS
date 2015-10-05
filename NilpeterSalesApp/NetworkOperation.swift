@@ -21,8 +21,14 @@ class NetworkOperation {
     }
 
     func downloadJSONFromURL(completion: JSONDictionaryCompletion) {
+        let request = NSMutableURLRequest(URL: queryURL)
+        let username = "arm@nilpeter.com"
+        let password = "enter13"
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
+        let base64LoginString =  loginData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
         
-        let request: NSURLRequest = NSURLRequest(URL: queryURL)
         let dataTask = session.dataTaskWithRequest(request) {
             data, response, error in
             
@@ -32,6 +38,9 @@ class NetworkOperation {
                 switch(httpResponse.statusCode) {
                 case 200:
                     // create json object
+                    let jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as? [[String: AnyObject]]
+                    completion(jsonDictionary)
+                case 401:
                     let jsonDictionary = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as? [[String: AnyObject]]
                     completion(jsonDictionary)
                 default:
@@ -66,6 +75,17 @@ class NetworkOperation {
                     do {
                         let parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
                     
+                        /* 6. Use the data! */
+                        if let status = parsedResult?["message"] as? String {
+                            completion(status)
+                        }
+                    } catch {
+                        print(error)
+                    }
+                case 401:
+                    do {
+                        let parsedResult = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as? NSDictionary
+                        
                         /* 6. Use the data! */
                         if let status = parsedResult?["message"] as? String {
                             completion(status)
