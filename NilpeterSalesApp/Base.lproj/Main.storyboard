@@ -267,11 +267,18 @@
                             <constraint firstItem="cjz-i1-E88" firstAttribute="centerX" secondItem="oVu-Tx-kDs" secondAttribute="centerX" id="wOA-bs-KYA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="CALENDAR" id="Phj-zC-Tgt"/>
+                    <navigationItem key="navigationItem" title="CALENDAR" id="Phj-zC-Tgt">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="nYP-T4-Yaq">
+                            <connections>
+                                <action selector="logout:" destination="8sL-Y7-Tma" id="bjR-PP-9cH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="loadingIndicator" destination="cjz-i1-E88" id="gSk-gP-3dM"/>
                         <outlet property="loadingLabel" destination="wf4-JX-Peh" id="Cz2-uL-PRa"/>
                         <outlet property="webView" destination="Nt7-Vt-uLQ" id="KIk-Pb-0Xj"/>
+                        <segue destination="ExF-yh-G1t" kind="show" identifier="showLogin" id="Wsj-zv-hpR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rIc-SI-ApK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -576,4 +583,7 @@
         <image name="calendar-7" width="30" height="30"/>
         <image name="list-simple-7" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Wsj-zv-hpR"/>
+    </inferredMetricsTieBreakers>
 </document>

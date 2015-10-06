@@ -14,6 +14,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet var loadingLabel: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,5 +63,11 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     {
         print("An error occurred while loading the webview")
     }
+    
+    @IBAction func logout(sender: AnyObject) {
+        User.session = 0
+        self.performSegueWithIdentifier("showLogin", sender: self)
+    }
+    
 
 }
