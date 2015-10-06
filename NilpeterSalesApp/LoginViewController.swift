@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -22,9 +22,10 @@ class LoginViewController: UIViewController {
         self.navigationItem.hidesBackButton = true
         self.navigationItem.backBarButtonItem = nil
         self.navigationItem.title = "Login"
-    
+        
+        self.email.delegate = self
+        self.password.delegate = self
     }
-    
     
     func validateUser() {
         let scheduleService = ScheduleService()
@@ -42,16 +43,27 @@ class LoginViewController: UIViewController {
                 }
             } else {
                 print("invalid")
+                self.dismissViewControllerAnimated(true, completion: nil)
+                let alertView = UIAlertController(title: "Invalid Username or Password", message: "Please reenter username and password again", preferredStyle: .Alert)
+                alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                self.presentViewController(alertView, animated: true, completion: nil)
             }
-            
         }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+      
+        
     }
 
     @IBAction func login(sender: AnyObject) {
-//        User.email = self.email.text
-//        User.password = self.password.text
-        
+        User.email = self.email.text!
+        User.password = self.password.text!
+        self.email.resignFirstResponder()
+        self.password.resignFirstResponder()
         validateUser()
-        // self.navigationController?.popToRootViewControllerAnimated(true)
     }
 }

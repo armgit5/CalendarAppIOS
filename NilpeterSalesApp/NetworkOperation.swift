@@ -13,7 +13,7 @@ class NetworkOperation {
     lazy var config: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
     lazy var session: NSURLSession = NSURLSession(configuration: self.config)
     let queryURL: NSURL
-    
+
     typealias JSONDictionaryCompletion = ([[String: AnyObject]]?) -> Void
     
     init(url: NSURL) {
@@ -22,8 +22,8 @@ class NetworkOperation {
 
     func downloadJSONFromURL(completion: JSONDictionaryCompletion) {
         let request = NSMutableURLRequest(URL: queryURL)
-        let username = "arm@nilpeter.com"
-        let password = "enter13"
+        let username = User.email
+        let password = User.password
         let loginString = NSString(format: "%@:%@", username, password)
         let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
         let base64LoginString =  loginData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
@@ -58,6 +58,13 @@ class NetworkOperation {
     func postBodyToURL(postBody: String, completion: String? -> Void) {
         
         let request = NSMutableURLRequest(URL: queryURL)
+        let username = User.email
+        let password = User.password
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: NSData = loginString.dataUsingEncoding(NSUTF8StringEncoding)!
+        let base64LoginString =  loginData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+
         let body = postBody
         request.HTTPMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")

@@ -71,13 +71,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         self.getComapnies()
         self.getLocation()
         
-//        let url = NSURL(string: "http://arm-calendar-apitest.herokuapp.com/ioscalendar")
-//        let request = NSURLRequest(URL: url!)
-//        self.webView?.delegate = self
-//        self.webView?.loadRequest(request)
-        
-    
-        
         print("call view did load")
     }
     
@@ -323,7 +316,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         var locationIdString = ""
         var combinedIdArray = ""
         var descriptionString = ""
-        let userIdString = ", \"user_id\": \"\(1)\" "
+        let userIdString = ", \"user_id\": \"\(User.userId)\" "
         
         if let dateTime = dateTextField.text {
             dateString = "\"date\": \"\(dateTime)\" "
@@ -351,13 +344,13 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         let body = "{" + dateString + allDayString + companyString + locationIdString + combinedIdArray + descriptionString + userIdString + "}"
 
         print(body)
-//        let scheduleService = ScheduleService()
-//        scheduleService.postSchedule(body) {
-//            status in
-//            if let returnMessage = status as String? {
-//                print(returnMessage, terminator: "")
-//            }
-//        }
+        let scheduleService = ScheduleService()
+        scheduleService.postSchedule(body) {
+            status in
+            if let returnMessage = status as String? {
+                print(returnMessage, terminator: "")
+            }
+        }
         
         self.tabBarController?.selectedIndex = 1
     }

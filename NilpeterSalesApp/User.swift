@@ -9,7 +9,7 @@
 import Foundation
 
 struct User {
-    static var email: String?
-    static var password: String?
-    static var userId: Int?
+    static var email = ""
+    static var password = ""
+    static var userId = 0
 }
