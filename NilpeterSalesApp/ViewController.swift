@@ -43,7 +43,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.performSegueWithIdentifier("showLogin", sender: self)
+        if User.session == 0 {
+            self.performSegueWithIdentifier("showLogin", sender: self)
+        }
         
         // disable table view selection
         self.tableView.allowsSelection = false
@@ -73,6 +75,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
         print("call view did load")
     }
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -225,9 +228,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                     let comArrayObj = Company(dictArray: comArray)
                     self.company?.companies = comArrayObj.companyArray!
                     self.company?.parentCompanyDict = comArrayObj.companyDict
-                    //self.tableView.reloadData()
-                    
-                    // self.hideLoading()
                 }
             }
             
@@ -308,8 +308,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     @IBAction func postToArm(sender: AnyObject) {
         
-        
-
         var dateString = ""
         let allDayString = ", \"all_day\": \"\(allDayStatus)\" "
         var companyString = ""
@@ -353,6 +351,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
         
         self.tabBarController?.selectedIndex = 1
+        self.cancelResetLocations()
     }
     
     // MARK: - unwind company from company table view

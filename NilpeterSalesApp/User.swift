@@ -9,7 +9,8 @@
 import Foundation
 
 struct User {
-    static var email = ""
-    static var password = ""
+    static var email = "arm@nilpeter.com"
+    static var password = "enter123"
     static var userId = 0
+    static var session = 0
 }

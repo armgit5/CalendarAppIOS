@@ -35,6 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 dispatch_async(dispatch_get_main_queue()) {
                     if let userId = validUser.first!["user_id"] as? Int {
                         User.userId = userId
+                        User.session = 1
                         self.navigationController?.popToRootViewControllerAnimated(true)
                     }
                     else {
@@ -52,11 +53,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
-      
-        
     }
 
     @IBAction func login(sender: AnyObject) {
