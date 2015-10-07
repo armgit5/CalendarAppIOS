@@ -37,16 +37,15 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     // Description
     @IBOutlet var descriptionTextField: UITextField!
-    
     var webView: UIWebView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if User.session == 0 {
-            self.performSegueWithIdentifier("showLogin", sender: self)
-        }
-        
+//        if User.session == 0 {
+//            self.performSegueWithIdentifier("showLogin", sender: self)
+//        }
+
         // disable table view selection
         self.tableView.allowsSelection = false
         
@@ -68,6 +67,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         self.tabBarController?.tabBar.barTintColor = UIColor.redColor()
         self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+
         
         self.getProducts()
         self.getComapnies()
@@ -76,7 +76,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         print("call view did load")
     }
 
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if location?.locationArray != nil {
@@ -85,7 +84,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
         
     }
-    
     
     // MARK: - uipicker view
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
@@ -124,23 +122,18 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
         
     }
-    
 
     // MARK: - Get locations
-    
     func getLocation() {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("locations") {
             locations in
             if let locationArray = locations {
-                
                 dispatch_async(dispatch_get_main_queue()) {
                     self.location = Location(dictArray: locationArray)
                 }
             }
-            
         }
-        
     }
     
     func getLocations(companyId: Int) {
@@ -221,19 +214,17 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("companies") {
             companies in
-            
             if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
-                    
                     let comArrayObj = Company(dictArray: comArray)
                     self.company?.companies = comArrayObj.companyArray!
                     self.company?.parentCompanyDict = comArrayObj.companyDict
+                    print(self.company.debugDescription)
                 }
             }
             
         }
     }
-
 
         
     func addCompany(company: String) {

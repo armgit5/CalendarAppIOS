@@ -84,7 +84,6 @@ class NilpeterProductTableViewController: UITableViewController {
         return 1
     }
     
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("nilpeterCell")
         
@@ -119,10 +118,8 @@ class NilpeterProductTableViewController: UITableViewController {
                     if let index = selectedProducts?.indexOf(selectedProduct) {
                         selectedProducts?.removeAtIndex(index)
                     }
-                    
                 }
             }
-        
         } else {
             cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
             selectedProducts?.append(product!)
@@ -136,19 +133,12 @@ class NilpeterProductTableViewController: UITableViewController {
 
    
     func isSelected(product: String) -> Bool {
-        
         for selectedProduct in (self.selectedProducts)! {
-    
             if product == selectedProduct {
                 return true
             }
         }
-        
         return false
     }
-    
-    
-
-    
 
 }

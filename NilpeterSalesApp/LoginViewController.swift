@@ -37,6 +37,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     if let userId = validUser.first!["user_id"] as? Int {
                         User.userId = userId
                         User.session = 1
+                        self.tabBarController?.tabBar.hidden = false
                         self.navigationController?.popToRootViewControllerAnimated(true)
                     }
                     else {
