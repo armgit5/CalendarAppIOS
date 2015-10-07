@@ -6,6 +6,7 @@
 //  Copyright (c) 2558 Arm Suwansiri. All rights reserved.
 //
 //  * Note: not working well because it cannot return the id from selected textfield
+//  Planning to impliment static variables in the models to store data statically later on
 
 
 import Foundation

@@ -19,7 +19,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
-        
+        // self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
     }
     
     override func viewWillAppear(animated: Bool) {
