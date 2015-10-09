@@ -148,8 +148,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             }
             if (filteredLocationArray != nil) {
                 // Check if the company has locations
-                print(filteredLocationArray)
-                print(filteredLocationArray?.count)
                 if filteredLocationArray?.count == 0 {
                     self.locationTextField.text = "No Location"
                     resetLocations()
@@ -219,7 +217,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
                     let comArrayObj = Company(dictArray: comArray)
                     self.company?.companies = comArrayObj.companyArray!
                     self.company?.parentCompanyDict = comArrayObj.companyDict
-                    print(self.company.debugDescription)
                 }
             }
             

@@ -12,6 +12,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var login: UIButton!
+    @IBOutlet weak var verifyingTextField: UILabel!
+    @IBOutlet weak var verifyingLoading: UIActivityIndicatorView!
+    
+    
     
     var user: User?
     
@@ -23,35 +28,63 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.navigationItem.backBarButtonItem = nil
         self.navigationItem.title = "Login"
         self.tabBarController?.tabBar.hidden = true
-        
         self.email.delegate = self
         self.password.delegate = self
+        
+        self.verifyingHide()
     }
     
     func validateUser() {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("user") {
             user in
-            if let validUser = user {
-                dispatch_async(dispatch_get_main_queue()) {
-                    if let userId = validUser.first!["user_id"] as? Int {
-                        User.userId = userId
-                        User.session = 1
-                        self.tabBarController?.tabBar.hidden = false
-                        self.navigationController?.popToRootViewControllerAnimated(true)
-                    }
-                    else {
-                        print("not valid")
-                    }
+            dispatch_async(dispatch_get_main_queue()) {
+                if let validUser = user {
+                    
+                        if let userId = validUser.first!["user_id"] as? Int {
+                            User.userId = userId
+                            User.session = 1
+                            self.tabBarController?.tabBar.hidden = false
+                            self.navigationController?.popToRootViewControllerAnimated(true)
+                            self.verifyingHide()
+                        }
+                        else {
+                            print("cannot find userid")
+                        }
+                    
+                } else {
+                    print("invalid user or password")
+                    self.verifyingHide()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.showAlert()
+                    
                 }
-            } else {
-                print("invalid")
-                self.dismissViewControllerAnimated(true, completion: nil)
-                let alertView = UIAlertController(title: "Invalid Username or Password", message: "Please reenter username and password again", preferredStyle: .Alert)
-                alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                self.presentViewController(alertView, animated: true, completion: nil)
             }
         }
+    }
+    
+    func showAlert() {
+        let alertView = UIAlertController(title: "Invalid Username or Password", message: "Please reenter username and password again", preferredStyle: .Alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+        self.presentViewController(alertView, animated: true, completion: nil)
+    }
+    
+    func verifyingShow() {
+        self.email.resignFirstResponder()
+        self.password.resignFirstResponder()
+        self.login.enabled = false
+        self.verifyingTextField.hidden = false
+        self.verifyingLoading.hidden = false
+        self.verifyingLoading.startAnimating()
+    }
+    
+    func verifyingHide() {
+        self.email.resignFirstResponder()
+        self.password.resignFirstResponder()
+        self.login.enabled = true
+        self.verifyingTextField.hidden = true
+        self.verifyingLoading.hidden = true
+        self.verifyingLoading.stopAnimating()
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -62,8 +95,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func login(sender: AnyObject) {
         User.email = self.email.text!
         User.password = self.password.text!
-        self.email.resignFirstResponder()
-        self.password.resignFirstResponder()
+        self.verifyingShow()
         validateUser()
     }
 }
