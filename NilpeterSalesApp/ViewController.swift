@@ -68,7 +68,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         self.tabBarController?.tabBar.barTintColor = UIColor.redColor()
         self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
 
-        
         self.getProducts()
         self.getComapnies()
         self.getLocation()
@@ -82,7 +81,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             locationPickerView.delegate = self
             locationTextField.inputView = locationPickerView
         }
-        
+        self.cancelAllFields()
     }
     
     // MARK: - uipicker view
@@ -441,14 +440,17 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
     }
     
-    @IBAction func cancelSchedule(sender: AnyObject) {
+    func cancelAllFields() {
         self.dateTextField.text?.removeAll()
         resetAllDayStatus()
         resetCompany()
         cancelResetLocations()
         resetProducts()
         self.descriptionTextField.text?.removeAll()
-
+    }
+    
+    @IBAction func cancelSchedule(sender: AnyObject) {
+        self.cancelAllFields()
     }
     
     
