@@ -81,7 +81,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             locationPickerView.delegate = self
             locationTextField.inputView = locationPickerView
         }
-        self.cancelAllFields()
     }
     
     // MARK: - uipicker view
@@ -338,7 +337,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
         
         self.tabBarController?.selectedIndex = 1
-        self.cancelResetLocations()
+        self.cancelAllFields()
     }
     
     // MARK: - unwind company from company table view
@@ -447,6 +446,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         cancelResetLocations()
         resetProducts()
         self.descriptionTextField.text?.removeAll()
+        self.descriptionTextField.resignFirstResponder()
     }
     
     @IBAction func cancelSchedule(sender: AnyObject) {
