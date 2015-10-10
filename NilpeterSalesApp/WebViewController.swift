@@ -14,7 +14,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet var loadingLabel: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

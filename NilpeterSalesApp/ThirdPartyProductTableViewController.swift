@@ -78,7 +78,6 @@ class ThirdPartyProductTableViewController: UITableViewController {
         return 1
     }
     
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("otherCell")
         
@@ -126,16 +125,13 @@ class ThirdPartyProductTableViewController: UITableViewController {
         self.performSegueWithIdentifier("otherProductSelected", sender: self)
     }
     
-    
     func isSelected(product: String) -> Bool {
-        
         for selectedProduct in (self.selectedProducts)! {
             
             if product == selectedProduct {
                 return true
             }
         }
-        
         return false
     }
 

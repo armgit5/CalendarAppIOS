@@ -17,16 +17,8 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     var loadingLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadingLabel = UILabel.init(frame: CGRectMake(55, 0, 80, 40))
-        loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
-        loadingLabel.text = "Updating..."
-        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        spinner.frame = CGRectMake(5, 0, 80, 40)
-        view.addSubview(spinner)
-        view.addSubview(loadingLabel)
-        
-        // Do any additional setup after loading the view, typically from a nib.
+     
+        // Result Controller
         
         self.resultSearchController = UISearchController(searchResultsController: nil)
         self.resultSearchController.searchResultsUpdater = self
@@ -38,9 +30,21 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         // UI stuff
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         
+        // Spinner
+        loadingLabel = UILabel.init(frame: CGRectMake(55, 0, 80, 40))
+        loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
+        loadingLabel.text = "Updating..."
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        spinner.frame = CGRectMake(5, 0, 80, 40)
+        view.addSubview(spinner)
+        view.addSubview(loadingLabel)
+        self.hideLoading()
+        
         // Operation
-        getComapnies()
-        self.showLoading()
+        if company == nil {
+            self.showLoading()
+            getComapnies()
+        }
     }
     
     // MARK: - Helper function
@@ -64,16 +68,13 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
             
             if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
-                    
                     let comArrayObj = Company(dictArray: comArray)
                     self.company?.companies = comArrayObj.companyArray!
                     self.company?.parentCompanyDict = comArrayObj.companyDict
                     self.tableView.reloadData()
-                    
                     self.hideLoading()
                 }
             }
-            
         }
     }
     

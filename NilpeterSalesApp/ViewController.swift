@@ -95,6 +95,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             locationPickerView.delegate = self
             locationTextField.inputView = locationPickerView
         }
+        if company == nil {
+            self.getProducts()
+            self.getComapnies()
+            self.getLocation()
+            self.showLoading()
+        }
     }
     
     // MARK: - UIPickerView Delegate
@@ -464,7 +470,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         self.product?.otherProductPickerIdArray?.removeAll()
         self.selectedProductName = [String]() // send back segue data
         self.selectedOtherProductName = [String]() // send back segue data
-        
     }
     
     func cancelAllFields() {

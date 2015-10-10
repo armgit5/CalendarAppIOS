@@ -21,7 +21,6 @@ class NilpeterProductTableViewController: UITableViewController {
             product = Product()
             self.showLoading()
             self.getProducts()
-            
         }
         
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
@@ -33,7 +32,6 @@ class NilpeterProductTableViewController: UITableViewController {
         spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 80, 80)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
-        
     }
     
     // MARK: - Helper function
@@ -58,7 +56,6 @@ class NilpeterProductTableViewController: UITableViewController {
                 dispatch_async(dispatch_get_main_queue()) {
                     let productArrayObj = Product(dictArray: productArray)
                     self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
-                   
                     self.product?.productDict = productArrayObj.productDict
                     self.tableView.reloadData()
                     self.hideLoading()
@@ -97,7 +94,6 @@ class NilpeterProductTableViewController: UITableViewController {
                 cell?.accessoryType = UITableViewCellAccessoryType.None
             }
         }
-        
         return cell!
     }
     
@@ -127,7 +123,6 @@ class NilpeterProductTableViewController: UITableViewController {
     @IBAction func dismissController(sender: AnyObject) {
         self.performSegueWithIdentifier("nilpeterProductsSelected", sender: self)
     }
-
    
     func isSelected(product: String) -> Bool {
         for selectedProduct in (self.selectedProducts)! {

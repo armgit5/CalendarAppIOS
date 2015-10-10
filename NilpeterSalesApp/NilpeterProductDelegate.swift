@@ -63,8 +63,6 @@ class NilpeterProductDelegate: NSObject, UITextFieldDelegate, UIPickerViewDataSo
         return true
     }
     
-    
-    
     func getProducts() {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("products") {
