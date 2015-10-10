@@ -349,6 +349,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             if let returnMessage = status as String? {
                 print(returnMessage)
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.descriptionTextField.resignFirstResponder()
                     self.tabBarController?.selectedIndex = 1
                     self.cancelAllFields()
                     self.hideLoading()
