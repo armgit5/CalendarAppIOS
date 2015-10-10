@@ -34,9 +34,6 @@ class NilpeterProductTableViewController: UITableViewController {
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         
-        //self.getProducts()
-        //self.showLoading()
-        
     }
     
     // MARK: - Helper function

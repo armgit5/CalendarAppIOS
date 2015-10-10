@@ -305,7 +305,7 @@
             </objects>
             <point key="canvasLocation" x="1709" y="36"/>
         </scene>
-        <!--Search Table View Controller-->
+        <!--Third Party Products-->
         <scene sceneID="4Wx-0O-grG">
             <objects>
                 <tableViewController id="MgI-nT-FQb" customClass="SearchTableViewController" customModule="NilpeterSalesApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -337,7 +337,7 @@
                             <outlet property="delegate" destination="MgI-nT-FQb" id="vRi-Yu-kaq"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ArV-hg-beW"/>
+                    <navigationItem key="navigationItem" title="Third Party Products" id="ArV-hg-beW"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="EvY-P3-uYP">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -449,12 +449,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" red="1" green="0.25109439659999999" blue="0.14399416270000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="nilpeterCell" id="mId-tF-VA6">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="nilpeterCell" textLabel="rb4-ke-YFN" style="IBUITableViewCellStyleDefault" id="mId-tF-VA6">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mId-tF-VA6" id="Pdg-1J-ngn">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rb4-ke-YFN">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -602,6 +611,6 @@
         <image name="list-simple-7" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wsj-zv-hpR"/>
+        <segue reference="S25-wX-dUk"/>
     </inferredMetricsTieBreakers>
 </document>

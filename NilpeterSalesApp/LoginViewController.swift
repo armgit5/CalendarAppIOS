@@ -16,8 +16,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var verifyingTextField: UILabel!
     @IBOutlet weak var verifyingLoading: UIActivityIndicatorView!
     
-    
-    
     var user: User?
     
     override func viewDidLoad() {

@@ -17,26 +17,14 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     var loadingLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("user statid id \(User.userId)")
+        
         loadingLabel = UILabel.init(frame: CGRectMake(55, 0, 80, 40))
         loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
         loadingLabel.text = "Updating..."
         spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         spinner.frame = CGRectMake(5, 0, 80, 40)
-        
-//        if company?.companies.count == 0 {
-//            loadingLabel = UILabel.init(frame: CGRectMake(view.center.x - 40, view.center.y - 40, 80, 80))
-//            loadingLabel.text = "Loading..."
-//            spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-//            spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 50, 25)
-//        } else {
-//            loadingLabel = UILabel.init(frame: CGRectMake(55, 0, 80, 40))
-//            loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
-//            loadingLabel.text = "Updating..."
-//            spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-//            spinner.frame = CGRectMake(5, 0, 80, 40)
-//        }
-        
+        view.addSubview(spinner)
+        view.addSubview(loadingLabel)
         
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -45,14 +33,10 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         self.resultSearchController.dimsBackgroundDuringPresentation = false
         self.resultSearchController.searchBar.sizeToFit()
         
-        
         self.tableView.tableHeaderView = self.resultSearchController.searchBar
         
         // UI stuff
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
-        
-        view.addSubview(spinner)
-        view.addSubview(loadingLabel)
         
         // Operation
         getComapnies()

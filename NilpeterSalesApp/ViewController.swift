@@ -18,7 +18,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     var allDayStatus = 0
     var popDatePicker : PopDatePicker?
     
-    // search bar
+    // company
     var company: Company?
     @IBOutlet weak var companyTextField: UITextField!
     
@@ -37,11 +37,16 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     // Description
     @IBOutlet var descriptionTextField: UITextField!
-    var webView: UIWebView?
+    let webView: UIWebView = UIWebView()
+    
+    // Spinner
+    var spinner: UIActivityIndicatorView!
+    var loadingLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Check user information
         if User.session == 0 {
             self.performSegueWithIdentifier("showLogin", sender: self)
         }
@@ -72,7 +77,16 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         self.getComapnies()
         self.getLocation()
         
-        print("call view did load")
+        // Submitting spinner
+        loadingLabel = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 75, 0, 80, 35))
+        loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
+        loadingLabel.text = "Submitting..."
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        spinner.frame = CGRectMake(self.view.frame.size.width - 130, 0, 80, 35)
+        view.addSubview(spinner)
+        view.addSubview(loadingLabel)
+        self.hideLoading()
+
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -83,7 +97,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
     }
     
-    // MARK: - uipicker view
+    // MARK: - UIPickerView Delegate
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
         return 1
     }
@@ -121,7 +136,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
     }
 
-    // MARK: - Get locations
+    // MARK: - Get information from the cloud
+    
     func getLocation() {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("locations") {
@@ -187,9 +203,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
     }
 
-    
-    
-    
     func getProducts() {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("products") {
@@ -221,7 +234,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
     }
 
-        
     func addCompany(company: String) {
         companyTextField.text = company
         tableView.reloadData()
@@ -241,6 +253,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         return true
         
     }
+    
+    // MARK: - Text Field delegate
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
@@ -281,19 +295,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
     }
     
-    
     // MARK: - post method
-    
-    func convertArrayIntToArratString(arrayInt: [Int]) -> [String] {
-        var outArray = [String]()
-        for i in arrayInt {
-            outArray.append("\(i)")
-        }
-        return outArray
-    }
     
     @IBAction func postToArm(sender: AnyObject) {
         
+        // Showloading spinner
+        self.showLoading()
+        
+        // Parse information
         var dateString = ""
         let allDayString = ", \"all_day\": \"\(allDayStatus)\" "
         var companyString = ""
@@ -327,21 +336,22 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
         let body = "{" + dateString + allDayString + companyString + locationIdString + combinedIdArray + descriptionString + userIdString + "}"
 
-        print(body)
+        // Send to the cloud
         let scheduleService = ScheduleService()
         scheduleService.postSchedule(body) {
             status in
             if let returnMessage = status as String? {
-                print(returnMessage, terminator: "")
+                print(returnMessage)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.tabBarController?.selectedIndex = 1
+                    self.cancelAllFields()
+                    self.hideLoading()
+                }
             }
         }
-        
-        self.tabBarController?.selectedIndex = 1
-        self.cancelAllFields()
     }
     
     // MARK: - unwind company from company table view
-    
     @IBAction func unwindFromModalViewController(segue: UIStoryboardSegue) {
         if segue.sourceViewController.isKindOfClass(SearchTableViewController) {
             let searchController = segue.sourceViewController as! SearchTableViewController
@@ -384,6 +394,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
     }
     
+    // MARK: - Prepare for segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "nilpeterProduct" {
             let nav = segue.destinationViewController as! UINavigationController
@@ -403,6 +414,24 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     // MARK: - Helper functions
+    
+    func convertArrayIntToArratString(arrayInt: [Int]) -> [String] {
+        var outArray = [String]()
+        for i in arrayInt {
+            outArray.append("\(i)")
+        }
+        return outArray
+    }
+    
+    func hideLoading() {
+        spinner.stopAnimating()
+        loadingLabel.hidden = true
+    }
+    
+    func showLoading() {
+        spinner.startAnimating()
+        loadingLabel.hidden = false
+    }
     
     func resetAllDayStatus() {
         self.allDayStatus = 0
@@ -427,7 +456,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         resetLocations()
         self.locationTextField.text?.removeAll()
     }
-    
     
     func resetProducts() {
         self.nilpeterProductTextField.text?.removeAll()
