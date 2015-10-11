@@ -307,6 +307,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
         // Showloading spinner
         self.showLoading()
+        self.descriptionTextField.resignFirstResponder()
         
         // Parse information
         var dateString = ""
@@ -343,16 +344,21 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         let body = "{" + dateString + allDayString + companyString + locationIdString + combinedIdArray + descriptionString + userIdString + "}"
 
         // Send to the cloud
+        
+        
+        
         let scheduleService = ScheduleService()
         scheduleService.postSchedule(body) {
             status in
             if let returnMessage = status as String? {
                 print(returnMessage)
+                
                 dispatch_async(dispatch_get_main_queue()) {
-                    self.descriptionTextField.resignFirstResponder()
+                    
                     self.tabBarController?.selectedIndex = 1
                     self.cancelAllFields()
                     self.hideLoading()
+                    
                 }
             }
         }
