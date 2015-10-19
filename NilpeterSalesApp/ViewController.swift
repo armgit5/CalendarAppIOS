@@ -45,9 +45,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         // Check user information
         if User.session == 0 {
+            
             self.performSegueWithIdentifier("showLogin", sender: self)
         }
 

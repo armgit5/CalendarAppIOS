@@ -15,7 +15,7 @@ struct ScheduleService {
     init() {
 //        let headingBastURL =  "http://localhost:3000/api/"
 //        let headingBastURL =  "http://arm-calendar-apitest.herokuapp.com/api/"
-        let headingBastURL = "http://nilpeter.herokuapp.com/api/"
+        let headingBastURL = "https://nilpeter.herokuapp.com/api/"
         self.scheduleBaseURL = NSURL(string: headingBastURL)
     }
     

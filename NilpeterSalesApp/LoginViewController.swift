@@ -24,8 +24,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         self.navigationItem.hidesBackButton = true
         self.navigationItem.backBarButtonItem = nil
-        self.navigationItem.title = "Login"
+        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
+        navigationItem.leftBarButtonItem = backButton
+        
         self.tabBarController?.tabBar.hidden = true
+        self.navigationItem.title = "Login"
         self.email.delegate = self
         self.password.delegate = self
         
