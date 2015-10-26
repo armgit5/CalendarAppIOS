@@ -49,8 +49,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     // [["message": Successfully login, "user_id": userid]]
                     if let userId = validUser.first!["user_id"] as? Int {
                         User.userId = userId
-                        User.session = 1
-                        
+    
 //                        self.prefs.setValue(self.email.text, forKey: "Email")
 //                        self.prefs.setValue(self.password.text, forKey: "Password")
                         self.prefs.setValue(userId, forKey: "Userid")

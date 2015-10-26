@@ -322,7 +322,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         var locationIdString = ""
         var combinedIdArray = ""
         var descriptionString = ""
-        let userIdString = ", \"user_id\": \"\(User.userId)\" "
+        let userIdString = ", \"user_id\": \"\(self.prefs.integerForKey("Userid"))\" "
         
         if let dateTime = dateTextField.text {
             dateString = "\"date\": \"\(dateTime)\" "
