@@ -12,5 +12,5 @@ struct User {
     static var email = "arm@nilpeter.com"
     static var password = "test123"
     static var userId = 1
-    static var session = 0
+    //static var session = 0
 }

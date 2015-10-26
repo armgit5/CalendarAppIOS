@@ -43,15 +43,20 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     var spinner: UIActivityIndicatorView!
     var loadingLabel: UILabel!
     
+    // User store
+    var prefs: NSUserDefaults!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        // Check user information
-        if User.session == 0 {
-            
+        
+        // User store
+        // Check user session
+        prefs = NSUserDefaults.standardUserDefaults()
+        
+        if prefs.integerForKey("Session") == 0 {
             self.performSegueWithIdentifier("showLogin", sender: self)
         }
-
+       
         // disable table view selection
         self.tableView.allowsSelection = false
         

@@ -14,11 +14,15 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet var loadingLabel: UILabel!
     
+    var prefs: NSUserDefaults!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         // self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+        
+        self.prefs = NSUserDefaults.standardUserDefaults()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -65,7 +69,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func logout(sender: AnyObject) {
-        User.session = 0
+        self.prefs.setValue(0, forKey: "Session")
         self.performSegueWithIdentifier("showLogin", sender: self)
     }
     

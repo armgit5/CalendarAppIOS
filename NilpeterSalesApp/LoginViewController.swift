@@ -17,6 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var verifyingLoading: UIActivityIndicatorView!
     
     var user: User?
+    var prefs: NSUserDefaults!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +34,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.password.delegate = self
         
         self.verifyingHide()
+        
+        // Store and password
+        prefs = NSUserDefaults.standardUserDefaults()
     }
     
     func validateUser() {
@@ -41,17 +45,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             user in
             dispatch_async(dispatch_get_main_queue()) {
                 if let validUser = user {
-                    
-                        if let userId = validUser.first!["user_id"] as? Int {
-                            User.userId = userId
-                            User.session = 1
-                            self.tabBarController?.tabBar.hidden = false
-                            self.navigationController?.popToRootViewControllerAnimated(true)
-                            self.verifyingHide()
-                        }
-                        else {
-                            print("cannot find userid")
-                        }
+                    // Check to see if user exist, if so will return
+                    // [["message": Successfully login, "user_id": userid]]
+                    if let userId = validUser.first!["user_id"] as? Int {
+                        User.userId = userId
+                        User.session = 1
+                        
+//                        self.prefs.setValue(self.email.text, forKey: "Email")
+//                        self.prefs.setValue(self.password.text, forKey: "Password")
+                        self.prefs.setValue(userId, forKey: "Userid")
+                        self.prefs.setValue(1, forKey: "Session")
+                        
+                        self.tabBarController?.tabBar.hidden = false
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        self.verifyingHide()
+                        
+                    }
+                    else {
+                        print("cannot find userid")
+                    }
                     
                 } else {
                     print("invalid user or password")
