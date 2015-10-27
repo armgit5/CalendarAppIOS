@@ -43,7 +43,15 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         // Operation
         if company == nil {
             self.showLoading()
-            getComapnies()
+            self.getComapnies()
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if company == nil {
+            self.showLoading()
+            self.getComapnies()
         }
     }
     
