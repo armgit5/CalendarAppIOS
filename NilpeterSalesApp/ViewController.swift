@@ -270,6 +270,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
+        textField.resignFirstResponder()
+        
         if (textField === dateTextField) {
             resign()
             let formatter = NSDateFormatter()
