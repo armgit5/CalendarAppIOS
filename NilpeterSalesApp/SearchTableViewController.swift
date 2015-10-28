@@ -41,6 +41,8 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         self.hideLoading()
         
         // Operation
+        
+        // print("viewdidappear")
         if company == nil {
             self.showLoading()
             self.getComapnies()
@@ -49,13 +51,22 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        // print("viewwillappear")
+        // print(company)
         //self.getComapnies()
         
-        if company?.companies == nil {
+        if let loadedCompanies = company {
+            print("company exists")
+            if loadedCompanies.companies.count == 0 {
+                self.showLoading()
+                self.getComapnies()
+            }
+        } else {
+            print("not exists")
             self.showLoading()
             self.getComapnies()
         }
+        
     }
     
     // MARK: - Helper function
@@ -77,11 +88,13 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         scheduleService.getSchedule("companies") {
             companies in
             
+            print(companies)
             if let comArray = companies {
                 dispatch_async(dispatch_get_main_queue()) {
                     let comArrayObj = Company(dictArray: comArray)
                     self.company?.companies = comArrayObj.companyArray!
                     self.company?.parentCompanyDict = comArrayObj.companyDict
+                    print("trying to load")
                     self.tableView.reloadData()
                     self.hideLoading()
                 }
