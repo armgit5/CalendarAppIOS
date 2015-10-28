@@ -12,5 +12,8 @@ struct User {
     static var email = "ios@nilpeter.com"
     static var password = "ios123"
     static var userId = 1
-    //static var session = 0
+    
+    //static let headingBaseURL = "https://nilpeter.herokuapp.com/"
+    //static let headingBaseURL =  "http://localhost:3000/"
+    static let headingBaseURL =  "http://arm-calendar-apitest.herokuapp.com/"
 }

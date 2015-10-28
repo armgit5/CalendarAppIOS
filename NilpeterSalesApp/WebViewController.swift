@@ -28,8 +28,9 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-//        let url = NSURL(string: "http://arm-calendar-apitest.herokuapp.com/ioscalendar")
-        let url = NSURL(string: "http://nilpeter.herokuapp.com/ioscalendar")
+        let url = NSURL(string: User.headingBaseURL + "ioscalendar")
+        
+        
         let request = NSURLRequest(URL: url!)
         webView.delegate = self
         webView.loadRequest(request)
