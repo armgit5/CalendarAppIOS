@@ -21,7 +21,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     var popEndDatePicker : PopDatePicker?
     
     // company
-    var company: Company?
     @IBOutlet weak var companyTextField: UITextField!
     
     // products
@@ -31,8 +30,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     var selectedProductName = [String]() // send back segue data
     var selectedOtherProductName = [String]() // send back segue data
     
+    // engineer
+    @IBOutlet weak var engineerTextField: UITextField!
+    
     // Description
     @IBOutlet var descriptionTextField: UITextField!
+    
     let webView: UIWebView = UIWebView()
     
     // Spinner
@@ -56,7 +59,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.tableView.allowsSelection = false
         
         // initialize company and location models
-        company = Company()
         product = Product()
         
         // location pickerview
@@ -67,6 +69,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         companyTextField.delegate = self
         nilpeterProductTextField.delegate = self
         otherProductTextField.delegate = self
+        engineerTextField.delegate = self
         descriptionTextField.delegate = self
         
         // UI Design
@@ -75,7 +78,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
         
         self.getProducts()
-        self.getComapnies()
+        self.getEngineers()
         
         // Submitting spinner
         loadingLabel = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 75, 0, 80, 35))
@@ -91,11 +94,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if company == nil {
-            self.getProducts()
-            self.getComapnies()
-            self.showLoading()
-        }
     }
     
     // MARK: - UIPickerView Delegate
@@ -123,20 +121,28 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         }
     }
     
-    func getComapnies() {
+    func getEngineers() {
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("companies") {
-            companies in
-            if let comArray = companies {
+        scheduleService.getSchedule("engineers") {
+            engineers in
+            if let engineerArray = engineers {
                 dispatch_async(dispatch_get_main_queue()) {
-                    let comArrayObj = Company(dictArray: comArray)
-                    self.company?.companies = comArrayObj.companyArray!
-                    self.company?.parentCompanyDict = comArrayObj.companyDict
+                    for engineer in engineerArray {
+                        if let engineertName = engineer["email"] as? String {
+                            Engineer.engineerArray.append(engineertName)
+                            if let engineerId = engineer["id"] as? Int {
+                                Engineer.engineerDict[engineertName] = engineerId
+                            }
+                        
+                        }
+                    }
+                    print(Engineer.engineerArray)
+                    print(Engineer.engineerDict)
                 }
             }
-            
         }
     }
+
 
     func addCompany(company: String) {
         companyTextField.text = company
@@ -192,14 +198,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                 
                 popEndDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
                 return false
-        } else if textField == companyTextField {
-            performSegueWithIdentifier("toATable", sender: self)
-            return true
         } else if textField == nilpeterProductTextField {
             performSegueWithIdentifier("nilpeterProduct", sender: self)
             return true
         } else if textField == otherProductTextField {
             performSegueWithIdentifier("otherProduct", sender: self)
+            return true
+        } else if textField == engineerTextField {
+            performSegueWithIdentifier("engineer", sender: self)
             return true
         }
         return true
@@ -215,16 +221,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         
         // Parse information
         var dateString = ""
-        var companyString = ""
         var combinedIdArray = ""
         var descriptionString = ""
         let userIdString = ", \"user_id\": \"\(self.prefs.integerForKey("Userid"))\" "
         
         if let dateTime = dateTextField.text {
             dateString = "\"date\": \"\(dateTime)\" "
-        }
-        if let companyId = company?.companyId {
-            companyString = ", \"company_id\": \"\(companyId)\" "
         }
         
         if let nilpeterProductId = product?.productPickerIdArray {
@@ -241,7 +243,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             descriptionString = ", \"project\": \"\(description)\" "
         }
         
-        let body = "{" + dateString + companyString + combinedIdArray + descriptionString + userIdString + "}"
+        let body = "{" + dateString + combinedIdArray + descriptionString + userIdString + "}"
 
         // Send to the cloud
         
@@ -266,15 +268,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     // MARK: - unwind company from company table view
     @IBAction func unwindFromModalViewController(segue: UIStoryboardSegue) {
-        if segue.sourceViewController.isKindOfClass(SearchTableViewController) {
-            let searchController = segue.sourceViewController as! SearchTableViewController
-            if searchController.company?.parentCompany != nil {
-                companyTextField.text = searchController.company?.parentCompany
-                company?.companyId = searchController.company?.parentCompanyId
-        }
+//        if segue.sourceViewController.isKindOfClass(SearchTableViewController) {
+//            let searchController = segue.sourceViewController as! SearchTableViewController
+//            if searchController.company?.parentCompany != nil {
+//                companyTextField.text = searchController.company?.parentCompany
+//        }
+        
             
-            
-        } else if segue.sourceViewController.isKindOfClass(NilpeterProductTableViewController) {
+        if segue.sourceViewController.isKindOfClass(NilpeterProductTableViewController) {
             let nilpeterProductsController = segue.sourceViewController as! NilpeterProductTableViewController
             if let selectedProductArray = nilpeterProductsController.selectedProducts {
                 selectedProductName = selectedProductArray // assign to segue pass back variable
@@ -303,6 +304,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                 }
                 
             }
+        } else if segue.sourceViewController.isKindOfClass(EngineerViewController) {
+            self.engineerTextField.text = Engineer.pickedEngineerNames.description
+            
         }
     }
     
@@ -318,11 +322,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             let destination = nav.topViewController as! ThirdPartyProductTableViewController
             destination.selectedProducts = selectedOtherProductName
             destination.product = self.product
-        } else if segue.identifier == "toATable" {
-            let nav = segue.destinationViewController as! UINavigationController
-            let destination = nav.topViewController as! SearchTableViewController
-            destination.company = self.company
-        } 
+        }
     }
     
     // MARK: - Helper functions
@@ -346,9 +346,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     }
     
     func resetCompany() {
-        self.company = Company()
         self.companyTextField.text?.removeAll()
-        self.getComapnies()
     }
     
     func resetProducts() {

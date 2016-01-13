@@ -13,7 +13,7 @@ struct User {
     static var password = "ios123"
     static var userId = 1
     
-    static let headingBaseURL = "http://nilpeter.herokuapp.com/"
-    //static let headingBaseURL =  "http://localhost:3000/"
+    //static let headingBaseURL = "http://nilpeter.herokuapp.com/"
+    static let headingBaseURL =  "http://localhost:3000/"
     //static let headingBaseURL =  "http://arm-calendar-apitest.herokuapp.com/"
 }

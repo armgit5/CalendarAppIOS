@@ -211,6 +211,7 @@
                         <outlet property="dateTextField" destination="PdG-SM-Hol" id="Oo2-1R-RKc"/>
                         <outlet property="descriptionTextField" destination="ihe-a1-FQZ" id="z85-9V-ZbT"/>
                         <outlet property="endDateTextField" destination="mhZ-Gj-g1Y" id="TDR-zF-wEm"/>
+                        <outlet property="engineerTextField" destination="eGl-al-C5U" id="Y28-0S-3ml"/>
                         <outlet property="nilpeterProductTextField" destination="jjA-6J-cx0" id="6Rk-5u-ZYb"/>
                         <outlet property="otherProductTextField" destination="gq2-Mu-3lS" id="H8J-uC-wgo"/>
                         <outlet property="searchDisplayController" destination="9Io-qc-hp6" id="C6G-XQ-gmw"/>
@@ -218,6 +219,7 @@
                         <segue destination="Dkp-ua-R12" kind="presentation" identifier="nilpeterProduct" id="70N-hW-mb1"/>
                         <segue destination="Wtj-UP-WkT" kind="presentation" identifier="otherProduct" id="maZ-mB-0ou"/>
                         <segue destination="ExF-yh-G1t" kind="show" identifier="showLogin" animates="NO" id="S25-wX-dUk"/>
+                        <segue destination="qo3-10-01l" kind="presentation" identifier="engineer" id="JMP-05-YWN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kTJ-Pv-peW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -493,7 +495,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23O-h4-v2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hgy-M6-vqJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4937" y="-449.99999999999994"/>
+            <point key="canvasLocation" x="4911" y="-430"/>
         </scene>
         <!--Third Party Products-->
         <scene sceneID="PZd-jn-Qzl">
@@ -570,7 +572,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2b3-Gi-lhB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4125" y="-449.99999999999994"/>
+            <point key="canvasLocation" x="4099" y="-430"/>
         </scene>
         <!--Calendar-->
         <scene sceneID="zMd-WW-R94">
@@ -610,6 +612,75 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MPG-CL-I2R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2583" y="-449.99999999999994"/>
+        </scene>
+        <!--Engineers-->
+        <scene sceneID="fZL-gh-5bb">
+            <objects>
+                <tableViewController id="mDr-gI-UlW" customClass="EngineerViewController" customModule="NilpeterServiceApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="jZx-lL-Bz0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" red="1" green="0.25109439659999999" blue="0.14399416270000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="engineerCell" textLabel="1uD-c4-qqJ" style="IBUITableViewCellStyleDefault" id="ImO-nA-nQd">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ImO-nA-nQd" id="lwz-ww-9rK">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1uD-c4-qqJ">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="mDr-gI-UlW" id="ygY-FQ-7fN"/>
+                            <outlet property="delegate" destination="mDr-gI-UlW" id="SQX-F2-M36"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Engineers" id="759-N8-7cy">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="xB3-nu-BvN">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="dismissController:" destination="mDr-gI-UlW" id="kLy-wh-ley"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="5zr-3R-d8s" kind="unwind" identifier="engineersSelected" unwindAction="unwindFromModalViewController:" id="xbL-bc-M9e"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kf3-YZ-LmO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5zr-3R-d8s" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="5617" y="290"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8vM-Rc-ffG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qo3-10-01l" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ck6-vq-Zz6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="1" green="0.25109439659999999" blue="0.14399416270000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mDr-gI-UlW" kind="relationship" relationship="rootViewController" id="8DP-sQ-bbv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="apR-Ay-Atm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4783" y="341"/>
         </scene>
     </scenes>
     <resources>
