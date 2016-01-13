@@ -15,8 +15,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     // date and time data
     @IBOutlet weak var dateTextField: UITextField!
-    var allDayStatus = 0
+    @IBOutlet weak var endDateTextField: UITextField!
+    
     var popDatePicker : PopDatePicker?
+    var popEndDatePicker : PopDatePicker?
     
     // company
     var company: Company?
@@ -52,10 +54,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         // User store
         // Check user session
         prefs = NSUserDefaults.standardUserDefaults()
-        
-        if prefs.integerForKey("Session") == 0 {
-            self.performSegueWithIdentifier("showLogin", sender: self)
-        }
+//        if prefs.integerForKey("Session") == 0 {
+//            self.performSegueWithIdentifier("showLogin", sender: self)
+//        }
        
         // disable table view selection
         self.tableView.allowsSelection = false
@@ -68,7 +69,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
         // location pickerview
         popDatePicker = PopDatePicker(forTextField: dateTextField)
+        popEndDatePicker = PopDatePicker(forTextField: endDateTextField)
         dateTextField.delegate = self
+        endDateTextField.delegate = self
         companyTextField.delegate = self
         nilpeterProductTextField.delegate = self
         otherProductTextField.delegate = self
@@ -78,7 +81,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         self.tabBarController?.tabBar.barTintColor = UIColor.redColor()
         self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
-
+        
         self.getProducts()
         self.getComapnies()
         self.getLocation()
@@ -286,6 +289,20 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             
             popDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
             return false
+        } else if (textField === endDateTextField) {
+                resign()
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "dd-MM-yyyy HH:mm"
+                let initDate : NSDate? = formatter.dateFromString(endDateTextField.text!)
+                let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
+                    
+                    // here we don't use self (no retain cycle)
+                    forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
+                    
+                }
+                
+                popEndDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
+                return false
         } else if textField == companyTextField {
             performSegueWithIdentifier("toATable", sender: self)
             return true
@@ -298,16 +315,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         }
         return true
     }
-       
-    // MARK: - allday onoff
-    
-    @IBAction func allDayOnOff(sender: AnyObject) {
-        if allDaySwitch.on {
-            allDayStatus = 1
-        } else {
-            allDayStatus = 0
-        }
-    }
     
     // MARK: - post method
     
@@ -319,7 +326,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
         // Parse information
         var dateString = ""
-        let allDayString = ", \"all_day\": \"\(allDayStatus)\" "
         var companyString = ""
         var locationIdString = ""
         var combinedIdArray = ""
@@ -349,7 +355,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             descriptionString = ", \"project\": \"\(description)\" "
         }
         
-        let body = "{" + dateString + allDayString + companyString + locationIdString + combinedIdArray + descriptionString + userIdString + "}"
+        let body = "{" + dateString + companyString + locationIdString + combinedIdArray + descriptionString + userIdString + "}"
 
         // Send to the cloud
         
@@ -454,11 +460,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         loadingLabel.hidden = false
     }
     
-    func resetAllDayStatus() {
-        self.allDayStatus = 0
-        self.allDaySwitch.setOn(false, animated: false)
-    }
-    
     func resetCompany() {
         self.company = Company()
         self.companyTextField.text?.removeAll()
@@ -489,7 +490,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     
     func cancelAllFields() {
         self.dateTextField.text?.removeAll()
-        resetAllDayStatus()
         resetCompany()
         cancelResetLocations()
         resetProducts()

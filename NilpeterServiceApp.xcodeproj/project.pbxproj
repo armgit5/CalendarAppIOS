@@ -16,19 +16,19 @@
 		12009D361B956F6000C012B6 /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D351B956F6000C012B6 /* ScheduleService.swift */; };
 		12009D381B956F7100C012B6 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D371B956F7100C012B6 /* NetworkOperation.swift */; };
 		12009D3A1B95726500C012B6 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D391B95726500C012B6 /* ScheduleData.swift */; };
-		1206DF9B1BBB9C8D0056536D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206DF9A1BBB9C8D0056536D /* WebViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		1206DFA21BBBAB020056536D /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9C1BBBAB020056536D /* camera.png */; settings = {ASSET_TAGS = (); }; };
-		1206DFA31BBBAB020056536D /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9D1BBBAB020056536D /* camera@2x.png */; settings = {ASSET_TAGS = (); }; };
-		1206DFA41BBBAB020056536D /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9E1BBBAB020056536D /* friends.png */; settings = {ASSET_TAGS = (); }; };
-		1206DFA51BBBAB020056536D /* friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9F1BBBAB020056536D /* friends@2x.png */; settings = {ASSET_TAGS = (); }; };
-		1206DFA61BBBAB020056536D /* inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DFA01BBBAB020056536D /* inbox.png */; settings = {ASSET_TAGS = (); }; };
-		1206DFA71BBBAB020056536D /* inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DFA11BBBAB020056536D /* inbox@2x.png */; settings = {ASSET_TAGS = (); }; };
-		120C5A2E1BB12E8E00D0F0D5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A2D1BB12E8E00D0F0D5 /* Product.swift */; settings = {ASSET_TAGS = (); }; };
-		120C5A331BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		1206DF9B1BBB9C8D0056536D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206DF9A1BBB9C8D0056536D /* WebViewController.swift */; };
+		1206DFA21BBBAB020056536D /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9C1BBBAB020056536D /* camera.png */; };
+		1206DFA31BBBAB020056536D /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9D1BBBAB020056536D /* camera@2x.png */; };
+		1206DFA41BBBAB020056536D /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9E1BBBAB020056536D /* friends.png */; };
+		1206DFA51BBBAB020056536D /* friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9F1BBBAB020056536D /* friends@2x.png */; };
+		1206DFA61BBBAB020056536D /* inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DFA01BBBAB020056536D /* inbox.png */; };
+		1206DFA71BBBAB020056536D /* inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DFA11BBBAB020056536D /* inbox@2x.png */; };
+		120C5A2E1BB12E8E00D0F0D5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A2D1BB12E8E00D0F0D5 /* Product.swift */; };
+		120C5A331BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */; };
 		122A64471B96EAE800E1A57D /* FriendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A64461B96EAE800E1A57D /* FriendItem.swift */; };
-		128885261BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		12C46CF61BC223E000A0787B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C46CF51BC223E000A0787B /* LoginViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		12C46CF81BC25DA100A0787B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C46CF71BC25DA100A0787B /* User.swift */; settings = {ASSET_TAGS = (); }; };
+		128885261BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */; };
+		12C46CF61BC223E000A0787B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C46CF51BC223E000A0787B /* LoginViewController.swift */; };
+		12C46CF81BC25DA100A0787B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C46CF71BC25DA100A0787B /* User.swift */; };
 		12CBF1281B987C250087E061 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF1271B987C250087E061 /* SearchViewController.swift */; };
 		12CBF12E1B9897E40087E061 /* PopDatePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */; };
 		12CBF1301B989AF80087E061 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */; };
@@ -52,14 +52,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		12009D101B830CD300C012B6 /* NilpeterSalesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NilpeterSalesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		12009D101B830CD300C012B6 /* NilpeterServiceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NilpeterServiceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12009D141B830CD300C012B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12009D151B830CD300C012B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12009D171B830CD300C012B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		12009D1A1B830CD300C012B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		12009D1C1B830CD300C012B6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		12009D1F1B830CD300C012B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		12009D251B830CD400C012B6 /* NilpeterSalesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NilpeterSalesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		12009D251B830CD400C012B6 /* NilpeterServiceApp.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NilpeterServiceApp.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12009D2A1B830CD400C012B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12009D2B1B830CD400C012B6 /* NilpeterSalesAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilpeterSalesAppTests.swift; sourceTree = "<group>"; };
 		12009D351B956F6000C012B6 /* ScheduleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
@@ -120,8 +120,8 @@
 		12009D111B830CD300C012B6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				12009D101B830CD300C012B6 /* NilpeterSalesApp.app */,
-				12009D251B830CD400C012B6 /* NilpeterSalesAppTests.xctest */,
+				12009D101B830CD300C012B6 /* NilpeterServiceApp.app */,
+				12009D251B830CD400C012B6 /* NilpeterServiceApp.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,9 +249,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		12009D0F1B830CD300C012B6 /* NilpeterSalesApp */ = {
+		12009D0F1B830CD300C012B6 /* NilpeterServiceApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 12009D2F1B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterSalesApp" */;
+			buildConfigurationList = 12009D2F1B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterServiceApp" */;
 			buildPhases = (
 				12009D0C1B830CD300C012B6 /* Sources */,
 				12009D0D1B830CD300C012B6 /* Frameworks */,
@@ -261,14 +261,14 @@
 			);
 			dependencies = (
 			);
-			name = NilpeterSalesApp;
+			name = NilpeterServiceApp;
 			productName = NilpeterSalesApp;
-			productReference = 12009D101B830CD300C012B6 /* NilpeterSalesApp.app */;
+			productReference = 12009D101B830CD300C012B6 /* NilpeterServiceApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		12009D241B830CD400C012B6 /* NilpeterSalesAppTests */ = {
+		12009D241B830CD400C012B6 /* NilpeterServiceAppTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 12009D321B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterSalesAppTests" */;
+			buildConfigurationList = 12009D321B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterServiceAppTests" */;
 			buildPhases = (
 				12009D211B830CD400C012B6 /* Sources */,
 				12009D221B830CD400C012B6 /* Frameworks */,
@@ -279,9 +279,9 @@
 			dependencies = (
 				12009D271B830CD400C012B6 /* PBXTargetDependency */,
 			);
-			name = NilpeterSalesAppTests;
+			name = NilpeterServiceAppTests;
 			productName = NilpeterSalesAppTests;
-			productReference = 12009D251B830CD400C012B6 /* NilpeterSalesAppTests.xctest */;
+			productReference = 12009D251B830CD400C012B6 /* NilpeterServiceApp.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -305,7 +305,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 12009D0B1B830CD300C012B6 /* Build configuration list for PBXProject "NilpeterSalesApp" */;
+			buildConfigurationList = 12009D0B1B830CD300C012B6 /* Build configuration list for PBXProject "NilpeterServiceApp" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -318,8 +318,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				12009D0F1B830CD300C012B6 /* NilpeterSalesApp */,
-				12009D241B830CD400C012B6 /* NilpeterSalesAppTests */,
+				12009D0F1B830CD300C012B6 /* NilpeterServiceApp */,
+				12009D241B830CD400C012B6 /* NilpeterServiceAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -393,7 +393,7 @@
 /* Begin PBXTargetDependency section */
 		12009D271B830CD400C012B6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 12009D0F1B830CD300C012B6 /* NilpeterSalesApp */;
+			target = 12009D0F1B830CD300C012B6 /* NilpeterServiceApp */;
 			targetProxy = 12009D261B830CD400C012B6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -510,7 +510,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arm.NilpeterSalesApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NilpeterServiceApp;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -525,7 +525,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arm.NilpeterSalesApp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NilpeterServiceApp;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -545,8 +545,8 @@
 				INFOPLIST_FILE = NilpeterSalesAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arm.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NilpeterSalesApp.app/NilpeterSalesApp";
+				PRODUCT_NAME = NilpeterServiceApp;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NilpeterServiceApp.app/NilpeterServiceApp";
 			};
 			name = Debug;
 		};
@@ -561,15 +561,15 @@
 				INFOPLIST_FILE = NilpeterSalesAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arm.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NilpeterSalesApp.app/NilpeterSalesApp";
+				PRODUCT_NAME = NilpeterServiceApp;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NilpeterServiceApp.app/NilpeterServiceApp";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		12009D0B1B830CD300C012B6 /* Build configuration list for PBXProject "NilpeterSalesApp" */ = {
+		12009D0B1B830CD300C012B6 /* Build configuration list for PBXProject "NilpeterServiceApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				12009D2D1B830CD400C012B6 /* Debug */,
@@ -578,7 +578,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		12009D2F1B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterSalesApp" */ = {
+		12009D2F1B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterServiceApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				12009D301B830CD400C012B6 /* Debug */,
@@ -587,7 +587,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		12009D321B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterSalesAppTests" */ = {
+		12009D321B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterServiceAppTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				12009D331B830CD400C012B6 /* Debug */,
