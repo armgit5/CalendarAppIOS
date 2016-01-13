@@ -9,7 +9,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UIWebViewDelegate {
+class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIWebViewDelegate {
     
     @IBOutlet weak var allDaySwitch: UISwitch!
     
@@ -23,12 +23,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     // company
     var company: Company?
     @IBOutlet weak var companyTextField: UITextField!
-    
-    // location picker view
-    let locationPickerView = UIPickerView()
-    var location: Location?
-    var filteredLocationArray: [String]?
-    @IBOutlet var locationTextField: UITextField!
     
     // products
     var product: Product?
@@ -63,9 +57,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
         // initialize company and location models
         company = Company()
-        location = Location()
         product = Product()
-        filteredLocationArray = [String]()
         
         // location pickerview
         popDatePicker = PopDatePicker(forTextField: dateTextField)
@@ -84,7 +76,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         
         self.getProducts()
         self.getComapnies()
-        self.getLocation()
         
         // Submitting spinner
         loadingLabel = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 75, 0, 80, 35))
@@ -100,14 +91,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if location?.locationArray != nil {
-            locationPickerView.delegate = self
-            locationTextField.inputView = locationPickerView
-        }
         if company == nil {
             self.getProducts()
             self.getComapnies()
-            self.getLocation()
             self.showLoading()
         }
     }
@@ -118,106 +104,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        if (filteredLocationArray != nil) {
-            return (filteredLocationArray?.count)!
-        } else {
-            return (location?.locationArray!.count)!
-        }
-    }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if (filteredLocationArray != nil) {
-            return filteredLocationArray![row]
-        } else {
-            return location?.locationArray![row]
-        }
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        pickerView.resignFirstResponder()
-        
-        if (filteredLocationArray != nil) {
-            self.locationTextField.text = (filteredLocationArray)![row]
-            self.location?.pickerLocationId = self.location?.allLocationDict![self.locationTextField.text!]
-            locationTextField.resignFirstResponder()
-        } else {
-            // set location name
-            self.locationTextField.text = (location?.locationArray)![row]
-            // set loation id
-            self.location?.pickerLocationId = self.location?.locationDict![self.locationTextField.text!]
-            locationTextField.resignFirstResponder()
-        }
-        
-    }
-
     // MARK: - Get information from the cloud
-    
-    func getLocation() {
-        let scheduleService = ScheduleService()
-        scheduleService.getSchedule("locations") {
-            locations in
-            if let locationArray = locations {
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.location = Location(dictArray: locationArray)
-                }
-            }
-        }
-    }
-    
-    func getLocations(companyId: Int) {
-        // Load locations from cache
-        if let rawLocation = self.location?.rawLocationData {
-            self.filteredLocationArray?.removeAll()
-            for location in rawLocation {
-                let locationName = location["name"] as! String
-                if companyId == location["company_id"] as! Int {
-                    self.filteredLocationArray?.append(locationName)
-                }
-            }
-            if (filteredLocationArray != nil) {
-                // Check if the company has locations
-                if filteredLocationArray?.count == 0 {
-                    self.locationTextField.text = "No Location"
-                    resetLocations()
-                } else {
-                    self.locationTextField.text = filteredLocationArray!.first
-                    if let firstLoc = filteredLocationArray!.first {
-                        self.location?.pickerLocationId = self.location?.allLocationDict![firstLoc]
-                        self.locationPickerView.delegate = self
-                        self.locationTextField.inputView = self.locationPickerView
-                    } else {
-                        resetLocations()
-                    }
-                }
-            }
-        } else {
-            // Load locations
-            let scheduleService = ScheduleService()
-            scheduleService.getSchedule("locations") {
-                locations in
-                if let locationArray = locations {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        let locationArrayObj = Location(dictArray: locationArray, companyId: companyId)
-                        self.location?.locationArray = locationArrayObj.locationArray
-                        self.location?.locationDict = locationArrayObj.locationDict
-                        // check if location array exist, then set first location name and id
-                        if let locationArray = self.location?.locationArray {
-                            self.locationTextField.text = locationArray.first
-                            if let firstLoc = locationArray.first {
-                                self.location?.pickerLocationId = self.location?.locationDict![firstLoc]
-                                self.locationPickerView.delegate = self
-                                self.locationTextField.inputView = self.locationPickerView
-                            } else {
-                                self.resetLocations()
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
+   
     func getProducts() {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("products") {
@@ -327,7 +216,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         // Parse information
         var dateString = ""
         var companyString = ""
-        var locationIdString = ""
         var combinedIdArray = ""
         var descriptionString = ""
         let userIdString = ", \"user_id\": \"\(self.prefs.integerForKey("Userid"))\" "
@@ -338,9 +226,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         if let companyId = company?.companyId {
             companyString = ", \"company_id\": \"\(companyId)\" "
         }
-        if let locationId = location?.pickerLocationId {
-            locationIdString = ", \"location_id\": \"\(locationId)\" "
-        }
+        
         if let nilpeterProductId = product?.productPickerIdArray {
             if let thirdPartyProductId = product?.otherProductPickerIdArray {
                 combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId + thirdPartyProductId)) "
@@ -355,7 +241,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             descriptionString = ", \"project\": \"\(description)\" "
         }
         
-        let body = "{" + dateString + companyString + locationIdString + combinedIdArray + descriptionString + userIdString + "}"
+        let body = "{" + dateString + companyString + combinedIdArray + descriptionString + userIdString + "}"
 
         // Send to the cloud
         
@@ -385,8 +271,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
             if searchController.company?.parentCompany != nil {
                 companyTextField.text = searchController.company?.parentCompany
                 company?.companyId = searchController.company?.parentCompanyId
-                getLocations((searchController.company?.parentCompanyId)!)
-            }
+        }
             
             
         } else if segue.sourceViewController.isKindOfClass(NilpeterProductTableViewController) {
@@ -466,19 +351,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
         self.getComapnies()
     }
     
-    func resetLocations() {
-        self.filteredLocationArray?.removeAll()
-        self.location?.locationArray = nil
-        self.location?.pickerLocationId = nil
-        self.locationPickerView.delegate = nil
-        self.locationTextField.inputView = nil
-    }
-    
-    func cancelResetLocations() {
-        resetLocations()
-        self.locationTextField.text?.removeAll()
-    }
-    
     func resetProducts() {
         self.nilpeterProductTextField.text?.removeAll()
         self.otherProductTextField.text?.removeAll()
@@ -491,7 +363,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDa
     func cancelAllFields() {
         self.dateTextField.text?.removeAll()
         resetCompany()
-        cancelResetLocations()
         resetProducts()
         self.descriptionTextField.text?.removeAll()
         self.descriptionTextField.resignFirstResponder()
