@@ -84,7 +84,8 @@ class EngineerViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("engineerCell")
-        cell?.textLabel?.text = Engineer.engineerArray[indexPath.row]
+        let engineerName: String = Engineer.engineerArray[indexPath.row].componentsSeparatedByString("@")[0]
+        cell?.textLabel?.text = engineerName
         
         let engineer = Engineer.engineerArray[indexPath.row]
         
