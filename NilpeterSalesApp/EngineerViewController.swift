@@ -23,10 +23,14 @@ class EngineerViewController: UITableViewController {
             self.performSegueWithIdentifier("showLogin", sender: self)
         }
         
-        if (Engineer.engineerArray.count < 2) {
-//            self.showLoading()
-            self.getEngineers()
-        }
+//        if (Engineer.engineerArray.count < 2) {
+////            self.showLoading()
+//            Engineer.rawEngineerData.removeAll()
+//            Engineer.engineerArray.removeAll()
+//            Engineer.engineerDict.removeAll()
+//
+//            self.getEngineers()
+//         }
         
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
         
@@ -40,18 +44,6 @@ class EngineerViewController: UITableViewController {
         
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-    
-//        Engineer.rawEngineerData = [["":""]]
-//        Engineer.engineerArray = []
-//        Engineer.engineerDict = ["":0]
-//        Engineer.pickedEngineerNames = []
-//        Engineer.pickedEngineerIds = []
-//
-//        getEngineers()
-        self.tableView.reloadData()
-    }
     
     func getEngineers() {
         let scheduleService = ScheduleService()
@@ -169,13 +161,7 @@ class EngineerViewController: UITableViewController {
     }
     
     @IBAction func refreshEngineers() {
-        Engineer.rawEngineerData = [["":""]]
-        Engineer.engineerArray = []
-        Engineer.engineerDict = ["":0]
-        Engineer.pickedEngineerNames = []
-        Engineer.pickedEngineerIds = []
-        
-        getEngineers()
+        self.tableView.reloadData()
         refreshControl?.endRefreshing()
     }
 

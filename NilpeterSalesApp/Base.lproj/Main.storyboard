@@ -368,9 +368,6 @@
                     <navigationItem key="navigationItem" title="Search Companies" id="ArV-hg-beW"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="EvY-P3-uYP">
                         <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <action selector="refreshCompanies" destination="MgI-nT-FQb" eventType="valueChanged" id="tSz-ML-uAf"/>
-                        </connections>
                     </refreshControl>
                     <connections>
                         <segue destination="SF1-aU-CXn" kind="unwind" identifier="companySelected" unwindAction="unwindFromModalViewController:" id="o8k-hw-dVa"/>
@@ -379,7 +376,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n0H-r5-klc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="SF1-aU-CXn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4805" y="-1120"/>
+            <point key="canvasLocation" x="4833" y="-1120"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="qZR-cV-ZdV">
@@ -513,9 +510,6 @@
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="dUB-U0-eXS">
                         <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <action selector="refreshProducts" destination="TD1-50-aUm" eventType="valueChanged" id="ABZ-Ed-Bk0"/>
-                        </connections>
                     </refreshControl>
                     <connections>
                         <segue destination="hgy-M6-vqJ" kind="unwind" identifier="nilpeterProductsSelected" unwindAction="unwindFromModalViewController:" id="9Ci-lY-Y8J"/>
@@ -692,7 +686,7 @@
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="7uk-Pr-x9n">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
-                            <action selector="refreshEngineers" destination="mDr-gI-UlW" eventType="valueChanged" id="Mad-BG-FU6"/>
+                            <action selector="refreshEngineers" destination="mDr-gI-UlW" eventType="valueChanged" id="UKk-K4-yWR"/>
                         </connections>
                     </refreshControl>
                     <connections>
