@@ -52,9 +52,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         // User store
         // Check user session
         prefs = NSUserDefaults.standardUserDefaults()
-//        if prefs.integerForKey("Session") == 0 {
-//            self.performSegueWithIdentifier("showLogin", sender: self)
-//        }
+        if prefs.integerForKey("Session") == 0 {
+            self.performSegueWithIdentifier("showLogin", sender: self)
+        }
        
         // disable table view selection
         self.tableView.allowsSelection = false
@@ -244,7 +244,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             jobString = ", \"job_num\": \"\(jobNumName)\" "
         }
         
-        engineerArray = ", \"engineer_ids\": \"\(convertArrayIntToArratString(Engineer.pickedEngineerIds))\" "
+        engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
         
         if let nilpeterProductId = product?.productPickerIdArray {
             if let thirdPartyProductId = product?.otherProductPickerIdArray {
@@ -266,21 +266,21 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
 
         // Send to the cloud
         
-//        let scheduleService = ScheduleService()
-//        scheduleService.postSchedule(body) {
-//            status in
-//            if let returnMessage = status as String? {
-//                print(returnMessage)
-//                
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    
-//                    self.tabBarController?.selectedIndex = 1
-//                    self.cancelAllFields()
-//                    self.hideLoading()
-//                    
-//                }
-//            }
-//        }
+        let scheduleService = ScheduleService()
+        scheduleService.postSchedule(body) {
+            status in
+            if let returnMessage = status as String? {
+                print(returnMessage)
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    
+                    self.tabBarController?.selectedIndex = 1
+                    self.cancelAllFields()
+                    self.hideLoading()
+                    
+                }
+            }
+        }
     }
     
     // MARK: - unwind company from company table view
