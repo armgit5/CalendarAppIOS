@@ -48,8 +48,6 @@ class EngineerViewController: UITableViewController {
                             
                         }
                     }
-                    print(Engineer.engineerArray)
-                    print(Engineer.engineerDict)
                 }
             }
         }
@@ -111,6 +109,7 @@ class EngineerViewController: UITableViewController {
                 if engineer == selectedEngineer {
                     if let index = Engineer.pickedEngineerNames.indexOf(selectedEngineer) {
                         Engineer.pickedEngineerNames.removeAtIndex(index)
+                        Engineer.pickedEngineerIds.removeAtIndex(index)
                     }
                 }
             }
@@ -118,6 +117,7 @@ class EngineerViewController: UITableViewController {
         } else {
             cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
             Engineer.pickedEngineerNames.append(engineer)
+            Engineer.pickedEngineerIds.append(Engineer.engineerDict[engineer]!)
         }
         
     }

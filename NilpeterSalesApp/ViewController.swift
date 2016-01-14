@@ -22,6 +22,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     // company
     @IBOutlet weak var companyTextField: UITextField!
+    @IBOutlet weak var jobNumTextField: UITextField!
     
     // products
     var product: Product?
@@ -136,8 +137,6 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                         
                         }
                     }
-                    print(Engineer.engineerArray)
-                    print(Engineer.engineerDict)
                 }
             }
         }
@@ -221,13 +220,31 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         
         // Parse information
         var dateString = ""
+        var endDateString = ""
+        var companyString = ""
+        var jobString = ""
         var combinedIdArray = ""
+        var engineerArray = ""
         var descriptionString = ""
         let userIdString = ", \"user_id\": \"\(self.prefs.integerForKey("Userid"))\" "
         
         if let dateTime = dateTextField.text {
             dateString = "\"date\": \"\(dateTime)\" "
         }
+        
+        if let endDateTime = endDateTextField.text {
+            endDateString = ", \"end_date\": \"\(endDateTime)\" "
+        }
+        
+        if let companyName = companyTextField.text {
+            companyString = ", \"company_name\": \"\(companyName)\" "
+        }
+        
+        if let jobNumName = jobNumTextField.text {
+            jobString = ", \"job_num\": \"\(jobNumName)\" "
+        }
+        
+        engineerArray = ", \"engineer_ids\": \"\(convertArrayIntToArratString(Engineer.pickedEngineerIds))\" "
         
         if let nilpeterProductId = product?.productPickerIdArray {
             if let thirdPartyProductId = product?.otherProductPickerIdArray {
@@ -243,27 +260,27 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             descriptionString = ", \"project\": \"\(description)\" "
         }
         
-        let body = "{" + dateString + combinedIdArray + descriptionString + userIdString + "}"
+        let body = "{" + dateString + endDateString + companyString + jobString + combinedIdArray + engineerArray + descriptionString + userIdString + "}"
+        
+        print(body)
 
         // Send to the cloud
         
-        
-        
-        let scheduleService = ScheduleService()
-        scheduleService.postSchedule(body) {
-            status in
-            if let returnMessage = status as String? {
-                print(returnMessage)
-                
-                dispatch_async(dispatch_get_main_queue()) {
-                    
-                    self.tabBarController?.selectedIndex = 1
-                    self.cancelAllFields()
-                    self.hideLoading()
-                    
-                }
-            }
-        }
+//        let scheduleService = ScheduleService()
+//        scheduleService.postSchedule(body) {
+//            status in
+//            if let returnMessage = status as String? {
+//                print(returnMessage)
+//                
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    
+//                    self.tabBarController?.selectedIndex = 1
+//                    self.cancelAllFields()
+//                    self.hideLoading()
+//                    
+//                }
+//            }
+//        }
     }
     
     // MARK: - unwind company from company table view
@@ -306,6 +323,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             }
         } else if segue.sourceViewController.isKindOfClass(EngineerViewController) {
             self.engineerTextField.text = Engineer.pickedEngineerNames.description
+            print(Engineer.pickedEngineerIds)
             
         }
     }
@@ -358,12 +376,22 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.selectedOtherProductName = [String]() // send back segue data
     }
     
+    func resetEngineers() {
+        Engineer.pickedEngineerNames = []
+        Engineer.pickedEngineerIds = []
+        self.engineerTextField.text?.removeAll()
+    }
+    
     func cancelAllFields() {
         self.dateTextField.text?.removeAll()
+        self.endDateTextField.text?.removeAll()
         resetCompany()
         resetProducts()
         self.descriptionTextField.text?.removeAll()
         self.descriptionTextField.resignFirstResponder()
+        self.endDateTextField.text?.removeAll()
+        resetEngineers()
+        self.jobNumTextField.text?.removeAll()
     }
     
     @IBAction func cancelSchedule(sender: AnyObject) {
