@@ -13,9 +13,15 @@ class EngineerViewController: UITableViewController {
     var selectedProducts: [String]?
     var spinner: UIActivityIndicatorView!
     var loadingLabel: UILabel!
+    var prefs: NSUserDefaults!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        prefs = NSUserDefaults.standardUserDefaults()
+        if prefs.integerForKey("Session") == 0 {
+            self.performSegueWithIdentifier("showLogin", sender: self)
+        }
         
         if (Engineer.engineerArray.count < 2) {
 //            self.showLoading()
