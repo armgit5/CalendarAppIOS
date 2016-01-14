@@ -134,5 +134,10 @@ class ThirdPartyProductTableViewController: UITableViewController {
         }
         return false
     }
+    
+    @IBAction func refreshProducts() {
+        getProducts()
+        refreshControl?.endRefreshing()
+    }
 
 }

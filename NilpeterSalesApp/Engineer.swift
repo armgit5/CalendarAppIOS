@@ -12,7 +12,7 @@ struct Engineer {
     
     // Parsing
     static var rawEngineerData: [[String: AnyObject]] = [["":""]]
-    static var engineerArray: [String] = [""]
+    static var engineerArray: [String] = []
     static var engineerDict: [String: Int] = ["":0]
     
     static var pickedEngineerNames: [String] = []

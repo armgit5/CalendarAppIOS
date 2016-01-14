@@ -131,13 +131,23 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                 dispatch_async(dispatch_get_main_queue()) {
                     for engineer in engineerArray {
                         if let engineertName = engineer["email"] as? String {
-                            Engineer.engineerArray.append(engineertName)
-                            if let engineerId = engineer["id"] as? Int {
-                                Engineer.engineerDict[engineertName] = engineerId
+                            if engineertName == "admin@nilpeter.com" {
+                                print("don't add admin")
+                                
+                            } else if engineertName == "ios@nilpeter.com" {
+                                print("don't add ios")
+                            } else if engineertName == self.prefs.stringForKey("Email") {
+                                print("dont' add current user")
+                            } else {
+                                Engineer.engineerArray.append(engineertName)
+                                if let engineerId = engineer["id"] as? Int {
+                                    Engineer.engineerDict[engineertName] = engineerId
+                                }
                             }
                         
                         }
                     }
+                    print(Engineer.engineerArray)
                 }
             }
         }

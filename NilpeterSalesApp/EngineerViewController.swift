@@ -18,7 +18,7 @@ class EngineerViewController: UITableViewController {
         super.viewDidLoad()
         
         if (Engineer.engineerArray.count < 2) {
-            self.showLoading()
+//            self.showLoading()
             self.getEngineers()
         }
         
@@ -31,6 +31,7 @@ class EngineerViewController: UITableViewController {
         spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 80, 80)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
+        
     }
     
     func getEngineers() {
@@ -41,30 +42,41 @@ class EngineerViewController: UITableViewController {
                 dispatch_async(dispatch_get_main_queue()) {
                     for engineer in engineerArray {
                         if let engineertName = engineer["email"] as? String {
-                            Engineer.engineerArray.append(engineertName)
-                            if let engineerId = engineer["id"] as? Int {
-                                Engineer.engineerDict[engineertName] = engineerId
+                            if engineertName == "admin@nilpeter.com" {
+                                print("don't add admin")
+                                
+                            } else if engineertName == "ios@nilpeter.com" {
+                                print("don't add ios")
+                            } else if engineertName == self.prefs.stringForKey("Email") {
+                                print("dont' add current user")
+                            } else {
+                                Engineer.engineerArray.append(engineertName)
+                                if let engineerId = engineer["id"] as? Int {
+                                    Engineer.engineerDict[engineertName] = engineerId
+                                }
                             }
                             
                         }
                     }
+                    print(Engineer.engineerArray)
                 }
             }
         }
     }
 
+
     
     // MARK: - Helper function
     
-    func hideLoading() {
-        self.spinner.stopAnimating()
-        self.loadingLabel.hidden = true
-    }
-    
-    func showLoading() {
-        self.spinner.startAnimating()
-        self.loadingLabel.hidden = false
-    }
+//    func hideLoading() {
+//        self.spinner.stopAnimating()
+//        self.loadingLabel.hidden = true
+//    }
+//    
+//    func showLoading() {
+//        self.spinner.startAnimating()
+//        self.loadingLabel.hidden = false
+//    }
     
     // MARK: - Get products
     
@@ -83,6 +95,7 @@ class EngineerViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("engineerCell")
         let engineerName: String = Engineer.engineerArray[indexPath.row].componentsSeparatedByString("@")[0]
+        
         cell?.textLabel?.text = engineerName
         
         let engineer = Engineer.engineerArray[indexPath.row]
@@ -133,6 +146,17 @@ class EngineerViewController: UITableViewController {
             }
         }
         return false
+    }
+    
+    @IBAction func refreshEngineers() {
+        Engineer.rawEngineerData = [["":""]]
+        Engineer.engineerArray = []
+        Engineer.engineerDict = ["":0]
+        Engineer.pickedEngineerNames = []
+        Engineer.pickedEngineerIds = []
+        
+        getEngineers()
+        refreshControl?.endRefreshing()
     }
 
 
