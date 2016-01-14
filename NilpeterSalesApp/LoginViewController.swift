@@ -53,7 +53,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //                        self.prefs.setValue(self.email.text, forKey: "Email")
 //                        self.prefs.setValue(self.password.text, forKey: "Password")
                         self.prefs.setValue(userId, forKey: "Userid")
-                        self.prefs.setValue(self.email.text, forKey: "Email")
+                        self.prefs.setValue(User.email, forKey: "Email")
                         self.prefs.setValue(1, forKey: "Session")
                         
                         self.tabBarController?.tabBar.hidden = false

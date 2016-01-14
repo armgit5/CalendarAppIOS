@@ -80,7 +80,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
         
         self.getProducts()
-        self.getEngineers()
+        // self.getEngineers()
         
         // Submitting spinner
         loadingLabel = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 75, 0, 80, 35))
@@ -96,7 +96,18 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+
+        Engineer.rawEngineerData = [["":""]]
+        Engineer.engineerArray = []
+        Engineer.engineerDict = ["":0]
+        Engineer.pickedEngineerNames = []
+        Engineer.pickedEngineerIds = []
+
+        getEngineers()
+//        self.tableView.reloadData()
     }
+
+
     
     // MARK: - UIPickerView Delegate
     
@@ -405,6 +416,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     }
     
     func cancelAllFields() {
+        
         self.dateTextField.text?.removeAll()
         self.endDateTextField.text?.removeAll()
         resetCompany()

@@ -72,6 +72,9 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     @IBAction func logout(sender: AnyObject) {
         self.prefs.setValue(0, forKey: "Session")
         self.performSegueWithIdentifier("showLogin", sender: self)
+        self.prefs.setValue(nil, forKey: "Userid")
+        self.prefs.setValue(nil, forKey: "Email")
+        self.prefs.setValue(nil, forKey: "Session")
     }
     
 

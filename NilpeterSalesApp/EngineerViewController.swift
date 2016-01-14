@@ -39,6 +39,19 @@ class EngineerViewController: UITableViewController {
         view.addSubview(loadingLabel)
         
     }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    
+//        Engineer.rawEngineerData = [["":""]]
+//        Engineer.engineerArray = []
+//        Engineer.engineerDict = ["":0]
+//        Engineer.pickedEngineerNames = []
+//        Engineer.pickedEngineerIds = []
+//
+//        getEngineers()
+        self.tableView.reloadData()
+    }
     
     func getEngineers() {
         let scheduleService = ScheduleService()
@@ -50,10 +63,10 @@ class EngineerViewController: UITableViewController {
                         if let engineertName = engineer["email"] as? String {
                             if engineertName == "admin@nilpeter.com" {
                                 print("don't add admin")
-                                
                             } else if engineertName == "ios@nilpeter.com" {
                                 print("don't add ios")
                             } else if engineertName == self.prefs.stringForKey("Email") {
+                                print(engineertName)
                                 print("dont' add current user")
                             } else {
                                 Engineer.engineerArray.append(engineertName)
@@ -64,6 +77,7 @@ class EngineerViewController: UITableViewController {
                             
                         }
                     }
+                    self.tableView.reloadData()
                     print(Engineer.engineerArray)
                 }
             }
