@@ -244,7 +244,13 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             jobString = ", \"job_num\": \"\(jobNumName)\" "
         }
         
-        engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
+        if (self.prefs.stringForKey("Email") == "admin@nilpeter.com") {
+            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
+        } else {
+            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds + [self.prefs.integerForKey("Userid")])) "
+        }
+        
+        
         
         if let nilpeterProductId = product?.productPickerIdArray {
             if let thirdPartyProductId = product?.otherProductPickerIdArray {
