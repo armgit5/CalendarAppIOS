@@ -23,6 +23,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     // company
     @IBOutlet weak var companyTextField: UITextField!
     @IBOutlet weak var jobNumTextField: UITextField!
+    @IBOutlet weak var machineTextField: UITextField!
     
     // products
     var product: Product?
@@ -223,6 +224,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         var endDateString = ""
         var companyString = ""
         var jobString = ""
+        var machineString = ""
         var combinedIdArray = ""
         var engineerArray = ""
         var descriptionString = ""
@@ -242,6 +244,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         
         if let jobNumName = jobNumTextField.text {
             jobString = ", \"job_num\": \"\(jobNumName)\" "
+        }
+        
+        if let machineNumName = machineTextField.text {
+            machineString = ", \"machine_number\": \"\(machineNumName)\" "
         }
         
         if (self.prefs.stringForKey("Email") == "admin@nilpeter.com") {
@@ -266,7 +272,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             descriptionString = ", \"project\": \"\(description)\" "
         }
         
-        let body = "{" + dateString + endDateString + companyString + jobString + combinedIdArray + engineerArray + descriptionString + userIdString + "}"
+        let body = "{" + dateString + endDateString + companyString + jobString + machineString + combinedIdArray + engineerArray + descriptionString + userIdString + "}"
         
         print(body)
 
@@ -398,6 +404,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.endDateTextField.text?.removeAll()
         resetEngineers()
         self.jobNumTextField.text?.removeAll()
+        self.machineTextField.text?.removeAll()
     }
     
     @IBAction func cancelSchedule(sender: AnyObject) {
