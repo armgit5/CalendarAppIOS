@@ -100,8 +100,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         Engineer.rawEngineerData = [["":""]]
         Engineer.engineerArray = []
         Engineer.engineerDict = ["":0]
-        Engineer.pickedEngineerNames = []
-        Engineer.pickedEngineerIds = []
+//        Engineer.pickedEngineerNames = []
+//        Engineer.pickedEngineerIds = []
 
         getEngineers()
 //        self.tableView.reloadData()
