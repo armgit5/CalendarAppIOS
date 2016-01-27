@@ -164,11 +164,24 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                 </textField>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="h15-7v-RDE">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Third Party Products..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDo-M6-6h7">
+                                                    <rect key="frame" x="45" y="15" width="228" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="h15-7v-RDE" firstAttribute="leading" secondItem="ECN-Dt-qbZ" secondAttribute="leading" constant="15" id="5zZ-ZI-nfg"/>
                                                 <constraint firstItem="eGl-al-C5U" firstAttribute="centerX" secondItem="ECN-Dt-qbZ" secondAttribute="centerX" id="NT5-sw-Jr0"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="eGl-al-C5U" secondAttribute="trailing" id="OD7-ce-BQP"/>
                                                 <constraint firstItem="eGl-al-C5U" firstAttribute="centerY" secondItem="ECN-Dt-qbZ" secondAttribute="centerY" id="Wkm-g4-yql"/>
+                                                <constraint firstItem="wDo-M6-6h7" firstAttribute="centerY" secondItem="ECN-Dt-qbZ" secondAttribute="centerY" id="bog-LZ-dsn"/>
+                                                <constraint firstItem="h15-7v-RDE" firstAttribute="centerY" secondItem="ECN-Dt-qbZ" secondAttribute="centerY" id="rph-GC-ydg"/>
+                                                <constraint firstItem="wDo-M6-6h7" firstAttribute="leading" secondItem="h15-7v-RDE" secondAttribute="trailing" constant="10" id="wAe-Gb-ing"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="eGl-al-C5U" secondAttribute="leading" id="x4b-Jl-1Nv"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -185,11 +198,24 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                 </textField>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="eGM-cI-xXw">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Engineers..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIW-Hc-McK">
+                                                    <rect key="frame" x="45" y="15" width="150" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="ihe-a1-FQZ" secondAttribute="trailing" id="30N-Gj-AQh"/>
+                                                <constraint firstItem="eGM-cI-xXw" firstAttribute="leading" secondItem="WJm-f7-sDD" secondAttribute="leading" constant="15" id="ODy-hN-v0z"/>
+                                                <constraint firstItem="KIW-Hc-McK" firstAttribute="leading" secondItem="eGM-cI-xXw" secondAttribute="trailing" constant="10" id="Wb0-jk-wm7"/>
                                                 <constraint firstItem="ihe-a1-FQZ" firstAttribute="centerY" secondItem="WJm-f7-sDD" secondAttribute="centerY" id="YDb-kg-kjv"/>
+                                                <constraint firstItem="eGM-cI-xXw" firstAttribute="centerY" secondItem="WJm-f7-sDD" secondAttribute="centerY" id="bUx-He-QvM"/>
                                                 <constraint firstAttribute="leadingMargin" secondItem="ihe-a1-FQZ" secondAttribute="leading" id="f1y-U7-6cy"/>
+                                                <constraint firstItem="KIW-Hc-McK" firstAttribute="centerY" secondItem="WJm-f7-sDD" secondAttribute="centerY" id="hxp-g6-6v0"/>
                                                 <constraint firstItem="ihe-a1-FQZ" firstAttribute="centerX" secondItem="WJm-f7-sDD" secondAttribute="centerX" id="qNw-vn-YMc"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -247,8 +273,12 @@
                         <outlet property="endDateTextField" destination="mhZ-Gj-g1Y" id="TDR-zF-wEm"/>
                         <outlet property="engineerTextField" destination="ihe-a1-FQZ" id="XPY-G7-Zfn"/>
                         <outlet property="jobNumTextField" destination="boK-zM-9af" id="ch4-le-E6q"/>
+                        <outlet property="loadingEngineerIndicator" destination="eGM-cI-xXw" id="CMR-WZ-WEz"/>
+                        <outlet property="loadingEngineerLabel" destination="KIW-Hc-McK" id="LMC-XG-M9L"/>
                         <outlet property="loadingNilpeterIndicator" destination="LVg-Ut-KSC" id="VAP-zO-SPy"/>
                         <outlet property="loadingNilpeterProducts" destination="oWV-J6-7TJ" id="jOz-ad-jF3"/>
+                        <outlet property="loadingThirdIndicator" destination="h15-7v-RDE" id="E9j-dS-Pky"/>
+                        <outlet property="loadingThirdLabel" destination="wDo-M6-6h7" id="Xnu-Gg-VpX"/>
                         <outlet property="machineTextField" destination="jjA-6J-cx0" id="8xk-tR-6hR"/>
                         <outlet property="nilpeterProductTextField" destination="gq2-Mu-3lS" id="74L-kl-JoM"/>
                         <outlet property="otherProductTextField" destination="eGl-al-C5U" id="9Ok-us-AAi"/>

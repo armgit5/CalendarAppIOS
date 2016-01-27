@@ -33,10 +33,16 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     var selectedOtherProductName = [String]() // send back segue data
     @IBOutlet weak var loadingNilpeterProducts: UILabel!
     @IBOutlet weak var loadingNilpeterIndicator: UIActivityIndicatorView!
-    var timer = NSTimer()
+    @IBOutlet weak var loadingThirdIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadingThirdLabel: UILabel!
+    var productTimer = NSTimer()
     
     // engineer
     @IBOutlet weak var engineerTextField: UITextField!
+    @IBOutlet weak var loadingEngineerIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var loadingEngineerLabel: UILabel!
+    
+    var engineerTimer = NSTimer()
     
     // Description
     @IBOutlet var descriptionTextField: UITextField!
@@ -83,8 +89,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
         
         self.getProducts()
-        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
+        productTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateProducts", userInfo: nil, repeats: true)
         self.getEngineers()
+        engineerTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateEngineers", userInfo: nil, repeats: true)
         
         // Submitting spinner
         loadingLabel = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 75, 0, 80, 35))
@@ -98,10 +105,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
 
     }
 
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        getEngineers()
-    }
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(animated)
+//        getEngineers()
+//    }
 
 
     
@@ -116,18 +123,26 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     func showLoadProducts() {
         loadingNilpeterIndicator.startAnimating()
+        loadingThirdIndicator.startAnimating()
         loadingNilpeterIndicator.hidden = false
         loadingNilpeterProducts.hidden = false
+        loadingThirdIndicator.hidden = false
+        loadingThirdLabel.hidden = false
         nilpeterProductTextField.userInteractionEnabled = false
+        otherProductTextField.userInteractionEnabled = false
     }
     func hideLoadProducts() {
         loadingNilpeterIndicator.stopAnimating()
+        loadingThirdIndicator.stopAnimating()
         loadingNilpeterIndicator.hidden = true
+        loadingThirdIndicator.hidden = true
         loadingNilpeterProducts.hidden = true
+        loadingThirdLabel.hidden = true
         nilpeterProductTextField.userInteractionEnabled = true
+        otherProductTextField.userInteractionEnabled = true
     }
     
-    func update() {
+    func updateProducts() {
         getProducts()
         print("timer get products")
         
@@ -145,13 +160,33 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                     self.product?.otherProductArray = productArrayObj.otherProductArray
                     self.product?.productDict = productArrayObj.productDict
                     self.hideLoadProducts()
-                    self.timer.invalidate()
+                    self.productTimer.invalidate()
                 }
             }
         }
     }
     
+    func showLoadEngineers() {
+        loadingEngineerIndicator.startAnimating()
+        loadingEngineerIndicator.hidden = false
+        loadingEngineerLabel.hidden = false
+        engineerTextField.userInteractionEnabled = false
+    }
+    func hideLoadEngineers() {
+        loadingEngineerIndicator.stopAnimating()
+        loadingEngineerIndicator.hidden = true
+        loadingEngineerLabel.hidden = true
+        engineerTextField.userInteractionEnabled = true
+    }
+    
+    func updateEngineers() {
+        getEngineers()
+        print("timer get engineers")
+        
+    }
+    
     func getEngineers() {
+        showLoadEngineers()
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("engineers") {
             engineers in
@@ -176,6 +211,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                             }
                         }
                     }
+                    self.hideLoadEngineers()
+                    self.engineerTimer.invalidate()
 //                    print(Engineer.engineerArray)
                 }
             }
