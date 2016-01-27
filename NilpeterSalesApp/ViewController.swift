@@ -510,6 +510,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         resetEngineers()
         self.jobNumTextField.text?.removeAll()
         self.machineTextField.text?.removeAll()
+        hideSubmitted()
     }
     
     @IBAction func cancelSchedule(sender: AnyObject) {
