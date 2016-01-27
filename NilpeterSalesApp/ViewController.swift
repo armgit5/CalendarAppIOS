@@ -52,6 +52,11 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     // Spinner
     var spinner: UIActivityIndicatorView!
     var loadingLabel: UILabel!
+    var updateText: UILabel!
+    var welcome: UILabel!
+    
+    @IBOutlet weak var sendButton: UIBarButtonItem!
+    
     
     // User store
     var prefs: NSUserDefaults!
@@ -95,14 +100,26 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         
         // Submitting spinner
         loadingLabel = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 75, 0, 80, 35))
-        loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
+        loadingLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14)
         loadingLabel.text = "Submitting..."
         spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         spinner.frame = CGRectMake(self.view.frame.size.width - 130, 0, 80, 35)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         self.hideLoading()
-
+        
+        updateText = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 150, 0, 150, 35))
+        updateText.font = UIFont(name: "HelveticaNeue-Light", size: 14)
+        updateText.text = "Succesfully submitted!"
+        view.addSubview(updateText)
+        hideSubmitted()
+        
+        welcome = UILabel.init(frame: CGRectMake(10, 0, 175, 35))
+        welcome.font = UIFont(name: "HelveticaNeue-Light", size: 14)
+        welcome.text = "Welcome \(self.prefs.stringForKey("Email")!)"
+        view.addSubview(welcome)
+        
+        sendButton.enabled = false
     }
 
 //    override func viewWillAppear(animated: Bool) {
@@ -213,6 +230,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                     }
                     self.hideLoadEngineers()
                     self.engineerTimer.invalidate()
+                    self.sendButton.enabled = true
 //                    print(Engineer.engineerArray)
                 }
             }
@@ -365,7 +383,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                     self.tabBarController?.selectedIndex = 0
                     self.cancelAllFields()
                     self.hideLoading()
-                    
+                    self.showSubmitted()
                 }
             }
         }
@@ -449,11 +467,21 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     func showLoading() {
         spinner.startAnimating()
         loadingLabel.hidden = false
+        hideSubmitted()
+    }
+    
+    func showSubmitted() {
+        updateText.hidden = false
     }
     
     func resetCompany() {
         self.companyTextField.text?.removeAll()
     }
+    
+    func hideSubmitted() {
+        updateText.hidden = true
+    }
+    
     
     func resetProducts() {
         self.nilpeterProductTextField.text?.removeAll()

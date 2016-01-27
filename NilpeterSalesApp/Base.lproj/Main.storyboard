@@ -283,6 +283,7 @@
                         <outlet property="nilpeterProductTextField" destination="gq2-Mu-3lS" id="74L-kl-JoM"/>
                         <outlet property="otherProductTextField" destination="eGl-al-C5U" id="9Ok-us-AAi"/>
                         <outlet property="searchDisplayController" destination="9Io-qc-hp6" id="C6G-XQ-gmw"/>
+                        <outlet property="sendButton" destination="74j-eP-egJ" id="VRe-Un-JCW"/>
                         <segue destination="fnf-38-leF" kind="presentation" identifier="toATable" id="Eg4-XK-k9t"/>
                         <segue destination="Dkp-ua-R12" kind="presentation" identifier="nilpeterProduct" id="70N-hW-mb1"/>
                         <segue destination="Wtj-UP-WkT" kind="presentation" identifier="otherProduct" id="maZ-mB-0ou"/>
