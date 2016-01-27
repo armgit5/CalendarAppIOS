@@ -126,8 +126,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if let email = self.prefs.stringForKey("Email") {
-            welcome.text = "Welcome \(email)"
+        if welcome.text == nil {
+            if let email = self.prefs.stringForKey("Email") {
+                welcome.text = "Welcome \(email)"
+            }
         }
     }
 
