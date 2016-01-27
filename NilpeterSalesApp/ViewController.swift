@@ -33,6 +33,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     var selectedOtherProductName = [String]() // send back segue data
     @IBOutlet weak var loadingNilpeterProducts: UILabel!
     @IBOutlet weak var loadingNilpeterIndicator: UIActivityIndicatorView!
+    var timer = NSTimer()
     
     // engineer
     @IBOutlet weak var engineerTextField: UITextField!
@@ -82,6 +83,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
         
         self.getProducts()
+        timer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "update", userInfo: nil, repeats: true)
         self.getEngineers()
         
         // Submitting spinner
@@ -124,6 +126,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         loadingNilpeterProducts.hidden = true
         nilpeterProductTextField.userInteractionEnabled = true
     }
+    
+    func update() {
+        getProducts()
+        print("timer get products")
+        
+    }
    
     func getProducts() {
         showLoadProducts()
@@ -137,6 +145,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                     self.product?.otherProductArray = productArrayObj.otherProductArray
                     self.product?.productDict = productArrayObj.productDict
                     self.hideLoadProducts()
+                    self.timer.invalidate()
                 }
             }
         }

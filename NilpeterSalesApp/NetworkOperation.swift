@@ -48,7 +48,7 @@ class NetworkOperation {
                 }
                 
             } else {
-                print("error no valid http response")
+                print("error no valid http request response")
             }
         }
         
@@ -105,7 +105,7 @@ class NetworkOperation {
                 }
                 
             } else {
-                print("error no valid http response")
+                print("error no valid http post response")
             }
         }
         
