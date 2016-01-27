@@ -116,16 +116,20 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         
         welcome = UILabel.init(frame: CGRectMake(10, 0, 175, 35))
         welcome.font = UIFont(name: "HelveticaNeue-Light", size: 14)
-        welcome.text = "Welcome \(self.prefs.stringForKey("Email")!)"
+        if let email = self.prefs.stringForKey("Email") {
+            welcome.text = "Welcome \(email)"
+        }
         view.addSubview(welcome)
         
         sendButton.enabled = false
     }
 
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(animated)
-//        getEngineers()
-//    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if let email = self.prefs.stringForKey("Email") {
+            welcome.text = "Welcome \(email)"
+        }
+    }
 
 
     
