@@ -517,7 +517,7 @@
 				INFOPLIST_FILE = NilpeterSalesApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arm.NilpeterSalesApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arm.NilpeterServiceApp;
 				PRODUCT_NAME = NilpeterServiceApp;
 				PROVISIONING_PROFILE = "";
 			};
@@ -532,7 +532,7 @@
 				INFOPLIST_FILE = NilpeterSalesApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arm.NilpeterSalesApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.arm.NilpeterServiceApp;
 				PRODUCT_NAME = NilpeterServiceApp;
 				PROVISIONING_PROFILE = "";
 			};

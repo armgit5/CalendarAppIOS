@@ -31,6 +31,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     @IBOutlet var otherProductTextField: UITextField!
     var selectedProductName = [String]() // send back segue data
     var selectedOtherProductName = [String]() // send back segue data
+    @IBOutlet weak var loadingNilpeterProducts: UILabel!
+    @IBOutlet weak var loadingNilpeterIndicator: UIActivityIndicatorView!
     
     // engineer
     @IBOutlet weak var engineerTextField: UITextField!
@@ -109,8 +111,22 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     
     // MARK: - Get information from the cloud
+    
+    func showLoadProducts() {
+        loadingNilpeterIndicator.startAnimating()
+        loadingNilpeterIndicator.hidden = false
+        loadingNilpeterProducts.hidden = false
+        nilpeterProductTextField.userInteractionEnabled = false
+    }
+    func hideLoadProducts() {
+        loadingNilpeterIndicator.stopAnimating()
+        loadingNilpeterIndicator.hidden = true
+        loadingNilpeterProducts.hidden = true
+        nilpeterProductTextField.userInteractionEnabled = true
+    }
    
     func getProducts() {
+        showLoadProducts()
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("products") {
             products in
@@ -120,7 +136,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                     self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
                     self.product?.otherProductArray = productArrayObj.otherProductArray
                     self.product?.productDict = productArrayObj.productDict
-                    self.tableView.reloadData()
+                    self.hideLoadProducts()
                 }
             }
         }
@@ -138,22 +154,20 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                     for engineer in engineerArray {
                         if let engineertName = engineer["email"] as? String {
                             if engineertName == "admin@nilpeter.com" {
-                                print("don't add admin")
-                                
+//                                print("don't add admin")
                             } else if engineertName == "ios@nilpeter.com" {
-                                print("don't add ios")
+//                                print("don't add ios")
                             } else if engineertName == self.prefs.stringForKey("Email") {
-                                print("dont' add current user")
+//                                print("dont' add current user")
                             } else {
                                 Engineer.engineerArray.append(engineertName)
                                 if let engineerId = engineer["id"] as? Int {
                                     Engineer.engineerDict[engineertName] = engineerId
                                 }
                             }
-                        
                         }
                     }
-                    print(Engineer.engineerArray)
+//                    print(Engineer.engineerArray)
                 }
             }
         }
@@ -302,7 +316,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
-                    self.tabBarController?.selectedIndex = 1
+                    self.tabBarController?.selectedIndex = 0
                     self.cancelAllFields()
                     self.hideLoading()
                     

@@ -131,11 +131,24 @@
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                 </textField>
+                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="LVg-Ut-KSC">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Nilpeter Products..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWV-J6-7TJ">
+                                                    <rect key="frame" x="45" y="14" width="205" height="21"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="LVg-Ut-KSC" firstAttribute="leading" secondItem="V4E-Dd-Vlh" secondAttribute="leading" constant="15" id="DVc-2y-5te"/>
                                                 <constraint firstItem="gq2-Mu-3lS" firstAttribute="centerY" secondItem="V4E-Dd-Vlh" secondAttribute="centerY" id="XAT-rI-0Go"/>
+                                                <constraint firstItem="oWV-J6-7TJ" firstAttribute="centerY" secondItem="V4E-Dd-Vlh" secondAttribute="centerY" id="bpE-gx-Kk5"/>
+                                                <constraint firstItem="oWV-J6-7TJ" firstAttribute="leading" secondItem="LVg-Ut-KSC" secondAttribute="trailing" constant="10" id="fTt-ks-ShJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="gq2-Mu-3lS" secondAttribute="trailing" constant="10" id="kN0-Tk-OVY"/>
                                                 <constraint firstItem="gq2-Mu-3lS" firstAttribute="leading" secondItem="V4E-Dd-Vlh" secondAttribute="leading" constant="10" id="tj3-vO-a5R"/>
+                                                <constraint firstItem="LVg-Ut-KSC" firstAttribute="centerY" secondItem="V4E-Dd-Vlh" secondAttribute="centerY" id="vGc-EZ-lGB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -234,6 +247,8 @@
                         <outlet property="endDateTextField" destination="mhZ-Gj-g1Y" id="TDR-zF-wEm"/>
                         <outlet property="engineerTextField" destination="ihe-a1-FQZ" id="XPY-G7-Zfn"/>
                         <outlet property="jobNumTextField" destination="boK-zM-9af" id="ch4-le-E6q"/>
+                        <outlet property="loadingNilpeterIndicator" destination="LVg-Ut-KSC" id="VAP-zO-SPy"/>
+                        <outlet property="loadingNilpeterProducts" destination="oWV-J6-7TJ" id="jOz-ad-jF3"/>
                         <outlet property="machineTextField" destination="jjA-6J-cx0" id="8xk-tR-6hR"/>
                         <outlet property="nilpeterProductTextField" destination="gq2-Mu-3lS" id="74L-kl-JoM"/>
                         <outlet property="otherProductTextField" destination="eGl-al-C5U" id="9Ok-us-AAi"/>
@@ -276,8 +291,8 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cjz-i1-E88">
                                 <rect key="frame" x="290" y="254" width="20" height="20"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf4-JX-Peh">
-                                <rect key="frame" x="261" y="289" width="78" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading...may take sometime..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf4-JX-Peh">
+                                <rect key="frame" x="178" y="289" width="245" height="22"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -312,7 +327,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rIc-SI-ApK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3265" y="1021.9999999999999"/>
+            <point key="canvasLocation" x="3265" y="1021"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rge-a5-0Ac">
@@ -723,6 +738,6 @@
         <image name="list-simple-7" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Wsj-zv-hpR"/>
+        <segue reference="S25-wX-dUk"/>
     </inferredMetricsTieBreakers>
 </document>
