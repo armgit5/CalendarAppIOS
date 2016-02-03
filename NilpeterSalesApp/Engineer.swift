@@ -18,19 +18,4 @@ struct Engineer {
     static var pickedEngineerNames: [String] = []
     static var pickedEngineerIds: [Int] = []
     
-//    func makeEngineerArray() {
-//        for product in rawEngineerData {
-//            if let productName = product["name"] as? String {
-//                if let typeId = product["type_id"] as? Int {
-//                    if typeId == 1 {
-//                        self.engineerArray!.append(productName)
-//                    }
-//                }
-//                let productId = product["id"] as? Int
-//                engineerDict![productName] = productId
-//            }
-//            
-//        }
-//    }
-    
 }
