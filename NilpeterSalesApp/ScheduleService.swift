@@ -30,14 +30,22 @@ struct ScheduleService {
         }
     }
     
-    func postSchedule(scheduleBody: String, completion: String? -> Void) {
-        if let scheduleURL = NSURL(string: "schedules", relativeToURL: scheduleBaseURL) {
+    func postSchedule(scheduleBody: String, postId: String?, postMethod: String, completion: String? -> Void) {
+        if let scheduleURL = NSURL(string: "schedules/", relativeToURL: scheduleBaseURL) {
             
             let networkOperation = NetworkOperation(url: scheduleURL)
-            networkOperation.postBodyToURL(scheduleBody) {
-                JSONDictionary in
-                completion(JSONDictionary)
+            if let id = postId {
+                networkOperation.postBodyToURL(scheduleBody, postId: id, postMethod: postMethod) {
+                    JSONDictionary in
+                    completion(JSONDictionary)
+                }
+            } else {
+                networkOperation.postBodyToURL(scheduleBody, postId: nil, postMethod: postMethod) {
+                    JSONDictionary in
+                    completion(JSONDictionary)
+                }
             }
+           
             
         } else {
             print("counldn't construct valid url")

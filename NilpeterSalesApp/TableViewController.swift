@@ -29,12 +29,17 @@ class TableViewController: UITableViewController {
                 dispatch_async(dispatch_get_main_queue()) {
                     for schedule in scheduleArray {
                         if let company_name = schedule["company_name"] as? String {
-                            print(company_name)
-                            self.products.append(company_name)
-                            self.details.append("test")
+                            let scheduleId = schedule["id"] as! String
+                            Schedules.title.append([company_name:scheduleId])
+                            if let details = schedule["project"] as? String {
+                                Schedules.details.append(details)
+                            } else {
+                                Schedules.details.append("No Details...")
+                            }
                             self.tableView.reloadData()
                         }
                     }
+                    print(Schedules.title)
                 }
             }
         }
@@ -42,41 +47,49 @@ class TableViewController: UITableViewController {
 
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.products.count
+        return Schedules.title.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+
         let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath)
-        cell.textLabel!.text = self.products[indexPath.row]
-        cell.detailTextLabel!.text = self.details[indexPath.row]
+        cell.textLabel!.text = Schedules.title[indexPath.row].keys.first
+//        cell.detailTextLabel!.text = Schedules.details[indexPath.row]
         return cell
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let shareAction = UITableViewRowAction(style: .Normal, title: "Share") { (UITableViewRowAction, indexPath) -> Void in
-            let firstActivityItem = self.products[indexPath.row]
-            let acitivityViewController = UIActivityViewController(activityItems: [firstActivityItem], applicationActivities: nil)
-            self.presentViewController(acitivityViewController, animated: true, completion: nil)
-            
-        }
-        
-        let shareAction2 = UITableViewRowAction(style: .Normal, title: "Share2") { (UITableViewRowAction, indexPath) -> Void in
-            let firstActivityItem = self.products[indexPath.row]
-            let acitivityViewController = UIActivityViewController(activityItems: [firstActivityItem], applicationActivities: nil)
-            self.presentViewController(acitivityViewController, animated: true, completion: nil)
-            
+        let shareAction = UITableViewRowAction(style: .Normal, title: "DELETE") { (UITableViewRowAction, indexPath) -> Void in
+            self.postToArm("326")
         }
         
         shareAction.backgroundColor = UIColor.blackColor()
-        shareAction2.backgroundColor = UIColor.redColor()
-        return [shareAction, shareAction2]
+        return [shareAction]
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print(products[indexPath.row])
         
+        print(Schedules.title[indexPath.row].values.first)
         performSegueWithIdentifier("showEditTable", sender: self)
     }
+    
+    func postToArm(postId: String?) {
+        
+        
+        // Send to the cloud
+        let body = ""
+        
+        let scheduleService = ScheduleService()
+        scheduleService.postSchedule(body,postId: postId, postMethod: "DELETE") {
+            status in
+            if let returnMessage = status as String? {
+                print(returnMessage)
+                dispatch_async(dispatch_get_main_queue()) {
+                    print("successfully deleted")
+                }
+            }
+        }
+    }
+
 
 }

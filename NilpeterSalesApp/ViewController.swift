@@ -379,7 +379,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         // Send to the cloud
         
         let scheduleService = ScheduleService()
-        scheduleService.postSchedule(body) {
+        scheduleService.postSchedule(body,postId: nil, postMethod: "POST") {
             status in
             if let returnMessage = status as String? {
                 print(returnMessage)

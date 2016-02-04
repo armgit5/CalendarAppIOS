@@ -10,8 +10,7 @@ import Foundation
 
 struct Schedules {
     
-    static var title : [String] = []
-    static var detials : [String] = []
-    static var idDict : [String:Int] = ["":0]
+    static var title : [[String:String]] = []
+    static var details : [String] = []
     
 }

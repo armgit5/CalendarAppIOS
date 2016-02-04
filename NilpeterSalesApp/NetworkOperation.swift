@@ -12,7 +12,7 @@ class NetworkOperation {
     
     lazy var config: NSURLSessionConfiguration = NSURLSessionConfiguration.defaultSessionConfiguration()
     lazy var session: NSURLSession = NSURLSession(configuration: self.config)
-    let queryURL: NSURL
+    var queryURL: NSURL
 
     typealias JSONDictionaryCompletion = ([[String: AnyObject]]?) -> Void
     
@@ -55,7 +55,12 @@ class NetworkOperation {
         dataTask.resume()
     }
     
-    func postBodyToURL(postBody: String, completion: String? -> Void) {
+    func postBodyToURL(postBody: String, postId: String?, postMethod: String, completion: String? -> Void) {
+        
+        if let id = postId {
+            queryURL = NSURL(string: id, relativeToURL: queryURL)!
+            print(queryURL)
+        }
         
         let request = NSMutableURLRequest(URL: queryURL)
         let username = User.email
@@ -66,7 +71,7 @@ class NetworkOperation {
         request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
 
         let body = postBody
-        request.HTTPMethod = "POST"
+        request.HTTPMethod = postMethod
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding);
