@@ -1,20 +1,19 @@
 //
-//  ProductsTableViewController.swift
-//  NilpeterSalesApp
+//  EditNilpeterProducts.swift
+//  NilpeterServiceApp
 //
-//  Created by Yuttanant Suwansiri on 9/25/2558 BE.
-//  Copyright © 2558 Arm Suwansiri. All rights reserved.
+//  Created by Yuttanant Suwansiri on 2/5/2559 BE.
+//  Copyright © 2559 Arm Suwansiri. All rights reserved.
 //
 
 import UIKit
 
-class NilpeterProductTableViewController: UITableViewController {
+class EditNilpeterProducts: UITableViewController {
     
     var product: Product?
     var selectedProducts: [String]?
     var spinner: UIActivityIndicatorView!
     var loadingLabel: UILabel!
-    var fromEditPage: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,14 +63,14 @@ class NilpeterProductTableViewController: UITableViewController {
             }
         }
     }
-
-
+    
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let nilpeterProducts = self.product?.nilpeterProductArray {
             return nilpeterProducts.count
@@ -100,7 +99,7 @@ class NilpeterProductTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
-    
+        
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         let product = self.product?.nilpeterProductArray![indexPath.row]
         
@@ -118,18 +117,13 @@ class NilpeterProductTableViewController: UITableViewController {
             cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
             selectedProducts?.append(product!)
         }
-    
+        
     }
     
     @IBAction func dismissController(sender: AnyObject) {
-        if fromEditPage {
-            self.performSegueWithIdentifier("editNilpeterProductsSelected", sender: self)
-        } else {
-            self.performSegueWithIdentifier("nilpeterProductsSelected", sender: self)
-        }
-        
+        self.performSegueWithIdentifier("nilpeterProductsSelected", sender: self)
     }
-   
+    
     func isSelected(product: String) -> Bool {
         for selectedProduct in (self.selectedProducts)! {
             if product == selectedProduct {
@@ -143,5 +137,5 @@ class NilpeterProductTableViewController: UITableViewController {
         getProducts()
         refreshControl?.endRefreshing()
     }
-
+    
 }

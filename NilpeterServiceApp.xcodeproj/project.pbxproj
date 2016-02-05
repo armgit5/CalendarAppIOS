@@ -26,6 +26,7 @@
 		1206DFA61BBBAB020056536D /* inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DFA01BBBAB020056536D /* inbox.png */; };
 		1206DFA71BBBAB020056536D /* inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DFA11BBBAB020056536D /* inbox@2x.png */; };
 		120B1E331C644BC800077DC7 /* TableViewEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120B1E321C644BC800077DC7 /* TableViewEditController.swift */; };
+		120B1E351C6460D300077DC7 /* EditNilpeterProducts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120B1E341C6460D300077DC7 /* EditNilpeterProducts.swift */; };
 		120C5A2E1BB12E8E00D0F0D5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A2D1BB12E8E00D0F0D5 /* Product.swift */; };
 		120C5A331BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */; };
 		122A64471B96EAE800E1A57D /* FriendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A64461B96EAE800E1A57D /* FriendItem.swift */; };
@@ -80,6 +81,7 @@
 		1206DFA01BBBAB020056536D /* inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inbox.png; sourceTree = "<group>"; };
 		1206DFA11BBBAB020056536D /* inbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inbox@2x.png"; sourceTree = "<group>"; };
 		120B1E321C644BC800077DC7 /* TableViewEditController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewEditController.swift; sourceTree = "<group>"; };
+		120B1E341C6460D300077DC7 /* EditNilpeterProducts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditNilpeterProducts.swift; sourceTree = "<group>"; };
 		120C5A2D1BB12E8E00D0F0D5 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NilpeterProductTableViewController.swift; sourceTree = "<group>"; };
 		122A64461B96EAE800E1A57D /* FriendItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendItem.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				1203935C1C464DB000E676DC /* EngineerViewController.swift */,
 				124ABA1A1C6093CE0015483F /* TableViewController.swift */,
 				120B1E321C644BC800077DC7 /* TableViewEditController.swift */,
+				120B1E341C6460D300077DC7 /* EditNilpeterProducts.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				12EAC8D11B9E9A3500B5E08A /* DateUtils.swift in Sources */,
 				12009D381B956F7100C012B6 /* NetworkOperation.swift in Sources */,
 				12009D361B956F6000C012B6 /* ScheduleService.swift in Sources */,
+				120B1E351C6460D300077DC7 /* EditNilpeterProducts.swift in Sources */,
 				12009D3A1B95726500C012B6 /* ScheduleData.swift in Sources */,
 				12EAC8D21B9E9A3500B5E08A /* PopDatePicker.swift in Sources */,
 				12C46CF61BC223E000A0787B /* LoginViewController.swift in Sources */,

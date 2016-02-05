@@ -299,7 +299,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             popEndDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
             return false
         } else if textField == nilpeterProductTextField {
-            performSegueWithIdentifier("nilpeterProduct", sender: self)
+            performSegueWithIdentifier("editNilpeterProduct", sender: self)
             return true
         } else if textField == otherProductTextField {
             performSegueWithIdentifier("otherProduct", sender: self)
@@ -396,7 +396,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     }
     
     // MARK: - unwind company from company table view
-    @IBAction func unwindFromModalViewController(segue: UIStoryboardSegue) {
+    @IBAction func unwindFromModalEditViewController(segue: UIStoryboardSegue) {
         //        if segue.sourceViewController.isKindOfClass(SearchTableViewController) {
         //            let searchController = segue.sourceViewController as! SearchTableViewController
         //            if searchController.company?.parentCompany != nil {
@@ -442,11 +442,12 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     
     // MARK: - Prepare for segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "nilpeterProduct" {
+        if segue.identifier == "editNilpeterProduct" {
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! NilpeterProductTableViewController
             destination.selectedProducts = selectedProductName
             destination.product = self.product
+            destination.fromEditPage = true
         } else if segue.identifier == "otherProduct" {
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! ThirdPartyProductTableViewController
