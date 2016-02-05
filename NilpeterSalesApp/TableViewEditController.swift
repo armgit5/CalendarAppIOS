@@ -127,7 +127,11 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         
         sendButton.enabled = false
         
-        getSchedule("300")
+        
+        if id != nil {
+            getSchedule(String(id!))
+        }
+        
     }
     
     override func viewWillAppear(animated: Bool) {
