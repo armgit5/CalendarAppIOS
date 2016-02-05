@@ -57,8 +57,8 @@ class NetworkOperation {
     
     func postBodyToURL(postBody: String, postId: String?, postMethod: String, completion: String? -> Void) {
         
-        if let id = postId {
-            queryURL = NSURL(string: id, relativeToURL: queryURL)!
+        if postId != nil {
+            queryURL = NSURL(string: postId!, relativeToURL: queryURL)!
             print(queryURL)
         }
         

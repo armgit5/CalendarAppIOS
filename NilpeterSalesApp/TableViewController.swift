@@ -17,7 +17,17 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+//        getSchedules()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         getSchedules()
+    }
+    
+    func removeSchedules() {
+        Schedules.title.removeAll()
+        Schedules.details.removeAll()
     }
     
     
@@ -27,18 +37,20 @@ class TableViewController: UITableViewController {
             schedules in
             if let scheduleArray = schedules {
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.removeSchedules()
                     for schedule in scheduleArray {
                         if let company_name = schedule["company_name"] as? String {
-                            let scheduleId = schedule["id"] as! String
+                            let scheduleId = schedule["id"] as! Int
                             Schedules.title.append([company_name:scheduleId])
                             if let details = schedule["project"] as? String {
                                 Schedules.details.append(details)
                             } else {
                                 Schedules.details.append("No Details...")
                             }
-                            self.tableView.reloadData()
+                            
                         }
                     }
+                    self.tableView.reloadData()
                     print(Schedules.title)
                 }
             }
@@ -51,19 +63,21 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath)
         cell.textLabel!.text = Schedules.title[indexPath.row].keys.first
-//        cell.detailTextLabel!.text = Schedules.details[indexPath.row]
         return cell
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let shareAction = UITableViewRowAction(style: .Normal, title: "DELETE") { (UITableViewRowAction, indexPath) -> Void in
-            self.postToArm("326")
+            if let id = Schedules.title[indexPath.row].values.first {
+                let idString = String(id)
+//                Schedules.title.removeAtIndex(indexPath.row)
+//                Schedules.details.removeAtIndex(indexPath.row)
+                self.postToArm(idString)
+            }
         }
-        
-        shareAction.backgroundColor = UIColor.blackColor()
+        shareAction.backgroundColor = UIColor.redColor()
         return [shareAction]
     }
     
@@ -86,6 +100,8 @@ class TableViewController: UITableViewController {
                 print(returnMessage)
                 dispatch_async(dispatch_get_main_queue()) {
                     print("successfully deleted")
+                    self.getSchedules()
+//                    self.tableView.reloadData()
                 }
             }
         }

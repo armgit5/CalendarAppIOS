@@ -10,7 +10,7 @@ import Foundation
 
 struct Schedules {
     
-    static var title : [[String:String]] = []
+    static var title : [[String:Int]] = []
     static var details : [String] = []
     
 }
