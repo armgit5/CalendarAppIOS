@@ -10,14 +10,12 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
-    var products = ["Lan: MCC: L12321 : F4234","dbsa","iwds","kjdsa"]
-    var details = ["dsa","fdsa","fdjahfdsa","jsuecs"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
-//        getSchedules()
+        let font: UIFont = UIFont(name: "HelveticaNeue-UltraLight", size: 17)!
+        let color = UIColor.whiteColor()
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font,NSForegroundColorAttributeName: color], forState: .Normal)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -72,8 +70,6 @@ class TableViewController: UITableViewController {
         let shareAction = UITableViewRowAction(style: .Normal, title: "DELETE") { (UITableViewRowAction, indexPath) -> Void in
             if let id = Schedules.title[indexPath.row].values.first {
                 let idString = String(id)
-//                Schedules.title.removeAtIndex(indexPath.row)
-//                Schedules.details.removeAtIndex(indexPath.row)
                 self.postToArm(idString)
             }
         }
@@ -101,7 +97,6 @@ class TableViewController: UITableViewController {
                 dispatch_async(dispatch_get_main_queue()) {
                     print("successfully deleted")
                     self.getSchedules()
-//                    self.tableView.reloadData()
                 }
             }
         }

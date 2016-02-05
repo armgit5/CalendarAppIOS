@@ -137,7 +137,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Nilpeter Products..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWV-J6-7TJ">
                                                     <rect key="frame" x="45" y="14" width="205" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -170,7 +170,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Third Party Products..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wDo-M6-6h7">
                                                     <rect key="frame" x="45" y="15" width="228" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -204,7 +204,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Engineers..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIW-Hc-McK">
                                                     <rect key="frame" x="45" y="15" width="150" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -514,7 +514,7 @@
             </objects>
             <point key="canvasLocation" x="4125" y="-1120"/>
         </scene>
-        <!--Nilpeter Products-->
+        <!--NILPETER PRODUCTS-->
         <scene sceneID="BKZ-iP-2y3">
             <objects>
                 <tableViewController id="TD1-50-aUm" customClass="NilpeterProductTableViewController" customModule="NilpeterServiceApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -547,7 +547,7 @@
                             <outlet property="delegate" destination="TD1-50-aUm" id="3Ny-qv-q6g"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Nilpeter Products" id="ry3-YS-S9O">
+                    <navigationItem key="navigationItem" title="NILPETER PRODUCTS" id="ry3-YS-S9O">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="a6o-3e-5XF">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -567,7 +567,7 @@
             </objects>
             <point key="canvasLocation" x="4911" y="-430"/>
         </scene>
-        <!--Third Party Products-->
+        <!--THIRD PARTY PRODUCTS-->
         <scene sceneID="PZd-jn-Qzl">
             <objects>
                 <tableViewController id="uRJ-ae-TCe" customClass="ThirdPartyProductTableViewController" customModule="NilpeterServiceApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -591,7 +591,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Third Party Products" id="m2T-Mv-iBL">
+                    <navigationItem key="navigationItem" title="THIRD PARTY PRODUCTS" id="m2T-Mv-iBL">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="a7A-io-mCT">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -690,14 +690,14 @@
                                             <rect key="frame" x="15" y="5" width="32" height="20"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eX7-LU-fcQ">
                                             <rect key="frame" x="15" y="25" width="31" height="14"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -710,7 +710,7 @@
                             <outlet property="delegate" destination="eB6-P6-uVt" id="h6w-1c-Xrj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="BGO-mb-Qjo"/>
+                    <navigationItem key="navigationItem" title="TABLE" id="BGO-mb-Qjo"/>
                     <connections>
                         <segue destination="UkQ-Mj-MoM" kind="show" identifier="showEditTable" id="MTh-3Y-344"/>
                     </connections>
@@ -836,7 +836,7 @@
         <!--EditTable-->
         <scene sceneID="LhC-U9-97X">
             <objects>
-                <tableViewController title="EditTable" id="UkQ-Mj-MoM" sceneMemberID="viewController">
+                <tableViewController title="EditTable" id="UkQ-Mj-MoM" customClass="TableViewEditController" customModule="NilpeterServiceApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="65" sectionHeaderHeight="18" sectionFooterHeight="18" id="84s-px-STS">
                         <rect key="frame" x="0.0" y="64" width="600" height="492"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -965,7 +965,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Nilpeter Products..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOG-dA-4sY">
                                                     <rect key="frame" x="45" y="14" width="205" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -998,7 +998,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Third Party Products..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="015-u0-QYh">
                                                     <rect key="frame" x="45" y="15" width="228" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1032,7 +1032,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Engineers..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnl-XY-FDN">
                                                     <rect key="frame" x="45" y="15" width="150" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1075,12 +1075,36 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="gZz-uj-KKA">
-                        <barButtonItem key="rightBarButtonItem" title="Edit Schedule" id="QLJ-cm-afc">
+                    <navigationItem key="navigationItem" title="DETAILS" id="gZz-uj-KKA">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="F6h-DB-Xsf">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="dismissViewController:" destination="UkQ-Mj-MoM" id="yPS-6B-FuZ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="QLJ-cm-afc">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="companyTextField" destination="COD-1V-t62" id="4OK-52-BVH"/>
+                        <outlet property="dateTextField" destination="R0C-CJ-9ql" id="vpy-lm-IdI"/>
+                        <outlet property="descriptionTextField" destination="nE7-C5-X4B" id="u06-Wb-sUt"/>
+                        <outlet property="endDateTextField" destination="c57-hh-XUk" id="cuv-gz-biJ"/>
+                        <outlet property="engineerTextField" destination="Sv0-6v-0et" id="kbD-sT-qI2"/>
+                        <outlet property="jobNumTextField" destination="sV1-0C-A5h" id="O3J-b0-Z6e"/>
+                        <outlet property="loadingEngineerIndicator" destination="Lgd-bv-nel" id="CHb-8b-4UD"/>
+                        <outlet property="loadingEngineerLabel" destination="mnl-XY-FDN" id="a1k-U9-njG"/>
+                        <outlet property="loadingNilpeterIndicator" destination="dux-TG-8AA" id="iOY-cl-gUn"/>
+                        <outlet property="loadingNilpeterProducts" destination="QOG-dA-4sY" id="DyK-Fr-QSZ"/>
+                        <outlet property="loadingThirdIndicator" destination="dKq-D4-Uz7" id="cYJ-43-55Q"/>
+                        <outlet property="loadingThirdLabel" destination="015-u0-QYh" id="O86-pw-LLz"/>
+                        <outlet property="machineTextField" destination="A4a-IY-4JD" id="H6V-nT-8W1"/>
+                        <outlet property="nilpeterProductTextField" destination="Kvg-9O-Emx" id="410-gp-aJ5"/>
+                        <outlet property="otherProductTextField" destination="e46-xx-c9q" id="XP3-Bw-uAq"/>
+                        <outlet property="sendButton" destination="QLJ-cm-afc" id="caa-zp-JcT"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jh6-Gn-v1T" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="cmc-wj-cg5"/>
@@ -1094,6 +1118,6 @@
         <image name="list-simple-7" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="S25-wX-dUk"/>
+        <segue reference="Wsj-zv-hpR"/>
     </inferredMetricsTieBreakers>
 </document>
