@@ -13,4 +13,5 @@ struct Schedules {
     static var title : [[String:Int]] = []
     static var details : [String] = []
     
+    static var companyName : String = ""
 }

@@ -38,7 +38,7 @@ class ThirdPartyProductTableViewController: UITableViewController {
     
     func getProducts() {
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("products") {
+        scheduleService.getSchedule("products", idString: nil) {
             products in
             if let productArray = products {
                 dispatch_async(dispatch_get_main_queue()) {

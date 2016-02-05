@@ -122,6 +122,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         view.addSubview(welcome)
         
         sendButton.enabled = false
+    
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -174,7 +175,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     func getProducts() {
         showLoadProducts()
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("products") {
+        scheduleService.getSchedule("products", idString: nil) {
             products in
             if let productArray = products {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -211,7 +212,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     func getEngineers() {
         showLoadEngineers()
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("engineers") {
+        scheduleService.getSchedule("engineers", idString: nil) {
             engineers in
             Engineer.rawEngineerData.removeAll()
             Engineer.engineerArray.removeAll()

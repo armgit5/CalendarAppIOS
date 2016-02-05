@@ -11,6 +11,8 @@ import UIKit
 class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIWebViewDelegate {
     
     
+    var id: Int?
+    
     @IBOutlet weak var allDaySwitch: UISwitch!
     
     // date and time data
@@ -63,6 +65,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("des \(id)")
         
         // User store
         // Check user session
@@ -122,6 +126,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         view.addSubview(welcome)
         
         sendButton.enabled = false
+        
+        getSchedule("300")
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -170,11 +176,12 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         print("timer get products")
         
     }
+
     
     func getProducts() {
         showLoadProducts()
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("products") {
+        scheduleService.getSchedule("products", idString: nil) {
             products in
             if let productArray = products {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -208,10 +215,28 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         
     }
     
+    func getSchedule(idStrng: String) {
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("schedules/", idString: idStrng) {
+            schedule in
+            
+            if let validSchedule = schedule {
+                dispatch_async(dispatch_get_main_queue()) {
+                    print(validSchedule)
+                    if let companyName = validSchedule.first!["company_name"] {
+                        self.companyTextField.text = companyName as? String
+                        print(companyName)
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
     func getEngineers() {
         showLoadEngineers()
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("engineers") {
+        scheduleService.getSchedule("engineers", idString: nil) {
             engineers in
             Engineer.rawEngineerData.removeAll()
             Engineer.engineerArray.removeAll()

@@ -10,6 +10,8 @@ import UIKit
 
 class TableViewController: UITableViewController {
     
+    var id: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
@@ -28,10 +30,9 @@ class TableViewController: UITableViewController {
         Schedules.details.removeAll()
     }
     
-    
     func getSchedules() {
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("schedules") {
+        scheduleService.getSchedule("schedules", idString: nil) {
             schedules in
             if let scheduleArray = schedules {
                 dispatch_async(dispatch_get_main_queue()) {
@@ -45,11 +46,10 @@ class TableViewController: UITableViewController {
                             } else {
                                 Schedules.details.append("No Details...")
                             }
-                            
                         }
                     }
                     self.tableView.reloadData()
-                    print(Schedules.title)
+                    // print(Schedules.title)
                 }
             }
         }
@@ -79,12 +79,20 @@ class TableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        print(Schedules.title[indexPath.row].values.first)
+        // print(Schedules.title[indexPath.row].values.first)
+        id = Schedules.title[indexPath.row].values.first!
         performSegueWithIdentifier("showEditTable", sender: self)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showEditTable" {
+            if let destination = segue.destinationViewController as? TableViewEditController {
+                destination.id = id
+            }
+        }
+    }
+    
     func postToArm(postId: String?) {
-        
         
         // Send to the cloud
         let body = ""

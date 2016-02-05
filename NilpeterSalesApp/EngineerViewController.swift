@@ -47,7 +47,7 @@ class EngineerViewController: UITableViewController {
     
     func getEngineers() {
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("engineers") {
+        scheduleService.getSchedule("engineers", idString: nil) {
             engineers in
             if let engineerArray = engineers {
                 dispatch_async(dispatch_get_main_queue()) {

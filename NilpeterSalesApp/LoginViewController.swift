@@ -41,7 +41,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func validateUser() {
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("user") {
+        scheduleService.getSchedule("user", idString: nil) {
             user in
             dispatch_async(dispatch_get_main_queue()) {
                 if let validUser = user {

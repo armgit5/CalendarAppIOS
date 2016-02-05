@@ -17,11 +17,11 @@ struct ScheduleService {
         self.scheduleBaseURL = NSURL(string: headingBastURL)
     }
     
-    func getSchedule(scheduleQuery: String, completion: ScheduleServiceCompletion) {
+    func getSchedule(scheduleQuery: String, idString: String?, completion: ScheduleServiceCompletion) {
         if let scheduleURL = NSURL(string: scheduleQuery, relativeToURL: scheduleBaseURL) {
             
             let networkOperation = NetworkOperation(url: scheduleURL)
-            networkOperation.downloadJSONFromURL {
+            networkOperation.downloadJSONFromURL(idString) {
                 JSONDictionary in
                 completion(JSONDictionary)
             }

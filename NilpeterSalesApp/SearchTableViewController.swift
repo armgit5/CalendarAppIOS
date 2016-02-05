@@ -47,6 +47,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
             self.showLoading()
             self.getComapnies()
         }
+    
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -85,7 +86,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     
     func getComapnies() {
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("companies") {
+        scheduleService.getSchedule("companies", idString: nil) {
             companies in
             
             print(companies)

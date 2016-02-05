@@ -20,7 +20,11 @@ class NetworkOperation {
         self.queryURL = url
     }
 
-    func downloadJSONFromURL(completion: JSONDictionaryCompletion) {
+    func downloadJSONFromURL(idString: String?, completion: JSONDictionaryCompletion) {
+        if idString != nil {
+            queryURL = NSURL(string: idString!, relativeToURL: queryURL)!
+            print(queryURL)
+        }
         let request = NSMutableURLRequest(URL: queryURL)
         let username = User.email
         let password = User.password
