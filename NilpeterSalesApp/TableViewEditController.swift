@@ -425,7 +425,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             performSegueWithIdentifier("editOtherProduct", sender: self)
             return true
         } else if textField == engineerTextField {
-            performSegueWithIdentifier("engineer", sender: self)
+            performSegueWithIdentifier("editEngineer", sender: self)
             return true
         }
         return true
