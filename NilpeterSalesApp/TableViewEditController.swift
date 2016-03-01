@@ -282,12 +282,14 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                         if let nilpeterProduct = product["name"] as? String {
                             Schedules.nilpeterProducts.append(nilpeterProduct);
                             if let productId = product["id"] as? Int {
-                                Schedules.productDicts[nilpeterProduct] = productId
+//                                Schedules.productDicts[nilpeterProduct] = productId
+                                Schedules.pickedNilpeterProductIds.append(productId)
                             }
                         }
                     }
                     self.nilpeterProductTextField.text = Schedules.nilpeterProducts.debugDescription
                     self.hideLoadProducts()
+                    print(Schedules.pickedNilpeterProductIds)
                     self.tableView.reloadData()
                 }
             }
@@ -308,7 +310,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                         if let thirdProduct = product["name"] as? String {
                             Schedules.thirdProducts.append(thirdProduct);
                             if let productId = product["id"] as? Int {
-                                Schedules.productDicts[thirdProduct] = productId
+//                                Schedules.productDicts[thirdProduct] = productId
+                                Schedules.pickedThirdProductIds.append(productId)
                             }
                         }
                     }
@@ -528,15 +531,17 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                 self.product?.productPickerIdArray?.removeAll()
                 
                 Schedules.nilpeterProducts.removeAll()
+                Schedules.pickedNilpeterProductIds.removeAll()
                 Schedules.nilpeterProducts = selectedProductName
                 
                 for product in selectedProductArray {
                     if let id = self.product?.productDict![product] {
                         self.product?.productPickerIdArray?.append(id)
+                        Schedules.pickedNilpeterProductIds.append(id)
                     }
                     
                 }
-                
+                print(Schedules.pickedNilpeterProductIds)
                 
                 
             }
