@@ -789,6 +789,7 @@
                     </refreshControl>
                     <connections>
                         <segue destination="5zr-3R-d8s" kind="unwind" identifier="engineersSelected" unwindAction="unwindFromModalViewController:" id="xbL-bc-M9e"/>
+                        <segue destination="5zr-3R-d8s" kind="unwind" identifier="editEngineersSelected" unwindAction="unwindFromModalEditViewController:" id="qtT-YW-1Hs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kf3-YZ-LmO" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -14,6 +14,8 @@ class EngineerViewController: UITableViewController {
     var spinner: UIActivityIndicatorView!
     var loadingLabel: UILabel!
     var prefs: NSUserDefaults!
+    var fromEditPage: Bool = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,7 +150,11 @@ class EngineerViewController: UITableViewController {
     }
     
     @IBAction func dismissController(sender: AnyObject) {
-        self.performSegueWithIdentifier("engineersSelected", sender: self)
+        if fromEditPage {
+            self.performSegueWithIdentifier("editEngineersSelected", sender: self)
+        } else {
+            self.performSegueWithIdentifier("engineersSelected", sender: self)
+        }
     }
     
     func isSelected(engineer: String) -> Bool {

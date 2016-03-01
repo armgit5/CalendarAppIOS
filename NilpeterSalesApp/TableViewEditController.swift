@@ -588,6 +588,10 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             destination.selectedProducts = Schedules.thirdProducts
             destination.product = self.product
             destination.fromEditPage = true
+        } else if segue.identifier == "editEngineer" {
+            let nav = segue.destinationViewController as! UINavigationController
+            let destination = nav.topViewController as! EngineerViewController
+            destination.fromEditPage = true
         }
     }
     
