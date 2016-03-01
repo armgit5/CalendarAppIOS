@@ -20,6 +20,6 @@ struct Schedules {
     static var nilpeterProducts : [String] = []
     static var thirdProducts : [String] = []
     static var productDicts : [String:Int] = [:]
-    
+  
     
 }

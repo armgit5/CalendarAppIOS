@@ -43,8 +43,11 @@ class NilpeterProductTableViewController: UITableViewController {
     }
     
     func showLoading() {
-        self.spinner.startAnimating()
-        self.loadingLabel.hidden = false
+        if !fromEditPage {
+            self.spinner.startAnimating()
+            self.loadingLabel.hidden = false
+        }
+        
     }
     
     // MARK: - Get products
@@ -73,9 +76,11 @@ class NilpeterProductTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if let nilpeterProducts = self.product?.nilpeterProductArray {
             return nilpeterProducts.count
         }
+        
         return 1
     }
     

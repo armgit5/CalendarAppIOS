@@ -58,13 +58,16 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     var welcome: UILabel!
     
     @IBOutlet weak var sendButton: UIBarButtonItem!
-
+   
     
     // User store
     var prefs: NSUserDefaults!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // initialize company and location models
+        product = Product()
         
         print("des \(id)")
         
@@ -227,6 +230,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         print("timer get engineers")
         
     }
+    
     
     func getSchedule(idStrng: String) {
         let scheduleService = ScheduleService()
@@ -522,11 +526,18 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                 nilpeterProductTextField.text = selectedProductName.description
                 
                 self.product?.productPickerIdArray?.removeAll()
+                
+                Schedules.nilpeterProducts.removeAll()
+                Schedules.nilpeterProducts = selectedProductName
+                
                 for product in selectedProductArray {
                     if let id = self.product?.productDict![product] {
                         self.product?.productPickerIdArray?.append(id)
                     }
+                    
                 }
+                
+                
                 
             }
             
@@ -556,10 +567,10 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         if segue.identifier == "editNilpeterProduct" {
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! NilpeterProductTableViewController
-            destination.selectedProducts = selectedProductName
+            destination.selectedProducts = Schedules.nilpeterProducts
             destination.product = self.product
             destination.fromEditPage = true
-        } else if segue.identifier == "otherProduct" {
+        } else if segue.identifier == "editOtherProduct" {
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! ThirdPartyProductTableViewController
             destination.selectedProducts = selectedOtherProductName
