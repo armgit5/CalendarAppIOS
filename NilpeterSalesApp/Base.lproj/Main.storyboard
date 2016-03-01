@@ -609,6 +609,7 @@
                     </refreshControl>
                     <connections>
                         <segue destination="uyk-4a-2hV" kind="unwind" identifier="otherProductSelected" unwindAction="unwindFromModalViewController:" id="Fey-Yo-xxH"/>
+                        <segue destination="uyk-4a-2hV" kind="unwind" identifier="editOtherProductsSelected" unwindAction="unwindFromModalEditViewController:" id="Ugc-XI-fgd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zHk-5z-3Il" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1105,6 +1106,7 @@
                         <outlet property="otherProductTextField" destination="e46-xx-c9q" id="XP3-Bw-uAq"/>
                         <outlet property="sendButton" destination="QLJ-cm-afc" id="caa-zp-JcT"/>
                         <segue destination="Dkp-ua-R12" kind="show" identifier="editNilpeterProduct" id="FUe-xe-pRL"/>
+                        <segue destination="Wtj-UP-WkT" kind="show" identifier="editOtherProduct" id="syH-8l-9fq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jh6-Gn-v1T" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1119,7 +1121,8 @@
         <image name="list-simple-7" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="70N-hW-mb1"/>
+        <segue reference="syH-8l-9fq"/>
+        <segue reference="FUe-xe-pRL"/>
         <segue reference="S25-wX-dUk"/>
     </inferredMetricsTieBreakers>
 </document>

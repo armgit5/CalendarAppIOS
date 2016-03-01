@@ -143,7 +143,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     func removeSchedules() {
         Schedules.nilpeterProducts.removeAll()
         Schedules.thirdProducts.removeAll()
-        Schedules.productDicts.removeAll()
+        Schedules.pickedThirdProductIds.removeAll()
+        Schedules.pickedNilpeterProductIds.removeAll()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -289,7 +290,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                     }
                     self.nilpeterProductTextField.text = Schedules.nilpeterProducts.debugDescription
                     self.hideLoadProducts()
-                    print(Schedules.pickedNilpeterProductIds)
+//                    print(Schedules.pickedNilpeterProductIds)
                     self.tableView.reloadData()
                 }
             }
@@ -317,6 +318,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                     }
                     self.otherProductTextField.text = Schedules.thirdProducts.debugDescription
                     self.hideLoadProducts()
+                    print(Schedules.pickedThirdProductIds)
                     self.tableView.reloadData()
                 }
             }
@@ -420,7 +422,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             performSegueWithIdentifier("editNilpeterProduct", sender: self)
             return true
         } else if textField == otherProductTextField {
-            performSegueWithIdentifier("otherProduct", sender: self)
+            performSegueWithIdentifier("editOtherProduct", sender: self)
             return true
         } else if textField == engineerTextField {
             performSegueWithIdentifier("engineer", sender: self)
@@ -541,7 +543,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                     }
                     
                 }
-                print(Schedules.pickedNilpeterProductIds)
+//                print(Schedules.pickedNilpeterProductIds)
                 
                 
             }
@@ -553,12 +555,17 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                 otherProductTextField.text = selectedOtherProductName.description
                 
                 self.product?.otherProductPickerIdArray?.removeAll()
+                Schedules.thirdProducts.removeAll()
+                Schedules.pickedThirdProductIds.removeAll()
+                Schedules.thirdProducts = selectedOtherProductName
+                
                 for product in selectedProductArray {
                     if let id = self.product?.productDict![product] {
                         self.product?.otherProductPickerIdArray?.append(id)
+                        Schedules.pickedThirdProductIds.append(id)
                     }
                 }
-                
+                print(Schedules.pickedThirdProductIds)
             }
         } else if segue.sourceViewController.isKindOfClass(EngineerViewController) {
             self.engineerTextField.text = Engineer.pickedEngineerNames.description
@@ -578,8 +585,9 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         } else if segue.identifier == "editOtherProduct" {
             let nav = segue.destinationViewController as! UINavigationController
             let destination = nav.topViewController as! ThirdPartyProductTableViewController
-            destination.selectedProducts = selectedOtherProductName
+            destination.selectedProducts = Schedules.thirdProducts
             destination.product = self.product
+            destination.fromEditPage = true
         }
     }
     

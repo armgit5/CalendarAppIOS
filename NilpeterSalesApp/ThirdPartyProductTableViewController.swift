@@ -14,6 +14,7 @@ class ThirdPartyProductTableViewController: UITableViewController {
     var selectedProducts: [String]?
     var spinner: UIActivityIndicatorView!
     var loadingLabel: UILabel!
+    var fromEditPage: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,7 +123,12 @@ class ThirdPartyProductTableViewController: UITableViewController {
     }
     
     @IBAction func dismissController(sender: AnyObject) {
-        self.performSegueWithIdentifier("otherProductSelected", sender: self)
+        if fromEditPage {
+            self.performSegueWithIdentifier("editOtherProductsSelected", sender: self)
+        } else {
+            self.performSegueWithIdentifier("otherProductSelected", sender: self)
+        }
+        
     }
     
     func isSelected(product: String) -> Bool {
