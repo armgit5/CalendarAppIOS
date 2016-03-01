@@ -11,6 +11,8 @@ import UIKit
 class TableViewController: UITableViewController {
     
     var id: Int = 0
+    // User store
+    var prefs: NSUserDefaults!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,8 @@ class TableViewController: UITableViewController {
         let font: UIFont = UIFont(name: "HelveticaNeue-UltraLight", size: 17)!
         let color = UIColor.whiteColor()
         self.navigationController?.navigationBar.topItem?.backBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font,NSForegroundColorAttributeName: color], forState: .Normal)
+        
+        prefs = NSUserDefaults.standardUserDefaults()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -32,21 +36,29 @@ class TableViewController: UITableViewController {
     
     func getSchedules() {
         let scheduleService = ScheduleService()
-        scheduleService.getSchedule("schedules", idString: nil) {
+        let userIdString = String(self.prefs.integerForKey("Userid"))
+        scheduleService.getSchedule("schedules/index/)", idString: userIdString) {
             schedules in
             if let scheduleArray = schedules {
                 dispatch_async(dispatch_get_main_queue()) {
                     self.removeSchedules()
                     for schedule in scheduleArray {
-                        if let company_name = schedule["company_name"] as? String {
-                            let scheduleId = schedule["id"] as! Int
-                            Schedules.title.append([company_name:scheduleId])
-                            if let details = schedule["project"] as? String {
-                                Schedules.details.append(details)
-                            } else {
-                                Schedules.details.append("No Details...")
-                            }
+                        var words = ""
+                        if let date = schedule["date"] as? String {
+                            words = date
                         }
+                        if let company_name = schedule["company_name"] as? String {
+                            words = words + ", " + company_name
+                        }
+                        if let details = schedule["project"] as? String {
+                            Schedules.details.append(details)
+                        } else {
+                            Schedules.details.append("No Details...")
+                        }
+                      
+                        let scheduleId = schedule["id"] as! Int
+                        Schedules.title.append([words:scheduleId])
+                        
                     }
                     self.tableView.reloadData()
                     // print(Schedules.title)
@@ -63,6 +75,7 @@ class TableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath)
         cell.textLabel!.text = Schedules.title[indexPath.row].keys.first
+        cell.detailTextLabel?.text = Schedules.details[indexPath.row]
         return cell
     }
     

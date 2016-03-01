@@ -20,6 +20,11 @@ struct Product {
     var otherProductArray: [String]?
     var productDict: [String: Int]?
     
+    static var productLists : [String] = ["MO-Line", "FA-Line", "FB-Line", "Alphasonics",
+        "Convertech, Inc.", "CPS", "Erhard + Leimer", "ESS Technology", "Meech",
+        "Pamarco Global Graphics", "Trelleborg", "Rotary Technologies"]
+    static var productListsIds : [Int] = [2,3,4,5,6,7,8,9,11,12,13,14]
+    
     init() {
         productPickerIdArray = [Int]()
         otherProductPickerIdArray = [Int]()

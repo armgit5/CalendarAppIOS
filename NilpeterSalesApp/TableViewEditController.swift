@@ -58,7 +58,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     var welcome: UILabel!
     
     @IBOutlet weak var sendButton: UIBarButtonItem!
-    
+
     
     // User store
     var prefs: NSUserDefaults!
@@ -128,10 +128,19 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         sendButton.enabled = false
         
         
+        removeSchedules()
+        
         if id != nil {
             getSchedule(String(id!))
         }
         
+        
+    }
+    
+    func removeSchedules() {
+        Schedules.nilpeterProducts.removeAll()
+        Schedules.thirdProducts.removeAll()
+        Schedules.productDicts.removeAll()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -226,19 +235,91 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             
             if let validSchedule = schedule {
                 dispatch_async(dispatch_get_main_queue()) {
-                    print(validSchedule)
+//                    print(validSchedule)
                     if let companyName = validSchedule.first!["company_name"] {
                         self.companyTextField.text = companyName as? String
-                        print(companyName)
-                        self.tableView.reloadData()
                     }
+                    if let date = validSchedule.first!["date"] {
+                        self.dateTextField.text = date as? String
+                    }
+                    if let endDate = validSchedule.first!["end_date"] {
+                        self.endDateTextField.text = endDate as? String
+                    }
+                    if let jobNum = validSchedule.first!["job_num"] {
+                        self.jobNumTextField.text = jobNum as? String
+                    }
+                    if let machineNum = validSchedule.first!["machine_number"] {
+                        self.machineTextField.text = machineNum as? String
+                    }
+                    if let proj = validSchedule.first!["project"] {
+                        self.descriptionTextField.text = proj as? String
+                    }
+                    self.getNilpeters(String(self.id!))
+                    self.getThird(String(self.id!))
+//                    if let scheduleId = validSchedule.first!["id"] as? String {
+//                        Schedules.scheduleId = scheduleId
+//                       
+//                    }
+                    self.tableView.reloadData()
                 }
             }
         }
     }
     
+    func getNilpeters(idString: String) {
+        showLoadProducts()
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("schedules/find_nilpeters/", idString: idString) {
+            schedule in
+            
+            if let validSchedule = schedule {
+                dispatch_async(dispatch_get_main_queue()) {
+                    for product in validSchedule {
+                        if let nilpeterProduct = product["name"] as? String {
+                            Schedules.nilpeterProducts.append(nilpeterProduct);
+                            if let productId = product["id"] as? Int {
+                                Schedules.productDicts[nilpeterProduct] = productId
+                            }
+                        }
+                    }
+                    self.nilpeterProductTextField.text = Schedules.nilpeterProducts.debugDescription
+                    self.hideLoadProducts()
+                    self.tableView.reloadData()
+                }
+            }
+        }
+
+    }
+    
+    func getThird(idString: String) {
+        
+        showLoadProducts()
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("schedules/find_third/", idString: idString) {
+            schedule in
+            
+            if let validSchedule = schedule {
+                dispatch_async(dispatch_get_main_queue()) {
+                    for product in validSchedule {
+                        if let thirdProduct = product["name"] as? String {
+                            Schedules.thirdProducts.append(thirdProduct);
+                            if let productId = product["id"] as? Int {
+                                Schedules.productDicts[thirdProduct] = productId
+                            }
+                        }
+                    }
+                    self.otherProductTextField.text = Schedules.thirdProducts.debugDescription
+                    self.hideLoadProducts()
+                    self.tableView.reloadData()
+                }
+            }
+        }
+
+        
+    }
+    
     func getEngineers() {
-        showLoadEngineers()
+        showLoadProducts()
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("engineers", idString: nil) {
             engineers in
@@ -263,6 +344,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                             }
                         }
                     }
+                    self.engineerTextField.text = Engineer.engineerArray.debugDescription
                     self.hideLoadEngineers()
                     self.engineerTimer.invalidate()
                     self.sendButton.enabled = true

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eth-b6-EES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eth-b6-EES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -674,11 +674,10 @@
         <scene sceneID="4YF-Pt-NRp">
             <objects>
                 <tableViewController id="eB6-P6-uVt" userLabel="EditDelete" customClass="TableViewController" customModule="NilpeterServiceApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xbq-9T-uN9">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xbq-9T-uN9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableCell" textLabel="Foy-6L-LaQ" detailTextLabel="eX7-LU-fcQ" style="IBUITableViewCellStyleSubtitle" id="vdL-w2-im9">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
@@ -1120,7 +1119,7 @@
         <image name="list-simple-7" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FUe-xe-pRL"/>
-        <segue reference="Wsj-zv-hpR"/>
+        <segue reference="70N-hW-mb1"/>
+        <segue reference="S25-wX-dUk"/>
     </inferredMetricsTieBreakers>
 </document>

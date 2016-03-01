@@ -14,4 +14,12 @@ struct Schedules {
     static var details : [String] = []
     
     static var companyName : String = ""
+    
+    
+    static var scheduleId : String = "0"
+    static var nilpeterProducts : [String] = []
+    static var thirdProducts : [String] = []
+    static var productDicts : [String:Int] = [:]
+    
+    
 }
