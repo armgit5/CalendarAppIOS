@@ -130,8 +130,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         
         sendButton.enabled = false
         
-        
         removeSchedules()
+        
         
         if id != nil {
             getSchedule(String(id!))
@@ -261,6 +261,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                     }
                     self.getNilpeters(String(self.id!))
                     self.getThird(String(self.id!))
+                    self.getSelectedEngineer(String(self.id!))
 //                    if let scheduleId = validSchedule.first!["id"] as? String {
 //                        Schedules.scheduleId = scheduleId
 //                       
@@ -327,6 +328,34 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         
     }
     
+    func getSelectedEngineer(idString: String) {
+        Engineer.pickedEngineerIds.removeAll()
+        Engineer.pickedEngineerNames.removeAll()
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("schedules/find_users/", idString: idString) {
+            schedule in
+            
+            if let validSchedule = schedule {
+                dispatch_async(dispatch_get_main_queue()) {
+                    for engineers in validSchedule {
+                        if let engineerName = engineers["email"] as? String {
+                            Engineer.pickedEngineerNames.append(engineerName)
+                            if let engineerId = engineers["id"] as? Int {
+                                //                                Schedules.productDicts[thirdProduct] = productId
+                                Engineer.pickedEngineerIds.append(engineerId)
+                            }
+                        }
+                    }
+//                    print(Engineer.pickedEngineerNames.debugDescription)
+//                    print(Engineer.pickedEngineerIds.debugDescription)
+                    self.engineerTextField.text = Engineer.pickedEngineerNames.debugDescription
+                    self.tableView.reloadData()
+                }
+            }
+        }
+
+    }
+    
     func getEngineers() {
         showLoadProducts()
         let scheduleService = ScheduleService()
@@ -353,7 +382,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                             }
                         }
                     }
-                    self.engineerTextField.text = Engineer.engineerArray.debugDescription
+                    
                     self.hideLoadEngineers()
                     self.engineerTimer.invalidate()
                     self.sendButton.enabled = true
@@ -470,23 +499,27 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             machineString = ", \"machine_number\": \"\(machineNumName)\" "
         }
         
-        if (self.prefs.stringForKey("Email") == "admin@nilpeter.com") {
-            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
-        } else {
-            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds + [self.prefs.integerForKey("Userid")])) "
-        }
+        engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
+        
+//        if (self.prefs.stringForKey("Email") == "admin@nilpeter.com") {
+//            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
+//        } else {
+//            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds + [self.prefs.integerForKey("Userid")])) "
+//        }
+        
+        combinedIdArray = ", product_ids: " + (convertArrayIntToArratString(Schedules.pickedNilpeterProductIds) + convertArrayIntToArratString(Schedules.pickedThirdProductIds)).debugDescription
+        
+//        if let nilpeterProductId = product?.productPickerIdArray {
+//            if let thirdPartyProductId = product?.otherProductPickerIdArray {
+//                combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId + thirdPartyProductId)) "
+//            } else {
+//                combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId)) "
+//            }
+//        } else if let thirdPartyProductId = product?.otherProductPickerIdArray {
+//            combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(thirdPartyProductId)) "
+//        }
         
         
-        
-        if let nilpeterProductId = product?.productPickerIdArray {
-            if let thirdPartyProductId = product?.otherProductPickerIdArray {
-                combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId + thirdPartyProductId)) "
-            } else {
-                combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId)) "
-            }
-        } else if let thirdPartyProductId = product?.otherProductPickerIdArray {
-            combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(thirdPartyProductId)) "
-        }
         
         if let description = descriptionTextField.text {
             descriptionString = ", \"project\": \"\(description)\" "
