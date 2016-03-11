@@ -14,6 +14,9 @@ class TableViewController: UITableViewController {
     // User store
     var prefs: NSUserDefaults!
     
+    var spinner: UIActivityIndicatorView!
+    var loadingLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
@@ -22,11 +25,32 @@ class TableViewController: UITableViewController {
         self.navigationController?.navigationBar.topItem?.backBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font,NSForegroundColorAttributeName: color], forState: .Normal)
         
         prefs = NSUserDefaults.standardUserDefaults()
+        
+        loadingLabel = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 75, 0, 80, 40))
+        loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
+        loadingLabel.text = "Updating..."
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        spinner.frame = CGRectMake(self.view.frame.size.width - 125, 0, 80, 40)
+        view.addSubview(spinner)
+        view.addSubview(loadingLabel)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         getSchedules()
+    }
+    
+    // MARK: - Helper function
+    
+    func hideLoading() {
+        spinner.stopAnimating()
+        loadingLabel.hidden = true
+    }
+    
+    func showLoading() {
+        spinner.startAnimating()
+        loadingLabel.hidden = false
     }
     
     func removeSchedules() {
@@ -35,6 +59,7 @@ class TableViewController: UITableViewController {
     }
     
     func getSchedules() {
+        showLoading()
         let scheduleService = ScheduleService()
         let userIdString = String(self.prefs.integerForKey("Userid"))
         scheduleService.getSchedule("schedules/index/)", idString: userIdString) {
@@ -62,6 +87,7 @@ class TableViewController: UITableViewController {
                     }
                     self.tableView.reloadData()
                     // print(Schedules.title)
+                    self.hideLoading()
                 }
             }
         }
