@@ -117,7 +117,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         
         updateText = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 150, 0, 150, 35))
         updateText.font = UIFont(name: "HelveticaNeue-Light", size: 14)
-        updateText.text = "Succesfully submitted!"
+        updateText.text = "Succesfully editted!"
         view.addSubview(updateText)
         hideSubmitted()
         
@@ -499,7 +499,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             machineString = ", \"machine_number\": \"\(machineNumName)\" "
         }
         
-        engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
+        engineerArray = ", \"user_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
         
 //        if (self.prefs.stringForKey("Email") == "admin@nilpeter.com") {
 //            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
@@ -507,7 +507,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
 //            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds + [self.prefs.integerForKey("Userid")])) "
 //        }
         
-        combinedIdArray = ", product_ids: " + (convertArrayIntToArratString(Schedules.pickedNilpeterProductIds) + convertArrayIntToArratString(Schedules.pickedThirdProductIds)).debugDescription
+        combinedIdArray = ", \"product_ids\": " + (convertArrayIntToArratString(Schedules.pickedNilpeterProductIds) + convertArrayIntToArratString(Schedules.pickedThirdProductIds)).debugDescription
         
 //        if let nilpeterProductId = product?.productPickerIdArray {
 //            if let thirdPartyProductId = product?.otherProductPickerIdArray {
@@ -532,14 +532,14 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         // Send to the cloud
         
         let scheduleService = ScheduleService()
-        scheduleService.postSchedule(body,postId: nil, postMethod: "POST") {
+        scheduleService.postSchedule(body,postId: String(self.id!), postMethod: "PUT") {
             status in
             if let returnMessage = status as String? {
                 print(returnMessage)
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
-                    self.tabBarController?.selectedIndex = 0
+                    self.tabBarController?.selectedIndex = 2
                     self.cancelAllFields()
                     self.hideLoading()
                     self.showSubmitted()
