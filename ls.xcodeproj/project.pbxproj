@@ -1,0 +1,622 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		12009D161B830CD300C012B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D151B830CD300C012B6 /* AppDelegate.swift */; };
+		12009D181B830CD300C012B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D171B830CD300C012B6 /* ViewController.swift */; };
+		12009D1B1B830CD300C012B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12009D191B830CD300C012B6 /* Main.storyboard */; };
+		12009D1D1B830CD300C012B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12009D1C1B830CD300C012B6 /* Images.xcassets */; };
+		12009D201B830CD300C012B6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12009D1E1B830CD300C012B6 /* LaunchScreen.xib */; };
+		12009D2C1B830CD400C012B6 /* NilpeterSalesAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D2B1B830CD400C012B6 /* NilpeterSalesAppTests.swift */; };
+		12009D361B956F6000C012B6 /* ScheduleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D351B956F6000C012B6 /* ScheduleService.swift */; };
+		12009D381B956F7100C012B6 /* NetworkOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D371B956F7100C012B6 /* NetworkOperation.swift */; };
+		12009D3A1B95726500C012B6 /* ScheduleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12009D391B95726500C012B6 /* ScheduleData.swift */; };
+		1203935B1C464A1200E676DC /* Engineer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203935A1C464A1200E676DC /* Engineer.swift */; };
+		1203935D1C464DB000E676DC /* EngineerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1203935C1C464DB000E676DC /* EngineerViewController.swift */; };
+		1206DF9B1BBB9C8D0056536D /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1206DF9A1BBB9C8D0056536D /* WebViewController.swift */; };
+		1206DFA21BBBAB020056536D /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9C1BBBAB020056536D /* camera.png */; };
+		1206DFA31BBBAB020056536D /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9D1BBBAB020056536D /* camera@2x.png */; };
+		1206DFA41BBBAB020056536D /* friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9E1BBBAB020056536D /* friends.png */; };
+		1206DFA51BBBAB020056536D /* friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DF9F1BBBAB020056536D /* friends@2x.png */; };
+		1206DFA61BBBAB020056536D /* inbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DFA01BBBAB020056536D /* inbox.png */; };
+		1206DFA71BBBAB020056536D /* inbox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1206DFA11BBBAB020056536D /* inbox@2x.png */; };
+		120B1E331C644BC800077DC7 /* TableViewEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120B1E321C644BC800077DC7 /* TableViewEditController.swift */; };
+		120C5A2E1BB12E8E00D0F0D5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A2D1BB12E8E00D0F0D5 /* Product.swift */; };
+		120C5A331BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */; };
+		122A64471B96EAE800E1A57D /* FriendItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 122A64461B96EAE800E1A57D /* FriendItem.swift */; };
+		124ABA1B1C6093CE0015483F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124ABA1A1C6093CE0015483F /* TableViewController.swift */; };
+		124ABA1D1C60BAD70015483F /* Schedules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124ABA1C1C60BAD70015483F /* Schedules.swift */; };
+		128885261BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */; };
+		12C46CF61BC223E000A0787B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C46CF51BC223E000A0787B /* LoginViewController.swift */; };
+		12C46CF81BC25DA100A0787B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C46CF71BC25DA100A0787B /* User.swift */; };
+		12CBF1281B987C250087E061 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF1271B987C250087E061 /* SearchViewController.swift */; };
+		12CBF12E1B9897E40087E061 /* PopDatePickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */; };
+		12CBF1301B989AF80087E061 /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */; };
+		12CBF1331B998B2D0087E061 /* NilpeterProductDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF1321B998B2D0087E061 /* NilpeterProductDelegate.swift */; };
+		12CBF1351B9993420087E061 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12CBF1341B9993420087E061 /* Company.swift */; };
+		12EAC8D11B9E9A3500B5E08A /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EAC8CD1B9E9A3500B5E08A /* DateUtils.swift */; };
+		12EAC8D21B9E9A3500B5E08A /* PopDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EAC8CE1B9E9A3500B5E08A /* PopDatePicker.swift */; };
+		12EAC8D31B9E9A3500B5E08A /* PopDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EAC8CF1B9E9A3500B5E08A /* PopDateViewController.swift */; };
+		12EAC8D41B9E9A3500B5E08A /* PopDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 12EAC8D01B9E9A3500B5E08A /* PopDateViewController.xib */; };
+		12EAC8D61BA013CB00B5E08A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12EAC8D51BA013CB00B5E08A /* Location.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		12009D261B830CD400C012B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12009D081B830CD300C012B6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 12009D0F1B830CD300C012B6;
+			remoteInfo = NilpeterSalesApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		12009D101B830CD300C012B6 /* NilpeterServiceApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NilpeterServiceApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		12009D141B830CD300C012B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12009D151B830CD300C012B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		12009D171B830CD300C012B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		12009D1A1B830CD300C012B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		12009D1C1B830CD300C012B6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		12009D1F1B830CD300C012B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		12009D251B830CD400C012B6 /* NilpeterServiceApp.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NilpeterServiceApp.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		12009D2A1B830CD400C012B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12009D2B1B830CD400C012B6 /* NilpeterSalesAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NilpeterSalesAppTests.swift; sourceTree = "<group>"; };
+		12009D351B956F6000C012B6 /* ScheduleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleService.swift; sourceTree = "<group>"; };
+		12009D371B956F7100C012B6 /* NetworkOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkOperation.swift; sourceTree = "<group>"; };
+		12009D391B95726500C012B6 /* ScheduleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleData.swift; sourceTree = "<group>"; };
+		1203935A1C464A1200E676DC /* Engineer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Engineer.swift; sourceTree = "<group>"; };
+		1203935C1C464DB000E676DC /* EngineerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EngineerViewController.swift; sourceTree = "<group>"; };
+		1206DF9A1BBB9C8D0056536D /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		1206DF9C1BBBAB020056536D /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		1206DF9D1BBBAB020056536D /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		1206DF9E1BBBAB020056536D /* friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = friends.png; sourceTree = "<group>"; };
+		1206DF9F1BBBAB020056536D /* friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "friends@2x.png"; sourceTree = "<group>"; };
+		1206DFA01BBBAB020056536D /* inbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inbox.png; sourceTree = "<group>"; };
+		1206DFA11BBBAB020056536D /* inbox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inbox@2x.png"; sourceTree = "<group>"; };
+		120B1E321C644BC800077DC7 /* TableViewEditController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewEditController.swift; sourceTree = "<group>"; };
+		120C5A2D1BB12E8E00D0F0D5 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NilpeterProductTableViewController.swift; sourceTree = "<group>"; };
+		122A64461B96EAE800E1A57D /* FriendItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendItem.swift; sourceTree = "<group>"; };
+		124ABA1A1C6093CE0015483F /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		124ABA1C1C60BAD70015483F /* Schedules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedules.swift; sourceTree = "<group>"; };
+		128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdPartyProductTableViewController.swift; sourceTree = "<group>"; };
+		12C46CF51BC223E000A0787B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		12C46CF71BC25DA100A0787B /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		12CBF1271B987C250087E061 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDatePickerDelegate.swift; sourceTree = "<group>"; };
+		12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
+		12CBF1321B998B2D0087E061 /* NilpeterProductDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NilpeterProductDelegate.swift; sourceTree = "<group>"; };
+		12CBF1341B9993420087E061 /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
+		12EAC8CD1B9E9A3500B5E08A /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateUtils.swift; path = "../../SupportiveCodes/PopDatePickerApp-master/PopDatePickerApp/DateUtils.swift"; sourceTree = "<group>"; };
+		12EAC8CE1B9E9A3500B5E08A /* PopDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopDatePicker.swift; path = "../../SupportiveCodes/PopDatePickerApp-master/PopDatePickerApp/PopDatePicker.swift"; sourceTree = "<group>"; };
+		12EAC8CF1B9E9A3500B5E08A /* PopDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopDateViewController.swift; path = "../../SupportiveCodes/PopDatePickerApp-master/PopDatePickerApp/PopDateViewController.swift"; sourceTree = "<group>"; };
+		12EAC8D01B9E9A3500B5E08A /* PopDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PopDateViewController.xib; path = "../../SupportiveCodes/PopDatePickerApp-master/PopDatePickerApp/PopDateViewController.xib"; sourceTree = "<group>"; };
+		12EAC8D51BA013CB00B5E08A /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		12009D0D1B830CD300C012B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12009D221B830CD400C012B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		12009D071B830CD300C012B6 = {
+			isa = PBXGroup;
+			children = (
+				12009D121B830CD300C012B6 /* NilpeterSalesApp */,
+				12009D281B830CD400C012B6 /* NilpeterSalesAppTests */,
+				12009D111B830CD300C012B6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		12009D111B830CD300C012B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12009D101B830CD300C012B6 /* NilpeterServiceApp.app */,
+				12009D251B830CD400C012B6 /* NilpeterServiceApp.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12009D121B830CD300C012B6 /* NilpeterSalesApp */ = {
+			isa = PBXGroup;
+			children = (
+				12147BBB1B9C53BF0033DF31 /* Views */,
+				12CBF1361B9993460087E061 /* Models */,
+				12147BBA1B9C53900033DF31 /* Controllers */,
+				120C5A2F1BB1824300D0F0D5 /* Delegates */,
+				12009D411B96B58900C012B6 /* PopDatePicker */,
+				12CBF1311B997CE30087E061 /* Test */,
+				12009D1C1B830CD300C012B6 /* Images.xcassets */,
+				1206DFA81BBBAB150056536D /* images */,
+				12009D1E1B830CD300C012B6 /* LaunchScreen.xib */,
+				12009D131B830CD300C012B6 /* Supporting Files */,
+			);
+			path = NilpeterSalesApp;
+			sourceTree = "<group>";
+		};
+		12009D131B830CD300C012B6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				12009D151B830CD300C012B6 /* AppDelegate.swift */,
+				12009D141B830CD300C012B6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		12009D281B830CD400C012B6 /* NilpeterSalesAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				12009D2B1B830CD400C012B6 /* NilpeterSalesAppTests.swift */,
+				12009D291B830CD400C012B6 /* Supporting Files */,
+			);
+			path = NilpeterSalesAppTests;
+			sourceTree = "<group>";
+		};
+		12009D291B830CD400C012B6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				12009D2A1B830CD400C012B6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		12009D411B96B58900C012B6 /* PopDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				12EAC8CD1B9E9A3500B5E08A /* DateUtils.swift */,
+				12EAC8CE1B9E9A3500B5E08A /* PopDatePicker.swift */,
+				12EAC8CF1B9E9A3500B5E08A /* PopDateViewController.swift */,
+				12EAC8D01B9E9A3500B5E08A /* PopDateViewController.xib */,
+			);
+			name = PopDatePicker;
+			sourceTree = "<group>";
+		};
+		1206DFA81BBBAB150056536D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				1206DF9D1BBBAB020056536D /* camera@2x.png */,
+				1206DF9E1BBBAB020056536D /* friends.png */,
+				1206DF9F1BBBAB020056536D /* friends@2x.png */,
+				1206DFA01BBBAB020056536D /* inbox.png */,
+				1206DFA11BBBAB020056536D /* inbox@2x.png */,
+				1206DF9C1BBBAB020056536D /* camera.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		120C5A2F1BB1824300D0F0D5 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				12CBF1321B998B2D0087E061 /* NilpeterProductDelegate.swift */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
+		12147BBA1B9C53900033DF31 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				12CBF12F1B989AF80087E061 /* SearchTableViewController.swift */,
+				120C5A321BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift */,
+				128885251BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift */,
+				12009D171B830CD300C012B6 /* ViewController.swift */,
+				1206DF9A1BBB9C8D0056536D /* WebViewController.swift */,
+				12C46CF51BC223E000A0787B /* LoginViewController.swift */,
+				1203935C1C464DB000E676DC /* EngineerViewController.swift */,
+				124ABA1A1C6093CE0015483F /* TableViewController.swift */,
+				120B1E321C644BC800077DC7 /* TableViewEditController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		12147BBB1B9C53BF0033DF31 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				12009D191B830CD300C012B6 /* Main.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		12CBF1311B997CE30087E061 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				12009D391B95726500C012B6 /* ScheduleData.swift */,
+				122A64461B96EAE800E1A57D /* FriendItem.swift */,
+				12CBF12D1B9897E40087E061 /* PopDatePickerDelegate.swift */,
+				12CBF1271B987C250087E061 /* SearchViewController.swift */,
+			);
+			name = Test;
+			sourceTree = "<group>";
+		};
+		12CBF1361B9993460087E061 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				12CBF1341B9993420087E061 /* Company.swift */,
+				12EAC8D51BA013CB00B5E08A /* Location.swift */,
+				120C5A2D1BB12E8E00D0F0D5 /* Product.swift */,
+				12009D371B956F7100C012B6 /* NetworkOperation.swift */,
+				12009D351B956F6000C012B6 /* ScheduleService.swift */,
+				12C46CF71BC25DA100A0787B /* User.swift */,
+				1203935A1C464A1200E676DC /* Engineer.swift */,
+				124ABA1C1C60BAD70015483F /* Schedules.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		12009D0F1B830CD300C012B6 /* NilpeterServiceApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12009D2F1B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterServiceApp" */;
+			buildPhases = (
+				12009D0C1B830CD300C012B6 /* Sources */,
+				12009D0D1B830CD300C012B6 /* Frameworks */,
+				12009D0E1B830CD300C012B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NilpeterServiceApp;
+			productName = NilpeterSalesApp;
+			productReference = 12009D101B830CD300C012B6 /* NilpeterServiceApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		12009D241B830CD400C012B6 /* NilpeterServiceAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12009D321B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterServiceAppTests" */;
+			buildPhases = (
+				12009D211B830CD400C012B6 /* Sources */,
+				12009D221B830CD400C012B6 /* Frameworks */,
+				12009D231B830CD400C012B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				12009D271B830CD400C012B6 /* PBXTargetDependency */,
+			);
+			name = NilpeterServiceAppTests;
+			productName = NilpeterSalesAppTests;
+			productReference = 12009D251B830CD400C012B6 /* NilpeterServiceApp.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		12009D081B830CD300C012B6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Arm Suwansiri";
+				TargetAttributes = {
+					12009D0F1B830CD300C012B6 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = X936CDJVAA;
+					};
+					12009D241B830CD400C012B6 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 12009D0F1B830CD300C012B6;
+					};
+				};
+			};
+			buildConfigurationList = 12009D0B1B830CD300C012B6 /* Build configuration list for PBXProject "NilpeterServiceApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 12009D071B830CD300C012B6;
+			productRefGroup = 12009D111B830CD300C012B6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				12009D0F1B830CD300C012B6 /* NilpeterServiceApp */,
+				12009D241B830CD400C012B6 /* NilpeterServiceAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		12009D0E1B830CD300C012B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1206DFA41BBBAB020056536D /* friends.png in Resources */,
+				12009D1B1B830CD300C012B6 /* Main.storyboard in Resources */,
+				12009D201B830CD300C012B6 /* LaunchScreen.xib in Resources */,
+				12EAC8D41B9E9A3500B5E08A /* PopDateViewController.xib in Resources */,
+				12009D1D1B830CD300C012B6 /* Images.xcassets in Resources */,
+				1206DFA71BBBAB020056536D /* inbox@2x.png in Resources */,
+				1206DFA21BBBAB020056536D /* camera.png in Resources */,
+				1206DFA51BBBAB020056536D /* friends@2x.png in Resources */,
+				1206DFA31BBBAB020056536D /* camera@2x.png in Resources */,
+				1206DFA61BBBAB020056536D /* inbox.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12009D231B830CD400C012B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		12009D0C1B830CD300C012B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1206DF9B1BBB9C8D0056536D /* WebViewController.swift in Sources */,
+				128885261BB91B7200E3D272 /* ThirdPartyProductTableViewController.swift in Sources */,
+				12CBF1281B987C250087E061 /* SearchViewController.swift in Sources */,
+				12EAC8D11B9E9A3500B5E08A /* DateUtils.swift in Sources */,
+				12009D381B956F7100C012B6 /* NetworkOperation.swift in Sources */,
+				12009D361B956F6000C012B6 /* ScheduleService.swift in Sources */,
+				12009D3A1B95726500C012B6 /* ScheduleData.swift in Sources */,
+				12EAC8D21B9E9A3500B5E08A /* PopDatePicker.swift in Sources */,
+				12C46CF61BC223E000A0787B /* LoginViewController.swift in Sources */,
+				120B1E331C644BC800077DC7 /* TableViewEditController.swift in Sources */,
+				124ABA1D1C60BAD70015483F /* Schedules.swift in Sources */,
+				12EAC8D31B9E9A3500B5E08A /* PopDateViewController.swift in Sources */,
+				1203935B1C464A1200E676DC /* Engineer.swift in Sources */,
+				12EAC8D61BA013CB00B5E08A /* Location.swift in Sources */,
+				12CBF12E1B9897E40087E061 /* PopDatePickerDelegate.swift in Sources */,
+				120C5A331BB502FD00D0F0D5 /* NilpeterProductTableViewController.swift in Sources */,
+				120C5A2E1BB12E8E00D0F0D5 /* Product.swift in Sources */,
+				12CBF1301B989AF80087E061 /* SearchTableViewController.swift in Sources */,
+				122A64471B96EAE800E1A57D /* FriendItem.swift in Sources */,
+				12CBF1351B9993420087E061 /* Company.swift in Sources */,
+				12009D181B830CD300C012B6 /* ViewController.swift in Sources */,
+				124ABA1B1C6093CE0015483F /* TableViewController.swift in Sources */,
+				1203935D1C464DB000E676DC /* EngineerViewController.swift in Sources */,
+				12CBF1331B998B2D0087E061 /* NilpeterProductDelegate.swift in Sources */,
+				12009D161B830CD300C012B6 /* AppDelegate.swift in Sources */,
+				12C46CF81BC25DA100A0787B /* User.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12009D211B830CD400C012B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12009D2C1B830CD400C012B6 /* NilpeterSalesAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		12009D271B830CD400C012B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 12009D0F1B830CD300C012B6 /* NilpeterServiceApp */;
+			targetProxy = 12009D261B830CD400C012B6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		12009D191B830CD300C012B6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				12009D1A1B830CD300C012B6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		12009D1E1B830CD300C012B6 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				12009D1F1B830CD300C012B6 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		12009D2D1B830CD400C012B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		12009D2E1B830CD400C012B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		12009D301B830CD400C012B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = NilpeterSalesApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arm.NilpeterServiceApp;
+				PRODUCT_NAME = NilpeterServiceApp;
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		12009D311B830CD400C012B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = NilpeterSalesApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arm.NilpeterServiceApp;
+				PRODUCT_NAME = NilpeterServiceApp;
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		12009D331B830CD400C012B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NilpeterSalesAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arm.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = NilpeterServiceApp;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NilpeterServiceApp.app/NilpeterServiceApp";
+			};
+			name = Debug;
+		};
+		12009D341B830CD400C012B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NilpeterSalesAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arm.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = NilpeterServiceApp;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NilpeterServiceApp.app/NilpeterServiceApp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		12009D0B1B830CD300C012B6 /* Build configuration list for PBXProject "NilpeterServiceApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12009D2D1B830CD400C012B6 /* Debug */,
+				12009D2E1B830CD400C012B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		12009D2F1B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterServiceApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12009D301B830CD400C012B6 /* Debug */,
+				12009D311B830CD400C012B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		12009D321B830CD400C012B6 /* Build configuration list for PBXNativeTarget "NilpeterServiceAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12009D331B830CD400C012B6 /* Debug */,
+				12009D341B830CD400C012B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 12009D081B830CD300C012B6 /* Project object */;
+}
