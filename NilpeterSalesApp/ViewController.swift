@@ -122,15 +122,15 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         view.addSubview(welcome)
         
         sendButton.enabled = false
-    
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print(self.prefs.integerForKey("Userid"))
         if let email = self.prefs.stringForKey("Email") {
             welcome.text = "Welcome \(email)"
         }
+        downLoadJobNum(String(self.prefs.integerForKey("Userid")))
         
     }
 
@@ -207,6 +207,23 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         getEngineers()
         print("timer get engineers")
         
+    }
+    
+    func downLoadJobNum(idString: String) {
+        let scheduleService = ScheduleService()
+        scheduleService.getSchedule("schedules/auto_jobnum/", idString: idString) {
+            newJobNums in
+            dispatch_async(dispatch_get_main_queue()) {
+                if let validJobNums = newJobNums {
+                    for newJobNum in validJobNums {
+                        if let jobNum = newJobNum["newJobNum"] as? String {
+                            self.jobNumTextField.text = jobNum
+                        }
+                    }
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
     
     func getEngineers() {

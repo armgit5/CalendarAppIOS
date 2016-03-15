@@ -50,7 +50,6 @@ struct Location {
                     }
                 }
             }
-            
         }
     }
     
