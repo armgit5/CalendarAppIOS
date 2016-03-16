@@ -49,6 +49,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     // Description
     @IBOutlet var descriptionTextField: UITextField!
     
+    
+    
     let webView: UIWebView = UIWebView()
     
     // Spinner

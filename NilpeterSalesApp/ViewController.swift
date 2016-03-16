@@ -57,6 +57,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     @IBOutlet weak var sendButton: UIBarButtonItem!
     
+    @IBOutlet weak var chargeStatus: UIButton!
+    var chargeStatusNum: Int = 0
+    
     
     // User store
     var prefs: NSUserDefaults!
@@ -120,7 +123,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             welcome.text = "Welcome \(email)"
         }
         view.addSubview(welcome)
-        
+                
         sendButton.enabled = false
     }
 
@@ -134,7 +137,16 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         
     }
 
+    
 
+    @IBAction func chargeButtonPressed(sender: AnyObject) {
+        if chargeStatusNum == 0 {
+            chargeStatus.setTitle("chargable", forState: .Normal)
+        }
+        if chargeStatusNum == 1 {
+            chargeStatus.setTitle("non-chargable", forState: .Normal)
+        }
+    }
     
     // MARK: - UIPickerView Delegate
     
