@@ -123,7 +123,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             welcome.text = "Welcome \(email)"
         }
         view.addSubview(welcome)
-                
+        
+        chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        
         sendButton.enabled = false
     }
 
@@ -134,17 +136,21 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             welcome.text = "Welcome \(email)"
         }
         downLoadJobNum(String(self.prefs.integerForKey("Userid")))
-        
     }
 
     
 
     @IBAction func chargeButtonPressed(sender: AnyObject) {
+        print("click")
+        print(chargeStatusNum == 0)
         if chargeStatusNum == 0 {
             chargeStatus.setTitle("chargable", forState: .Normal)
-        }
-        if chargeStatusNum == 1 {
+            chargeStatusNum = 1
+            chargeStatus.setTitleColor(UIColor.redColor(), forState: .Normal)
+        } else if chargeStatusNum == 1 {
             chargeStatus.setTitle("non-chargable", forState: .Normal)
+            chargeStatusNum = 0
+            chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
         }
     }
     
@@ -402,7 +408,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             descriptionString = ", \"project\": \"\(description)\" "
         }
         
-        let body = "{" + dateString + endDateString + companyString + jobString + machineString + combinedIdArray + engineerArray + descriptionString + userIdString + "}"
+        let chargeStatusString = ", \"chargable\": \"\(chargeStatusNum)\" "
+        
+        let body = "{" + dateString + endDateString + companyString + jobString + machineString + combinedIdArray + engineerArray + descriptionString + chargeStatusString + userIdString + "}"
         
         print(body)
 
@@ -534,6 +542,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.engineerTextField.text?.removeAll()
     }
     
+    func clearChargable() {
+        chargeStatus.setTitle("non-chargable", forState: .Normal)
+        chargeStatusNum = 0
+        chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+    }
+    
     func cancelAllFields() {
         
         self.dateTextField.text?.removeAll()
@@ -547,6 +561,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.jobNumTextField.text?.removeAll()
         self.machineTextField.text?.removeAll()
         hideSubmitted()
+        clearChargable()
+        
     }
     
     @IBAction func cancelSchedule(sender: AnyObject) {
