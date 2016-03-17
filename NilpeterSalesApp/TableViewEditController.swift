@@ -442,8 +442,6 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
 //        }
         textField.resignFirstResponder()
         return true
-        return true
-        
     }
     
     // MARK: - Text Field delegate
@@ -558,7 +556,9 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             descriptionString = ", \"project\": \"\(description)\" "
         }
         
-        let body = "{" + dateString + endDateString + companyString + jobString + machineString + combinedIdArray + engineerArray + descriptionString + userIdString + "}"
+        let chargeStatusString = ", \"chargable\": \"\(chargeStatusNum)\" "
+        
+        let body = "{" + dateString + endDateString + companyString + jobString + machineString + combinedIdArray + engineerArray + descriptionString + chargeStatusString + userIdString + "}"
         
         print(body)
         
@@ -572,10 +572,11 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     
-                    self.tabBarController?.selectedIndex = 2
+                    // self.tabBarController?.selectedIndex = 2
                     self.cancelAllFields()
                     self.hideLoading()
                     self.showSubmitted()
+                    self.navigationController?.popToRootViewControllerAnimated(true)
                 }
             }
         }
