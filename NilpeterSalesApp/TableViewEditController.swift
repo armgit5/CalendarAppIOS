@@ -49,7 +49,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     // Description
     @IBOutlet var descriptionTextField: UITextField!
     
-    
+    @IBOutlet weak var chargeStatus: UIButton!
+    var chargeStatusNum: Int = 0
     
     let webView: UIWebView = UIWebView()
     
@@ -96,6 +97,9 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         otherProductTextField.delegate = self
         engineerTextField.delegate = self
         descriptionTextField.delegate = self
+        companyTextField.delegate = self
+        jobNumTextField.delegate = self
+        machineTextField.delegate = self
         
         // UI Design
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
@@ -130,6 +134,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         }
         view.addSubview(welcome)
         
+        chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        
         sendButton.enabled = false
         
         removeSchedules()
@@ -156,6 +162,20 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             welcome.text = "Welcome \(email)"
         }
         
+    }
+    
+    @IBAction func chargeButtonPressed(sender: AnyObject) {
+        print("click")
+        print(chargeStatusNum == 0)
+        if chargeStatusNum == 0 {
+            chargeStatus.setTitle("chargable", forState: .Normal)
+            chargeStatusNum = 1
+            chargeStatus.setTitleColor(UIColor.redColor(), forState: .Normal)
+        } else if chargeStatusNum == 1 {
+            chargeStatus.setTitle("non-chargable", forState: .Normal)
+            chargeStatusNum = 0
+            chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        }
     }
     
     
@@ -261,6 +281,15 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                     if let proj = validSchedule.first!["project"] {
                         self.descriptionTextField.text = proj as? String
                     }
+                    
+                    if let chargable = validSchedule.first!["chargable"] as? Int {
+                        if chargable == 1 {
+                            self.chargeStatus.setTitle("chargable", forState: .Normal)
+                            self.chargeStatus.setTitleColor(UIColor.redColor(), forState: .Normal)
+                            self.chargeStatusNum = 1
+                        }
+                    }
+                    
                     self.getNilpeters(String(self.id!))
                     self.getThird(String(self.id!))
                     self.getSelectedEngineer(String(self.id!))
@@ -407,10 +436,12 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField == descriptionTextField {
-            textField.resignFirstResponder()
-            return true
-        }
+//        if textField == descriptionTextField {
+//            textField.resignFirstResponder()
+//            return true
+//        }
+        textField.resignFirstResponder()
+        return true
         return true
         
     }
@@ -679,6 +710,12 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         self.engineerTextField.text?.removeAll()
     }
     
+    func clearChargable() {
+        chargeStatus.setTitle("non-chargable", forState: .Normal)
+        chargeStatusNum = 0
+        chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+    }
+    
     func cancelAllFields() {
         
         self.dateTextField.text?.removeAll()
@@ -692,6 +729,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         self.jobNumTextField.text?.removeAll()
         self.machineTextField.text?.removeAll()
         hideSubmitted()
+        clearChargable()
     }
     
     @IBAction func cancelSchedule(sender: AnyObject) {

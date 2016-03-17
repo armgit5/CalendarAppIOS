@@ -16,6 +16,8 @@ class TableViewController: UITableViewController {
     
     var spinner: UIActivityIndicatorView!
     var loadingLabel: UILabel!
+   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

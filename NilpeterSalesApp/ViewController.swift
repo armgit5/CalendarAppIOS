@@ -90,6 +90,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         otherProductTextField.delegate = self
         engineerTextField.delegate = self
         descriptionTextField.delegate = self
+        companyTextField.delegate = self
+        jobNumTextField.delegate = self
+        machineTextField.delegate = self
         
         // UI Design
         self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
@@ -292,10 +295,11 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField == descriptionTextField {
-            textField.resignFirstResponder()
-            return true
-        }
+//        if textField == descriptionTextField || textField == machineTextField || textField == jobNumTextField || textField == companyTextField {
+//            textField.resignFirstResponder()
+//            return true
+//        }
+        textField.resignFirstResponder()
         return true
         
     }
