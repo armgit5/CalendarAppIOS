@@ -312,7 +312,7 @@
 				TargetAttributes = {
 					12009D0F1B830CD300C012B6 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = X936CDJVAA;
+						DevelopmentTeam = Y7E7JR3VWR;
 					};
 					12009D241B830CD400C012B6 = {
 						CreatedOnToolsVersion = 6.4;
@@ -529,7 +529,7 @@
 				INFOPLIST_FILE = NilpeterSalesApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arm.NilpeterServiceApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.armcomm.NilpeterServiceApp;
 				PRODUCT_NAME = NilpeterServiceApp;
 				PROVISIONING_PROFILE = "";
 			};
@@ -544,7 +544,7 @@
 				INFOPLIST_FILE = NilpeterSalesApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arm.NilpeterServiceApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.armcomm.NilpeterServiceApp;
 				PRODUCT_NAME = NilpeterServiceApp;
 				PROVISIONING_PROFILE = "";
 			};
