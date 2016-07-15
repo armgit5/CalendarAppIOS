@@ -15,6 +15,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet var loadingLabel: UILabel!
     
     var prefs: NSUserDefaults!
+    var webScript: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,11 +29,11 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let url = NSURL(string: User.headingBaseURL + "ioscalendar")
-        
+        let url = NSURL(string: User.headingBaseURL + "ioscalendar/timesheet/372")
         
         let request = NSURLRequest(URL: url!)
         webView.delegate = self
+        webView.scalesPageToFit = true
         webView.loadRequest(request)
     }
     
@@ -59,6 +60,14 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     func webViewDidFinishLoad(webView: UIWebView)
     {
+//        let contentSize:CGSize = webView.scrollView.contentSize
+//        let viewSize:CGSize = self.view.bounds.size
+//        
+//        let rw = viewSize.width / contentSize.width
+//        
+//        webView.scrollView.minimumZoomScale = rw
+//        webView.scrollView.maximumZoomScale = rw
+//        webView.scrollView.zoomScale = rw
         print("webViewDidFinishLoad")
         hideLoading()
         
@@ -70,11 +79,17 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func logout(sender: AnyObject) {
-        self.prefs.setValue(0, forKey: "Session")
-        self.performSegueWithIdentifier("showLogin", sender: self)
-        self.prefs.setValue(nil, forKey: "Userid")
-        self.prefs.setValue(nil, forKey: "Email")
-        self.prefs.setValue(nil, forKey: "Session")
+//        self.prefs.setValue(0, forKey: "Session")
+//        self.performSegueWithIdentifier("showLogin", sender: self)
+//        self.prefs.setValue(nil, forKey: "Userid")
+//        self.prefs.setValue(nil, forKey: "Email")
+//        self.prefs.setValue(nil, forKey: "Session")
+        
+//        let script = "signaturePad.clear();"
+//        webView.stringByEvaluatingJavaScriptFromString(script)
+
+        let script = "$('#submitButton').trigger('click')"
+        webView.stringByEvaluatingJavaScriptFromString(script)
     }
     
 
