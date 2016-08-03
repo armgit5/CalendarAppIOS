@@ -10,8 +10,9 @@ import Foundation
 
 struct Schedules {
     
-    static var title : [[String:Int]] = []
+    static var title : [[String:[Int]]] = []
     static var details : [String] = []
+//    static var timesheetId : [String] = []
     
     static var companyName : String = ""
     
@@ -23,4 +24,5 @@ struct Schedules {
   
     static var pickedNilpeterProductIds : [Int] = []
     static var pickedThirdProductIds : [Int] = []
+    
 }

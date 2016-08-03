@@ -82,9 +82,18 @@ class TableViewController: UITableViewController {
                         } else {
                             Schedules.details.append("No Details...")
                         }
+                        if let timesheetId = schedule["timesheet_id"] as? Int {
+//                            Schedules.timesheetId.append(timesheetId)
+                            let scheduleId = schedule["id"] as! Int
+                            Schedules.title.append([words:[scheduleId, timesheetId]])
+                        } else {
+//                            Schedules.details.append("No timesheet...")
+                            let scheduleId = schedule["id"] as! Int
+                            Schedules.title.append([words:[scheduleId, 0]])
+                        }
+
                       
-                        let scheduleId = schedule["id"] as! Int
-                        Schedules.title.append([words:scheduleId])
+                        
                         
                     }
                     self.tableView.reloadData()
@@ -109,19 +118,34 @@ class TableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let shareAction = UITableViewRowAction(style: .Normal, title: "DELETE") { (UITableViewRowAction, indexPath) -> Void in
-            if let id = Schedules.title[indexPath.row].values.first {
+            // print(Schedules.title[indexPath.row].values.first?[1])
+            if let id = Schedules.title[indexPath.row].values.first?.first {
                 let idString = String(id)
                 self.postToArm(idString)
             }
         }
+    
+        let timesheetAction: UITableViewRowAction!
+        
+        if (Schedules.title[indexPath.row].values.first?[1])! == 0 {
+            timesheetAction = UITableViewRowAction(style: .Normal, title: "DELETE") { (UITableViewRowAction, indexPath) -> Void in
+                print("has timesheet")
+            }
+        } else {
+            timesheetAction = UITableViewRowAction(style: .Normal, title: "TIMESHEET") { (UITableViewRowAction, indexPath) -> Void in
+                print("no timesheet")
+            }
+        }
+
         shareAction.backgroundColor = UIColor.redColor()
-        return [shareAction]
+        timesheetAction.backgroundColor = UIColor.orangeColor()
+        return [shareAction, timesheetAction]
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        // print(Schedules.title[indexPath.row].values.first)
-        id = Schedules.title[indexPath.row].values.first!
+//         print(Schedules.title[indexPath.row].values.first)
+        id = (Schedules.title[indexPath.row].values.first?.first!)!
         performSegueWithIdentifier("showEditTable", sender: self)
     }
     

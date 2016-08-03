@@ -29,7 +29,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let url = NSURL(string: User.headingBaseURL + "ioscalendar/edit_timesheet/40")
+        let url = NSURL(string: User.headingBaseURL + "ioscalendar")
         
         let request = NSURLRequest(URL: url!)
         webView.delegate = self
