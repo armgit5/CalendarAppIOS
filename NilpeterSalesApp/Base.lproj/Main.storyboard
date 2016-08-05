@@ -1201,6 +1201,7 @@
                     <connections>
                         <outlet property="loadingIndicator" destination="8sB-zR-BEG" id="4H1-UU-YGE"/>
                         <outlet property="loadingLabel" destination="gad-1y-Z5j" id="DCn-pF-EDU"/>
+                        <outlet property="submitButton" destination="GuY-pv-c3T" id="dCY-fe-kko"/>
                         <outlet property="webView" destination="TLQ-Pa-LjM" id="XMR-5c-cnC"/>
                     </connections>
                 </viewController>

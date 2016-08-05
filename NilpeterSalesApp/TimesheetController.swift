@@ -13,6 +13,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     @IBOutlet var webView: UIWebView!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet var loadingLabel: UILabel!
+    @IBOutlet weak var submitButton: UIBarButtonItem!
     
     var prefs: NSUserDefaults!
     var webScript: String!
@@ -76,7 +77,8 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     
     @IBAction func submit(sender: AnyObject) {
         let script = "$('#submitButton').trigger('click')"
-    webView.stringByEvaluatingJavaScriptFromString(script)
+        webView.stringByEvaluatingJavaScriptFromString(script)
+        self.submitButton.enabled = false
     }
     
     @IBAction func dismissViewController(sender: AnyObject) {
