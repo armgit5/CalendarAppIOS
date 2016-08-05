@@ -17,7 +17,8 @@ class TableViewController: UITableViewController {
     var spinner: UIActivityIndicatorView!
     var loadingLabel: UILabel!
    
-    
+    var createEdit = ""
+    var timesheetId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,8 +93,7 @@ class TableViewController: UITableViewController {
                             Schedules.title.append([words:[scheduleId, 0]])
                         }
 
-                      
-                        
+
                         
                     }
                     self.tableView.reloadData()
@@ -128,12 +128,23 @@ class TableViewController: UITableViewController {
         let timesheetAction: UITableViewRowAction!
         
         if (Schedules.title[indexPath.row].values.first?[1])! == 0 {
-            timesheetAction = UITableViewRowAction(style: .Normal, title: "DELETE") { (UITableViewRowAction, indexPath) -> Void in
-                print("has timesheet")
+            timesheetAction = UITableViewRowAction(style: .Normal, title: "CREATE") { (UITableViewRowAction, indexPath) -> Void in
+                self.createEdit = "/iostimesheet/"
+                if let id = Schedules.title[indexPath.row].values.first?.first {
+                    let idString = String(id)
+                    self.timesheetId = String(idString)
+                }
+                
+                self.performSegueWithIdentifier("showTimesheet", sender: self)
             }
         } else {
-            timesheetAction = UITableViewRowAction(style: .Normal, title: "TIMESHEET") { (UITableViewRowAction, indexPath) -> Void in
-                print("no timesheet")
+            timesheetAction = UITableViewRowAction(style: .Normal, title: "EDIT") { (UITableViewRowAction, indexPath) -> Void in
+                self.createEdit = "/edit_iostimesheet/"
+                if let id = Schedules.title[indexPath.row].values.first?[1] {
+                    let idString = String(id)
+                    self.timesheetId = String(idString)
+                }
+                self.performSegueWithIdentifier("showTimesheet", sender: self)
             }
         }
 
@@ -155,6 +166,14 @@ class TableViewController: UITableViewController {
                 destination.id = id
             }
         }
+        
+        if segue.identifier == "showTimesheet" {
+            if let destination = segue.destinationViewController as? TimesheetController {
+                destination.id = timesheetId
+                destination.createEdit = createEdit
+            }
+        }
+        
     }
     
     func postToArm(postId: String?) {

@@ -371,7 +371,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rIc-SI-ApK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3265" y="1021"/>
+            <point key="canvasLocation" x="3255" y="1021"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="rge-a5-0Ac">
@@ -644,7 +644,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBT-Ja-cy3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3242" y="277"/>
+            <point key="canvasLocation" x="3234" y="301"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fb0-aI-NXf">
@@ -727,6 +727,7 @@
                     <navigationItem key="navigationItem" title="TABLE" id="BGO-mb-Qjo"/>
                     <connections>
                         <segue destination="UkQ-Mj-MoM" kind="show" identifier="showEditTable" id="MTh-3Y-344"/>
+                        <segue destination="TVb-ba-lvc" kind="show" identifier="showTimesheet" id="cln-Cp-B5C"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QMe-1h-bmj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1145,6 +1146,68 @@
             </objects>
             <point key="canvasLocation" x="4094" y="1168"/>
         </scene>
+        <!--TIMESHEET-->
+        <scene sceneID="4t1-AO-Fs9">
+            <objects>
+                <viewController id="TVb-ba-lvc" customClass="TimesheetController" customModule="NilpeterServiceApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ktN-Wb-7tk"/>
+                        <viewControllerLayoutGuide type="bottom" id="7k4-RC-Glp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cgu-dn-Aui">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TLQ-Pa-LjM">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8sB-zR-BEG">
+                                <rect key="frame" x="290" y="254" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading...may take sometime..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gad-1y-Z5j">
+                                <rect key="frame" x="178" y="289" width="245" height="22"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="TLQ-Pa-LjM" secondAttribute="bottom" id="HQ5-qO-WGr"/>
+                            <constraint firstItem="gad-1y-Z5j" firstAttribute="top" secondItem="8sB-zR-BEG" secondAttribute="bottom" constant="15" id="LBV-Yp-J7Q"/>
+                            <constraint firstItem="gad-1y-Z5j" firstAttribute="centerY" secondItem="Cgu-dn-Aui" secondAttribute="centerY" id="LN7-mN-WMl"/>
+                            <constraint firstItem="gad-1y-Z5j" firstAttribute="centerX" secondItem="Cgu-dn-Aui" secondAttribute="centerX" id="SyD-bz-3Ty"/>
+                            <constraint firstItem="TLQ-Pa-LjM" firstAttribute="top" secondItem="Cgu-dn-Aui" secondAttribute="top" id="V4C-Iw-Zlb"/>
+                            <constraint firstItem="8sB-zR-BEG" firstAttribute="centerX" secondItem="Cgu-dn-Aui" secondAttribute="centerX" id="oL5-L0-chU"/>
+                            <constraint firstAttribute="trailing" secondItem="TLQ-Pa-LjM" secondAttribute="trailing" id="qaL-BS-tf1"/>
+                            <constraint firstItem="TLQ-Pa-LjM" firstAttribute="leading" secondItem="Cgu-dn-Aui" secondAttribute="leading" id="v7L-XM-Sda"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="TIMESHEET" id="fLr-x5-OXS" userLabel="TIMESHEET">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="MX4-gY-S87">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="dismissViewController:" destination="TVb-ba-lvc" id="lgz-1Q-jni"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Submit" id="GuY-pv-c3T">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="submit:" destination="TVb-ba-lvc" id="K4x-1C-X85"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="loadingIndicator" destination="8sB-zR-BEG" id="4H1-UU-YGE"/>
+                        <outlet property="loadingLabel" destination="gad-1y-Z5j" id="DCn-pF-EDU"/>
+                        <outlet property="webView" destination="TLQ-Pa-LjM" id="XMR-5c-cnC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GBV-9v-7Wq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4069" y="1941"/>
+        </scene>
     </scenes>
     <resources>
         <image name="calendar-7" width="30" height="30"/>
@@ -1152,9 +1215,9 @@
         <image name="list-simple-7" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="70N-hW-mb1"/>
-        <segue reference="maZ-mB-0ou"/>
-        <segue reference="S25-wX-dUk"/>
-        <segue reference="JMP-05-YWN"/>
+        <segue reference="Wsj-zv-hpR"/>
+        <segue reference="syH-8l-9fq"/>
+        <segue reference="FUe-xe-pRL"/>
+        <segue reference="4U1-oS-Uxv"/>
     </inferredMetricsTieBreakers>
 </document>
