@@ -128,6 +128,7 @@
 				12009D111B830CD300C012B6 /* Products */,
 			);
 			sourceTree = "<group>";
+			wrapsLines = 1;
 		};
 		12009D111B830CD300C012B6 /* Products */ = {
 			isa = PBXGroup;
@@ -536,6 +537,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.armcomm.NilpeterServiceApp;
 				PRODUCT_NAME = NilpeterServiceApp;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -551,6 +553,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.armcomm.NilpeterServiceApp;
 				PRODUCT_NAME = NilpeterServiceApp;
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

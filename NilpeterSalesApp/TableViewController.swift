@@ -178,20 +178,29 @@ class TableViewController: UITableViewController {
     
     func postToArm(postId: String?) {
         
-        // Send to the cloud
-        let body = ""
-        
-        let scheduleService = ScheduleService()
-        scheduleService.postSchedule(body,postId: postId, postMethod: "DELETE") {
-            status in
-            if let returnMessage = status as String? {
-                print(returnMessage)
-                dispatch_async(dispatch_get_main_queue()) {
-                    print("successfully deleted")
-                    self.getSchedules()
+        let alert = UIAlertController(title: "Alert", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:  { action in
+            
+            // Send to the cloud
+            let body = ""
+            
+            let scheduleService = ScheduleService()
+            scheduleService.postSchedule(body,postId: postId, postMethod: "DELETE") {
+                status in
+                if let returnMessage = status as String? {
+                    print(returnMessage)
+                    dispatch_async(dispatch_get_main_queue()) {
+                        print("successfully deleted")
+                        self.getSchedules()
+                    }
                 }
             }
-        }
+            
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+        
+        
     }
 
 
