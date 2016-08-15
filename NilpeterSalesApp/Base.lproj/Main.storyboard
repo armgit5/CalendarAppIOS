@@ -1171,17 +1171,40 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oh6-az-nR8">
+                                <rect key="frame" x="20" y="513" width="55" height="30"/>
+                                <state key="normal" title="Nilpeter">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="nilpeterSignature:" destination="TVb-ba-lvc" eventType="touchUpInside" id="sV6-4n-Cva"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xw-8q-oAY">
+                                <rect key="frame" x="513" y="513" width="67" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Customer">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="customerSignature:" destination="TVb-ba-lvc" eventType="touchUpInside" id="I4Z-uB-JXy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="3xw-8q-oAY" firstAttribute="top" secondItem="TLQ-Pa-LjM" secondAttribute="bottom" constant="-87" id="Cxq-OU-Uqr"/>
                             <constraint firstAttribute="bottomMargin" secondItem="TLQ-Pa-LjM" secondAttribute="bottom" id="HQ5-qO-WGr"/>
                             <constraint firstItem="gad-1y-Z5j" firstAttribute="top" secondItem="8sB-zR-BEG" secondAttribute="bottom" constant="15" id="LBV-Yp-J7Q"/>
                             <constraint firstItem="gad-1y-Z5j" firstAttribute="centerY" secondItem="Cgu-dn-Aui" secondAttribute="centerY" id="LN7-mN-WMl"/>
+                            <constraint firstItem="TLQ-Pa-LjM" firstAttribute="leading" secondItem="oh6-az-nR8" secondAttribute="trailing" constant="-75" id="M99-HT-xnf"/>
                             <constraint firstItem="gad-1y-Z5j" firstAttribute="centerX" secondItem="Cgu-dn-Aui" secondAttribute="centerX" id="SyD-bz-3Ty"/>
                             <constraint firstItem="TLQ-Pa-LjM" firstAttribute="top" secondItem="Cgu-dn-Aui" secondAttribute="top" id="V4C-Iw-Zlb"/>
+                            <constraint firstItem="oh6-az-nR8" firstAttribute="top" secondItem="TLQ-Pa-LjM" secondAttribute="bottom" constant="-87" id="jNG-kE-JCN"/>
                             <constraint firstItem="8sB-zR-BEG" firstAttribute="centerX" secondItem="Cgu-dn-Aui" secondAttribute="centerX" id="oL5-L0-chU"/>
                             <constraint firstAttribute="trailing" secondItem="TLQ-Pa-LjM" secondAttribute="trailing" id="qaL-BS-tf1"/>
                             <constraint firstItem="TLQ-Pa-LjM" firstAttribute="leading" secondItem="Cgu-dn-Aui" secondAttribute="leading" id="v7L-XM-Sda"/>
+                            <constraint firstItem="3xw-8q-oAY" firstAttribute="leading" secondItem="TLQ-Pa-LjM" secondAttribute="trailing" constant="-87" id="vkF-Qc-lNd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TIMESHEET" id="fLr-x5-OXS" userLabel="TIMESHEET">
@@ -1203,11 +1226,86 @@
                         <outlet property="loadingLabel" destination="gad-1y-Z5j" id="DCn-pF-EDU"/>
                         <outlet property="submitButton" destination="GuY-pv-c3T" id="dCY-fe-kko"/>
                         <outlet property="webView" destination="TLQ-Pa-LjM" id="XMR-5c-cnC"/>
+                        <segue destination="ijJ-r9-kQH" kind="presentation" identifier="showSignature" id="DvB-tl-5tK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GBV-9v-7Wq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4069" y="1941"/>
+            <point key="canvasLocation" x="4125" y="1955"/>
+        </scene>
+        <!--Signature View Controller-->
+        <scene sceneID="06h-bv-1Lv">
+            <objects>
+                <viewController storyboardIdentifier="signatureVCID" id="ijJ-r9-kQH" customClass="SignatureViewController" customModule="NilpeterServiceApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CCg-N5-ThW"/>
+                        <viewControllerLayoutGuide type="bottom" id="lBM-lZ-f46"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="72a-iL-9GG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="OQV-Wr-KeZ">
+                                <rect key="frame" x="45" y="45" width="510" height="510"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mdt-23-TuB" customClass="YPDrawSignatureView" customModule="NilpeterServiceApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="510" height="480"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="signatureBackgroundColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QnX-1B-aWh">
+                                        <rect key="frame" x="0.0" y="480" width="510" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C4B-et-jZ3">
+                                                <rect key="frame" x="0.0" y="0.0" width="255" height="30"/>
+                                                <color key="backgroundColor" red="1" green="0.25109439659999999" blue="0.14399416270000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                                                <state key="normal" title="Clear">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="clearSignature:" destination="ijJ-r9-kQH" eventType="touchUpInside" id="eOy-02-0tV"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2KE-WO-BdY">
+                                                <rect key="frame" x="255" y="0.0" width="255" height="30"/>
+                                                <color key="backgroundColor" red="1" green="0.25109439659999999" blue="0.14399416270000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                                                <state key="normal" title="Save signature">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="okButton:" destination="ijJ-r9-kQH" eventType="touchUpInside" id="yB5-cG-fW5"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.25109439659999999" blue="0.14399416270000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="2KE-WO-BdY" firstAttribute="width" secondItem="C4B-et-jZ3" secondAttribute="width" id="1A4-iq-1sj"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mdt-23-TuB" secondAttribute="trailing" constant="25" id="HGt-gK-vp9"/>
+                            <constraint firstItem="Mdt-23-TuB" firstAttribute="top" secondItem="CCg-N5-ThW" secondAttribute="bottom" constant="25" id="Vu3-jb-mDO"/>
+                            <constraint firstItem="OQV-Wr-KeZ" firstAttribute="centerY" secondItem="72a-iL-9GG" secondAttribute="centerY" id="XFS-Qx-hB0"/>
+                            <constraint firstItem="OQV-Wr-KeZ" firstAttribute="centerX" secondItem="72a-iL-9GG" secondAttribute="centerX" id="tPc-Hs-oVS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="signatureView" destination="Mdt-23-TuB" id="M6H-aH-FWh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KYf-Ss-SnD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4899" y="1955"/>
         </scene>
     </scenes>
     <resources>
