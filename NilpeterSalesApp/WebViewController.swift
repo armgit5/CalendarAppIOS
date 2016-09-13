@@ -79,17 +79,17 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func logout(sender: AnyObject) {
-//        self.prefs.setValue(0, forKey: "Session")
-//        self.performSegueWithIdentifier("showLogin", sender: self)
-//        self.prefs.setValue(nil, forKey: "Userid")
-//        self.prefs.setValue(nil, forKey: "Email")
-//        self.prefs.setValue(nil, forKey: "Session")
+        self.prefs.setValue(0, forKey: "Session")
+        self.performSegueWithIdentifier("showLogin", sender: self)
+        self.prefs.setValue(nil, forKey: "Userid")
+        self.prefs.setValue(nil, forKey: "Email")
+        self.prefs.setValue(nil, forKey: "Session")
         
 //        let script = "signaturePad.clear();"
 //        webView.stringByEvaluatingJavaScriptFromString(script)
 
-        let script = "$('#submitButton').trigger('click')"
-        webView.stringByEvaluatingJavaScriptFromString(script)
+//        let script = "$('#submitButton').trigger('click')"
+//        webView.stringByEvaluatingJavaScriptFromString(script)
     }
     
 
