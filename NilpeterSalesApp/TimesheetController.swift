@@ -49,7 +49,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func customerSignature(sender: AnyObject) {
-        webView.hidden = true
+        performSegueWithIdentifier("showSignature", sender: "customerSignature")
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -113,7 +113,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         let script = "$('#submitButton').trigger('click')"
                webView.stringByEvaluatingJavaScriptFromString(script)
         
-        self.submitButton.enabled = false
+//        self.submitButton.enabled = false
         
     }
     

@@ -1214,7 +1214,7 @@
                                 <action selector="dismissViewController:" destination="TVb-ba-lvc" id="lgz-1Q-jni"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Submit" id="GuY-pv-c3T">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="GuY-pv-c3T">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="submit:" destination="TVb-ba-lvc" id="K4x-1C-X85"/>
