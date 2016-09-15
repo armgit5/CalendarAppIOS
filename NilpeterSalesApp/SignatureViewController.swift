@@ -35,16 +35,14 @@ class SignatureViewController: UIViewController, YPDrawSignatureViewDelegate {
             
             let imageData:NSData = UIImagePNGRepresentation(signatureImage)!
             let strBase64 = imageData.base64EncodedStringWithOptions([])
-            var trimmed = strBase64.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            let trimmed = strBase64.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
 
             if signatureType == "nilpeter" {
                 Timesheet.nilpeterSignature = "signaturePad.fromDataURL('data:image/png;base64,\(trimmed)')"
-                trimmed = ""
             }
             
             if signatureType == "customer" {
                 Timesheet.customerSignature = "signaturePad2.fromDataURL('data:image/png;base64,\(trimmed)')"
-                trimmed = ""
             }
             
         }
