@@ -35,14 +35,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     @IBOutlet weak var loadingNilpeterIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingThirdIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingThirdLabel: UILabel!
-    var productTimer = NSTimer()
+    var productTimer = Timer()
     
     // engineer
     @IBOutlet weak var engineerTextField: UITextField!
     @IBOutlet weak var loadingEngineerIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingEngineerLabel: UILabel!
     
-    var engineerTimer = NSTimer()
+    var engineerTimer = Timer()
     
     // Description
     @IBOutlet var descriptionTextField: UITextField!
@@ -62,16 +62,16 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     
     // User store
-    var prefs: NSUserDefaults!
+    var prefs: UserDefaults!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // User store
         // Check user session
-        prefs = NSUserDefaults.standardUserDefaults()
-        if prefs.integerForKey("Session") == 0 {
-            self.performSegueWithIdentifier("showLogin", sender: self)
+        prefs = UserDefaults.standard
+        if prefs.integer(forKey: "Session") == 0 {
+            self.performSegue(withIdentifier: "showLogin", sender: self)
         }
        
         // disable table view selection
@@ -95,71 +95,71 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         machineTextField.delegate = self
         
         // UI Design
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
-        self.tabBarController?.tabBar.barTintColor = UIColor.redColor()
-        self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
+        self.tabBarController?.tabBar.barTintColor = UIColor.red
+        self.tabBarController?.tabBar.tintColor = UIColor.white
         
         self.getProducts()
-        productTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateProducts", userInfo: nil, repeats: true)
+        productTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateProducts), userInfo: nil, repeats: true)
         self.getEngineers()
-        engineerTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateEngineers", userInfo: nil, repeats: true)
+        engineerTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateEngineers), userInfo: nil, repeats: true)
         
         // Submitting spinner
-        loadingLabel = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 75, 0, 80, 35))
+        loadingLabel = UILabel.init(frame: CGRect(x: self.view.frame.size.width - 75, y: 0, width: 80, height: 35))
         loadingLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14)
         loadingLabel.text = "Submitting..."
-        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        spinner.frame = CGRectMake(self.view.frame.size.width - 130, 0, 80, 35)
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        spinner.frame = CGRect(x: self.view.frame.size.width - 130, y: 0, width: 80, height: 35)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         self.hideLoading()
         
-        updateText = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 150, 0, 150, 35))
+        updateText = UILabel.init(frame: CGRect(x: self.view.frame.size.width - 150, y: 0, width: 150, height: 35))
         updateText.font = UIFont(name: "HelveticaNeue-Light", size: 14)
         updateText.text = "Succesfully submitted!"
         view.addSubview(updateText)
         hideSubmitted()
         
-        welcome = UILabel.init(frame: CGRectMake(10, 0, 175, 35))
+        welcome = UILabel.init(frame: CGRect(x: 10, y: 0, width: 175, height: 35))
         welcome.font = UIFont(name: "HelveticaNeue-Light", size: 14)
-        if let email = self.prefs.stringForKey("Email") {
+        if let email = self.prefs.string(forKey: "Email") {
             welcome.text = "Welcome \(email)"
         }
         view.addSubview(welcome)
         
-        chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        chargeStatus.setTitleColor(UIColor.blue, for: UIControlState())
         
-        sendButton.enabled = false
+        sendButton.isEnabled = false
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(self.prefs.integerForKey("Userid"))
-        if let email = self.prefs.stringForKey("Email") {
+        print(self.prefs.integer(forKey: "Userid"))
+        if let email = self.prefs.string(forKey: "Email") {
             welcome.text = "Welcome \(email)"
         }
-        downLoadJobNum(String(self.prefs.integerForKey("Userid")))
+        downLoadJobNum(String(self.prefs.integer(forKey: "Userid")))
     }
 
     
 
-    @IBAction func chargeButtonPressed(sender: AnyObject) {
+    @IBAction func chargeButtonPressed(_ sender: AnyObject) {
         print("click")
         print(chargeStatusNum == 0)
         if chargeStatusNum == 0 {
-            chargeStatus.setTitle("chargable", forState: .Normal)
+            chargeStatus.setTitle("chargable", for: UIControlState())
             chargeStatusNum = 1
-            chargeStatus.setTitleColor(UIColor.redColor(), forState: .Normal)
+            chargeStatus.setTitleColor(UIColor.red, for: UIControlState())
         } else if chargeStatusNum == 1 {
-            chargeStatus.setTitle("non-chargable", forState: .Normal)
+            chargeStatus.setTitle("non-chargable", for: UIControlState())
             chargeStatusNum = 0
-            chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+            chargeStatus.setTitleColor(UIColor.blue, for: UIControlState())
         }
     }
     
     // MARK: - UIPickerView Delegate
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
+    func numberOfComponentsInPickerView(_ pickerView: UIPickerView) -> Int{
         return 1
     }
     
@@ -169,22 +169,22 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     func showLoadProducts() {
         loadingNilpeterIndicator.startAnimating()
         loadingThirdIndicator.startAnimating()
-        loadingNilpeterIndicator.hidden = false
-        loadingNilpeterProducts.hidden = false
-        loadingThirdIndicator.hidden = false
-        loadingThirdLabel.hidden = false
-        nilpeterProductTextField.userInteractionEnabled = false
-        otherProductTextField.userInteractionEnabled = false
+        loadingNilpeterIndicator.isHidden = false
+        loadingNilpeterProducts.isHidden = false
+        loadingThirdIndicator.isHidden = false
+        loadingThirdLabel.isHidden = false
+        nilpeterProductTextField.isUserInteractionEnabled = false
+        otherProductTextField.isUserInteractionEnabled = false
     }
     func hideLoadProducts() {
         loadingNilpeterIndicator.stopAnimating()
         loadingThirdIndicator.stopAnimating()
-        loadingNilpeterIndicator.hidden = true
-        loadingThirdIndicator.hidden = true
-        loadingNilpeterProducts.hidden = true
-        loadingThirdLabel.hidden = true
-        nilpeterProductTextField.userInteractionEnabled = true
-        otherProductTextField.userInteractionEnabled = true
+        loadingNilpeterIndicator.isHidden = true
+        loadingThirdIndicator.isHidden = true
+        loadingNilpeterProducts.isHidden = true
+        loadingThirdLabel.isHidden = true
+        nilpeterProductTextField.isUserInteractionEnabled = true
+        otherProductTextField.isUserInteractionEnabled = true
     }
     
     func updateProducts() {
@@ -199,7 +199,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         scheduleService.getSchedule("products", idString: nil) {
             products in
             if let productArray = products {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     let productArrayObj = Product(dictArray: productArray)
                     self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
                     self.product?.otherProductArray = productArrayObj.otherProductArray
@@ -213,15 +213,15 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     func showLoadEngineers() {
         loadingEngineerIndicator.startAnimating()
-        loadingEngineerIndicator.hidden = false
-        loadingEngineerLabel.hidden = false
-        engineerTextField.userInteractionEnabled = false
+        loadingEngineerIndicator.isHidden = false
+        loadingEngineerLabel.isHidden = false
+        engineerTextField.isUserInteractionEnabled = false
     }
     func hideLoadEngineers() {
         loadingEngineerIndicator.stopAnimating()
-        loadingEngineerIndicator.hidden = true
-        loadingEngineerLabel.hidden = true
-        engineerTextField.userInteractionEnabled = true
+        loadingEngineerIndicator.isHidden = true
+        loadingEngineerLabel.isHidden = true
+        engineerTextField.isUserInteractionEnabled = true
     }
     
     func updateEngineers() {
@@ -230,11 +230,11 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         
     }
     
-    func downLoadJobNum(idString: String) {
+    func downLoadJobNum(_ idString: String) {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("schedules/auto_jobnum/", idString: idString) {
             newJobNums in
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 if let validJobNums = newJobNums {
                     for newJobNum in validJobNums {
                         if let jobNum = newJobNum["newJobNum"] as? String {
@@ -256,14 +256,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             Engineer.engineerArray.removeAll()
             Engineer.engineerDict.removeAll()
             if let engineerArray = engineers {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     for engineer in engineerArray {
                         if let engineertName = engineer["email"] as? String {
                             if engineertName == "admin@nilpeter.com" {
 //                                print("don't add admin")
                             } else if engineertName == "ios@nilpeter.com" {
 //                                print("don't add ios")
-                            } else if engineertName == self.prefs.stringForKey("Email") {
+                            } else if engineertName == self.prefs.string(forKey: "Email") {
 //                                print("dont' add current user")
                             } else {
                                 Engineer.engineerArray.append(engineertName)
@@ -275,7 +275,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                     }
                     self.hideLoadEngineers()
                     self.engineerTimer.invalidate()
-                    self.sendButton.enabled = true
+                    self.sendButton.isEnabled = true
 //                    print(Engineer.engineerArray)
                 }
             }
@@ -283,7 +283,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     }
 
 
-    func addCompany(company: String) {
+    func addCompany(_ company: String) {
         companyTextField.text = company
         tableView.reloadData()
     }
@@ -294,7 +294,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         dateTextField.resignFirstResponder()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        if textField == descriptionTextField || textField == machineTextField || textField == jobNumTextField || textField == companyTextField {
 //            textField.resignFirstResponder()
 //            return true
@@ -306,16 +306,16 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     // MARK: - Text Field delegate
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
         
         if (textField === dateTextField) {
             resign()
-            let formatter = NSDateFormatter()
+            let formatter = DateFormatter()
             formatter.dateFormat = "dd-MM-yyyy HH:mm"
-            let initDate : NSDate? = formatter.dateFromString(dateTextField.text!)
-            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
+            let initDate : Date? = formatter.date(from: dateTextField.text!)
+            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : Date, forTextField : UITextField) -> () in
     
                 // here we don't use self (no retain cycle)
                 forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
@@ -326,10 +326,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             return false
         } else if (textField === endDateTextField) {
                 resign()
-                let formatter = NSDateFormatter()
+                let formatter = DateFormatter()
                 formatter.dateFormat = "dd-MM-yyyy HH:mm"
-                let initDate : NSDate? = formatter.dateFromString(endDateTextField.text!)
-                let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
+                let initDate : Date? = formatter.date(from: endDateTextField.text!)
+                let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : Date, forTextField : UITextField) -> () in
                     
                     // here we don't use self (no retain cycle)
                     forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
@@ -339,13 +339,13 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                 popEndDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
                 return false
         } else if textField == nilpeterProductTextField {
-            performSegueWithIdentifier("nilpeterProduct", sender: self)
+            performSegue(withIdentifier: "nilpeterProduct", sender: self)
             return true
         } else if textField == otherProductTextField {
-            performSegueWithIdentifier("otherProduct", sender: self)
+            performSegue(withIdentifier: "otherProduct", sender: self)
             return true
         } else if textField == engineerTextField {
-            performSegueWithIdentifier("engineer", sender: self)
+            performSegue(withIdentifier: "engineer", sender: self)
             return true
         }
         return true
@@ -353,7 +353,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     // MARK: - post method
     
-    @IBAction func postToArm(sender: AnyObject) {
+    @IBAction func postToArm(_ sender: AnyObject) {
         
         // Showloading spinner
         self.showLoading()
@@ -368,7 +368,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         var combinedIdArray = ""
         var engineerArray = ""
         var descriptionString = ""
-        let userIdString = ", \"user_id\": \"\(self.prefs.integerForKey("Userid"))\" "
+        let userIdString = ", \"user_id\": \"\(self.prefs.integer(forKey: "Userid"))\" "
         
         if let dateTime = dateTextField.text {
             dateString = "\"date\": \"\(dateTime)\" "
@@ -390,10 +390,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             machineString = ", \"machine_number\": \"\(machineNumName)\" "
         }
         
-        if (self.prefs.stringForKey("Email") == "admin@nilpeter.com") {
+        if (self.prefs.string(forKey: "Email") == "admin@nilpeter.com") {
             engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
         } else {
-            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds + [self.prefs.integerForKey("Userid")])) "
+            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds + [self.prefs.integer(forKey: "Userid")])) "
         }
         
         
@@ -426,7 +426,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             if let returnMessage = status as String? {
                 print(returnMessage)
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     
                     self.tabBarController?.selectedIndex = 0
                     self.cancelAllFields()
@@ -438,7 +438,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     }
     
     // MARK: - unwind company from company table view
-    @IBAction func unwindFromModalViewController(segue: UIStoryboardSegue) {
+    @IBAction func unwindFromModalViewController(_ segue: UIStoryboardSegue) {
 //        if segue.sourceViewController.isKindOfClass(SearchTableViewController) {
 //            let searchController = segue.sourceViewController as! SearchTableViewController
 //            if searchController.company?.parentCompany != nil {
@@ -446,8 +446,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
 //        }
         
             
-        if segue.sourceViewController.isKindOfClass(NilpeterProductTableViewController) {
-            let nilpeterProductsController = segue.sourceViewController as! NilpeterProductTableViewController
+        if segue.source.isKind(of: NilpeterProductTableViewController.self) {
+            let nilpeterProductsController = segue.source as! NilpeterProductTableViewController
             if let selectedProductArray = nilpeterProductsController.selectedProducts {
                 selectedProductName = selectedProductArray // assign to segue pass back variable
                 nilpeterProductTextField.text = selectedProductName.description
@@ -461,8 +461,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                 
             }
             
-        } else if segue.sourceViewController.isKindOfClass(ThirdPartyProductTableViewController) {
-            let otherProductsController = segue.sourceViewController as! ThirdPartyProductTableViewController
+        } else if segue.source.isKind(of: ThirdPartyProductTableViewController.self) {
+            let otherProductsController = segue.source as! ThirdPartyProductTableViewController
             if let selectedProductArray = otherProductsController.selectedProducts {
                 selectedOtherProductName = selectedProductArray // assign to segue pass back variable
                 otherProductTextField.text = selectedOtherProductName.description
@@ -475,7 +475,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
                 }
                 
             }
-        } else if segue.sourceViewController.isKindOfClass(EngineerViewController) {
+        } else if segue.source.isKind(of: EngineerViewController.self) {
             self.engineerTextField.text = Engineer.pickedEngineerNames.description
             print(Engineer.pickedEngineerIds)
             
@@ -483,14 +483,14 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     }
     
     // MARK: - Prepare for segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "nilpeterProduct" {
-            let nav = segue.destinationViewController as! UINavigationController
+            let nav = segue.destination as! UINavigationController
             let destination = nav.topViewController as! NilpeterProductTableViewController
             destination.selectedProducts = selectedProductName
             destination.product = self.product
         } else if segue.identifier == "otherProduct" {
-            let nav = segue.destinationViewController as! UINavigationController
+            let nav = segue.destination as! UINavigationController
             let destination = nav.topViewController as! ThirdPartyProductTableViewController
             destination.selectedProducts = selectedOtherProductName
             destination.product = self.product
@@ -499,7 +499,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     // MARK: - Helper functions
     
-    func convertArrayIntToArratString(arrayInt: [Int]) -> [String] {
+    func convertArrayIntToArratString(_ arrayInt: [Int]) -> [String] {
         var outArray = [String]()
         for i in arrayInt {
             outArray.append("\(i)")
@@ -509,17 +509,17 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     func hideLoading() {
         spinner.stopAnimating()
-        loadingLabel.hidden = true
+        loadingLabel.isHidden = true
     }
     
     func showLoading() {
         spinner.startAnimating()
-        loadingLabel.hidden = false
+        loadingLabel.isHidden = false
         hideSubmitted()
     }
     
     func showSubmitted() {
-        updateText.hidden = false
+        updateText.isHidden = false
     }
     
     func resetCompany() {
@@ -527,7 +527,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     }
     
     func hideSubmitted() {
-        updateText.hidden = true
+        updateText.isHidden = true
     }
     
     
@@ -547,9 +547,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     }
     
     func clearChargable() {
-        chargeStatus.setTitle("non-chargable", forState: .Normal)
+        chargeStatus.setTitle("non-chargable", for: UIControlState())
         chargeStatusNum = 0
-        chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        chargeStatus.setTitleColor(UIColor.blue, for: UIControlState())
     }
     
     func cancelAllFields() {
@@ -569,7 +569,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         
     }
     
-    @IBAction func cancelSchedule(sender: AnyObject) {
+    @IBAction func cancelSchedule(_ sender: AnyObject) {
         self.cancelAllFields()
     }
     

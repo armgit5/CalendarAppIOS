@@ -17,7 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var verifyingLoading: UIActivityIndicatorView!
     
     var user: User?
-    var prefs: NSUserDefaults!
+    var prefs: UserDefaults!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +25,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         self.navigationItem.hidesBackButton = true
         self.navigationItem.backBarButtonItem = nil
-        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: navigationController, action: nil)
+        let backButton = UIBarButtonItem(title: "", style: UIBarButtonItemStyle.plain, target: navigationController, action: nil)
         navigationItem.leftBarButtonItem = backButton
         
-        self.tabBarController?.tabBar.hidden = true
+        self.tabBarController?.tabBar.isHidden = true
         self.navigationItem.title = "Login"
         self.email.delegate = self
         self.password.delegate = self
@@ -36,14 +36,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.verifyingHide()
         
         // Store and password
-        prefs = NSUserDefaults.standardUserDefaults()
+        prefs = UserDefaults.standard
     }
     
     func validateUser() {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("user", idString: nil) {
             user in
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 if let validUser = user {
                     // Check to see if user exist, if so will return
                     // [["message": Successfully login, "user_id": userid]]
@@ -56,8 +56,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.prefs.setValue(User.email, forKey: "Email")
                         self.prefs.setValue(1, forKey: "Session")
                         
-                        self.tabBarController?.tabBar.hidden = false
-                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        self.tabBarController?.tabBar.isHidden = false
+                        self.navigationController?.popToRootViewController(animated: true)
                         self.verifyingHide()
                         
                     }
@@ -68,7 +68,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     print("invalid user or password")
                     self.verifyingHide()
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                     self.showAlert()
                     
                 }
@@ -77,35 +77,35 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func showAlert() {
-        let alertView = UIAlertController(title: "Invalid Username or Password", message: "Please reenter username and password again", preferredStyle: .Alert)
-        alertView.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-        self.presentViewController(alertView, animated: true, completion: nil)
+        let alertView = UIAlertController(title: "Invalid Username or Password", message: "Please reenter username and password again", preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alertView, animated: true, completion: nil)
     }
     
     func verifyingShow() {
         self.email.resignFirstResponder()
         self.password.resignFirstResponder()
-        self.login.enabled = false
-        self.verifyingTextField.hidden = false
-        self.verifyingLoading.hidden = false
+        self.login.isEnabled = false
+        self.verifyingTextField.isHidden = false
+        self.verifyingLoading.isHidden = false
         self.verifyingLoading.startAnimating()
     }
     
     func verifyingHide() {
         self.email.resignFirstResponder()
         self.password.resignFirstResponder()
-        self.login.enabled = true
-        self.verifyingTextField.hidden = true
-        self.verifyingLoading.hidden = true
+        self.login.isEnabled = true
+        self.verifyingTextField.isHidden = true
+        self.verifyingLoading.isHidden = true
         self.verifyingLoading.stopAnimating()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
 
-    @IBAction func login(sender: AnyObject) {
+    @IBAction func login(_ sender: AnyObject) {
         User.email = self.email.text!
         User.password = self.password.text!
         self.verifyingShow()

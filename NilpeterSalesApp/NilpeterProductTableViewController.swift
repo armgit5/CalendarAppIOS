@@ -24,13 +24,13 @@ class NilpeterProductTableViewController: UITableViewController {
             self.getProducts()
         }
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
         
-        loadingLabel = UILabel.init(frame: CGRectMake(view.center.x - 40, view.center.y - 40, 80, 80))
+        loadingLabel = UILabel.init(frame: CGRect(x: view.center.x - 40, y: view.center.y - 40, width: 80, height: 80))
         loadingLabel.text = "Loading..."
-        self.loadingLabel.hidden = true
-        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 80, 80)
+        self.loadingLabel.isHidden = true
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        spinner.frame = CGRect(x: view.center.x - 40, y: view.center.y - 65, width: 80, height: 80)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
     }
@@ -39,13 +39,13 @@ class NilpeterProductTableViewController: UITableViewController {
     
     func hideLoading() {
         self.spinner.stopAnimating()
-        self.loadingLabel.hidden = true
+        self.loadingLabel.isHidden = true
     }
     
     func showLoading() {
         if !fromEditPage {
             self.spinner.startAnimating()
-            self.loadingLabel.hidden = false
+            self.loadingLabel.isHidden = false
         }
         
     }
@@ -57,7 +57,7 @@ class NilpeterProductTableViewController: UITableViewController {
         scheduleService.getSchedule("products", idString: nil) {
             products in
             if let productArray = products {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     let productArrayObj = Product(dictArray: productArray)
                     self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
                     self.product?.productDict = productArrayObj.productDict
@@ -71,11 +71,11 @@ class NilpeterProductTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let nilpeterProducts = self.product?.nilpeterProductArray {
             return nilpeterProducts.count
@@ -84,58 +84,58 @@ class NilpeterProductTableViewController: UITableViewController {
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("nilpeterCell")
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "nilpeterCell")
         
         if let nilpeterProducts = self.product?.nilpeterProductArray {
-            cell?.textLabel!.text = nilpeterProducts[indexPath.row]
+            cell?.textLabel!.text = nilpeterProducts[(indexPath as NSIndexPath).row]
         }
         
         if self.product?.nilpeterProductArray != nil {
-            let product = self.product?.nilpeterProductArray![indexPath.row]
+            let product = self.product?.nilpeterProductArray![(indexPath as NSIndexPath).row]
             if isSelected(product!) {
-                cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+                cell?.accessoryType = UITableViewCellAccessoryType.checkmark
                 
             } else {
-                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell?.accessoryType = UITableViewCellAccessoryType.none
             }
         }
         return cell!
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
     
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        let product = self.product?.nilpeterProductArray![indexPath.row]
+        let cell = tableView.cellForRow(at: indexPath)
+        let product = self.product?.nilpeterProductArray![(indexPath as NSIndexPath).row]
         
         if isSelected(product!) {
-            cell!.accessoryType = UITableViewCellAccessoryType.None
+            cell!.accessoryType = UITableViewCellAccessoryType.none
             
             for selectedProduct in selectedProducts! {
                 if product == selectedProduct {
-                    if let index = selectedProducts?.indexOf(selectedProduct) {
-                        selectedProducts?.removeAtIndex(index)
+                    if let index = selectedProducts?.index(of: selectedProduct) {
+                        selectedProducts?.remove(at: index)
                     }
                 }
             }
         } else {
-            cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell!.accessoryType = UITableViewCellAccessoryType.checkmark
             selectedProducts?.append(product!)
         }
     
     }
     
-    @IBAction func dismissController(sender: AnyObject) {
+    @IBAction func dismissController(_ sender: AnyObject) {
         if fromEditPage {
-            self.performSegueWithIdentifier("editNilpeterProductsSelected", sender: self)
+            self.performSegue(withIdentifier: "editNilpeterProductsSelected", sender: self)
         } else {
-            self.performSegueWithIdentifier("nilpeterProductsSelected", sender: self)
+            self.performSegue(withIdentifier: "nilpeterProductsSelected", sender: self)
         }
         
     }
    
-    func isSelected(product: String) -> Bool {
+    func isSelected(_ product: String) -> Bool {
         for selectedProduct in (self.selectedProducts)! {
             if product == selectedProduct {
                 return true

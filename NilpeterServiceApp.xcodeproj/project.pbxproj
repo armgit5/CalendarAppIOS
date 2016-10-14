@@ -325,7 +325,8 @@
 				TargetAttributes = {
 					12009D0F1B830CD300C012B6 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = Y7E7JR3VWR;
+						DevelopmentTeam = X936CDJVAA;
+						LastSwiftMigration = 0800;
 					};
 					12009D241B830CD400C012B6 = {
 						CreatedOnToolsVersion = 6.4;
@@ -549,6 +550,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.armcomm.NilpeterServiceApp;
 				PRODUCT_NAME = NilpeterServiceApp;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -565,6 +567,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.armcomm.NilpeterServiceApp;
 				PRODUCT_NAME = NilpeterServiceApp;
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

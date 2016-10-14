@@ -11,7 +11,7 @@ import Foundation
 struct Engineer {
     
     // Parsing
-    static var rawEngineerData: [[String: AnyObject]] = [["":""]]
+    static var rawEngineerData: [[String: AnyObject]] = [["":"" as AnyObject]]
     static var engineerArray: [String] = []
     static var engineerDict: [String: Int] = ["":0]
     

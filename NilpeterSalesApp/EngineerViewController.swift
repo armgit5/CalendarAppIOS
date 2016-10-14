@@ -13,16 +13,16 @@ class EngineerViewController: UITableViewController {
     var selectedProducts: [String]?
     var spinner: UIActivityIndicatorView!
     var loadingLabel: UILabel!
-    var prefs: NSUserDefaults!
+    var prefs: UserDefaults!
     var fromEditPage: Bool = false
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        prefs = NSUserDefaults.standardUserDefaults()
-        if prefs.integerForKey("Session") == 0 {
-            self.performSegueWithIdentifier("showLogin", sender: self)
+        prefs = UserDefaults.standard
+        if prefs.integer(forKey: "Session") == 0 {
+            self.performSegue(withIdentifier: "showLogin", sender: self)
         }
         
 //        if (Engineer.engineerArray.count < 2) {
@@ -34,13 +34,13 @@ class EngineerViewController: UITableViewController {
 //            self.getEngineers()
 //         }
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
         
-        loadingLabel = UILabel.init(frame: CGRectMake(view.center.x - 40, view.center.y - 40, 80, 80))
+        loadingLabel = UILabel.init(frame: CGRect(x: view.center.x - 40, y: view.center.y - 40, width: 80, height: 80))
         loadingLabel.text = "Loading..."
-        self.loadingLabel.hidden = true
-        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 80, 80)
+        self.loadingLabel.isHidden = true
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        spinner.frame = CGRect(x: view.center.x - 40, y: view.center.y - 65, width: 80, height: 80)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         
@@ -52,14 +52,14 @@ class EngineerViewController: UITableViewController {
         scheduleService.getSchedule("engineers", idString: nil) {
             engineers in
             if let engineerArray = engineers {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     for engineer in engineerArray {
                         if let engineertName = engineer["email"] as? String {
                             if engineertName == "admin@nilpeter.com" {
                                 print("don't add admin")
                             } else if engineertName == "ios@nilpeter.com" {
                                 print("don't add ios")
-                            } else if engineertName == self.prefs.stringForKey("Email") {
+                            } else if engineertName == self.prefs.string(forKey: "Email") {
                                 print(engineertName)
                                 print("dont' add current user")
                             } else {
@@ -98,66 +98,66 @@ class EngineerViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Engineer.engineerArray.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("engineerCell")
-        let engineerName: String = Engineer.engineerArray[indexPath.row].componentsSeparatedByString("@")[0]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "engineerCell")
+        let engineerName: String = Engineer.engineerArray[(indexPath as NSIndexPath).row].components(separatedBy: "@")[0]
         
         cell?.textLabel?.text = engineerName
         
-        let engineer = Engineer.engineerArray[indexPath.row]
+        let engineer = Engineer.engineerArray[(indexPath as NSIndexPath).row]
         
         if isSelected(engineer) {
-            cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell?.accessoryType = UITableViewCellAccessoryType.checkmark
         } else {
-            cell?.accessoryType = UITableViewCellAccessoryType.None
+            cell?.accessoryType = UITableViewCellAccessoryType.none
         }
         
         return cell!
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        let engineer = Engineer.engineerArray[indexPath.row]
+        let cell = tableView.cellForRow(at: indexPath)
+        let engineer = Engineer.engineerArray[(indexPath as NSIndexPath).row]
         
         if isSelected(engineer) {
-            cell!.accessoryType = UITableViewCellAccessoryType.None
+            cell!.accessoryType = UITableViewCellAccessoryType.none
             
             for selectedEngineer in Engineer.pickedEngineerNames {
                 if engineer == selectedEngineer {
-                    if let index = Engineer.pickedEngineerNames.indexOf(selectedEngineer) {
-                        Engineer.pickedEngineerNames.removeAtIndex(index)
-                        Engineer.pickedEngineerIds.removeAtIndex(index)
+                    if let index = Engineer.pickedEngineerNames.index(of: selectedEngineer) {
+                        Engineer.pickedEngineerNames.remove(at: index)
+                        Engineer.pickedEngineerIds.remove(at: index)
                     }
                 }
             }
             
         } else {
-            cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell!.accessoryType = UITableViewCellAccessoryType.checkmark
             Engineer.pickedEngineerNames.append(engineer)
             Engineer.pickedEngineerIds.append(Engineer.engineerDict[engineer]!)
         }
         
     }
     
-    @IBAction func dismissController(sender: AnyObject) {
+    @IBAction func dismissController(_ sender: AnyObject) {
         if fromEditPage {
-            self.performSegueWithIdentifier("editEngineersSelected", sender: self)
+            self.performSegue(withIdentifier: "editEngineersSelected", sender: self)
         } else {
-            self.performSegueWithIdentifier("engineersSelected", sender: self)
+            self.performSegue(withIdentifier: "engineersSelected", sender: self)
         }
     }
     
-    func isSelected(engineer: String) -> Bool {
+    func isSelected(_ engineer: String) -> Bool {
         for selectedEngineer in (Engineer.pickedEngineerNames) {
             if engineer == selectedEngineer {
                 return true

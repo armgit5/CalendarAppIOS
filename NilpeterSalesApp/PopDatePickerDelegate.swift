@@ -27,16 +27,16 @@ class PopDatePickerDelegate: NSObject, UITextFieldDelegate {
     }
     
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         if (textField === dateTextField) {
             dateTextField!.resignFirstResponder()
-            let formatter = NSDateFormatter()
+            let formatter = DateFormatter()
             formatter.dateFormat = "dd-MM-yyyy HH:mm"
             
-            let initDate : NSDate? = formatter.dateFromString(dateTextField!.text!)
+            let initDate : Date? = formatter.date(from: dateTextField!.text!)
             
-            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
+            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : Date, forTextField : UITextField) -> () in
                 
                 // here we don't use self (no retain cycle)
                 forTextField.text = (newDate.ToDateMediumString() ?? "?") as String

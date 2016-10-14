@@ -28,14 +28,14 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         self.tableView.tableHeaderView = self.resultSearchController.searchBar
         
         // UI stuff
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
         
         // Spinner
-        loadingLabel = UILabel.init(frame: CGRectMake(55, 0, 80, 40))
+        loadingLabel = UILabel.init(frame: CGRect(x: 55, y: 0, width: 80, height: 40))
         loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
         loadingLabel.text = "Updating..."
-        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        spinner.frame = CGRectMake(5, 0, 80, 40)
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        spinner.frame = CGRect(x: 5, y: 0, width: 80, height: 40)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         self.hideLoading()
@@ -50,7 +50,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // print("viewwillappear")
         // print(company)
@@ -74,12 +74,12 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     
     func hideLoading() {
         spinner.stopAnimating()
-        loadingLabel.hidden = true
+        loadingLabel.isHidden = true
     }
     
     func showLoading() {
         spinner.startAnimating()
-        loadingLabel.hidden = false
+        loadingLabel.isHidden = false
     }
     
     // MARK: - Get companies
@@ -91,7 +91,7 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
             
             print(companies)
             if let comArray = companies {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     let comArrayObj = Company(dictArray: comArray)
                     self.company?.companies = comArrayObj.companyArray!
                     self.company?.parentCompanyDict = comArrayObj.companyDict
@@ -105,12 +105,12 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
     
     // MARK: - tableview stuffs
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (self.resultSearchController.active) {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (self.resultSearchController.isActive) {
             return (self.company?.filteredCompanies.count)!
         }
         else {
@@ -118,45 +118,45 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        if (self.resultSearchController.active) {
-            cell.textLabel?.text = self.company?.filteredCompanies[indexPath.row]
+        if (self.resultSearchController.isActive) {
+            cell.textLabel?.text = self.company?.filteredCompanies[(indexPath as NSIndexPath).row]
             return cell        }
         else {
-            cell.textLabel?.text = self.company?.companies[indexPath.row]
+            cell.textLabel?.text = self.company?.companies[(indexPath as NSIndexPath).row]
             return cell
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
         var apple = ""
         
-        if (self.resultSearchController.active) {
-            apple = (self.company?.filteredCompanies[indexPath.row])!
+        if (self.resultSearchController.isActive) {
+            apple = (self.company?.filteredCompanies[(indexPath as NSIndexPath).row])!
         } else {
-            apple = (self.company?.companies[indexPath.row])!
+            apple = (self.company?.companies[(indexPath as NSIndexPath).row])!
         }
         
         if  !apple.isEmpty {
             company?.parentCompany = apple
             company?.parentCompanyId = company?.parentCompanyDict![apple]
-            self.dismissViewControllerAnimated(false, completion: nil)
-            self.performSegueWithIdentifier("companySelected", sender: self)
+            self.dismiss(animated: false, completion: nil)
+            self.performSegue(withIdentifier: "companySelected", sender: self)
         }
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController)
+    func updateSearchResults(for searchController: UISearchController)
     {
-        self.company?.filteredCompanies.removeAll(keepCapacity: false)
+        self.company?.filteredCompanies.removeAll(keepingCapacity: false)
         
         let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
-        let array = ((self.company?.companies)! as NSArray).filteredArrayUsingPredicate(searchPredicate)
+        let array = ((self.company?.companies)! as NSArray).filtered(using: searchPredicate)
         self.company?.filteredCompanies = array as! [String]
         self.tableView.reloadData()
     }

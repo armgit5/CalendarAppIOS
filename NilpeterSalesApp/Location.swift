@@ -38,7 +38,7 @@ struct Location {
         makeLocationArray(companyId)
     }
     
-    mutating func makeLocationArray(companyId: Int) {
+    mutating func makeLocationArray(_ companyId: Int) {
         for location in rawLocationData! {
             if let companyIdKey = location["company_id"] as? Int {
                 if companyIdKey == companyId {

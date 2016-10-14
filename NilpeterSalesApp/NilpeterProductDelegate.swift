@@ -27,37 +27,37 @@ class NilpeterProductDelegate: NSObject, UITextFieldDelegate, UIPickerViewDataSo
         
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         nilpeterProductView.delegate = self
         textField.inputView = nilpeterProductView
         
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         textField.text = name
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
+    func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
         //        return (location?.locationArray?.count)!
         return testarray.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         //        return (location?.locationArray)![row]
         return testarray[row]
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         name = testarray[row]
     }
     
    
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.text = name
         textField.resignFirstResponder()
         return true
@@ -68,7 +68,7 @@ class NilpeterProductDelegate: NSObject, UITextFieldDelegate, UIPickerViewDataSo
         scheduleService.getSchedule("products", idString: nil) {
             products in
             if let productArray = products {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     let productArrayObj = Product(dictArray: productArray)
                     self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
                     self.product?.otherProductArray = productArrayObj.otherProductArray

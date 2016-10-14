@@ -37,14 +37,14 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     @IBOutlet weak var loadingNilpeterIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingThirdIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingThirdLabel: UILabel!
-    var productTimer = NSTimer()
+    var productTimer = Timer()
     
     // engineer
     @IBOutlet weak var engineerTextField: UITextField!
     @IBOutlet weak var loadingEngineerIndicator: UIActivityIndicatorView!
     @IBOutlet weak var loadingEngineerLabel: UILabel!
     
-    var engineerTimer = NSTimer()
+    var engineerTimer = Timer()
     
     // Description
     @IBOutlet var descriptionTextField: UITextField!
@@ -64,7 +64,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
    
     
     // User store
-    var prefs: NSUserDefaults!
+    var prefs: UserDefaults!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,9 +76,9 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         
         // User store
         // Check user session
-        prefs = NSUserDefaults.standardUserDefaults()
-        if prefs.integerForKey("Session") == 0 {
-            self.performSegueWithIdentifier("showLogin", sender: self)
+        prefs = UserDefaults.standard
+        if prefs.integer(forKey: "Session") == 0 {
+            self.performSegue(withIdentifier: "showLogin", sender: self)
         }
         
         // disable table view selection
@@ -102,41 +102,41 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         machineTextField.delegate = self
         
         // UI Design
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
-        self.tabBarController?.tabBar.barTintColor = UIColor.redColor()
-        self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
+        self.tabBarController?.tabBar.barTintColor = UIColor.red
+        self.tabBarController?.tabBar.tintColor = UIColor.white
         
         self.getProducts()
-        productTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateProducts", userInfo: nil, repeats: true)
+        productTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(TableViewEditController.updateProducts), userInfo: nil, repeats: true)
         self.getEngineers()
-        engineerTimer = NSTimer.scheduledTimerWithTimeInterval(10, target: self, selector: "updateEngineers", userInfo: nil, repeats: true)
+        engineerTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(TableViewEditController.updateEngineers), userInfo: nil, repeats: true)
         
         // Submitting spinner
-        loadingLabel = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 75, 0, 80, 35))
+        loadingLabel = UILabel.init(frame: CGRect(x: self.view.frame.size.width - 75, y: 0, width: 80, height: 35))
         loadingLabel.font = UIFont(name: "HelveticaNeue-Light", size: 14)
         loadingLabel.text = "Submitting..."
-        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        spinner.frame = CGRectMake(self.view.frame.size.width - 130, 0, 80, 35)
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        spinner.frame = CGRect(x: self.view.frame.size.width - 130, y: 0, width: 80, height: 35)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         self.hideLoading()
         
-        updateText = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 150, 0, 150, 35))
+        updateText = UILabel.init(frame: CGRect(x: self.view.frame.size.width - 150, y: 0, width: 150, height: 35))
         updateText.font = UIFont(name: "HelveticaNeue-Light", size: 14)
         updateText.text = "Succesfully editted!"
         view.addSubview(updateText)
         hideSubmitted()
         
-        welcome = UILabel.init(frame: CGRectMake(10, 0, 175, 35))
+        welcome = UILabel.init(frame: CGRect(x: 10, y: 0, width: 175, height: 35))
         welcome.font = UIFont(name: "HelveticaNeue-Light", size: 14)
-        if let email = self.prefs.stringForKey("Email") {
+        if let email = self.prefs.string(forKey: "Email") {
             welcome.text = "Welcome \(email)"
         }
         view.addSubview(welcome)
         
-        chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        chargeStatus.setTitleColor(UIColor.blue, for: UIControlState())
         
-        sendButton.enabled = false
+        sendButton.isEnabled = false
         
         removeSchedules()
         
@@ -155,26 +155,26 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         Schedules.pickedNilpeterProductIds.removeAll()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let email = self.prefs.stringForKey("Email") {
+        if let email = self.prefs.string(forKey: "Email") {
             welcome.text = "Welcome \(email)"
         }
         
     }
     
-    @IBAction func chargeButtonPressed(sender: AnyObject) {
+    @IBAction func chargeButtonPressed(_ sender: AnyObject) {
         print("click")
         print(chargeStatusNum == 0)
         if chargeStatusNum == 0 {
-            chargeStatus.setTitle("chargable", forState: .Normal)
+            chargeStatus.setTitle("chargable", for: UIControlState())
             chargeStatusNum = 1
-            chargeStatus.setTitleColor(UIColor.redColor(), forState: .Normal)
+            chargeStatus.setTitleColor(UIColor.red, for: UIControlState())
         } else if chargeStatusNum == 1 {
-            chargeStatus.setTitle("non-chargable", forState: .Normal)
+            chargeStatus.setTitle("non-chargable", for: UIControlState())
             chargeStatusNum = 0
-            chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+            chargeStatus.setTitleColor(UIColor.blue, for: UIControlState())
         }
     }
     
@@ -182,7 +182,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     
     // MARK: - UIPickerView Delegate
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int{
+    func numberOfComponentsInPickerView(_ pickerView: UIPickerView) -> Int{
         return 1
     }
     
@@ -192,22 +192,22 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     func showLoadProducts() {
         loadingNilpeterIndicator.startAnimating()
         loadingThirdIndicator.startAnimating()
-        loadingNilpeterIndicator.hidden = false
-        loadingNilpeterProducts.hidden = false
-        loadingThirdIndicator.hidden = false
-        loadingThirdLabel.hidden = false
-        nilpeterProductTextField.userInteractionEnabled = false
-        otherProductTextField.userInteractionEnabled = false
+        loadingNilpeterIndicator.isHidden = false
+        loadingNilpeterProducts.isHidden = false
+        loadingThirdIndicator.isHidden = false
+        loadingThirdLabel.isHidden = false
+        nilpeterProductTextField.isUserInteractionEnabled = false
+        otherProductTextField.isUserInteractionEnabled = false
     }
     func hideLoadProducts() {
         loadingNilpeterIndicator.stopAnimating()
         loadingThirdIndicator.stopAnimating()
-        loadingNilpeterIndicator.hidden = true
-        loadingThirdIndicator.hidden = true
-        loadingNilpeterProducts.hidden = true
-        loadingThirdLabel.hidden = true
-        nilpeterProductTextField.userInteractionEnabled = true
-        otherProductTextField.userInteractionEnabled = true
+        loadingNilpeterIndicator.isHidden = true
+        loadingThirdIndicator.isHidden = true
+        loadingNilpeterProducts.isHidden = true
+        loadingThirdLabel.isHidden = true
+        nilpeterProductTextField.isUserInteractionEnabled = true
+        otherProductTextField.isUserInteractionEnabled = true
     }
     
     func updateProducts() {
@@ -223,7 +223,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         scheduleService.getSchedule("products", idString: nil) {
             products in
             if let productArray = products {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     let productArrayObj = Product(dictArray: productArray)
                     self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
                     self.product?.otherProductArray = productArrayObj.otherProductArray
@@ -237,15 +237,15 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     
     func showLoadEngineers() {
         loadingEngineerIndicator.startAnimating()
-        loadingEngineerIndicator.hidden = false
-        loadingEngineerLabel.hidden = false
-        engineerTextField.userInteractionEnabled = false
+        loadingEngineerIndicator.isHidden = false
+        loadingEngineerLabel.isHidden = false
+        engineerTextField.isUserInteractionEnabled = false
     }
     func hideLoadEngineers() {
         loadingEngineerIndicator.stopAnimating()
-        loadingEngineerIndicator.hidden = true
-        loadingEngineerLabel.hidden = true
-        engineerTextField.userInteractionEnabled = true
+        loadingEngineerIndicator.isHidden = true
+        loadingEngineerLabel.isHidden = true
+        engineerTextField.isUserInteractionEnabled = true
     }
     
     func updateEngineers() {
@@ -255,13 +255,13 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     }
     
     
-    func getSchedule(idStrng: String) {
+    func getSchedule(_ idStrng: String) {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("schedules/", idString: idStrng) {
             schedule in
             
             if let validSchedule = schedule {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
 //                    print(validSchedule)
                     if let companyName = validSchedule.first!["company_name"] {
                         self.companyTextField.text = companyName as? String
@@ -284,8 +284,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                     
                     if let chargable = validSchedule.first!["chargable"] as? Int {
                         if chargable == 1 {
-                            self.chargeStatus.setTitle("chargable", forState: .Normal)
-                            self.chargeStatus.setTitleColor(UIColor.redColor(), forState: .Normal)
+                            self.chargeStatus.setTitle("chargable", for: UIControlState())
+                            self.chargeStatus.setTitleColor(UIColor.red, for: UIControlState())
                             self.chargeStatusNum = 1
                         }
                     }
@@ -303,14 +303,14 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         }
     }
     
-    func getNilpeters(idString: String) {
+    func getNilpeters(_ idString: String) {
         showLoadProducts()
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("schedules/find_nilpeters/", idString: idString) {
             schedule in
             
             if let validSchedule = schedule {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     for product in validSchedule {
                         if let nilpeterProduct = product["name"] as? String {
                             Schedules.nilpeterProducts.append(nilpeterProduct);
@@ -330,7 +330,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
 
     }
     
-    func getThird(idString: String) {
+    func getThird(_ idString: String) {
         
         showLoadProducts()
         let scheduleService = ScheduleService()
@@ -338,7 +338,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             schedule in
             
             if let validSchedule = schedule {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     for product in validSchedule {
                         if let thirdProduct = product["name"] as? String {
                             Schedules.thirdProducts.append(thirdProduct);
@@ -359,7 +359,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         
     }
     
-    func getSelectedEngineer(idString: String) {
+    func getSelectedEngineer(_ idString: String) {
         Engineer.pickedEngineerIds.removeAll()
         Engineer.pickedEngineerNames.removeAll()
         let scheduleService = ScheduleService()
@@ -367,7 +367,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             schedule in
             
             if let validSchedule = schedule {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     for engineers in validSchedule {
                         if let engineerName = engineers["email"] as? String {
                             Engineer.pickedEngineerNames.append(engineerName)
@@ -396,14 +396,14 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             Engineer.engineerArray.removeAll()
             Engineer.engineerDict.removeAll()
             if let engineerArray = engineers {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     for engineer in engineerArray {
                         if let engineertName = engineer["email"] as? String {
                             if engineertName == "admin@nilpeter.com" {
                                 //                                print("don't add admin")
                             } else if engineertName == "ios@nilpeter.com" {
                                 //                                print("don't add ios")
-                            } else if engineertName == self.prefs.stringForKey("Email") {
+                            } else if engineertName == self.prefs.string(forKey: "Email") {
                                 //                                print("dont' add current user")
                             } else {
                                 Engineer.engineerArray.append(engineertName)
@@ -416,7 +416,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                     
                     self.hideLoadEngineers()
                     self.engineerTimer.invalidate()
-                    self.sendButton.enabled = true
+                    self.sendButton.isEnabled = true
                     //                    print(Engineer.engineerArray)
                 }
             }
@@ -424,7 +424,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     }
     
     
-    func addCompany(company: String) {
+    func addCompany(_ company: String) {
         companyTextField.text = company
         tableView.reloadData()
     }
@@ -435,7 +435,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         dateTextField.resignFirstResponder()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        if textField == descriptionTextField {
 //            textField.resignFirstResponder()
 //            return true
@@ -446,16 +446,16 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     
     // MARK: - Text Field delegate
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
         
         if (textField === dateTextField) {
             resign()
-            let formatter = NSDateFormatter()
+            let formatter = DateFormatter()
             formatter.dateFormat = "dd-MM-yyyy HH:mm"
-            let initDate : NSDate? = formatter.dateFromString(dateTextField.text!)
-            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
+            let initDate : Date? = formatter.date(from: dateTextField.text!)
+            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : Date, forTextField : UITextField) -> () in
                 
                 // here we don't use self (no retain cycle)
                 forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
@@ -466,10 +466,10 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             return false
         } else if (textField === endDateTextField) {
             resign()
-            let formatter = NSDateFormatter()
+            let formatter = DateFormatter()
             formatter.dateFormat = "dd-MM-yyyy HH:mm"
-            let initDate : NSDate? = formatter.dateFromString(endDateTextField.text!)
-            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : NSDate, forTextField : UITextField) -> () in
+            let initDate : Date? = formatter.date(from: endDateTextField.text!)
+            let dataChangedCallback : PopDatePicker.PopDatePickerCallback = { (newDate : Date, forTextField : UITextField) -> () in
                 
                 // here we don't use self (no retain cycle)
                 forTextField.text = (newDate.ToDateMediumString() ?? "?") as String
@@ -479,13 +479,13 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             popEndDatePicker!.pick(self, initDate: initDate, dataChanged: dataChangedCallback)
             return false
         } else if textField == nilpeterProductTextField {
-            performSegueWithIdentifier("editNilpeterProduct", sender: self)
+            performSegue(withIdentifier: "editNilpeterProduct", sender: self)
             return true
         } else if textField == otherProductTextField {
-            performSegueWithIdentifier("editOtherProduct", sender: self)
+            performSegue(withIdentifier: "editOtherProduct", sender: self)
             return true
         } else if textField == engineerTextField {
-            performSegueWithIdentifier("editEngineer", sender: self)
+            performSegue(withIdentifier: "editEngineer", sender: self)
             return true
         }
         return true
@@ -493,7 +493,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     
     // MARK: - post method
     
-    @IBAction func postToArm(sender: AnyObject) {
+    @IBAction func postToArm(_ sender: AnyObject) {
         
         // Showloading spinner
         self.showLoading()
@@ -508,7 +508,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         var combinedIdArray = ""
         var engineerArray = ""
         var descriptionString = ""
-        let userIdString = ", \"user_id\": \"\(self.prefs.integerForKey("Userid"))\" "
+        let userIdString = ", \"user_id\": \"\(self.prefs.integer(forKey: "Userid"))\" "
         
         if let dateTime = dateTextField.text {
             dateString = "\"date\": \"\(dateTime)\" "
@@ -570,20 +570,20 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
             if let returnMessage = status as String? {
                 print(returnMessage)
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     
                     // self.tabBarController?.selectedIndex = 2
                     self.cancelAllFields()
                     self.hideLoading()
                     self.showSubmitted()
-                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }
         }
     }
     
     // MARK: - unwind company from company table view
-    @IBAction func unwindFromModalEditViewController(segue: UIStoryboardSegue) {
+    @IBAction func unwindFromModalEditViewController(_ segue: UIStoryboardSegue) {
         //        if segue.sourceViewController.isKindOfClass(SearchTableViewController) {
         //            let searchController = segue.sourceViewController as! SearchTableViewController
         //            if searchController.company?.parentCompany != nil {
@@ -591,8 +591,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         //        }
         
         
-        if segue.sourceViewController.isKindOfClass(NilpeterProductTableViewController) {
-            let nilpeterProductsController = segue.sourceViewController as! NilpeterProductTableViewController
+        if segue.source.isKind(of: NilpeterProductTableViewController.self) {
+            let nilpeterProductsController = segue.source as! NilpeterProductTableViewController
             if let selectedProductArray = nilpeterProductsController.selectedProducts {
                 selectedProductName = selectedProductArray // assign to segue pass back variable
                 nilpeterProductTextField.text = selectedProductName.description
@@ -615,8 +615,8 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                 
             }
             
-        } else if segue.sourceViewController.isKindOfClass(ThirdPartyProductTableViewController) {
-            let otherProductsController = segue.sourceViewController as! ThirdPartyProductTableViewController
+        } else if segue.source.isKind(of: ThirdPartyProductTableViewController.self) {
+            let otherProductsController = segue.source as! ThirdPartyProductTableViewController
             if let selectedProductArray = otherProductsController.selectedProducts {
                 selectedOtherProductName = selectedProductArray // assign to segue pass back variable
                 otherProductTextField.text = selectedOtherProductName.description
@@ -634,7 +634,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
                 }
                 print(Schedules.pickedThirdProductIds)
             }
-        } else if segue.sourceViewController.isKindOfClass(EngineerViewController) {
+        } else if segue.source.isKind(of: EngineerViewController.self) {
             self.engineerTextField.text = Engineer.pickedEngineerNames.description
             print(Engineer.pickedEngineerIds)
             
@@ -642,21 +642,21 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     }
     
     // MARK: - Prepare for segue
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editNilpeterProduct" {
-            let nav = segue.destinationViewController as! UINavigationController
+            let nav = segue.destination as! UINavigationController
             let destination = nav.topViewController as! NilpeterProductTableViewController
             destination.selectedProducts = Schedules.nilpeterProducts
             destination.product = self.product
             destination.fromEditPage = true
         } else if segue.identifier == "editOtherProduct" {
-            let nav = segue.destinationViewController as! UINavigationController
+            let nav = segue.destination as! UINavigationController
             let destination = nav.topViewController as! ThirdPartyProductTableViewController
             destination.selectedProducts = Schedules.thirdProducts
             destination.product = self.product
             destination.fromEditPage = true
         } else if segue.identifier == "editEngineer" {
-            let nav = segue.destinationViewController as! UINavigationController
+            let nav = segue.destination as! UINavigationController
             let destination = nav.topViewController as! EngineerViewController
             destination.fromEditPage = true
         }
@@ -664,7 +664,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     
     // MARK: - Helper functions
     
-    func convertArrayIntToArratString(arrayInt: [Int]) -> [String] {
+    func convertArrayIntToArratString(_ arrayInt: [Int]) -> [String] {
         var outArray = [String]()
         for i in arrayInt {
             outArray.append("\(i)")
@@ -674,17 +674,17 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     
     func hideLoading() {
         spinner.stopAnimating()
-        loadingLabel.hidden = true
+        loadingLabel.isHidden = true
     }
     
     func showLoading() {
         spinner.startAnimating()
-        loadingLabel.hidden = false
+        loadingLabel.isHidden = false
         hideSubmitted()
     }
     
     func showSubmitted() {
-        updateText.hidden = false
+        updateText.isHidden = false
     }
     
     func resetCompany() {
@@ -692,7 +692,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     }
     
     func hideSubmitted() {
-        updateText.hidden = true
+        updateText.isHidden = true
     }
     
     
@@ -712,9 +712,9 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
     }
     
     func clearChargable() {
-        chargeStatus.setTitle("non-chargable", forState: .Normal)
+        chargeStatus.setTitle("non-chargable", for: UIControlState())
         chargeStatusNum = 0
-        chargeStatus.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        chargeStatus.setTitleColor(UIColor.blue, for: UIControlState())
     }
     
     func cancelAllFields() {
@@ -733,13 +733,13 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         clearChargable()
     }
     
-    @IBAction func cancelSchedule(sender: AnyObject) {
+    @IBAction func cancelSchedule(_ sender: AnyObject) {
         self.cancelAllFields()
     }
 
     
-    @IBAction func dismissViewController(sender: AnyObject) {
-        self.navigationController?.popToRootViewControllerAnimated(true)
+    @IBAction func dismissViewController(_ sender: AnyObject) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
 }

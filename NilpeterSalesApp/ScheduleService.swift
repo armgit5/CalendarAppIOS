@@ -9,16 +9,16 @@
 import Foundation
 
 struct ScheduleService {
-    let scheduleBaseURL: NSURL?
+    let scheduleBaseURL: URL?
     typealias ScheduleServiceCompletion = ([[String: AnyObject]]?) -> Void
     
     init() {
         let headingBastURL = User.headingBaseURL + "api/"
-        self.scheduleBaseURL = NSURL(string: headingBastURL)
+        self.scheduleBaseURL = URL(string: headingBastURL)
     }
     
-    func getSchedule(scheduleQuery: String, idString: String?, completion: ScheduleServiceCompletion) {
-        if let scheduleURL = NSURL(string: scheduleQuery, relativeToURL: scheduleBaseURL) {
+    func getSchedule(_ scheduleQuery: String, idString: String?, completion: @escaping ScheduleServiceCompletion) {
+        if let scheduleURL = URL(string: scheduleQuery, relativeTo: scheduleBaseURL) {
             
             let networkOperation = NetworkOperation(url: scheduleURL)
             networkOperation.downloadJSONFromURL(idString) {
@@ -30,8 +30,8 @@ struct ScheduleService {
         }
     }
     
-    func postSchedule(scheduleBody: String, postId: String?, postMethod: String, completion: String? -> Void) {
-        if let scheduleURL = NSURL(string: "schedules/", relativeToURL: scheduleBaseURL) {
+    func postSchedule(_ scheduleBody: String, postId: String?, postMethod: String, completion: @escaping (String?) -> Void) {
+        if let scheduleURL = URL(string: "schedules/", relativeTo: scheduleBaseURL) {
             
             let networkOperation = NetworkOperation(url: scheduleURL)
             if let id = postId {

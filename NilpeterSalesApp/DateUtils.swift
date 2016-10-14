@@ -8,14 +8,14 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
     
     // -> Date System Formatted Medium
     func ToDateMediumString() -> NSString? {
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy HH:mm"
 //        formatter.dateStyle = .MediumStyle;
 //        formatter.timeStyle = .NoStyle;
-        return formatter.stringFromDate(self)
+        return formatter.string(from: self) as NSString?
     }
 }

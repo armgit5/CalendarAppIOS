@@ -16,26 +16,26 @@ class SignatureViewController: UIViewController, YPDrawSignatureViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
         
         signatureView.delegate = self;
         
-        let value = UIInterfaceOrientation.LandscapeLeft.rawValue
-        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
         UIViewController.attemptRotationToDeviceOrientation()
     }
     
-    @IBAction func clearSignature(sender: AnyObject) {
+    @IBAction func clearSignature(_ sender: AnyObject) {
         self.signatureView.clearSignature()
     }
     
     
-    @IBAction func okButton(sender: AnyObject) {
+    @IBAction func okButton(_ sender: AnyObject) {
         if let signatureImage = self.signatureView.getSignature(scale: 10) {
             
-            let imageData:NSData = UIImagePNGRepresentation(signatureImage)!
-            let strBase64 = imageData.base64EncodedStringWithOptions([])
-            let trimmed = strBase64.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+            let imageData:Data = UIImagePNGRepresentation(signatureImage)!
+            let strBase64 = imageData.base64EncodedString(options: [])
+            let trimmed = strBase64.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
 
             if signatureType == "nilpeter" {
                 Timesheet.nilpeterSignature = "signaturePad.fromDataURL('data:image/png;base64,\(trimmed)')"
@@ -47,7 +47,7 @@ class SignatureViewController: UIViewController, YPDrawSignatureViewDelegate {
             
         }
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
         
     }
     
@@ -59,11 +59,11 @@ class SignatureViewController: UIViewController, YPDrawSignatureViewDelegate {
         print("Started")
     }
 
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.LandscapeLeft
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscapeLeft
     }
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
         return true
     }
 }

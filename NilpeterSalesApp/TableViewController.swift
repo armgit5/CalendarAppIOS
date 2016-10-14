@@ -12,7 +12,7 @@ class TableViewController: UITableViewController {
     
     var id: Int = 0
     // User store
-    var prefs: NSUserDefaults!
+    var prefs: UserDefaults!
     
     var spinner: UIActivityIndicatorView!
     var loadingLabel: UILabel!
@@ -22,24 +22,24 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
         let font: UIFont = UIFont(name: "HelveticaNeue-UltraLight", size: 17)!
-        let color = UIColor.whiteColor()
-        self.navigationController?.navigationBar.topItem?.backBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font,NSForegroundColorAttributeName: color], forState: .Normal)
+        let color = UIColor.white
+        self.navigationController?.navigationBar.topItem?.backBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font,NSForegroundColorAttributeName: color], for: UIControlState())
         
-        prefs = NSUserDefaults.standardUserDefaults()
+        prefs = UserDefaults.standard
         
-        loadingLabel = UILabel.init(frame: CGRectMake(self.view.frame.size.width - 75, 0, 80, 40))
+        loadingLabel = UILabel.init(frame: CGRect(x: self.view.frame.size.width - 75, y: 0, width: 80, height: 40))
         loadingLabel.font = UIFont(name: "HelveticaNeue-UltraLight", size: 14)
         loadingLabel.text = "Updating..."
-        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        spinner.frame = CGRectMake(self.view.frame.size.width - 125, 0, 80, 40)
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        spinner.frame = CGRect(x: self.view.frame.size.width - 125, y: 0, width: 80, height: 40)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getSchedules()
     }
@@ -48,12 +48,12 @@ class TableViewController: UITableViewController {
     
     func hideLoading() {
         spinner.stopAnimating()
-        loadingLabel.hidden = true
+        loadingLabel.isHidden = true
     }
     
     func showLoading() {
         spinner.startAnimating()
-        loadingLabel.hidden = false
+        loadingLabel.isHidden = false
     }
     
     func removeSchedules() {
@@ -64,11 +64,11 @@ class TableViewController: UITableViewController {
     func getSchedules() {
         showLoading()
         let scheduleService = ScheduleService()
-        let userIdString = String(self.prefs.integerForKey("Userid"))
+        let userIdString = String(self.prefs.integer(forKey: "Userid"))
         scheduleService.getSchedule("schedules/index/)", idString: userIdString) {
             schedules in
             if let scheduleArray = schedules {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.removeSchedules()
                     for schedule in scheduleArray {
                         var words = ""
@@ -105,21 +105,21 @@ class TableViewController: UITableViewController {
     }
 
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Schedules.title.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("tableCell", forIndexPath: indexPath)
-        cell.textLabel!.text = Schedules.title[indexPath.row].keys.first
-        cell.detailTextLabel?.text = Schedules.details[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
+        cell.textLabel!.text = Schedules.title[(indexPath as NSIndexPath).row].keys.first
+        cell.detailTextLabel?.text = Schedules.details[(indexPath as NSIndexPath).row]
         return cell
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let shareAction = UITableViewRowAction(style: .Normal, title: "DELETE") { (UITableViewRowAction, indexPath) -> Void in
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let shareAction = UITableViewRowAction(style: .normal, title: "DELETE") { (UITableViewRowAction, indexPath) -> Void in
             // print(Schedules.title[indexPath.row].values.first?[1])
-            if let id = Schedules.title[indexPath.row].values.first?.first {
+            if let id = Schedules.title[(indexPath as NSIndexPath).row].values.first?.first {
                 let idString = String(id)
                 self.postToArm(idString)
             }
@@ -127,48 +127,48 @@ class TableViewController: UITableViewController {
     
         let timesheetAction: UITableViewRowAction!
         
-        if (Schedules.title[indexPath.row].values.first?[1])! == 0 {
-            timesheetAction = UITableViewRowAction(style: .Normal, title: "CREATE") { (UITableViewRowAction, indexPath) -> Void in
+        if (Schedules.title[(indexPath as NSIndexPath).row].values.first?[1])! == 0 {
+            timesheetAction = UITableViewRowAction(style: .normal, title: "CREATE") { (UITableViewRowAction, indexPath) -> Void in
                 self.createEdit = "/iostimesheet/"
-                if let id = Schedules.title[indexPath.row].values.first?.first {
+                if let id = Schedules.title[(indexPath as NSIndexPath).row].values.first?.first {
                     let idString = String(id)
                     self.timesheetId = String(idString)
                 }
                 
-                self.performSegueWithIdentifier("showTimesheet", sender: self)
+                self.performSegue(withIdentifier: "showTimesheet", sender: self)
             }
         } else {
-            timesheetAction = UITableViewRowAction(style: .Normal, title: "EDIT") { (UITableViewRowAction, indexPath) -> Void in
+            timesheetAction = UITableViewRowAction(style: .normal, title: "EDIT") { (UITableViewRowAction, indexPath) -> Void in
                 self.createEdit = "/edit_iostimesheet/"
-                if let id = Schedules.title[indexPath.row].values.first?[1] {
+                if let id = Schedules.title[(indexPath as NSIndexPath).row].values.first?[1] {
                     let idString = String(id)
                     self.timesheetId = String(idString)
                 }
-                self.performSegueWithIdentifier("showTimesheet", sender: self)
+                self.performSegue(withIdentifier: "showTimesheet", sender: self)
             }
         }
 
-        shareAction.backgroundColor = UIColor.redColor()
-        timesheetAction.backgroundColor = UIColor.orangeColor()
+        shareAction.backgroundColor = UIColor.red
+        timesheetAction.backgroundColor = UIColor.orange
         return [shareAction, timesheetAction]
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 //         print(Schedules.title[indexPath.row].values.first)
-        id = (Schedules.title[indexPath.row].values.first?.first!)!
-        performSegueWithIdentifier("showEditTable", sender: self)
+        id = (Schedules.title[(indexPath as NSIndexPath).row].values.first?.first!)!
+        performSegue(withIdentifier: "showEditTable", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEditTable" {
-            if let destination = segue.destinationViewController as? TableViewEditController {
+            if let destination = segue.destination as? TableViewEditController {
                 destination.id = id
             }
         }
         
         if segue.identifier == "showTimesheet" {
-            if let destination = segue.destinationViewController as? TimesheetController {
+            if let destination = segue.destination as? TimesheetController {
                 destination.id = timesheetId
                 destination.createEdit = createEdit
             }
@@ -176,10 +176,10 @@ class TableViewController: UITableViewController {
         
     }
     
-    func postToArm(postId: String?) {
+    func postToArm(_ postId: String?) {
         
-        let alert = UIAlertController(title: "Alert", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:  { action in
+        let alert = UIAlertController(title: "Alert", message: "Are you sure?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:  { action in
             
             // Send to the cloud
             let body = ""
@@ -189,7 +189,7 @@ class TableViewController: UITableViewController {
                 status in
                 if let returnMessage = status as String? {
                     print(returnMessage)
-                    dispatch_async(dispatch_get_main_queue()) {
+                    DispatchQueue.main.async {
                         print("successfully deleted")
                         self.getSchedules()
                     }
@@ -197,8 +197,8 @@ class TableViewController: UITableViewController {
             }
             
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
         
         
     }

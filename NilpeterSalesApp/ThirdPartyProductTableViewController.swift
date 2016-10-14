@@ -25,13 +25,13 @@ class ThirdPartyProductTableViewController: UITableViewController {
         }
         
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
         
-        loadingLabel = UILabel.init(frame: CGRectMake(view.center.x - 40, view.center.y - 40, 80, 80))
+        loadingLabel = UILabel.init(frame: CGRect(x: view.center.x - 40, y: view.center.y - 40, width: 80, height: 80))
         loadingLabel.text = "Loading..."
-        self.loadingLabel.hidden = true
-        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        spinner.frame = CGRectMake(view.center.x - 40, view.center.y - 65, 80, 80)
+        self.loadingLabel.isHidden = true
+        spinner = UIActivityIndicatorView.init(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+        spinner.frame = CGRect(x: view.center.x - 40, y: view.center.y - 65, width: 80, height: 80)
         view.addSubview(spinner)
         view.addSubview(loadingLabel)
         
@@ -42,7 +42,7 @@ class ThirdPartyProductTableViewController: UITableViewController {
         scheduleService.getSchedule("products", idString: nil) {
             products in
             if let productArray = products {
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     let productArrayObj = Product(dictArray: productArray)
                     self.product?.otherProductArray = productArrayObj.otherProductArray
                     self.product?.productDict = productArrayObj.productDict
@@ -58,80 +58,80 @@ class ThirdPartyProductTableViewController: UITableViewController {
     
     func hideLoading() {
         spinner.stopAnimating()
-        loadingLabel.hidden = true
+        loadingLabel.isHidden = true
     }
     
     func showLoading() {
         spinner.startAnimating()
-        loadingLabel.hidden = false
+        loadingLabel.isHidden = false
     }
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let otherProducts = self.product?.otherProductArray {
             return otherProducts.count
         }
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("otherCell")
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "otherCell")
         
         if let nilpeterProducts = self.product?.otherProductArray {
-            cell?.textLabel!.text = nilpeterProducts[indexPath.row]
+            cell?.textLabel!.text = nilpeterProducts[(indexPath as NSIndexPath).row]
         }
         
         if self.product?.otherProductArray != nil {
-            let product = self.product?.otherProductArray![indexPath.row]
+            let product = self.product?.otherProductArray![(indexPath as NSIndexPath).row]
             if isSelected(product!) {
-                cell?.accessoryType = UITableViewCellAccessoryType.Checkmark
+                cell?.accessoryType = UITableViewCellAccessoryType.checkmark
                 
             } else {
-                cell?.accessoryType = UITableViewCellAccessoryType.None
+                cell?.accessoryType = UITableViewCellAccessoryType.none
             }
         }
         
         return cell!
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        let product = self.product?.otherProductArray![indexPath.row]
+        let cell = tableView.cellForRow(at: indexPath)
+        let product = self.product?.otherProductArray![(indexPath as NSIndexPath).row]
         
         if isSelected(product!) {
-            cell!.accessoryType = UITableViewCellAccessoryType.None
+            cell!.accessoryType = UITableViewCellAccessoryType.none
             
             for selectedProduct in selectedProducts! {
                 if product == selectedProduct {
-                    if let index = selectedProducts?.indexOf(selectedProduct) {
-                        selectedProducts?.removeAtIndex(index)
+                    if let index = selectedProducts?.index(of: selectedProduct) {
+                        selectedProducts?.remove(at: index)
                     }
                 }
             }
             
         } else {
-            cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
+            cell!.accessoryType = UITableViewCellAccessoryType.checkmark
             selectedProducts?.append(product!)
         }
     }
     
-    @IBAction func dismissController(sender: AnyObject) {
+    @IBAction func dismissController(_ sender: AnyObject) {
         if fromEditPage {
-            self.performSegueWithIdentifier("editOtherProductsSelected", sender: self)
+            self.performSegue(withIdentifier: "editOtherProductsSelected", sender: self)
         } else {
-            self.performSegueWithIdentifier("otherProductSelected", sender: self)
+            self.performSegue(withIdentifier: "otherProductSelected", sender: self)
         }
         
     }
     
-    func isSelected(product: String) -> Bool {
+    func isSelected(_ product: String) -> Bool {
         for selectedProduct in (self.selectedProducts)! {
             
             if product == selectedProduct {

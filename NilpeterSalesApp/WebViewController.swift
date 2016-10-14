@@ -14,24 +14,24 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet var loadingLabel: UILabel!
     
-    var prefs: NSUserDefaults!
+    var prefs: UserDefaults!
     var webScript: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.red
         // self.tabBarController?.tabBar.tintColor = UIColor.whiteColor()
         
-        self.prefs = NSUserDefaults.standardUserDefaults()
+        self.prefs = UserDefaults.standard
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let url = NSURL(string: User.headingBaseURL + "ioscalendar")
+        let url = URL(string: User.headingBaseURL + "ioscalendar")
         
-        let request = NSURLRequest(URL: url!)
+        let request = URLRequest(url: url!)
         webView.delegate = self
         webView.scalesPageToFit = true
         webView.loadRequest(request)
@@ -39,26 +39,26 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     func hideLoading() {
         loadingIndicator.stopAnimating()
-        loadingIndicator.hidden = true
-        loadingLabel.hidden = true
+        loadingIndicator.isHidden = true
+        loadingLabel.isHidden = true
         webView.alpha = 0.85
         
     }
     
     func showLoading() {
         loadingIndicator.startAnimating()
-        loadingIndicator.hidden = false
-        loadingLabel.hidden = false
+        loadingIndicator.isHidden = false
+        loadingLabel.isHidden = false
         webView.alpha = 0.3
     }
     
-    func webViewDidStartLoad(webView: UIWebView)
+    func webViewDidStartLoad(_ webView: UIWebView)
     {
         print("webViewDidStartLoad")
         showLoading()
     }
     
-    func webViewDidFinishLoad(webView: UIWebView)
+    func webViewDidFinishLoad(_ webView: UIWebView)
     {
 //        let contentSize:CGSize = webView.scrollView.contentSize
 //        let viewSize:CGSize = self.view.bounds.size
@@ -73,14 +73,14 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?)
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error)
     {
         print("An error occurred while loading the webview")
     }
     
-    @IBAction func logout(sender: AnyObject) {
+    @IBAction func logout(_ sender: AnyObject) {
         self.prefs.setValue(0, forKey: "Session")
-        self.performSegueWithIdentifier("showLogin", sender: self)
+        self.performSegue(withIdentifier: "showLogin", sender: self)
         self.prefs.setValue(nil, forKey: "Userid")
         self.prefs.setValue(nil, forKey: "Email")
         self.prefs.setValue(nil, forKey: "Session")
