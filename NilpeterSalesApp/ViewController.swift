@@ -355,86 +355,96 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     @IBAction func postToArm(_ sender: AnyObject) {
         
-        // Showloading spinner
-        self.showLoading()
-        self.descriptionTextField.resignFirstResponder()
-        
-        // Parse information
-        var dateString = ""
-        var endDateString = ""
-        var companyString = ""
-        var jobString = ""
-        var machineString = ""
-        var combinedIdArray = ""
-        var engineerArray = ""
-        var descriptionString = ""
-        let userIdString = ", \"user_id\": \"\(self.prefs.integer(forKey: "Userid"))\" "
-        
-        if let dateTime = dateTextField.text {
-            dateString = "\"date\": \"\(dateTime)\" "
-        }
-        
-        if let endDateTime = endDateTextField.text {
-            endDateString = ", \"end_date\": \"\(endDateTime)\" "
-        }
-        
-        if let companyName = companyTextField.text {
-            companyString = ", \"company_name\": \"\(companyName)\" "
-        }
-        
-        if let jobNumName = jobNumTextField.text {
-            jobString = ", \"job_num\": \"\(jobNumName)\" "
-        }
-        
-        if let machineNumName = machineTextField.text {
-            machineString = ", \"machine_number\": \"\(machineNumName)\" "
-        }
-        
-        if (self.prefs.string(forKey: "Email") == "admin@nilpeter.com") {
-            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
+        if dateTextField.text == "" || endDateTextField.text == "" || companyTextField.text == "" || descriptionTextField.text == "" || companyTextField.text == "" || jobNumTextField.text == "" {
+            let alert = UIAlertController(title: "Alert", message: "Please make sure date, company, job , and description fields are not empty", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         } else {
-            engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds + [self.prefs.integer(forKey: "Userid")])) "
-        }
         
-        
-        
-        if let nilpeterProductId = product?.productPickerIdArray {
-            if let thirdPartyProductId = product?.otherProductPickerIdArray {
-                combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId + thirdPartyProductId)) "
-            } else {
-                combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId)) "
+            // Showloading spinner
+            self.showLoading()
+            self.descriptionTextField.resignFirstResponder()
+            
+            // Parse information
+            var dateString = ""
+            var endDateString = ""
+            var companyString = ""
+            var jobString = ""
+            var machineString = ""
+            var combinedIdArray = ""
+            var engineerArray = ""
+            var descriptionString = ""
+            let userIdString = ", \"user_id\": \"\(self.prefs.integer(forKey: "Userid"))\" "
+            
+            if let dateTime = dateTextField.text {
+                dateString = "\"date\": \"\(dateTime)\" "
             }
-        } else if let thirdPartyProductId = product?.otherProductPickerIdArray {
-            combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(thirdPartyProductId)) "
-        }
-        
-        if let description = descriptionTextField.text {
-            descriptionString = ", \"project\": \"\(description)\" "
-        }
-        
-        let chargeStatusString = ", \"chargable\": \"\(chargeStatusNum)\" "
-        
-        let body = "{" + dateString + endDateString + companyString + jobString + machineString + combinedIdArray + engineerArray + descriptionString + chargeStatusString + userIdString + "}"
-        
-        print(body)
+            
+            if let endDateTime = endDateTextField.text {
+                endDateString = ", \"end_date\": \"\(endDateTime)\" "
+            }
+            
+            if let companyName = companyTextField.text {
+                companyString = ", \"company_name\": \"\(companyName)\" "
+            }
+            
+            if let jobNumName = jobNumTextField.text {
+                jobString = ", \"job_num\": \"\(jobNumName)\" "
+            }
+            
+            if let machineNumName = machineTextField.text {
+                machineString = ", \"machine_number\": \"\(machineNumName)\" "
+            }
+            
+            if (self.prefs.string(forKey: "Email") == "admin@nilpeter.com") {
+                engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds)) "
+            } else {
+                engineerArray = ", \"engineer_ids\": \(convertArrayIntToArratString(Engineer.pickedEngineerIds + [self.prefs.integer(forKey: "Userid")])) "
+            }
+            
+            
+            
+            if let nilpeterProductId = product?.productPickerIdArray {
+                if let thirdPartyProductId = product?.otherProductPickerIdArray {
+                    combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId + thirdPartyProductId)) "
+                } else {
+                    combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(nilpeterProductId)) "
+                }
+            } else if let thirdPartyProductId = product?.otherProductPickerIdArray {
+                combinedIdArray = ", \"product_ids\": \(convertArrayIntToArratString(thirdPartyProductId)) "
+            }
+            
+            if let description = descriptionTextField.text {
+                descriptionString = ", \"project\": \"\(description)\" "
+            }
+            
+            let chargeStatusString = ", \"chargable\": \"\(chargeStatusNum)\" "
+            
+            let body = "{" + dateString + endDateString + companyString + jobString + machineString + combinedIdArray + engineerArray + descriptionString + chargeStatusString + userIdString + "}"
+            
+            print(body)
 
-        // Send to the cloud
-        
-        let scheduleService = ScheduleService()
-        scheduleService.postSchedule(body,postId: nil, postMethod: "POST") {
-            status in
-            if let returnMessage = status as String? {
-                print(returnMessage)
-                
-                DispatchQueue.main.async {
+            // Send to the cloud
+            
+
+            let scheduleService = ScheduleService()
+            scheduleService.postSchedule(body,postId: nil, postMethod: "POST") {
+                status in
+                if let returnMessage = status as String? {
+                    print(returnMessage)
                     
-                    self.tabBarController?.selectedIndex = 0
-                    self.cancelAllFields()
-                    self.hideLoading()
-                    self.showSubmitted()
+                    DispatchQueue.main.async {
+                        
+                        self.tabBarController?.selectedIndex = 0
+                        self.cancelAllFields()
+                        self.hideLoading()
+                        self.showSubmitted()
+                    }
                 }
             }
+          
         }
+        
     }
     
     // MARK: - unwind company from company table view
