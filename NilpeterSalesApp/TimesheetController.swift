@@ -15,6 +15,12 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     @IBOutlet var loadingLabel: UILabel!
     @IBOutlet weak var submitButton: UIBarButtonItem!
     
+    @IBOutlet weak var nilpeterButton: UIButton!
+    @IBOutlet weak var customerButton: UIButton!
+    
+    
+    var hasTyped = false
+    
     var prefs: UserDefaults!
     var webScript: String!
     
@@ -25,17 +31,17 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         self.navigationController?.navigationBar.barTintColor = UIColor.red
         self.prefs = UserDefaults.standard
-
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let url = URL(string: User.headingBaseURL + "ioscalendar" + createEdit + id)
-        print(url)
+        print(url!)
         
         let request = URLRequest(url: url!)
         webView.delegate = self
@@ -44,8 +50,26 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         
     }
     
+    
+    func keyboardWillShow(notification: NSNotification) {
+        print("typing")
+        hasTyped = true
+    }
+
+    func alert() {
+        let alert = UIAlertController(title: "Alert", message: "Please save before continuing", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func nilpeterSignature(_ sender: AnyObject) {
-        performSegue(withIdentifier: "showSignature", sender: "nilpeterSignature")
+        
+        if (!hasTyped) {
+            performSegue(withIdentifier: "showSignature", sender: "nilpeterSignature")
+        } else {
+            alert()
+        }
+        
     }
     
     @IBAction func customerSignature(_ sender: AnyObject) {
@@ -90,6 +114,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     {
         print("webViewDidStartLoad")
         showLoading()
+    
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView)
@@ -110,10 +135,13 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     
     @IBAction func submit(_ sender: AnyObject) {
         
+        
+        
         let script = "$('#submitButton').trigger('click')"
                webView.stringByEvaluatingJavaScript(from: script)
         
 //        self.submitButton.enabled = false
+        hasTyped = false
         
     }
     
