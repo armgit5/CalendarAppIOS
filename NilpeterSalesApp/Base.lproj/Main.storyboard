@@ -1168,27 +1168,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TLQ-Pa-LjM">
-                                <rect key="frame" x="0.0" y="0.0" width="359" height="64"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8sB-zR-BEG">
-                                <rect key="frame" x="290" y="254" width="20" height="20"/>
+                                <rect key="frame" x="177" y="294" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading...may take sometime..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gad-1y-Z5j">
-                                <rect key="frame" x="178" y="289" width="245" height="22"/>
+                                <rect key="frame" x="65" y="322" width="245" height="22"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oh6-az-nR8">
-                                <rect key="frame" x="20" y="513" width="55" height="30"/>
-                                <state key="normal" title="Nilpeter">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="nilpeterSignature:" destination="TVb-ba-lvc" eventType="touchUpInside" id="sV6-4n-Cva"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xw-8q-oAY">
                                 <rect key="frame" x="292" y="513" width="67" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1199,21 +1190,30 @@
                                     <action selector="customerSignature:" destination="TVb-ba-lvc" eventType="touchUpInside" id="I4Z-uB-JXy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oh6-az-nR8">
+                                <rect key="frame" x="16" y="513" width="55" height="30"/>
+                                <state key="normal" title="Nilpeter">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="nilpeterSignature:" destination="TVb-ba-lvc" eventType="touchUpInside" id="sV6-4n-Cva"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="TLQ-Pa-LjM" firstAttribute="top" secondItem="Cgu-dn-Aui" secondAttribute="top" id="1op-03-lgk"/>
-                            <constraint firstItem="TLQ-Pa-LjM" firstAttribute="bottom" secondItem="ktN-Wb-7tk" secondAttribute="bottom" id="2iQ-RL-P3U"/>
-                            <constraint firstItem="oh6-az-nR8" firstAttribute="leading" secondItem="Cgu-dn-Aui" secondAttribute="leadingMargin" constant="4" id="F9e-WT-Nby"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8sB-zR-BEG" secondAttribute="trailing" constant="49" id="Jk5-rx-Fnz"/>
-                            <constraint firstItem="gad-1y-Z5j" firstAttribute="top" secondItem="8sB-zR-BEG" secondAttribute="bottom" constant="15" id="QOQ-dZ-Rk7"/>
-                            <constraint firstItem="7k4-RC-Glp" firstAttribute="top" secondItem="oh6-az-nR8" secondAttribute="bottom" constant="75" id="SNa-i4-HfZ"/>
-                            <constraint firstItem="TLQ-Pa-LjM" firstAttribute="leading" secondItem="Cgu-dn-Aui" secondAttribute="leading" id="XFh-Aw-VHm"/>
-                            <constraint firstItem="3xw-8q-oAY" firstAttribute="trailing" secondItem="TLQ-Pa-LjM" secondAttribute="trailing" id="XVR-aI-fBF"/>
-                            <constraint firstItem="8sB-zR-BEG" firstAttribute="centerX" secondItem="gad-1y-Z5j" secondAttribute="centerX" id="bVX-du-GJg"/>
-                            <constraint firstItem="8sB-zR-BEG" firstAttribute="top" secondItem="ktN-Wb-7tk" secondAttribute="bottom" constant="190" id="hdR-F3-z0U"/>
-                            <constraint firstItem="TLQ-Pa-LjM" firstAttribute="trailing" secondItem="Cgu-dn-Aui" secondAttribute="trailingMargin" id="lKC-Lj-aR7"/>
-                            <constraint firstItem="3xw-8q-oAY" firstAttribute="baseline" secondItem="oh6-az-nR8" secondAttribute="baseline" id="lwe-yf-Zif"/>
+                            <constraint firstItem="oh6-az-nR8" firstAttribute="leading" secondItem="Cgu-dn-Aui" secondAttribute="leadingMargin" id="0Gt-hg-Czg"/>
+                            <constraint firstAttribute="trailing" secondItem="TLQ-Pa-LjM" secondAttribute="trailing" id="3oU-aB-fnj"/>
+                            <constraint firstItem="3xw-8q-oAY" firstAttribute="trailing" secondItem="Cgu-dn-Aui" secondAttribute="trailingMargin" id="6R8-Q1-UU8"/>
+                            <constraint firstItem="TLQ-Pa-LjM" firstAttribute="leading" secondItem="Cgu-dn-Aui" secondAttribute="leading" id="PDJ-HY-GYm"/>
+                            <constraint firstItem="7k4-RC-Glp" firstAttribute="top" secondItem="oh6-az-nR8" secondAttribute="bottom" constant="75" id="Uk9-tC-Ce6"/>
+                            <constraint firstItem="8sB-zR-BEG" firstAttribute="centerX" secondItem="gad-1y-Z5j" secondAttribute="centerX" id="dBd-cz-off"/>
+                            <constraint firstItem="gad-1y-Z5j" firstAttribute="top" secondItem="8sB-zR-BEG" secondAttribute="bottom" constant="8" symbolic="YES" id="eth-9I-iGa"/>
+                            <constraint firstItem="oh6-az-nR8" firstAttribute="baseline" secondItem="3xw-8q-oAY" secondAttribute="baseline" id="kBl-if-kJG"/>
+                            <constraint firstItem="TLQ-Pa-LjM" firstAttribute="top" secondItem="ktN-Wb-7tk" secondAttribute="bottom" id="mvA-bd-mop"/>
+                            <constraint firstItem="gad-1y-Z5j" firstAttribute="centerY" secondItem="Cgu-dn-Aui" secondAttribute="centerY" id="sVW-Nk-VOR"/>
+                            <constraint firstAttribute="bottom" secondItem="TLQ-Pa-LjM" secondAttribute="bottom" id="tGW-b2-55J"/>
+                            <constraint firstItem="TLQ-Pa-LjM" firstAttribute="centerX" secondItem="8sB-zR-BEG" secondAttribute="centerX" id="xCs-lJ-vTo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TIMESHEET" id="fLr-x5-OXS" userLabel="TIMESHEET">
@@ -1314,7 +1314,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KYf-Ss-SnD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5471" y="1988"/>
+            <point key="canvasLocation" x="4974" y="1954"/>
         </scene>
     </scenes>
     <resources>
