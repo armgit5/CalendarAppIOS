@@ -1278,8 +1278,6 @@
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="clearSignature:" destination="ijJ-r9-kQH" eventType="touchUpInside" id="EQo-TD-Cz6"/>
-                                                    <action selector="dismiss:" destination="ijJ-r9-kQH" eventType="touchUpInside" id="TE8-A0-ytI"/>
                                                     <action selector="goBack:" destination="ijJ-r9-kQH" eventType="touchUpInside" id="F98-Zv-F85"/>
                                                 </connections>
                                             </button>
