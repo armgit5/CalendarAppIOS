@@ -66,4 +66,9 @@ class SignatureViewController: UIViewController, YPDrawSignatureViewDelegate {
     override var shouldAutorotate : Bool {
         return true
     }
+    
+    @IBAction func goBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

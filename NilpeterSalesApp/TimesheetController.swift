@@ -146,7 +146,11 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func dismissViewController(_ sender: AnyObject) {
-        self.navigationController?.popToRootViewController(animated: true)
+        if (!hasTyped) {
+            navigationController?.popToRootViewController(animated: true)
+        } else {
+            alert()
+        }
     }
     
 }
