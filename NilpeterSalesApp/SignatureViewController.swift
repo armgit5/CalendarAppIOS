@@ -10,6 +10,8 @@ import UIKit
 
 class SignatureViewController: UIViewController, YPDrawSignatureViewDelegate {
     
+    @IBOutlet weak var signatureLabel: UILabel!
+    
     @IBOutlet var signatureView: YPDrawSignatureView!
     var signatureType = ""
     
@@ -23,6 +25,16 @@ class SignatureViewController: UIViewController, YPDrawSignatureViewDelegate {
         let value = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         UIViewController.attemptRotationToDeviceOrientation()
+        
+        if signatureType == "nilpeter" {
+            signatureLabel.text = "Nilpeter's Signature:"
+        }
+        
+        if signatureType == "customer" {
+            signatureLabel.text = "Customer's Signature:"
+        }
+        
+        
     }
     
     @IBAction func clearSignature(_ sender: AnyObject) {

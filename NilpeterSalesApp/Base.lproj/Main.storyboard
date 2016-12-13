@@ -1204,6 +1204,9 @@
                                     <constraint firstAttribute="width" constant="52" id="Mmu-fC-Ahh"/>
                                 </constraints>
                                 <state key="normal" title="X" image="Eraser-52"/>
+                                <connections>
+                                    <action selector="clearNilpeterSig:" destination="TVb-ba-lvc" eventType="touchUpInside" id="Hkr-IA-eun"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGR-tI-bR4">
                                 <rect key="frame" x="323" y="566" width="52" height="52"/>
@@ -1211,6 +1214,9 @@
                                     <constraint firstAttribute="width" constant="52" id="8IO-DC-026"/>
                                 </constraints>
                                 <state key="normal" title="X" image="Eraser-52"/>
+                                <connections>
+                                    <action selector="clearCustomerSig:" destination="TVb-ba-lvc" eventType="touchUpInside" id="Eku-xD-dYG"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1329,6 +1335,13 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQU-gs-Ovu">
+                                <rect key="frame" x="45" y="45" width="293" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1339,12 +1352,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="signatureLabel" destination="lQU-gs-Ovu" id="XAS-Lo-QcA"/>
                         <outlet property="signatureView" destination="Mdt-23-TuB" id="M6H-aH-FWh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KYf-Ss-SnD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4974" y="1954"/>
+            <point key="canvasLocation" x="4973.6000000000004" y="1953.3733133433284"/>
         </scene>
     </scenes>
     <resources>

@@ -130,9 +130,20 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         hideLoading()
         webView.stringByEvaluatingJavaScript(from: Timesheet.nilpeterSignature)
         webView.stringByEvaluatingJavaScript(from: Timesheet.customerSignature)
-
         
     }
+    
+    @IBAction func clearNilpeterSig(_ sender: Any) {
+        let script = "$('#submitButton').trigger('click')"
+        webView.stringByEvaluatingJavaScript(from: script)
+    }
+    
+    
+    @IBAction func clearCustomerSig(_ sender: Any) {
+        let script = "$('#submitButton').trigger('click')"
+        webView.stringByEvaluatingJavaScript(from: script)
+    }
+    
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error)
     {
