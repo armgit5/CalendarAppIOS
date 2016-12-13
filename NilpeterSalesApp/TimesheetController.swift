@@ -56,12 +56,25 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         hasTyped = true
     }
 
-    func alert() {
-        let alert = UIAlertController(title: "Alert", message: "Please press yes and save before continuing, press no go to back without saving", preferredStyle: UIAlertControllerStyle.alert)
+    func alert(_ sig: String) {
+        let alert = UIAlertController(title: "Alert", message: "Please press yes to go back and save the changes, press no go to cotinue without saving", preferredStyle: UIAlertControllerStyle.alert)
         let okAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: nil)
         let cancelAction =  UIAlertAction(title: "NO", style: UIAlertActionStyle.default, handler: {
             UIAlertAction in
-            self.navigationController?.popToRootViewController(animated: true)
+            
+            if sig == "back" {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+            
+            if sig == "nilSig" {
+                self.performSegue(withIdentifier: "showSignature", sender: "nilpeterSignature")
+            }
+            
+            if sig == "cusSig" {
+                self.performSegue(withIdentifier: "showSignature", sender: "customerSignature")
+            }
+            
+            
         })
         alert.addAction(okAction)
         alert.addAction(cancelAction)
@@ -73,13 +86,17 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         if (!hasTyped) {
             performSegue(withIdentifier: "showSignature", sender: "nilpeterSignature")
         } else {
-            alert()
+            alert("nilSig")
         }
         
     }
     
     @IBAction func customerSignature(_ sender: AnyObject) {
-        performSegue(withIdentifier: "showSignature", sender: "customerSignature")
+        if (!hasTyped) {
+            performSegue(withIdentifier: "showSignature", sender: "customerSignature")
+        } else {
+            alert("cusSig")
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -134,13 +151,13 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func clearNilpeterSig(_ sender: Any) {
-        let script = "$('#submitButton').trigger('click')"
+        let script = "signaturePad.clear();"
         webView.stringByEvaluatingJavaScript(from: script)
     }
     
     
     @IBAction func clearCustomerSig(_ sender: Any) {
-        let script = "$('#submitButton').trigger('click')"
+        let script = "signaturePad2.clear();"
         webView.stringByEvaluatingJavaScript(from: script)
     }
     
@@ -166,7 +183,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         if (!hasTyped) {
             navigationController?.popToRootViewController(animated: true)
         } else {
-            alert()
+            alert("back")
         }
     }
     
