@@ -1180,41 +1180,56 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oh6-az-nR8">
-                                <rect key="frame" x="16" y="580" width="55" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Nilpeter">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oh6-az-nR8">
+                                <rect key="frame" x="0.0" y="566" width="52" height="52"/>
+                                <state key="normal" image="Ball Point Pen-52">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="nilpeterSignature:" destination="TVb-ba-lvc" eventType="touchUpInside" id="sV6-4n-Cva"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xw-8q-oAY">
-                                <rect key="frame" x="292" y="580" width="67" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="Customer">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xw-8q-oAY">
+                                <rect key="frame" x="271" y="566" width="52" height="52"/>
+                                <state key="normal" image="Ball Point Pen-52">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="customerSignature:" destination="TVb-ba-lvc" eventType="touchUpInside" id="I4Z-uB-JXy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRL-tE-epm">
+                                <rect key="frame" x="52" y="566" width="52" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="52" id="Mmu-fC-Ahh"/>
+                                </constraints>
+                                <state key="normal" title="X" image="Eraser-52"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGR-tI-bR4">
+                                <rect key="frame" x="323" y="566" width="52" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="52" id="8IO-DC-026"/>
+                                </constraints>
+                                <state key="normal" title="X" image="Eraser-52"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="oh6-az-nR8" firstAttribute="leading" secondItem="Cgu-dn-Aui" secondAttribute="leadingMargin" id="0Gt-hg-Czg"/>
                             <constraint firstAttribute="trailing" secondItem="TLQ-Pa-LjM" secondAttribute="trailing" id="3oU-aB-fnj"/>
-                            <constraint firstItem="3xw-8q-oAY" firstAttribute="trailing" secondItem="Cgu-dn-Aui" secondAttribute="trailingMargin" id="6R8-Q1-UU8"/>
+                            <constraint firstItem="fGR-tI-bR4" firstAttribute="baseline" secondItem="WRL-tE-epm" secondAttribute="baseline" id="42D-87-CZk"/>
+                            <constraint firstItem="fGR-tI-bR4" firstAttribute="trailing" secondItem="TLQ-Pa-LjM" secondAttribute="trailing" id="Gbz-qB-x4f"/>
+                            <constraint firstItem="fGR-tI-bR4" firstAttribute="leading" secondItem="3xw-8q-oAY" secondAttribute="trailing" id="LnG-i0-4E5"/>
                             <constraint firstItem="TLQ-Pa-LjM" firstAttribute="leading" secondItem="Cgu-dn-Aui" secondAttribute="leading" id="PDJ-HY-GYm"/>
-                            <constraint firstItem="7k4-RC-Glp" firstAttribute="top" secondItem="oh6-az-nR8" secondAttribute="bottom" constant="8" id="Uk9-tC-Ce6"/>
+                            <constraint firstItem="WRL-tE-epm" firstAttribute="leading" secondItem="oh6-az-nR8" secondAttribute="trailing" id="QSy-er-LXf"/>
+                            <constraint firstItem="oh6-az-nR8" firstAttribute="bottom" secondItem="7k4-RC-Glp" secondAttribute="top" id="RFs-fs-f1V"/>
                             <constraint firstItem="8sB-zR-BEG" firstAttribute="centerX" secondItem="gad-1y-Z5j" secondAttribute="centerX" id="dBd-cz-off"/>
                             <constraint firstItem="gad-1y-Z5j" firstAttribute="top" secondItem="8sB-zR-BEG" secondAttribute="bottom" constant="8" symbolic="YES" id="eth-9I-iGa"/>
-                            <constraint firstItem="oh6-az-nR8" firstAttribute="baseline" secondItem="3xw-8q-oAY" secondAttribute="baseline" id="kBl-if-kJG"/>
+                            <constraint firstItem="WRL-tE-epm" firstAttribute="top" secondItem="oh6-az-nR8" secondAttribute="top" id="iIa-Fe-POu"/>
                             <constraint firstItem="TLQ-Pa-LjM" firstAttribute="top" secondItem="ktN-Wb-7tk" secondAttribute="bottom" id="mvA-bd-mop"/>
+                            <constraint firstItem="oh6-az-nR8" firstAttribute="leading" secondItem="TLQ-Pa-LjM" secondAttribute="leading" id="o0x-pg-Xj3"/>
                             <constraint firstItem="gad-1y-Z5j" firstAttribute="centerY" secondItem="Cgu-dn-Aui" secondAttribute="centerY" id="sVW-Nk-VOR"/>
                             <constraint firstAttribute="bottom" secondItem="TLQ-Pa-LjM" secondAttribute="bottom" id="tGW-b2-55J"/>
+                            <constraint firstItem="3xw-8q-oAY" firstAttribute="top" secondItem="fGR-tI-bR4" secondAttribute="top" id="uR7-lw-gha"/>
                             <constraint firstItem="TLQ-Pa-LjM" firstAttribute="centerX" secondItem="8sB-zR-BEG" secondAttribute="centerX" id="xCs-lJ-vTo"/>
                         </constraints>
                     </view>
@@ -1333,6 +1348,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Ball Point Pen-52" width="52" height="52"/>
+        <image name="Eraser-52" width="52" height="52"/>
         <image name="calendar-7" width="30" height="30"/>
         <image name="layout-arrange-09-7" width="29" height="30"/>
         <image name="list-simple-7" width="30" height="30"/>
