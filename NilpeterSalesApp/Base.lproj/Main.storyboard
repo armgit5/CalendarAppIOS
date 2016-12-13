@@ -1180,23 +1180,25 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oh6-az-nR8">
+                                <rect key="frame" x="16" y="580" width="55" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Nilpeter">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="nilpeterSignature:" destination="TVb-ba-lvc" eventType="touchUpInside" id="sV6-4n-Cva"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xw-8q-oAY">
-                                <rect key="frame" x="292" y="513" width="67" height="30"/>
+                                <rect key="frame" x="292" y="580" width="67" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Customer">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="customerSignature:" destination="TVb-ba-lvc" eventType="touchUpInside" id="I4Z-uB-JXy"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oh6-az-nR8">
-                                <rect key="frame" x="16" y="513" width="55" height="30"/>
-                                <state key="normal" title="Nilpeter">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="nilpeterSignature:" destination="TVb-ba-lvc" eventType="touchUpInside" id="sV6-4n-Cva"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1206,7 +1208,7 @@
                             <constraint firstAttribute="trailing" secondItem="TLQ-Pa-LjM" secondAttribute="trailing" id="3oU-aB-fnj"/>
                             <constraint firstItem="3xw-8q-oAY" firstAttribute="trailing" secondItem="Cgu-dn-Aui" secondAttribute="trailingMargin" id="6R8-Q1-UU8"/>
                             <constraint firstItem="TLQ-Pa-LjM" firstAttribute="leading" secondItem="Cgu-dn-Aui" secondAttribute="leading" id="PDJ-HY-GYm"/>
-                            <constraint firstItem="7k4-RC-Glp" firstAttribute="top" secondItem="oh6-az-nR8" secondAttribute="bottom" constant="75" id="Uk9-tC-Ce6"/>
+                            <constraint firstItem="7k4-RC-Glp" firstAttribute="top" secondItem="oh6-az-nR8" secondAttribute="bottom" constant="8" id="Uk9-tC-Ce6"/>
                             <constraint firstItem="8sB-zR-BEG" firstAttribute="centerX" secondItem="gad-1y-Z5j" secondAttribute="centerX" id="dBd-cz-off"/>
                             <constraint firstItem="gad-1y-Z5j" firstAttribute="top" secondItem="8sB-zR-BEG" secondAttribute="bottom" constant="8" symbolic="YES" id="eth-9I-iGa"/>
                             <constraint firstItem="oh6-az-nR8" firstAttribute="baseline" secondItem="3xw-8q-oAY" secondAttribute="baseline" id="kBl-if-kJG"/>

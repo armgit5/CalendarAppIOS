@@ -57,8 +57,14 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     }
 
     func alert() {
-        let alert = UIAlertController(title: "Alert", message: "Please save before continuing", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        let alert = UIAlertController(title: "Alert", message: "Please press yes and save before continuing, press no go to back without saving", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: nil)
+        let cancelAction =  UIAlertAction(title: "NO", style: UIAlertActionStyle.default, handler: {
+            UIAlertAction in
+            self.navigationController?.popToRootViewController(animated: true)
+        })
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
     
