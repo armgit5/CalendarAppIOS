@@ -155,13 +155,14 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         let script = "signaturePad.clear();"
         webView.stringByEvaluatingJavaScript(from: script)
         Timesheet.hasTyped = true
+        Timesheet.nilpeterSignature = ""
     }
-    
     
     @IBAction func clearCustomerSig(_ sender: Any) {
         let script = "signaturePad2.clear();"
         webView.stringByEvaluatingJavaScript(from: script)
         Timesheet.hasTyped = true
+        Timesheet.nilpeterSignature = ""
     }
     
     
