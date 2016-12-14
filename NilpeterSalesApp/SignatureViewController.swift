@@ -51,10 +51,12 @@ class SignatureViewController: UIViewController, YPDrawSignatureViewDelegate {
 
             if signatureType == "nilpeter" {
                 Timesheet.nilpeterSignature = "signaturePad.fromDataURL('data:image/png;base64,\(trimmed)')"
+                Timesheet.hasTyped = true
             }
             
             if signatureType == "customer" {
                 Timesheet.customerSignature = "signaturePad2.fromDataURL('data:image/png;base64,\(trimmed)')"
+                Timesheet.hasTyped = true
             }
             
         }

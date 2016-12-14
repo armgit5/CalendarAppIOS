@@ -13,4 +13,6 @@ struct Timesheet {
     static var nilpeterSignature: String = ""
     static var customerSignature: String = ""
     
+    static var hasTyped = false
+    
 }

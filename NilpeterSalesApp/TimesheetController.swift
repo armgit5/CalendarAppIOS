@@ -19,7 +19,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var customerButton: UIButton!
     
     
-    var hasTyped = false
+    
     
     var prefs: UserDefaults!
     var webScript: String!
@@ -35,6 +35,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         self.prefs = UserDefaults.standard
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        Timesheet.hasTyped = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +54,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     
     func keyboardWillShow(notification: NSNotification) {
         print("typing")
-        hasTyped = true
+        Timesheet.hasTyped = true
     }
 
     func alert(_ sig: String) {
@@ -83,7 +84,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     
     @IBAction func nilpeterSignature(_ sender: AnyObject) {
         
-        if (!hasTyped) {
+        if (!Timesheet.hasTyped) {
             performSegue(withIdentifier: "showSignature", sender: "nilpeterSignature")
         } else {
             alert("nilSig")
@@ -92,7 +93,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     }
     
     @IBAction func customerSignature(_ sender: AnyObject) {
-        if (!hasTyped) {
+        if (!Timesheet.hasTyped) {
             performSegue(withIdentifier: "showSignature", sender: "customerSignature")
         } else {
             alert("cusSig")
@@ -153,12 +154,14 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     @IBAction func clearNilpeterSig(_ sender: Any) {
         let script = "signaturePad.clear();"
         webView.stringByEvaluatingJavaScript(from: script)
+        Timesheet.hasTyped = true
     }
     
     
     @IBAction func clearCustomerSig(_ sender: Any) {
         let script = "signaturePad2.clear();"
         webView.stringByEvaluatingJavaScript(from: script)
+        Timesheet.hasTyped = true
     }
     
     
@@ -175,12 +178,12 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
                webView.stringByEvaluatingJavaScript(from: script)
         
 //        self.submitButton.enabled = false
-        hasTyped = false
+        Timesheet.hasTyped = false
         
     }
     
     @IBAction func dismissViewController(_ sender: AnyObject) {
-        if (!hasTyped) {
+        if (!Timesheet.hasTyped) {
             navigationController?.popToRootViewController(animated: true)
         } else {
             alert("back")
