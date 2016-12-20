@@ -17,6 +17,8 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var nilpeterButton: UIButton!
     @IBOutlet weak var customerButton: UIButton!
+    @IBOutlet weak var nilpeterEraser: UIButton!
+    @IBOutlet weak var customerEraser: UIButton!
     
     
     
@@ -27,6 +29,8 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     var id: String!
     var createEdit: String!
     
+    var created = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,17 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         Timesheet.hasTyped = false
+        Timesheet.customerSignature = ""
+        Timesheet.nilpeterSignature = ""
+        
+        print("view did load")
+        print(createEdit == "/iostimesheet/")
+        if createEdit == "/iostimesheet/" {
+            nilpeterButton.isHidden = true
+            nilpeterEraser.isHidden = true
+            customerButton.isHidden = true
+            customerEraser.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +63,8 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         webView.delegate = self
         webView.scalesPageToFit = true
         webView.loadRequest(request)
+        
+        print("view will appear")
         
     }
     
@@ -75,12 +92,34 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
                 self.performSegue(withIdentifier: "showSignature", sender: "customerSignature")
             }
             
+            if sig == "fromCreate" {
+                
+            }
+            
             
         })
         alert.addAction(okAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
+    
+    func alertFromCreate(_ sig: String) {
+        let alert = UIAlertController(title: "Alert", message: "Please wait until the timesheet is successfully created then press ok, then please edit to edit the timesheet and have the customer sign the timesheet after timesheet being created", preferredStyle: UIAlertControllerStyle.alert)
+
+        let okAction =  UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {
+            UIAlertAction in
+            
+            if sig == "fromCreate" {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+            
+            
+        })
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
     
     @IBAction func nilpeterSignature(_ sender: AnyObject) {
         
@@ -178,17 +217,23 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
         let script = "$('#submitButton').trigger('click')"
                webView.stringByEvaluatingJavaScript(from: script)
         
-//        self.submitButton.enabled = false
         Timesheet.hasTyped = false
+        
+        if createEdit == "/iostimesheet/" {
+            alertFromCreate("fromCreate")
+        }
         
     }
     
     @IBAction func dismissViewController(_ sender: AnyObject) {
+        
         if (!Timesheet.hasTyped) {
             navigationController?.popToRootViewController(animated: true)
         } else {
             alert("back")
         }
+        
+        
     }
     
 }
