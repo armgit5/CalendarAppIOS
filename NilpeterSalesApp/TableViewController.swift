@@ -65,6 +65,7 @@ class TableViewController: UITableViewController {
         showLoading()
         let scheduleService = ScheduleService()
         let userIdString = String(self.prefs.integer(forKey: "Userid"))
+//        print(userIdString)
         scheduleService.getSchedule("schedules/index/)", idString: userIdString) {
             schedules in
             if let scheduleArray = schedules {

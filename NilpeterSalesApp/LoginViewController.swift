@@ -15,6 +15,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var login: UIButton!
     @IBOutlet weak var verifyingTextField: UILabel!
     @IBOutlet weak var verifyingLoading: UIActivityIndicatorView!
+    @IBOutlet weak var serverName: UITextField!
     
     var user: User?
     var prefs: UserDefaults!
@@ -55,7 +56,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         self.prefs.setValue(userId, forKey: "Userid")
                         self.prefs.setValue(User.email, forKey: "Email")
                         self.prefs.setValue(1, forKey: "Session")
-                        
                         self.tabBarController?.tabBar.isHidden = false
                         self.navigationController?.popToRootViewController(animated: true)
                         self.verifyingHide()
@@ -108,6 +108,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func login(_ sender: AnyObject) {
         User.email = self.email.text!
         User.password = self.password.text!
+        self.prefs.setValue(self.serverName.text, forKey: "ServerName")
+        User.headingBaseURL = prefs.string(forKey: "ServerName")! + "/"
         self.verifyingShow()
         validateUser()
     }

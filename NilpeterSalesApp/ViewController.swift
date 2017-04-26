@@ -13,6 +13,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
     
     @IBOutlet weak var allDaySwitch: UISwitch!
     
+    var alreadyLoaded = false;
+    
     // date and time data
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var endDateTextField: UITextField!
@@ -99,10 +101,10 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.tabBarController?.tabBar.barTintColor = UIColor.red
         self.tabBarController?.tabBar.tintColor = UIColor.white
         
-        self.getProducts()
-        productTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateProducts), userInfo: nil, repeats: true)
-        self.getEngineers()
-        engineerTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateEngineers), userInfo: nil, repeats: true)
+//        self.getProducts()
+//        productTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateProducts), userInfo: nil, repeats: true)
+//        self.getEngineers()
+//        engineerTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateEngineers), userInfo: nil, repeats: true)
         
         // Submitting spinner
         loadingLabel = UILabel.init(frame: CGRect(x: self.view.frame.size.width - 75, y: 0, width: 80, height: 35))
@@ -138,6 +140,16 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         if let email = self.prefs.string(forKey: "Email") {
             welcome.text = "Welcome \(email)"
         }
+        
+        if (prefs.integer(forKey: "Session") == 1 && self.alreadyLoaded == false) {
+            self.getProducts()
+            productTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateProducts), userInfo: nil, repeats: true)
+            self.getEngineers()
+            engineerTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateEngineers), userInfo: nil, repeats: true)
+            self.alreadyLoaded = true
+        }
+
+        
         downLoadJobNum(String(self.prefs.integer(forKey: "Userid")))
     }
 
@@ -428,6 +440,7 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
             
 
             let scheduleService = ScheduleService()
+            print(User.headingBaseURL)
             scheduleService.postSchedule(body,postId: nil, postMethod: "POST") {
                 status in
                 if let returnMessage = status as String? {

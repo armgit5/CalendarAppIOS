@@ -53,6 +53,7 @@ class NetworkOperation {
                 
             } else {
                 print("error no valid http request response")
+//                print(error)
             }
         }) 
         

@@ -13,6 +13,7 @@ struct ScheduleService {
     typealias ScheduleServiceCompletion = ([[String: AnyObject]]?) -> Void
     
     init() {
+        
         let headingBastURL = User.headingBaseURL + "api/"
         self.scheduleBaseURL = URL(string: headingBastURL)
     }

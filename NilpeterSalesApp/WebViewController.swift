@@ -84,7 +84,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         self.prefs.setValue(nil, forKey: "Userid")
         self.prefs.setValue(nil, forKey: "Email")
         self.prefs.setValue(nil, forKey: "Session")
-        
+        self.prefs.setValue(nil, forKey: "ServerName")
 //        let script = "signaturePad.clear();"
 //        webView.stringByEvaluatingJavaScriptFromString(script)
 
