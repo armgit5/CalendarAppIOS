@@ -44,6 +44,8 @@ class NetworkOperation {
                     // create json object
                     let jsonDictionary = (try? JSONSerialization.jsonObject(with: data!, options: [])) as? [[String: AnyObject]]
                     completion(jsonDictionary)
+                    print("jsondic")
+                    print(jsonDictionary as Any)
                 case 401:
                     let jsonDictionary = (try? JSONSerialization.jsonObject(with: data!, options: [])) as? [[String: AnyObject]]
                     completion(jsonDictionary)
@@ -53,7 +55,7 @@ class NetworkOperation {
                 
             } else {
                 print("error no valid http request response")
-//                print(error)
+                completion([["user_id": -1 as AnyObject, "message": "Not successfully login" as AnyObject]])
             }
         }) 
         

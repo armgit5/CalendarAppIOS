@@ -44,11 +44,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("user", idString: nil) {
             user in
+            print("user ")
+            print(user)
             DispatchQueue.main.async {
                 if let validUser = user {
                     // Check to see if user exist, if so will return
                     // [["message": Successfully login, "user_id": userid]]
+        
+                    
                     if let userId = validUser.first!["user_id"] as? Int {
+                        
+                        if userId == -1 {
+                            print("invalid server")
+                            self.verifyingHide()
+                            self.dismiss(animated: true, completion: nil)
+                            self.showAlert()
+                        }
+                        
                         User.userId = userId
     
 //                        self.prefs.setValue(self.email.text, forKey: "Email")

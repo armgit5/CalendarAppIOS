@@ -28,6 +28,7 @@ struct ScheduleService {
             }
         } else {
             print("counldn't construct valid url")
+            completion([["user_id": -1 as AnyObject, "message": "Not successfully login" as AnyObject]])
         }
     }
     
