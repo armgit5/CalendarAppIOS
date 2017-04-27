@@ -101,9 +101,9 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         self.tabBarController?.tabBar.barTintColor = UIColor.red
         self.tabBarController?.tabBar.tintColor = UIColor.white
         
-//        self.getProducts()
+        self.getProducts()
 //        productTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateProducts), userInfo: nil, repeats: true)
-//        self.getEngineers()
+        self.getEngineers()
 //        engineerTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateEngineers), userInfo: nil, repeats: true)
         
         // Submitting spinner

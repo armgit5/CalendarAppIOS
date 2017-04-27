@@ -60,14 +60,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     func webViewDidFinishLoad(_ webView: UIWebView)
     {
-//        let contentSize:CGSize = webView.scrollView.contentSize
-//        let viewSize:CGSize = self.view.bounds.size
-//        
-//        let rw = viewSize.width / contentSize.width
-//        
-//        webView.scrollView.minimumZoomScale = rw
-//        webView.scrollView.maximumZoomScale = rw
-//        webView.scrollView.zoomScale = rw
         print("webViewDidFinishLoad")
         hideLoading()
         
@@ -85,11 +77,6 @@ class WebViewController: UIViewController, UIWebViewDelegate {
         self.prefs.setValue(nil, forKey: "Email")
         self.prefs.setValue(nil, forKey: "Session")
         self.prefs.setValue(nil, forKey: "ServerName")
-//        let script = "signaturePad.clear();"
-//        webView.stringByEvaluatingJavaScriptFromString(script)
-
-//        let script = "$('#submitButton').trigger('click')"
-//        webView.stringByEvaluatingJavaScriptFromString(script)
     }
     
 

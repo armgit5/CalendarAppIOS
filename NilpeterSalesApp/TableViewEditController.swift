@@ -72,9 +72,7 @@ class TableViewEditController: UITableViewController, UITextFieldDelegate, UIPic
         // initialize company and location models
         product = Product()
         
-        print("des \(id)")
         
-        // User store
         // Check user session
         prefs = UserDefaults.standard
         if prefs.integer(forKey: "Session") == 0 {

@@ -88,8 +88,6 @@ class SearchTableViewController: UITableViewController, UISearchResultsUpdating 
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("companies", idString: nil) {
             companies in
-            
-            print(companies)
             if let comArray = companies {
                 DispatchQueue.main.async {
                     let comArrayObj = Company(dictArray: comArray)

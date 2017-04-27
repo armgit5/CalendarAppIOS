@@ -73,7 +73,6 @@ class NilpeterProductDelegate: NSObject, UITextFieldDelegate, UIPickerViewDataSo
                     self.product?.nilpeterProductArray = productArrayObj.nilpeterProductArray
                     self.product?.otherProductArray = productArrayObj.otherProductArray
                     self.product?.productDict = productArrayObj.productDict
-                    print(self.product?.nilpeterProductArray)
                 }
             }
             

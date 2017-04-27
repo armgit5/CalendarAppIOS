@@ -44,8 +44,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let scheduleService = ScheduleService()
         scheduleService.getSchedule("user", idString: nil) {
             user in
-            print("user ")
-            print(user)
             DispatchQueue.main.async {
                 if let validUser = user {
                     // Check to see if user exist, if so will return
