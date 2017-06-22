@@ -90,6 +90,7 @@ class TableViewController: UITableViewController {
                             Schedules.title.append([words:[scheduleId, timesheetId]])
                         } else {
 //                            Schedules.details.append("No timesheet...")
+                            
                             let scheduleId = schedule["id"] as! Int
                             Schedules.title.append([words:[scheduleId, 0]])
                         }

@@ -18,14 +18,17 @@ struct User {
     static var userId = 1
     static var headingBaseURL = "http://localhost:3000/"
 //    static let headingBaseURL = "http://nilpeter.herokuapp.com/"
-//    static let headingBaseURL =  "http://nilpeter-service.herokuapp.com/"
+//    static var headingBaseURL =  "http://nilpeter-service.herokuapp.com/"
 //    static var headingBaseURL = ""
 //    static let headingBaseURL =  "http://nilpeterit.herokuapp.com/"
 //    static let headingBaseURL =  "http://arm-calendar.herokuapp.com/"
     //static let headingBaseURL =  "http://arm-calendar-apitest.herokuapp.com/"
     
+    static var isSet = false
+    
     static func setUrl() {
         headingBaseURL = prefs.string(forKey: "ServerName")!
+        isSet = true
     }
 }
 

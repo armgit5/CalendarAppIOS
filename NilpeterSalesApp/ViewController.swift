@@ -74,6 +74,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         prefs = UserDefaults.standard
         if prefs.integer(forKey: "Session") == 0 {
             self.performSegue(withIdentifier: "showLogin", sender: self)
+        } else {
+            User.setUrl()
         }
        
         // disable table view selection
@@ -132,6 +134,8 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         chargeStatus.setTitleColor(UIColor.blue, for: UIControlState())
         
         sendButton.isEnabled = false
+        
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -140,8 +144,12 @@ class ViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDe
         if let email = self.prefs.string(forKey: "Email") {
             welcome.text = "Welcome \(email)"
         }
-        
-        if (prefs.integer(forKey: "Session") == 1 && self.alreadyLoaded == false) {
+//        print("session \(prefs.integer(forKey: "Session"))")
+//        print("already loaded \(self.alreadyLoaded)")
+//        print("isSet \(User.isSet)")
+//        print("heading url \(User.headingBaseURL)")
+//        print("heading url \(prefs.string(forKey: "ServerName")!)")
+        if (prefs.integer(forKey: "Session") == 1 && self.alreadyLoaded == false && User.isSet == true) {
             self.getProducts()
             productTimer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(ViewController.updateProducts), userInfo: nil, repeats: true)
             self.getEngineers()

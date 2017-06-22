@@ -14,7 +14,7 @@ struct ScheduleService {
     
     init() {
         
-        let headingBastURL = User.headingBaseURL + "api/"
+        let headingBastURL = User.headingBaseURL + "/api/"
         self.scheduleBaseURL = URL(string: headingBastURL)
     }
     

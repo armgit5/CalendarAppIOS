@@ -56,7 +56,7 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let url = URL(string: User.headingBaseURL + "ioscalendar" + createEdit + id)
+        let url = URL(string: User.headingBaseURL + "/ioscalendar" + createEdit + id)
         print(url!)
         
         let request = URLRequest(url: url!)

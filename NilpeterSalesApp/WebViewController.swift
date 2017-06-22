@@ -29,7 +29,8 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let url = URL(string: User.headingBaseURL + "ioscalendar")
+        let url = URL(string: User.headingBaseURL + "/ioscalendar")
+        print(url!)
         
         let request = URLRequest(url: url!)
         webView.delegate = self
@@ -68,6 +69,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error)
     {
         print("An error occurred while loading the webview")
+        print(error)
     }
     
     @IBAction func logout(_ sender: AnyObject) {
