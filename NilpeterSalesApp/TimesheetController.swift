@@ -20,9 +20,6 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var nilpeterEraser: UIButton!
     @IBOutlet weak var customerEraser: UIButton!
     
-    
-    
-    
     var prefs: UserDefaults!
     var webScript: String!
     
@@ -30,7 +27,6 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     var createEdit: String!
     
     var created = false
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +46,10 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
             nilpeterEraser.isHidden = true
             customerButton.isHidden = true
             customerEraser.isHidden = true
+            submitButton.title = "Create"
         }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,9 +74,9 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     }
 
     func alert(_ sig: String) {
-        let alert = UIAlertController(title: "Alert", message: "Please press yes to go back and save the changes, press no go to cotinue without saving", preferredStyle: UIAlertControllerStyle.alert)
-        let okAction = UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: nil)
-        let cancelAction =  UIAlertAction(title: "NO", style: UIAlertActionStyle.default, handler: {
+        let alert = UIAlertController(title: "Alert", message: "Please press no to go back and save the changes, press yes go to cotinue without saving (YOUR CHANGES WILL BE LOST WITHOUT SAVING).", preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.default, handler: nil)
+        let cancelAction =  UIAlertAction(title: "YES", style: UIAlertActionStyle.default, handler: {
             UIAlertAction in
             
             if sig == "back" {
@@ -96,7 +95,6 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
                 
             }
             
-            
         })
         alert.addAction(okAction)
         alert.addAction(cancelAction)
@@ -104,20 +102,30 @@ class TimesheetController: UIViewController, UIWebViewDelegate {
     }
     
     func alertFromCreate(_ sig: String) {
-        let alert = UIAlertController(title: "Alert", message: "Please wait until the timesheet is successfully created then press ok, then please edit to edit the timesheet and have the customer sign the timesheet after timesheet being created", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Alert", message: "Timesheet is being created. Please wait...", preferredStyle: UIAlertControllerStyle.alert)
 
-        let okAction =  UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {
-            UIAlertAction in
-            
+//        let okAction =  UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {
+//            UIAlertAction in
+//            
+//            if sig == "fromCreate" {
+//                self.navigationController?.popToRootViewController(animated: true)
+//            }
+//            
+//            
+//        })
+        
+//        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+        
+        let when = DispatchTime.now() + 5
+        DispatchQueue.main.asyncAfter(deadline: when){
+            // your code with delay
+//            alert.dismiss(animated: true, completion: nil)
             if sig == "fromCreate" {
+                alert.dismiss(animated: true, completion: nil)
                 self.navigationController?.popToRootViewController(animated: true)
             }
-            
-            
-        })
-        
-        alert.addAction(okAction)
-        self.present(alert, animated: true, completion: nil)
+        }
     }
 
     
