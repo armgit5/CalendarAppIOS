@@ -27,7 +27,11 @@ struct User {
     static var isSet = false
     
     static func setUrl() {
-        headingBaseURL = prefs.string(forKey: "ServerName")!
+        if let headingUrl = prefs.string(forKey: "ServerName") {
+            headingBaseURL = headingUrl
+        } else {
+            headingBaseURL = "http://nilpeter-service.herokuapp.com/"
+        }
         isSet = true
     }
 }
